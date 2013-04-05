@@ -1,0 +1,1595 @@
+
+#pui {
+  position: relative;
+}
+
+/* Push Button */
+INPUT.button {
+	color: #335588;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+
+/* Calendar Classes */
+.calendar {
+	font-size:11px;
+	font-weight:bold;
+	cursor:pointer;
+}
+.brndrow1 {
+	background-color: #5588BB;
+}
+.brndrow1 A {
+  border: 0px;
+}
+.brndrow1 A:hover {
+  border: 0px;
+}
+
+.brndrow2
+{
+	background-color: #5588BB;
+}
+
+
+
+body {
+  margin: 0px 0px 0px 0px;
+  text-align: center;
+  vertical-align: middle;
+  background-repeat: repeat-y;
+  background-color: #FFFFFF;
+  font-family: Trebuchet MS;
+  font-size: 14px;
+  overflow: auto;	
+}
+
+A {
+  color: #0066cc;
+}
+
+div {
+  padding: 1px;
+  z-index: 10;
+  text-align: left;
+  white-space: nowrap;
+  outline: none;
+}
+
+img {
+  z-index: 10;
+}
+
+
+
+.input {
+  font-family: Monospace;
+  font-size: 13px;
+  z-index: 20;    
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid #7eadd9;
+  background-image: url(/profoundui/proddata/images/input-background.gif);
+  background-repeat: repeat-x;
+}
+
+INPUT.enhanced-input {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+  z-index: 20;    
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid #7eadd9;
+  background-image: url(/profoundui/proddata/images/input-background.gif);
+  background-repeat: repeat-x;
+}
+
+SELECT.enhanced-input {
+  font-family: Sans-Serif;
+  font-size: 13px;
+  z-index: 20;    
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid #7eadd9;
+  background-image: url(/profoundui/proddata/images/input-background.gif);
+  background-repeat: repeat-x;
+}
+
+.focusInp {
+	background: #ffffdd;
+  font-weight: bold;
+  font-family: Monospace;
+  font-size: 13px;
+  z-index: 20;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid #7eadd9;
+  background-repeat: repeat-x;
+}
+
+
+
+.label {
+  text-align: right;
+  font-weight: bold;
+}
+
+.heading {
+  color: #105184;
+  font-weight: bold;
+  font-size: 20px
+}
+
+
+SELECT {
+  z-index: 20;
+}
+
+BUTTON {
+  z-index: 20;
+}
+
+INPUT {
+  z-index: 20;
+}
+
+TEXTAREA {
+  z-index: 20;
+  resize: none;
+}
+
+FieldSet {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.design a:hover {
+  background-color: transparent;
+  border-top-style: none;  
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom: 1px dotted #c1b6b6;
+}
+
+
+.autocomplete-item {
+
+	border-style: solid;
+	border-width: 1px;
+	border-color: #FFFFFF rgb(255, 255, 255) rgb(238, 238, 238);
+	font-size: 10px;
+	font-family: tahoma, arial, helvetica, sans-serif;
+	color: #555555;
+	background-color: #FFFFFF;
+	cursor: pointer;
+	margin: 0px;
+	padding: 4px 4px 4px 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: left;	
+
+}
+
+.autocomplete-selected {
+
+	background-color: #DFE8F6;
+	border: 1px dotted #A3BAE9 !important; 
+
+
+}
+
+.autocomplete-col {
+
+	overflow: hidden;
+	white-space: nowrap;
+
+}
+
+
+
+.link1 A {
+  font-family: Verdana;
+  color: #009999;
+  text-decoration: none;
+  border-bottom: 1px dotted #888888;
+}
+.link1 A:hover {
+  border: 1px solid #cccccc;
+}
+
+.link2 A {
+  font-family: Arial;
+  text-decoration: none;
+  border-bottom: 1px dotted #c1b6b6;  
+}
+.link2 A:hover {
+  border: 1px solid #999999;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+  background-color: #5588BB;
+}
+
+
+.link3 A {
+  text-decoration: none;
+  border-bottom: 1px dotted #c1b6b6;
+  color: #333333;
+}
+.link3 A:hover {
+  border: 2px solid #c23c00;
+  background-color: #ffd7b2;
+}
+
+.link4 A {
+  text-decoration: none;
+}
+.link4 A:hover {
+  text-decoration: underline;
+}
+
+.link5 A {
+  font-weight: bold;
+  text-decoration: none;
+}
+.link5 A:hover {  
+  border-top: 1px dashed #4866d5;
+  border-bottom: 1px dashed #4866d5;
+}
+
+.link6 A {
+  font-family: Arial;
+  font-size: 14px;
+  color: blue;
+  text-decoration: none;
+}
+.link6 A:hover {  
+  font-weight: bold;
+}
+
+.invalid {
+  background-image: url(/profoundui/proddata/images/invalid-underline.gif);
+  background-repeat: repeat-x;
+  background-position: bottom;
+  border-color: #924949;
+}
+
+
+.grid-mask {
+  z-index: 250;
+  background-color: #CCCCCC;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3; 
+  
+}
+
+
+.paging-bar {
+  background-image: url('/profoundui/proddata/images/grids/pagingBar.gif');
+  vertical-align: top;
+  font-size: 12px;
+  border: 1px solid #CCCCFF;
+}
+
+.paging-link {
+  color: #0C51CE;
+  cursor: pointer;
+  text-decoration: underline;
+  
+}
+
+.crystal-grid .paging-link {
+} 
+
+.paging-link-hover {
+  color: #2C71EE;
+}
+
+
+.paging-link-disabled {
+  color: #666666;
+  cursor: default;
+  text-decoration: none;
+}
+
+.prev-image-icon {
+  background-image: url('/profoundui/proddata/images/grids/prev.gif');
+  cursor: pointer; 
+}
+
+
+.prev-image-icon-disabled {
+  background-image: url('/profoundui/proddata/images/grids/prev-disabled.gif');
+  cursor: default;
+}
+
+.next-image-icon {
+  background-image: url('/profoundui/proddata/images/grids/next.gif');
+  cursor: pointer; 
+}
+
+
+.next-image-icon-disabled {
+  background-image: url('/profoundui/proddata/images/grids/next-disabled.gif');
+  cursor: default;
+}
+
+.export-image-icon{
+  background-image: url('/profoundui/proddata/images/grids/excel.gif');
+}
+
+.RTL {
+  direction: rtl;
+}
+
+
+
+INPUT.PR { 
+  border: 0px solid #ffffff;
+  background-image: none;
+  background-color: transparent;
+}
+INPUT[type="password"].PR {
+  visibility: hidden;
+}
+INPUT.PR-UL { 
+  border: 0px solid #ffffff;
+  background-image: none;
+  background-color: transparent;
+  text-decoration: underline;
+}
+INPUT[type="password"].PR-UL {
+  visibility: hidden;
+}
+
+INPUT.ND {
+  display: none;
+}
+
+DIV.ND {
+  display: none;
+}
+
+DIV.BLU { color: blue; }
+INPUT.BLU { color: blue; }
+
+DIV.GRN {  }
+INPUT.GRN { color: #009900; }
+
+DIV.PNK { color: fuchsia; }
+INPUT.PNK { color: fuchsia; }
+
+DIV.RED { color: red; }
+INPUT.RED { color:red; }
+
+DIV.TRQ { color: #00BBBB; }
+INPUT.TRQ { color: #00BBBB; }
+
+DIV.WHT { font-weight: bold; color: black; }
+INPUT.WHT { font-weight: bold; }
+
+DIV.YLW { color: #EBA334; font-weight: bold }
+INPUT.YLW { color: #ff9900; }
+
+DIV.RI { background-color: yellow; }
+INPUT.RI { background-color: yellow; background-image: none; }
+
+DIV.HI { font-weight: bold;  }
+INPUT.HI { font-weight: bold; }
+
+DIV.UL { text-decoration: underline }
+INPUT.UL { text-decoration: none }
+
+
+DIV.BL { color: red; }
+INPUT.BL { color: red; }
+
+
+/* For file upload widget */
+div.pui-file-upload {
+
+	font-family: verdana, sans-serif;
+  border: 1px inset #CCCCCC;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: white;
+  vertical-align: baseline;
+
+}
+
+div.pui-file-upload div.control-box {
+
+  padding-left: 5px;
+	font-size: 14px;  
+
+}
+
+div.pui-file-upload a {
+
+	color: #3867B1;
+	cursor: pointer;
+
+}
+
+div.pui-file-upload a:visted {
+
+	color: #3867B1;
+
+}
+
+.design div.pui-file-upload a:hover {
+
+  border-style: none;
+  
+}
+
+div.pui-file-upload a.control-proxy {
+
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+
+}
+
+div.pui-file-upload a.clear {
+
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 20px;
+
+}
+
+div.pui-file-upload input.control {
+
+  position: absolute;
+  top: 0px;
+  left: -800px;
+  margin: 0px;
+  font-size: 70px;
+  opacity: 0;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";   
+  filter: alpha(opacity=0);
+  cursor: pointer;
+
+}
+
+div.pui-file-upload div.list-box {
+
+  margin-top: 10px;
+	font-size: 10px;
+	padding-left: 5px;
+	padding-right: 5px;  
+	
+}
+
+div.pui-file-upload table.list {
+
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+}
+
+div.pui-file-upload table.list tr.row {
+
+  height: 23px;	
+  width: 100%;
+
+}
+
+div.pui-file-upload table.list td {
+
+  border-top: 1px solid #CCCCCC;
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+
+div.pui-file-upload table.list td.name-col {
+
+
+}
+
+div.pui-file-upload table.list td.remove-col {
+
+  width: 65px;
+  padding-left: 10px;
+
+}
+
+div.pui-file-upload a.remove {
+
+
+}
+
+
+
+/* CSS for Simple Grids */
+.simple-grid {
+  z-index: 9;
+}
+.simple-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.simple-grid .cell {
+  text-align: center;
+}
+.simple-grid .header-cell {
+  font-size: 13px;
+  color: #ffffff;
+  background-color: #6699ff;
+  text-align: center;
+  font-weight: bold;
+}
+.simple-grid .header-cell div {
+  text-align: center;
+}
+.simple-grid .odd {
+  color: #555555;
+  background-color: #efefef;
+}
+.simple-grid .even {
+  color: #555555;
+  background-color: #fcfcfc;
+}
+.simple-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.simple-grid .hover {
+  color: #555555;
+  background-color: #dfe8f6;
+}
+
+
+/* CSS for Crystal Grids */
+.crystal-grid {
+  z-index: 9;
+}
+.crystal-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.crystal-grid .cell {
+  text-align: center;
+}
+.crystal-grid .header-cell {
+  font-size: 11px;
+  color: #1641af;
+  background-color: #cddef3;
+  background-image: url('/profoundui/proddata/images/grids/crystal/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.crystal-grid .header-cell div {
+  text-align: center;
+}
+.crystal-grid .odd {
+  color: #555555;
+  background-color: #efefef;
+}
+.crystal-grid .even {
+  color: #555555;
+  background-color: #fcfcfc;
+}
+.crystal-grid .odd INPUT.PR {
+  color: #555555;
+}
+.crystal-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.crystal-grid .even INPUT.PR {
+  color: #555555;
+}
+.crystal-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.crystal-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.crystal-grid .hover {
+  color: #555555;
+  background-color: #cbe2ff;
+  background-image: url('/profoundui/proddata/images/grids/crystal/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Contemporary Grids */
+.contemporary-grid {
+  z-index: 9;
+}
+.contemporary-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.contemporary-grid .cell {
+  text-align: center;
+}
+.contemporary-grid .header-cell {
+  font-family: Sans-Serif;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #0888f5;
+  background-image: url('/profoundui/proddata/images/grids/contemporary/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.contemporary-grid .header-cell div {
+  text-align: center;
+}
+.contemporary-grid .odd {
+  color: #555555;
+  background-color: #ffffff;
+}
+.contemporary-grid .even {
+  color: #555555;
+  background-color: #f5fafa;
+}
+.contemporary-grid .odd INPUT.PR {
+  color: #555555;
+}
+.contemporary-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.contemporary-grid .even INPUT.PR {
+  color: #555555;
+}
+.contemporary-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.contemporary-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.contemporary-grid .hover {
+  color: #555555;
+  background-color: #cddef3;
+  background-image: url('/profoundui/proddata/images/grids/contemporary/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Ice Blue Grids */
+.ice-blue-grid {
+  z-index: 9;
+}
+.ice-blue-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.ice-blue-grid .cell {
+  text-align: center;
+}
+.ice-blue-grid .header-cell {
+  font-size: 12px;
+  color: #000000;
+  background-color: #92c0f4;
+  background-image: url('/profoundui/proddata/images/grids/ice blue/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.ice-blue-grid .header-cell div {
+  text-align: center;
+}
+.ice-blue-grid .odd {
+  color: #555555;
+  background-color: #e8efff;
+}
+.ice-blue-grid .even {
+  color: #555555;
+  background-color: #e8efff;
+}
+.ice-blue-grid .odd INPUT.PR {
+  color: #555555;
+}
+.ice-blue-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.ice-blue-grid .even INPUT.PR {
+  color: #555555;
+}
+.ice-blue-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.ice-blue-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.ice-blue-grid .hover {
+  color: #555555;
+  background-color: #ffe088;
+  background-image: url('/profoundui/proddata/images/grids/ice blue/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Evergreen Grids */
+.evergreen-grid {
+  z-index: 9;
+}
+.evergreen-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.evergreen-grid .cell {
+  text-align: center;
+}
+.evergreen-grid .header-cell {
+  font-size: 11px;
+  color: #ffffff;
+  background-color: #47c444;
+  background-image: url('/profoundui/proddata/images/grids/evergreen/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.evergreen-grid .header-cell div {
+  text-align: center;
+}
+.evergreen-grid .odd {
+  color: #555555;
+  background-color: #ffffff;
+}
+.evergreen-grid .even {
+  color: #555555;
+  background-color: #f2f2f2;
+}
+.evergreen-grid .odd INPUT.PR {
+  color: #555555;
+}
+.evergreen-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.evergreen-grid .even INPUT.PR {
+  color: #555555;
+}
+.evergreen-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.evergreen-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.evergreen-grid .hover {
+  color: #ffffff;
+  background-color: #a0c985;
+}
+
+/* CSS for Midnight Grids */
+.midnight-grid {
+  z-index: 9;
+}
+.midnight-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.midnight-grid .cell {
+  text-align: center;
+}
+.midnight-grid .header-cell {
+  font-size: 11px;
+  color: #cae8e8;
+  background-color: #5e84bd;
+  background-image: url('/profoundui/proddata/images/grids/midnight/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.midnight-grid .header-cell div {
+  text-align: center;
+}
+.midnight-grid .odd {
+  color: #555555;
+  background-color: #d9d9d9;
+}
+.midnight-grid .even {
+  color: #555555;
+  background-color: #d9d9d9;
+}
+.midnight-grid .odd INPUT.PR {
+  color: #555555;
+}
+.midnight-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.midnight-grid .even INPUT.PR {
+  color: #555555;
+}
+.midnight-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.midnight-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.midnight-grid .hover {
+  color: #ffffff;
+  background-color: #3f639b;
+  background-image: url('/profoundui/proddata/images/grids/midnight/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Silver Grids */
+.silver-grid {
+  z-index: 9;
+}
+.silver-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.silver-grid .cell {
+  text-align: center;
+}
+.silver-grid .header-cell {
+  font-size: 11px;
+  color: #969591;
+  background-color: #e7e7e7;
+  background-image: url('/profoundui/proddata/images/grids/silver/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: normal;
+  font-family: Arial;
+}
+.silver-grid .header-cell div {
+  text-align: center;
+}
+.silver-grid .odd {
+  color: #555555;
+  background-color: #f9f9f9;
+}
+.silver-grid .even {
+  color: #555555;
+  background-color: #eeeeee;
+}
+.silver-grid .odd INPUT.PR {
+  color: #555555;
+}
+.silver-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.silver-grid .even INPUT.PR {
+  color: #555555;
+}
+.silver-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.silver-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.silver-grid .hover {
+  color: #555555;
+  background-color: #cbe2ff;
+  background-image: url('/profoundui/proddata/images/grids/silver/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Sapphire Grids */
+.sapphire-grid {
+  z-index: 9;
+}
+.sapphire-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.sapphire-grid .cell {
+  text-align: center;
+}
+.sapphire-grid .header-cell {
+  font-size: 11px;
+  color: #ffffff;
+  background-color: #4985fd;
+  background-image: url('/profoundui/proddata/images/grids/sapphire/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.sapphire-grid .header-cell div {
+  text-align: center;
+}
+.sapphire-grid .odd {
+  color: #555555;
+  background-color: #ffffff;
+}
+.sapphire-grid .even {
+  color: #555555;
+  background-color: #f2f2f2;
+}
+.sapphire-grid .odd INPUT.PR {
+  color: #555555;
+}
+.sapphire-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.sapphire-grid .even INPUT.PR {
+  color: #555555;
+}
+.sapphire-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.sapphire-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.sapphire-grid .hover {
+  color: #ffffff;
+  background-color: #ffe088;
+  background-image: url('/profoundui/proddata/images/grids/sapphire/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Coral Grids */
+.coral-grid {
+  z-index: 9;
+}
+.coral-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.coral-grid .cell {
+  text-align: center;
+}
+.coral-grid .header-cell {
+  font-size: 11px;
+  color: #cc3333;
+  background-color: #ffc113;
+  background-image: url('/profoundui/proddata/images/grids/coral/header.png');
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.coral-grid .header-cell div {
+  text-align: center;
+}
+.coral-grid .odd {
+  color: #555555;
+  background-color: #ffffff;
+}
+.coral-grid .even {
+  color: #555555;
+  background-color: #f2f2f2;
+}
+.coral-grid .odd INPUT.PR {
+  color: #555555;
+}
+.coral-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.coral-grid .even INPUT.PR {
+  color: #555555;
+}
+.coral-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.coral-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.coral-grid .hover {
+  color: #555555;
+  background-color: #ffe088;
+  background-image: url('/profoundui/proddata/images/grids/coral/hover.png');
+  background-repeat: repeat-x;
+}
+
+/* CSS for Polished Grids */
+.polished-grid {
+  z-index: 9;
+}
+.polished-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.polished-grid .cell {
+  text-align: center;
+}
+.polished-grid .header-cell {
+  font-size: 11px;
+  color: #000000;
+  background-color: #f2f5fb;
+  background-image: url('/profoundui/proddata/images/grids/polished/header.png');
+  background-repeat: repeat-x;
+  text-align: left;
+  font-weight: bold;
+  font-family: Arial;
+}
+.polished-grid .header-cell div {
+  text-align: left;
+}
+.polished-grid .odd {
+  color: #555555;
+  background-color: #ffffff;
+}
+.polished-grid .even {
+  color: #555555;
+  background-color: #f2f2f2;
+}
+.polished-grid .odd INPUT.PR {
+  color: #555555;
+}
+.polished-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.polished-grid .even INPUT.PR {
+  color: #555555;
+}
+.polished-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.polished-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.polished-grid .hover {
+  color: #ffffff;
+  background-color: #39698a;
+}
+
+
+/* Default CSS for Styled Buttons */
+/* This can be overriden using specific styled button classes, such as ice-blue-button */
+.styled-button {
+  font-family: Sans-serif;
+  color: #335588;
+  font-size: 12px;
+  font-weight: bold;
+
+}
+
+/* Default CSS for Panels */
+.panel {
+  font-family: Sans-serif;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+
+}
+/* Override CCSS for specific panels */
+.evergreen-panel {
+  font-size: 14px;
+  text-align: center;
+}
+.sapphire-panel {
+  text-align: center;
+}
+.polished-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.contemporary-panel {
+  font-size: 14px;
+}
+.slate-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.smoke-panel {
+  font-size: 14px;
+}
+.pine-panel {
+  font-size: 14px;
+}
+.ice-blue-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.glass-panel {
+  text-align: center;
+  font-size: 14px;
+  color: #0050b0;
+}
+.navy-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.steel-blue-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.harvest-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.professional-dialog-panel {
+  font-size: 14px;
+}
+.classic-dialog-panel {
+  font-size: 14px;
+}
+.simple-dialog-panel {
+  color: #15428b;
+  text-align: center;
+}
+.polished-dialog-panel {
+  color: #666666;
+  text-align: center;
+  font-size: 13px;
+}
+.modern-dialog-panel {
+  text-align: center;
+  font-size: 14px;
+}
+.glass-dialog-panel {
+  color: #15428b;
+  font-size: 13px;
+}
+.crimson-dialog-panel {
+  text-align: center;
+  font-size: 14px;
+}
+
+
+.constant {
+  font-family: Trebuchet MS;
+}
+
+.outputField {
+  font-family: Trebuchet MS;
+}
+
+DIV.top-line {
+  color: #ffffff;
+}
+
+.subfile-heading {
+  font-size: 11px;
+  color: #1641af;
+  font-weight: bold;
+  z-index: 100  /* above grid lines */
+}
+DIV.subfile-heading {
+  color: #1641af;
+}
+
+.enhanced-constant {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+}
+
+.enhanced-output-field {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+}
+
+.enhanced-subfile-heading {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+  color: #1641af;
+  font-weight: bold;
+  z-index: 100  /* above grid lines */
+}
+DIV.enhanced-subfile-heading {
+  color: #1641af;
+}
+
+
+INPUT.empty-text, TEXTAREA.empty-text {
+  color: gray;
+  border: 1px solid #B5B8C8;
+}
+
+@media print {
+  .pui-scrollbar {
+    display: none;
+  }
+}
+
+body.hybrid {
+  font-family: Consolas, Monospace;
+}
+
+
+.hybrid-link {
+  font-family: sans-serif;  
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+  color: #0067C3;  
+}
+.hybrid-link :hover {
+  text-decoration: underline;
+}
+
+
+DIV.hybrid-crumb {
+  font-family: sans-serif;  
+  font-weight: bold;
+  font-size: 12px;
+  color: #333333;
+}
+
+A.hybrid-crumb {
+  font-family: sans-serif;  
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+  color: #0067C3;  
+}
+A.hybrid-crumb :hover {
+  text-decoration: underline;
+}
+
+
+.hybrid-required {
+  font-family: sans-serif;  
+  font-weight: bold;
+  font-size: 12px;
+  color: #ff0000;  
+}
+
+
+
+
+/* Hybrid Theme */
+
+INPUT.hybrid-input {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+  z-index: 20;    
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid #7eadd9;
+  background-image: url(/profoundui/proddata/images/input-background.gif);
+  background-repeat: repeat-x;
+}
+
+SELECT.hybrid-input {
+  font-family: Sans-Serif;
+  font-size: 12px;
+  z-index: 20;    
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid #7eadd9;
+  background-image: url(/profoundui/proddata/images/input-background.gif);
+  background-repeat: repeat-x;
+}
+
+
+INPUT.hybrid-button {
+	color: #335588;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+
+.hybrid-constant {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+  color: #333333;
+}
+.hybrid-constant2 {
+  font-family: sans-serif;  
+  font-weight: bold;
+  font-size: 12px;
+  color: #333333;
+}
+
+.hybrid-output-field {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+  color: #666666;
+}
+
+.hybrid-subfile-heading {
+  font-family: Consolas, Monospace;
+  font-size: 14px;
+  color: #333333;
+  font-weight: bold;
+  z-index: 100  /* above grid lines */
+}
+DIV.hybrid-subfile-heading {
+  color: #333333;
+}
+
+
+/* CSS for Hybrid Grid */
+.hybrid-grid {
+  z-index: 9;
+}
+.hybrid-grid .cell { 
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.hybrid-grid .cell {
+  text-align: center;
+}
+.hybrid-grid .header-cell {
+  font-size: 11px;
+  color: #ffffff;
+  background-color: #0b72a9;
+  background-repeat: repeat-x;
+  text-align: center;
+  font-weight: bold;
+}
+.hybrid-grid .header-cell div {
+  text-align: center;
+}
+.hybrid-grid .odd {
+  color: #555555;
+  background-color: #efefef;
+}
+.hybrid-grid .even {
+  color: #555555;
+  background-color: #fcfcfc;
+}
+.hybrid-grid .odd INPUT.PR {
+  color: #555555;
+}
+.hybrid-grid .odd INPUT.PR-UL {
+  color: #555555;
+}
+.hybrid-grid .even INPUT.PR {
+  color: #555555;
+}
+.hybrid-grid .even INPUT.PR-UL {
+  color: #555555;
+}
+.hybrid-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.hybrid-grid .hover {
+  color: #555555;
+  background-color: #cbe2ff;
+  background-image: url('/profoundui/proddata/images/grids/hybrid/hover.png');
+  background-repeat: repeat-x;
+}
+
+
+
+.hybrid INPUT.PR { 
+  border: 0px solid #ffffff;
+  background-image: none;
+  background-color: transparent;
+  color: #666666;
+}
+
+.hybrid INPUT.PR-UL { 
+  border: 0px solid #ffffff;
+  background-image: none;
+  background-color: transparent;
+  text-decoration: underline;
+  color: #666666;
+}
+
+
+.hybrid DIV.RI { background-color: yellow; }
+.hybrid INPUT.RI { background-color: yellow; background-image: none; }
+
+
+
+
+.hybrid DIV.TRQ { color: #335588; }
+.hybrid INPUT.TRQ { color: #000000; }
+
+
+
+.hybrid INPUT.invalid {
+  background-image: url(/profoundui/proddata/images/invalid-underline.gif);
+  background-repeat: repeat-x;
+  background-position: bottom;
+  border-color: #924949;
+}
+
+
+
+.hybrid-heading1 {
+  height: 122px;
+  background-color: #005079;
+  background-image: url("/profoundui/userdata/genie skins/Hybrid/background.gif");
+  background-position: center top;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: -2px;
+  z-index: 4;
+}
+
+body.hybrid-signon {
+  background-color: #005079;
+  background-image: url("/profoundui/userdata/genie skins/Hybrid/background.gif");
+  background-position: center top;
+  background-repeat: no-repeat;  
+}
+
+.hybrid-heading2 {
+  position: absolute;
+  top: 75px;
+  left: -4px;
+  border-top: 1px solid #18638A;
+  border-bottom: 1px solid #18638A;
+  background-image: url('/profoundui/userdata/genie skins/Hybrid/heading_strip.png');
+  background-repeat: repeat-x;
+  z-index: 5;
+  width: 100%;
+}
+
+.hybrid-actions {
+  background: #e7f1f3; /* Old browsers */
+  background: -moz-linear-gradient(top,  #e7f1f3 38%, #ffffff 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(38%,#e7f1f3), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* IE10+ */
+  background: linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7f1f3', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.hybrid .top-line {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+
+div.mobile-device-layout {
+  z-index: 8;
+}
+div.mobile-device-layout table {
+  empty-cells: show;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+div.mobile-device-layout td.top-bar, div.mobile-device-layout div.top-bar {
+  background-color: #2175af;
+  background-image: url(/profoundui/proddata/images/layouts/mobilebar3.png);
+  background-repeat: repeat-x;
+}
+div.mobile-device-layout td.top-bar, div.mobile-device-layout div.top-bar {
+  height: 55px;
+}
+div.mobile-device-layout td.content-section, div.mobile-device-layout div.content-section {
+  background-color: #eeeeee;
+}
+div.mobile-device-layout div.content-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+div.mobile-device-layout td.bottom-bar, div.mobile-device-layout div.bottom-bar {
+  background-color: #000000;
+  background-image: url(/profoundui/proddata/images/layouts/mobilebar4.png);
+  background-repeat: repeat-x;
+}
+div.mobile-device-layout td.bottom-bar, div.mobile-device-layout div.bottom-bar {
+  height: 55px;
+}
+
+
+div.onoff-switch {
+  position: relative;
+  height: 27px;
+  min-height: 27px;
+  max-height: 27px;
+  min-width: 50px;
+  max-width: 550px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.onoff-switch label {
+  white-space: nowrap;
+  font-size: 17px;
+  line-height: 17px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  display: block;
+  height: 27px;
+  position: absolute;
+  width: auto;
+  top: 0;
+  padding-top: 5px;
+  overflow: hidden;
+}
+.onoff-switch, .onoff-switch label {
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+.onoff-switch-disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5; 
+}
+label.on-label {
+  color: white;
+  background: url('/profoundui/proddata/images/onoff/on.png') no-repeat;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+  left: 0;
+  padding-top: 5px;
+}
+label.on-label span {
+  padding-left: 8px;
+}
+label.off-label {
+  color: #8b8b8b;
+  background: url('/profoundui/proddata/images/onoff/off.png') no-repeat right 0;
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+  text-align: right;
+  right: 0;
+}
+label.off-label span {
+  padding-right: 8px;
+}
+.onoff-handle-left {
+  display: block;
+  height: 27px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  background: url('/profoundui/proddata/images/onoff/handle_left.png') no-repeat;
+  padding-left: 3px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.onoff-handle-right {
+  height: 100%;
+  width: 100%;
+  padding-right: 3px;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: url('/profoundui/proddata/images/onoff/handle_right.png') no-repeat right 0; 
+}
+.onoff-handle-center {
+  height: 100%;
+  width: 100%;
+  background: url('/profoundui/proddata/images/onoff/handle_center.png');
+  padding: 0px;
+}
+
+div.ace_editor, .ace_editor div {
+  padding: 0px;
+}
+div.ace_gutter-cell {
+  padding-left: 19px;
+  padding-right: 6px;
+}
+div.ace_gutter-cell {
+  padding-left: 19px;
+  padding-right: 6px;
+}
+div.ace_gutter-tooltip {
+  padding: 4px;
+}
+div.ace_folding-enabled > div.ace_gutter-cell {
+    padding-right: 13px;
+}
