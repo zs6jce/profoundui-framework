@@ -31,6 +31,8 @@
 
      D PRID            S             10A
      D PRNAME          S             30A
+     D PPRICE          S             11P 2
+     D PSTOCK          S              7P 0
      D FirstRecord     S               N   Inz(*On)
 
 
@@ -56,9 +58,9 @@
           ExSr WriteOut;
 
           Exec SQL DECLARE cursor1 SCROLL CURSOR FOR
-            SELECT PRID, PRNAME FROM PRODUCTSP;
+            SELECT PRID, PRNAME, PPRICE, PSTOCK FROM PRODUCTSP;
           Exec SQL Open cursor1;
-          Exec SQL Fetch cursor1 INTO :PRID, :PRNAME;
+          Exec SQL Fetch cursor1 INTO :PRID, :PRNAME, :PPRICE, :PSTOCK;
           Dow (SQLCod <> 100) and (SQLCod >= 0);
             If Not FirstRecord;
               Buffer = ',';
@@ -66,11 +68,13 @@
             EndIf;
             FirstRecord = *Off;
 
-            Buffer = '{ "PRID": "' + %TrimR(PRID) +
-                     '",  "PRNAME": "' + %TrimR(PRNAME) + '" }';
+            Buffer = '{ "PRID": "' + %TrimR(PRID) + '",' +
+                       '"PRNAME": "' + %TrimR(PRNAME) + '",' +
+                       '"PPRICE": "' + %Char(PPRICE) + '",' +
+                       '"PSTOCK": "' + %Char(PSTOCK) + '"}';
             ExSr WriteOut;
 
-            Exec SQL Fetch cursor1 INTO :PRID, :PRNAME;
+            Exec SQL Fetch cursor1 INTO :PRID, :PRNAME, :PPRICE, :PSTOCK;
           EndDo;
           Exec SQL Close cursor1;
 
