@@ -37,12 +37,9 @@ pui.buildHyperlink = function(dom, value, designMode, href, target) {
   a.appendChild(document.createTextNode(text));
   if (is_ie && (context == "dspf" || context == "genie")) {
     addEvent(a, "click", function(e) {
+      e.preventDefault();
       e.returnValue = false;
       return false;      
-      //pui.skipConfirm = true;
-      //setTimeout(function() {
-      //  pui.skipConfirm = false;
-      //}, 0);
     });
   }
   dom.appendChild(a);

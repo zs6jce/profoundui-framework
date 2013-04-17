@@ -150,7 +150,7 @@ function numericSignOnly(e){
   if(!e) e = window.event;
   var target = e.srcElement || e.target;
   if (target.autoComp != null) return;	
-  var allowedUnicodes = new Array(8,9,13,16,17,18,19,20,27,33,34,35,36,37,38,39,40,45,46,48,49,50,51,52,53,54,55,56,57,91,93,96,97,98,99,100,101,102,103,104,105,109,110,112,123,144,145,188,190,112,113,114,115,116,117,118,119,120,121,122,123,189,109,pui["field exit key"]);
+  var allowedUnicodes = new Array(8,9,13,16,17,18,19,20,27,33,34,35,36,37,38,39,40,45,46,48,49,50,51,52,53,54,55,56,57,91,93,96,97,98,99,100,101,102,103,104,105,109,112,123,144,145,112,113,114,115,116,117,118,119,120,121,122,123,189,pui["field exit key"]);
   allowKeys(allowedUnicodes, e);
 }
 function alphabeticOnly(e) {
@@ -496,18 +496,13 @@ function allowKeys(allowedUnicodes, e) {
   var pos;
   var success;
   var shiftKey;
-  var isTextbox = false;
 
   //key=(typeof event!='undefined')?window.event.keyCode:e.keyCode;
   key = e.keyCode;
   obj = e.target || e.srcElement; // IE doesn't use .target
   
-  if (obj.tagName == "INPUT") {
-    if (obj.type == null || obj.type == "" || obj.type == "text" || obj.type == "number" || obj.type == "password") {
-      isTextbox = true;
-    }
-  }
-
+  var isTextbox = pui.isTextbox(obj);
+  
   if (pui.genie.formSubmitted) {
     if (pui.genie.config.enableKeyAhead) {
       if (e.modifiers) shiftKey = e.modifiers && Event.SHIFT_MASK;
@@ -623,7 +618,7 @@ function allowKeys(allowedUnicodes, e) {
   	}
     
   }
-  if (key == pui["field exit key"] && isTextbox && !e.shiftKey) {    // numpad plus sign
+  if (isTextbox && pui.isFieldExit(e)) {    
     pui.storeCursorPosition(obj);
     fieldExit(obj);
     disableAction(e);
@@ -1400,3 +1395,35 @@ pui.parseCommaSeparatedList = function(list) {
   return listArray;
 }
 
+pui.isTextbox = function(obj) {
+
+  if (obj.tagName == "INPUT") {
+    if (obj.type == null || obj.type == "" || obj.type == "text" || obj.type == "number" || obj.type == "password") {
+      return true;
+    }
+  }
+  
+  return false;
+
+}
+
+pui.isFieldExit = function(e) {
+
+  e = e || window.event;
+  var key = e.keyCode;
+  var fe = pui["field exit key"];
+  
+  if ((key == fe) && 
+      (!e.shiftKey || fe == 16) && 
+      (!e.ctrlKey || fe == 17)) {
+  
+    return true;
+      
+  }
+  else {
+  
+    return false;
+  
+  }        
+  
+}
