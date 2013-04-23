@@ -73,3 +73,12 @@ Atrium["getToken"] = function() {
 	return par["Atrium"]["api"]["getToken"]();
 
 }
+
+Atrium["getUser"] = function() {
+
+	var par = parent.parent || parent;
+	if (!par || !par["Atrium"]) return;	
+	
+	return par["Atrium"]["api"]["getUser"]();  
+
+}
