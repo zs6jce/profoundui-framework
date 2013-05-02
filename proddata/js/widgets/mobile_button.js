@@ -35,6 +35,8 @@ pui.MobileButton = function() {
   
   var swatch = "c";
   var disabled = false;
+  var iconShadowClass = " ui-icon-shadow";
+  if (is_firefox) iconShadowClass = "";
   
   var me = this;
 
@@ -53,7 +55,7 @@ pui.MobileButton = function() {
     link.style.marginBottom = "0";
     innerSpan.className = "ui-btn-inner ui-btn-corner-all";
     textSpan.className = "ui-btn-text";
-    iconSpan.className = "ui-icon ui-icon-shadow";
+    iconSpan.className = "ui-icon" + iconShadowClass;
     innerSpan.appendChild(textSpan);
     innerSpan.appendChild(iconSpan);
     link.appendChild(innerSpan);
@@ -127,7 +129,7 @@ pui.MobileButton = function() {
     if (icon == "down arrow") icon = "arrow-d";
     if (icon == null) icon = "";
     if (icon !=  "") icon = " ui-icon-" + icon;
-    iconSpan.className = "ui-icon" + icon +  " ui-icon-shadow"; 
+    iconSpan.className = "ui-icon" + icon + iconShadowClass; 
   }
   
   this.setMini = function(flag) {
