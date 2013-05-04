@@ -305,6 +305,11 @@ pui.CSS3Panel = function() {
   
   this.resize = function(newHeight) {
     var totalHeight;
+    if (typeof newHeight == "string") {
+      if (newHeight.length < 3 || newHeight.substr(newHeight.length - 2, 2) != "px") {
+        newHeight = null;
+      }
+    }
     if (newHeight != null && !isNaN(parseInt(newHeight))) totalHeight = parseInt(newHeight);
     else totalHeight = me.container.offsetHeight;
     var hdrHeight = headerHeight;
@@ -356,8 +361,9 @@ pui.widgets.getCSS3PanelProxy = function(defaultParms) {
   panel.setHeaderSwatch(defaults["header theme"]);
   panel.setBodySwatch(defaults["body theme"]);
   panel.setStraightEdge(defaults["straight edge"]);
+  panel.setHasHeader(defaults["has header"] !== "false" && defaults["has header"] !== false);
   panel.setHeaderHeight(defaults["header height"]);
-  panel.setHeight(defaults["height"]);
+  panel.setHeight(defaults["height"]);  
   return dom;
 }
 
@@ -401,6 +407,11 @@ pui.widgets.add({
   propertySetters: {
 
     "field type": function(parms) {
+      
+      parms.dom.sizeMe = function() {
+        parms.dom.panel.resize();
+      }
+      
       var panel = new pui.CSS3Panel();
       panel.container = parms.dom;
       parms.dom.innerHTML = "";
@@ -412,7 +423,11 @@ pui.widgets.add({
       panel.setHeaderSwatch(parms.evalProperty("header theme"));
       panel.setBodySwatch(parms.evalProperty("body theme"));
       panel.setStraightEdge(parms.evalProperty("straight edge"));
+      var hasHeader = parms.evalProperty("has header");
+      hasHeader = (hasHeader !== "false" && hasHeader !== false);
+      panel.setHasHeader(hasHeader);
       panel.setHeaderHeight(parms.evalProperty("header height"));
+      panel.setHeight(parms.evalProperty("height"));
     },
     
     "header theme": function(parms) {
@@ -429,6 +444,11 @@ pui.widgets.add({
 
     "straight edge": function(parms) {
       parms.dom.panel.setStraightEdge(parms.value);
+    },
+
+    "has header": function(parms) {
+      var hasHeader = (parms.value !== "false" && parms.value !== false);
+      parms.dom.panel.setHasHeader(hasHeader);
     },
 
     "header height": function(parms) {
