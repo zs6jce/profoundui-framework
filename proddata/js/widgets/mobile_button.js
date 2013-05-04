@@ -27,13 +27,14 @@
 pui.MobileButton = function() {
   this.container = null;
   this.designMode = null;
+  this.forProxy = false;
   
   var link;
   var innerSpan;
   var textSpan;
   var iconSpan;
   
-  var swatch = "c";
+  var swatch = "a";
   var disabled = false;
   var iconShadowClass = " ui-icon-shadow";
   if (is_firefox) iconShadowClass = "";
@@ -96,7 +97,7 @@ pui.MobileButton = function() {
   }
   
   this.setSwatch = function(newSwatch) {
-    if (newSwatch == null) newSwatch = "a";  // default
+    if (newSwatch == null || newSwatch == "") newSwatch = "a";  // default
     if (newSwatch.length > 1) newSwatch = newSwatch.substr(0, 1);
     newSwatch = newSwatch.toLowerCase();
     if (swatch == newSwatch) return;
