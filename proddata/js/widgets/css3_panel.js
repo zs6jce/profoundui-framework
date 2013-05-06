@@ -58,6 +58,7 @@ pui.CSS3PanelSection = function() {
       layoutContainer.style.position = "absolute";
       layoutContainer.style.width = "100%";
       layoutContainer.style.height = "100%";
+      layoutContainer.style.overflow = "hidden";
       mainSpan.appendChild(layoutContainer); 
     }
     mainSpan.appendChild(innerSpan);
