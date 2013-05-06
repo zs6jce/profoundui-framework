@@ -27,11 +27,13 @@
 pui.CSS3PanelSection = function() {
   this.container = null;
   this.type = "body";
+  this.forLayout = false;
   
   var mainSpan;
   var innerSpan;
   var textSpan;
   var iconSpan;
+  var layoutContainer;
   
   var swatch = "c";
   
@@ -49,6 +51,14 @@ pui.CSS3PanelSection = function() {
     if (me.type == "header") {
       textSpan.className = "ui-btn-text";
       innerSpan.appendChild(textSpan);
+    }
+    if (me.forLayout && me.type == "body") {
+      layoutContainer = document.createElement("div");
+      layoutContainer.setAttribute("container", "true");
+      layoutContainer.style.position = "absolute";
+      layoutContainer.style.width = "100%";
+      layoutContainer.style.height = "100%";
+      mainSpan.appendChild(layoutContainer); 
     }
     mainSpan.appendChild(innerSpan);
     me.container.appendChild(mainSpan);
@@ -144,6 +154,15 @@ pui.CSS3PanelSection = function() {
       textSpan.style[styleName] = styleValue;
     }
   },
+  
+  this.setAllStyles = function(properties) {
+    var styles = ["color", "font family", "font size", "font style", "font variant", "font weight", "letter spacing", "text align", "text decoration", "text transform", "word spacing"];
+    for (var i = 0; i < styles.length; i++) {
+      var style = styles[i];
+      var value = properties[style];
+      if (value != null) me.setStyle(style, value);
+    }
+  },
 
   this.setLineHeight = function(containerHeight) {
     if (me.type != "header") return;
@@ -184,6 +203,7 @@ pui.CSS3PanelSection = function() {
 
 pui.CSS3Panel = function() {
   this.container = null;
+  this.forLayout = false;
   
   var headerDiv;
   var bodyDiv;
@@ -207,12 +227,14 @@ pui.CSS3Panel = function() {
     bodyDiv.style.width = "100%";
     headerPanel = new pui.CSS3PanelSection();
     headerPanel.type = "header";
+    headerPanel.forLayout = me.forLayout;
     headerPanel.container = headerDiv;
     headerPanel.init();
     headerPanel.setSwatch("b");
     headerPanel.setHeight("100%");
     bodyPanel = new pui.CSS3PanelSection();
     bodyPanel.type = "body";
+    bodyPanel.forLayout = me.forLayout;
     bodyPanel.container = bodyDiv;
     bodyPanel.init();
     bodyPanel.setHeight("100%");
@@ -294,6 +316,10 @@ pui.CSS3Panel = function() {
   this.setStyle = function(styleName, styleValue) {
     headerPanel.setStyle(styleName, styleValue);
   },
+
+  this.setAllStyles = function(properties) {
+    headerPanel.setAllStyles(properties);
+  },
   
   this.setHeaderSwatch = function(swatch) {
     headerPanel.setSwatch(swatch);
@@ -348,8 +374,8 @@ pui.widgets.getCSS3PanelProxy = function(defaultParms) {
   if (defaults.value == null) defaults.value = "Panel Title";
   if (defaults.width == null) defaults.width = "200px";
   if (defaults.height == null) defaults.height = "300px";
-  if (defaults["header theme"] == null) defaults["header theme"] = "b - Blue";
-  if (defaults["body theme"] == null) defaults["body theme"] = "c- Gray";
+  if (defaults["header theme"] == null) defaults["header theme"] = "B - Blue";
+  if (defaults["body theme"] == null) defaults["body theme"] = "C - Gray";
   var dom = document.createElement("div");
   dom.style.width = defaults.width;
   dom.style.height = defaults.height;
@@ -380,7 +406,6 @@ pui.widgets.add({
   defaults: {
     "width": "200px",
     "height": "300px",
-    "theme": "c - Gray",
     "z index": "8"
   },
   
@@ -427,7 +452,6 @@ pui.widgets.add({
       hasHeader = (hasHeader !== "false" && hasHeader !== false);
       panel.setHasHeader(hasHeader);
       panel.setHeaderHeight(parms.evalProperty("header height"));
-      panel.setHeight(parms.evalProperty("height"));
     },
     
     "header theme": function(parms) {
