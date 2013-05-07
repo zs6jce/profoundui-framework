@@ -20,11 +20,11 @@
 
 
 /**
- * CSS3 Panel Header
+ * CSS Panel Header
  * @constructor
  */
 
-pui.CSS3PanelSection = function() {
+pui.CSSPanelSection = function() {
   this.container = null;
   this.type = "body";
   this.forLayout = false;
@@ -198,11 +198,11 @@ pui.CSS3PanelSection = function() {
 
 
 /**
- * CSS3 Panel
+ * CSS Panel
  * @constructor
  */
 
-pui.CSS3Panel = function() {
+pui.CSSPanel = function() {
   this.container = null;
   this.forLayout = false;
   
@@ -226,14 +226,14 @@ pui.CSS3Panel = function() {
     bodyDiv.style.position = "absolute";
     bodyDiv.style.left = "0px";
     bodyDiv.style.width = "100%";
-    headerPanel = new pui.CSS3PanelSection();
+    headerPanel = new pui.CSSPanelSection();
     headerPanel.type = "header";
     headerPanel.forLayout = me.forLayout;
     headerPanel.container = headerDiv;
     headerPanel.init();
     headerPanel.setSwatch("b");
     headerPanel.setHeight("100%");
-    bodyPanel = new pui.CSS3PanelSection();
+    bodyPanel = new pui.CSSPanelSection();
     bodyPanel.type = "body";
     bodyPanel.forLayout = me.forLayout;
     bodyPanel.container = bodyDiv;
@@ -367,7 +367,7 @@ pui.CSS3Panel = function() {
 
 
 
-pui.widgets.getCSS3PanelProxy = function(defaultParms) {
+pui.widgets.getCSSPanelProxy = function(defaultParms) {
   var defaults = {};
   for (var x in defaultParms) {
     defaults[x] = defaultParms[x];
@@ -381,7 +381,7 @@ pui.widgets.getCSS3PanelProxy = function(defaultParms) {
   dom.style.width = defaults.width;
   dom.style.height = defaults.height;
   dom.style.position = "relative";
-  var panel = new pui.CSS3Panel();
+  var panel = new pui.CSSPanel();
   panel.container = dom;
   panel.init();
   panel.setText(defaults["value"]);
@@ -399,8 +399,8 @@ pui.widgets.getCSS3PanelProxy = function(defaultParms) {
 
 
 pui.widgets.add({
-  name: "css3 panel",
-  menuName: "CSS3 Panel",
+  name: "css panel",
+  menuName: "CSS Panel",
   newId: "Panel",
   newValue: "Panel Title",
   inlineEdit: true,
@@ -438,7 +438,7 @@ pui.widgets.add({
         parms.dom.panel.resize();
       }
       
-      var panel = new pui.CSS3Panel();
+      var panel = new pui.CSSPanel();
       panel.container = parms.dom;
       parms.dom.innerHTML = "";
       panel.init();

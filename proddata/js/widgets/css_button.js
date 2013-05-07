@@ -20,11 +20,11 @@
 
 
 /**
- * Mobile Button Class
+ * CSS Button Class
  * @constructor
  */
 
-pui.MobileButton = function() {
+pui.CSSButton = function() {
   this.container = null;
   this.designMode = null;
   this.forProxy = false;
@@ -246,7 +246,7 @@ pui.MobileButton = function() {
 
 
 
-pui.widgets.getMobileButtonProxy = function(defaultParms) {
+pui.widgets.getCSSButtonProxy = function(defaultParms) {
   var defaults = {};
   for (var x in defaultParms) {
     defaults[x] = defaultParms[x];
@@ -258,7 +258,7 @@ pui.widgets.getMobileButtonProxy = function(defaultParms) {
   var dom = document.createElement("div");
   dom.style.width = defaults.width;
   dom.style.height = defaults.height;
-  var button = new pui.MobileButton();
+  var button = new pui.CSSButton();
   button.container = dom;
   button.designMode = true;
   button.forProxy = true;
@@ -277,7 +277,7 @@ pui.widgets.getMobileButtonProxy = function(defaultParms) {
 
 
 pui.widgets.add({
-  name: "mobile button",
+  name: "css button",
   newValue: "Click Here",
   inlineEdit: true,
   defaults: {
@@ -308,7 +308,7 @@ pui.widgets.add({
   propertySetters: {
 
     "field type": function(parms) {
-      var button = new pui.MobileButton();
+      var button = new pui.CSSButton();
       button.container = parms.dom;
       button.designMode = parms.design;
       parms.dom.innerHTML = "";
