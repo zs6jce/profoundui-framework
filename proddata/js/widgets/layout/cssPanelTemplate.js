@@ -19,7 +19,7 @@
 
 
 
-pui.layout.template.css3PanelTemplate = function(parms) {  
+pui.layout.template.cssPanelTemplate = function(parms) {  
   
   var properties = parms.properties;
   var designMode = parms.designMode;
@@ -53,7 +53,7 @@ pui.layout.template.css3PanelTemplate = function(parms) {
     dom = document.createElement("div");
   }
   dom.innerHTML = "";
-  var panel = new pui.CSS3Panel();
+  var panel = new pui.CSSPanel();
   panel.forLayout = true;
   panel.container = dom;
   panel.init();
