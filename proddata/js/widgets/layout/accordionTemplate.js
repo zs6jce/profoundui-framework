@@ -60,7 +60,6 @@ pui.layout.template.accordionTemplate = function(parms) {
   if (proxyMode) accordion.forProxy = true;
   accordion.container = dom;
   accordion.designMode = designMode;
-  accordion.section
   accordion.init();
   dom.accordion = accordion;
   dom.sizeMe = function() {
