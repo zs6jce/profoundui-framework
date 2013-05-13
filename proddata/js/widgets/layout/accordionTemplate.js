@@ -30,9 +30,11 @@ pui.layout.template.accordionTemplate = function(parms) {
   if (returnProps) {
     return pui.layout.mergeProps([
       { name: "section names", type: "list", help: "Specifies a comma separate list of section names for the accordion." },
+      { name: "active section", format: "number", help: "This property specifies the initial active section on an Accordion Layout. Each section within an Accordion is identified by a sequential index, starting with 0 for the first section, 1 for the second section, and so on.  The default value is 0." },
       { name: "header theme", choices: ["A - Black", "B - Blue", "C - Gray", "D - Light Gray", "E - Yellow", "F - Green", "G - Red", "Other..."], help: "Specifies the jQuery Mobile theme to use for the accordion headers.  The theme is associated with a set of cascading style sheet rules." },
       { name: "body theme", choices: ["A - Black", "B - Blue", "C - Gray", "D - Light Gray", "E - Yellow", "F - Green", "G - Red", "Other..."], help: "Specifies the jQuery Mobile theme to use for the content body of the accordion.  The theme is associated with a set of cascading style sheet rules." },
-      { name: "small sections", choices: ["true", "false"], help: "This property uses CSS to provide a smaller, more compact version of the header sections.", controls: ["css button"] },
+      { name: "small sections", choices: ["true", "false"], help: "This property uses CSS to provide a smaller, more compact version of the header sections." },
+      { name: "allow collapse", choices: ["true", "false"], help: "Determines if the accordion can be fully collapsed." },
       { name: "straight edge", choices: ["all", "left", "right", "top", "bottom"], help: "Determines which parts of the element will have a straight edge instead of rounded corners." },
       { name: "color", stylename: "color", type: "color", help: "Defines the color of the text inside the given element." },
       { name: "font family", stylename: "fontFamily", choices: ["Arial", "Consolas", "Courier New", "Georgia", "Monospace", "Tahoma", "Times New Roman", "Sans-Serif", "Serif", "Trebuchet MS", "Verdana", "Other..."],help: "The font face for the text of the current element.<br>Ex: <span style='font-family:arial;'>Arial</span>, <span style='font-family:times new roman;'>Times New Roman</span>, <span style='font-family:verdana;'>Verdana</span>, etc."},
@@ -41,7 +43,9 @@ pui.layout.template.accordionTemplate = function(parms) {
       { name: "font weight", stylename: "fontWeight", format: "bold / normal", choices: ["normal", "bolder", "bold", "lighter", "100", "200", "300", "400", "500", "600", "700", "800", "900" ],help: "Font's weight. Most common used are <span style='font-weight:bold;'>bold</span> and <span style='font-weight:lighter;'>lighter</span>."},
       { name: "text align", stylename: "textAlign", choices: ["left", "right", "center", "justify"], help: "Alignment of the text in the current element.(Left, Right, Center, Justify).<br><table cellpadding='0' cellspacing='2'><tr><td><div style='text-align:left;width:125px;border:1px solid black;'>Left</div></td></tr><tr><td><div style='text-align:right;width:125px;border:1px solid black;'>Right</div></td></tr><tr><td><div style='text-align:center;width:125px;border:1px solid black;'>Center</div></td></tr><tr><td><div style='text-align:justify;width:125px;border:1px solid black;'>Justify</div></td></tr></table>"},
       { name: "text decoration", stylename: "textDecoration", format: "underline / none", choices: ["none", "underline", "overline", "line-through"],help: "Decoration on the text of the current element. <br><br>None, <span style='text-decoration:underline;'>Underline</span>, <span style='text-decoration:overline;'>Overline</span>, <span style='text-decoration:line-through;'>Line-through</span>. "},
-      { name: "text transform", stylename: "textTransform", choices: ["capitalize", "uppercase", "lowercase", "none"], help: "Transforms the default formatting of the text. <br><br>Capitalize(first character only),UPPERCASE(all), lowercase(all)."}
+      { name: "text transform", stylename: "textTransform", choices: ["capitalize", "uppercase", "lowercase", "none"], help: "Transforms the default formatting of the text. <br><br>Capitalize(first character only),UPPERCASE(all), lowercase(all)."},
+      { name: "onexpand", type: "js", help: "Initiates a client-side script when an accordion section is expanded.  The section index is passed to the event as a parameter named \"section\".  If the client-side script evaluates to false, the section will not be expanded." },
+      { name: "oncollapse", type: "js", help: "Initiates a client-side script when an accordion section is collapsed.  The section index is passed to the event as a parameter named \"section\".  If the client-side script evaluates to false, the section will not be colapsed." }
     ]);
   }
 
@@ -53,14 +57,17 @@ pui.layout.template.accordionTemplate = function(parms) {
   }
   dom.innerHTML = "";
   var accordion = new pui.Accordion();
+  if (proxyMode) accordion.forProxy = true;
   accordion.container = dom;
+  accordion.designMode = designMode;
+  accordion.section
   accordion.init();
   dom.accordion = accordion;
   dom.sizeMe = function() {
     dom.accordion.resize();
   }
   
-  var sectionNames = properties["sectionNames"];
+  var sectionNames = properties["section names"];
   accordion.setSectionNames(sectionNames);  
   var headerTheme = properties["header theme"];
   if (headerTheme != null) accordion.setHeaderSwatch(headerTheme);
@@ -74,6 +81,15 @@ pui.layout.template.accordionTemplate = function(parms) {
   var height = properties["height"];
   if (height == null) height = "300px";
   accordion.setHeight(height);
+  if (!designMode) {
+    var activeSection = properties["active section"];
+    if (activeSection != null) {
+      activeSection = Number(activeSection);
+      if (!isNaN(activeSection) && activeSection != 0) {
+        accordion.expandSection(activeSection);
+      }
+    }
+  }
   
   if (proxyMode) {
     dom.style.position = "relative";
