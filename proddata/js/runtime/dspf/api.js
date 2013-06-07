@@ -501,13 +501,13 @@ pui["capturePhoto"] = function(parms) {
   if (handler == null) {
     handler = function(response) {
       if (response["success"] == false) {
-        alert(response["error"]);
+        pui.alert(response["error"]);
       }
       else if (response["success"] == true) {
-        alert("Photo captured successfully.");
+        pui.alert("Photo captured successfully.");
       }
       else {
-        alert("Invalid response.");  // this shouldn't happen
+        pui.alert("Invalid response.");  // this shouldn't happen
       }
     }
   }
@@ -701,4 +701,35 @@ pui["uploadSignature"] = function(params) {
   
   pui.uploadDataUrl(params, params["handler"]);
     
+}
+
+pui["errorTip"] = function(el, msg, hideDelay) {
+
+  if (hideDelay == null) {
+  
+    hideDelay = 3000;
+  
+  }
+  else if (hideDelay == 0) {
+  
+    hideDelay = null;
+  
+  }
+
+  if (typeof(el) == "string") {
+  
+    el = getObj(el);
+  
+  }
+  
+  var tip = el.validationTip;
+  if (tip == null) {
+  
+    tip = new pui.ValidationTip(el);
+  
+  }
+  pui.addCssClass(el, "invalid");
+  tip.setMessage(msg); 
+  tip.show(hideDelay);
+
 }

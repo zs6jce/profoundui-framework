@@ -42,7 +42,6 @@ pui.modified = false;
 pui.ctlRecModified = {};
 pui.ignoreBlurs = false;
 pui.ignoreFocus = false;
-pui.closeMessage = "This will end your session.";
 pui.confirmOnClose = true;
 pui.shutdownOnClose = true;
 pui.skipConfirm = false;
@@ -88,14 +87,6 @@ pui.pagingBarHeight = 27;
 pui["vertical button spacing"] = 33;     // this accounts for the height of the button as well, used in non-window formats
 pui["horizontal button spacing"] = 90;   // this accounts for the width of the button as well, used in window formats
 
-pui["runtimeMessages"]= {};
-pui["runtimeMessages"]["ME"] = "Mandatory entry field. You must enter data.";
-pui["runtimeMessages"]["MF"] = "Mandatory fill field. You must fill the input box completely.";
-pui["runtimeMessages"]["required"] = "The value cannot be blank. This field is required.";
-pui["runtimeMessages"]["file required"] = "You must select at least one file.";
-pui["runtimeMessages"]["signature overflow"] = "The signature drawing size exceeds the maximum number of bytes available for storing the signature.  Please clear the signature pad and try again.";
-pui["runtimeMessages"]["validValues"] = "Value entered is not valid. Valid values are: ";
-
 pui["dup"] = {};
 pui["dup"]["char"] = "\u25CF";  // this is a character that looks like a round circle
 pui["dup"]["keyCode"] = 45;     // Insert (the default dup key is Shift-Insert)
@@ -117,9 +108,6 @@ pui["loading animation"]["height"] = 16;
 
 pui["auto tab"] = false;  // when the user reaches the end of the field, the cursor is automatically advanced to the next field
 pui["enable arrow keys"] = false;
-
-pui["session ended text"] = "Your session has ended.";
-pui["close browser text"] = "To complete the log off process, please close your browser window.";
 
 pui.fkeyValues = {
   "F1": 1,
@@ -409,7 +397,7 @@ pui.overlayAdjust = function(formats) {
               var itm = items[j];
               if (itm["grid"] != null) continue;
               var itmType = itm["field type"];
-              if (itmType != "panel" && typeof itm["top"] != "object" && itm["css class"] != "stationary" && itm["css class 2"] != "stationary") {
+              if (itmType != "panel" && itmType != "css panel" && typeof itm["top"] != "object" && itm["css class"] != "stationary" && itm["css class 2"] != "stationary") {
                 itm["top"] = (parseInt(itm["top"]) + pushDown) + "px";
               }
             }
@@ -460,15 +448,18 @@ pui.cleanup = function() {
 }
 
 
-pui.resize = function() {
+pui.resize = function(inEmulator) {
   var container = pui.runtimeContainer;
   if (container == null) return;
-  for (j = 0; j < container.childNodes.length; j++) {
+  for (var j = 0; j < container.childNodes.length; j++) {
     var child = container.childNodes[j];
     if (child.sizeMe != null && typeof child.sizeMe == "function") {
       if (is_ie || pui.isPercent(child.style.width) || pui.isPercent(child.style.height)) {  // IE reports the width and height in pixels for certain types of elements, even if they were set using percentages
         child.sizeMe();
       }
+    }
+    if (inEmulator && child.layout != null) {
+      child.layout.stretch();
     }
   } 
 }
@@ -497,6 +488,12 @@ pui.render = function(parms) {
     if (window.console && window.console.error) {
       console.error(msg);
     }
+  }
+
+  if (pui.genie && pui.genie.middleDiv == null) {
+  
+    pui.genie.middleDiv = document.getElementById("middle");
+  
   }
 
   if (!pui.resizeEventAssigned) {
@@ -654,7 +651,7 @@ pui.render = function(parms) {
           var refItems = layers[i]["metaData"]["items"];
           for (var j = 0; j < refItems.length; j++) {
             var panel = refItems[j];
-            if (panel["id"] == winRef && panel["field type"] == "panel") {
+            if (panel["id"] == winRef && (panel["field type"] == "panel" || panel["field type"] == "css panel")) {
               formats[0]["metaData"]["items"].push(panel);
               break;
             }
@@ -981,7 +978,7 @@ pui.renderFormat = function(parms) {
         designItem.properties.newitem = "true";
         designItem.propertiesChanged.newitem = true;
         var fieldType = items[i]["field type"];
-        if (fieldType == "styled button" || fieldType == "panel") {
+        if (fieldType == "styled button" || fieldType == "panel" || fieldType == "css panel" || fieldType == "css button" || fieldType == "Layout") {
           designItem.dom.style.borderStyle = "none";
         }
       }
@@ -1597,7 +1594,7 @@ pui.renderFormat = function(parms) {
           }
         }
         // textboxes and text areas    
-        if ((dom.comboBoxWidget != null) || (dom.tagName == "TEXTAREA") || (dom.tagName == "INPUT" && (dom.type == "" || dom.type == "text" || dom.type == "number" || dom.type == "password" || dom.type == "file"))) {
+        if ((dom.comboBoxWidget != null) || (dom.tagName == "TEXTAREA") || (dom.tagName == "INPUT" && (pui.isTextbox(dom) || dom.type == "file"))) {
           var boxDom = dom;
           if (dom.comboBoxWidget != null) boxDom = dom.comboBoxWidget.getBox();
           if (dom.formattingInfo != null && dom.formattingInfo.maxLength != null) {
@@ -1773,7 +1770,7 @@ pui.renderFormat = function(parms) {
       // determine first field to set focus on
       if (!isDesignMode && !pui.iPadEmulation && pui.focusField.dom == null && !dom.disabled && !dom.readOnly && properties["visibility"] != "hidden") {
         if (dom.tagName == "INPUT") {
-          if (dom.type == "" || dom.type == "text" || dom.type == "number" || dom.type == "checkbox" || dom.type == "radio" || dom.type == "password" || dom.type == "file") {
+          if (pui.isTextbox(dom) || dom.type == "checkbox" || dom.type == "radio" || dom.type == "file") {
             pui.focusField.dom = dom;
           }
         }
@@ -2012,7 +2009,7 @@ pui.renderFormat = function(parms) {
   	    	        
     }  // end if already rendered condition
 
-    if (pui["controller"] != null && properties != null && properties["set as modified"] != "false") {
+    if ((pui["controller"] != null || typeof pui.handler == "function") && properties != null && properties["set as modified"] != "false") {
       dom.modified = true;
     }
     
@@ -2210,43 +2207,30 @@ pui.showErrors = function(errors, rrn) {
       if (msg != null && msg != "") globalMessages.push(msg);
       continue;
     }
-    if (dom.comboBoxWidget != null) dom = dom.comboBoxWidget.getBox();
-    var newClass = dom.className;
-    if (newClass == null) newClass = "";
-    var temp = " " + newClass + " ";
-    if (temp.indexOf(" invalid ") < 0) {  //  not found
-      if (newClass != "") newClass += " ";
-      newClass += "invalid";
+    // 'dom' is the widget element. 
+    // 'tipBox' is the element the tool tip is attached to
+    // this is the interior textbox for a combobox widget.
+    if (dom.parentNode && dom.parentNode.comboBoxWidget) {
+    
+      dom = dom.parentNode;
+    
+    }   
+    var tipBox = dom;    
+    if (dom.comboBoxWidget != null) { 
+      tipBox = dom.comboBoxWidget.getBox();
     }
-    dom.className = newClass;
-    if (dom.validationTip == null) {
-      var posDom = dom;
-      if (dom.parentNode != null && dom.parentNode.comboBoxWidget != null) posDom = dom.parentNode;
-      dom.validationTip = new pui.ValidationTip(posDom);
-      dom.validationTip.container = pui.runtimeContainer;
-  	  if (dom.parentNode.isPUIWindow == true) {
-  	    dom.validationTip.container = dom.parentNode;
-  	  }
-  	  else {
-  	    var gridDiv = dom.parentNode.parentNode;
-  	    if (gridDiv != null && gridDiv.grid != null && gridDiv.parentNode.isPUIWindow == true) {
-  	      dom.validationTip.container = gridDiv.parentNode;
-  	    }
-  	  }
-      dom.validationTip.init();
+    if (dom.pui.properties["error message location"] == "alert") {
+      globalMessages.push(msg);
+    
     }
-
-    var tip = dom.validationTip;
-    tip.doneShowing = false;
-    tip.setMessage(msg);      
-    function showTipOnTimer(tip, dom) {  // allows blur events to complete
-      setTimeout(function() {
-        tip.show(3000);
-      }, 0);
-    }
-    showTipOnTimer(tip, dom);
-
-    if (rrn != null) {
+    else {
+      var tip = tipBox.validationTip;
+      if (tip == null) {
+        tip = new pui.ValidationTip(dom); 
+      }
+      pui.addCssClass(tipBox, "invalid");
+      tip.setMessage(msg); 
+      tip.show(3000, true);     
       var cell = dom.parentNode;
       if (cell != null) {
         var gridDiv = cell.parentNode;
@@ -2257,57 +2241,6 @@ pui.showErrors = function(errors, rrn) {
       }
     }
 
-    function showTipOnFocus(e) {
-      if (pui.ignoreFocus) return;
-      var target = getTarget(e);
-      if (target == null) return;
-      var tip = target.validationTip;
-      if (tip == null) return;
-      if (tip.doneShowing == true) return;
-      tip.show();
-    }
-    
-    function hideTipOnBlur(e) {
-      if (pui.ignoreBlurs) return;
-      var target = getTarget(e);
-      if (target == null) return;
-      var tip = target.validationTip;
-      if (tip == null) return;
-      tip.hide();
-    }
-    
-    function hideTipOnKeyDown(event) {
-      event = event || window.event;
-      var key = event.keyCode;        
-      if (key >= 9 && key <= 45) return;     // includes keys like arrow keys, ctrl, shift, etc.
-      if (key >= 112 && key <= 145) return;  // includes f1-f12, num lock, scroll lock, etc.
-      var target = getTarget(event);
-      if (target == null) return;
-      var tip = target.validationTip;
-      if (tip == null) return;
-      tip.hide();
-      tip.doneShowing = true;
-      pui.removeCssClass(target, "invalid");
-    }
-
-    function hideTipOnChange(event) {
-      event = event || window.event;
-      var target = getTarget(event);
-      if (target == null) return;
-      var tip = target.validationTip;
-      if (tip == null) return;
-      tip.hide();
-      tip.doneShowing = true;
-      pui.removeCssClass(target, "invalid");
-    }
-    
-    addEvent(dom, "focus", showTipOnFocus);
-    if (!(dom.tagName == "INPUT" && (dom.type == "text" || dom.type == "number"))) {
-      addEvent(dom, "click", showTipOnFocus);
-    }
-    addEvent(dom, "blur", hideTipOnBlur)
-    if (dom.tagName == "SELECT") addEvent(dom, "change", hideTipOnChange);
-    else addEvent(dom, "keydown", hideTipOnKeyDown);
   }    
   
   if (globalMessages.length > 0) {
@@ -2381,6 +2314,9 @@ pui.respond = function() {
     try {
       pui.referenceToResponse = response;  // create temporary reference to response object, so it can be updated by certain API's
       var onsubmitReturnVal = eval(pui.onsubmitProp);
+      if (typeof onsubmitReturnVal == "function") {
+        onsubmitReturnVal = onsubmitReturnVal(response);
+      }
       delete pui.referenceToResponse;
       if (onsubmitReturnVal == false) {
         pui.rrnTracker = {};
@@ -2480,13 +2416,13 @@ pui.buildResponse = function() {
         if (dom.ME == true && dom.modified != true) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
-          response.errors.push({ dom: boxDom, msg: pui["runtimeMessages"]["ME"] });
+          response.errors.push({ dom: boxDom, msg: pui.getLanguageText("runtimeMsg", "ME") });
           continue;
         }
         if (dom.MF == true && dom.modified == true && boxDom.maxLength != null && boxDom.value != null && (boxDom.maxLength != boxDom.value.length || boxDom.value === boxDom.emptyText)) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
-          response.errors.push({ dom: boxDom, msg: pui["runtimeMessages"]["MF"] });
+          response.errors.push({ dom: boxDom, msg: pui.getLanguageText("runtimeMsg", "MF") });
           continue;
         }
       }
@@ -2495,8 +2431,8 @@ pui.buildResponse = function() {
              (dom.fileUpload != null && dom.fileUpload.getCount() < 1) ) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
-          var msg = pui["runtimeMessages"]["required"];
-          if (dom.fileUpload != null) msg = pui["runtimeMessages"]["file required"];
+          var msg = pui.getLanguageText("runtimeMsg", "required");
+          if (dom.fileUpload != null) msg = pui.getLanguageText("runtimeMsg", "file required");
           response.errors.push({ dom: boxDom, msg: msg });
           continue;
         }
@@ -2522,6 +2458,20 @@ pui.buildResponse = function() {
             case "file":
             case "hidden":
             case "":
+            // following are new HTML5 input types
+            case "number":
+            case "date":
+            case "datetime":
+            case "time":
+            case "email":
+            case "url":
+            case "month":
+            case "tel":
+            case "url":
+            case "color":
+            case "datetime-local":
+            case "search":
+            case "week":
               value = dom.value;
               if (value === dom.emptyText) value = "";
               if (dom.autoCompValueField != null) {
@@ -2655,7 +2605,7 @@ pui.buildResponse = function() {
         if (value.length > dom.formattingInfo.maxLength) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
-          response.errors.push({ dom: dom, msg: pui["runtimeMessages"]["signature overflow"] });
+          response.errors.push({ dom: dom, msg: pui.getLanguageText("runtimeMsg", "signature overflow") });
           continue;          
         }
       }
@@ -2703,7 +2653,7 @@ pui.buildResponse = function() {
             if (invalid) {
               response.valid = false;
               if (response.errors == null) response.errors = [];
-              response.errors.push({ dom: boxDom, msg: pui["runtimeMessages"]["validValues"] + validValues.join(", ") + "." });
+              response.errors.push({ dom: boxDom, msg: pui.getLanguageText("runtimeMsg", "validValues") + validValues.join(", ") + "." });
               continue;
             }
           }
@@ -2982,7 +2932,7 @@ pui.submitResponse = function(response) {
         pui.hideWaitAnimation();
         if (parms == null) {
           document.body.style.backgroundColor = "#DFE8F6";
-          document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui["session ended text"] + '<br/><br/>' + pui["close browser text"] + '</div>';
+          document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui.getLanguageText("runtimeMsg", "session ended text") + '<br/><br/>' + pui.getLanguageText("runtimeMsg", "close browser text") + '</div>';
           var returnVal = shutDown();
           if (returnVal == false) return;
           pui.shutdownOnClose = false;
@@ -3024,15 +2974,11 @@ pui.cancelResponse = function(messages) {
     var msg = messages[id];
     var dom = getObj(id);
     if (dom != null) {
-      if (dom.validationTip != null) dom.validationTip.hide();
-      dom.validationTip = new pui.ValidationTip(dom);
-      dom.validationTip.container = pui.runtimeContainer;
-  	  if (dom.parentNode.isPUIWindow == true) {
-  	    dom.validationTip.container = dom.parentNode;
-  	  }
-      dom.validationTip.init();
-      dom.validationTip.setMessage(msg);
-      dom.validationTip.show();
+      var tip = dom.validationTip;
+      if (tip != null) tip.hide();
+      tip = new pui.ValidationTip(dom);
+      tip.setMessage(msg);
+      tip.show();
     }    
   }
   pui.hideWaitAnimation(true);
@@ -3373,6 +3319,7 @@ pui.handleF1 = function(e) {
 
 
 pui["run"] = function(config) {
+  var mobile = (config["mobile"] === true);
   var program = config["program"];
   if (program == null) program = "";
   var container = config["container"];
@@ -3415,6 +3362,9 @@ pui["run"] = function(config) {
   }  
   if (config["duplicateid"] == "1") {
     ajaxParams["duplicateid"] = "1";
+  }
+  if (mobile) {
+    ajaxParams["mobile"] = "1";
   }  
   var params = config["params"];
   if (params != null) {
@@ -3431,6 +3381,26 @@ pui["run"] = function(config) {
       var preview = window.opener.pui["generatePreview"]();
       preview.container = container;
       pui.isPreview = true;
+      if (window.opener.pui.viewdesigner) {
+        pui.handler = function(response) {
+          ajaxJSON({
+            "url": "dummy_url",
+            "method": "post",
+            "params": response,
+            "sendAsBinary": false,
+            "suppressAlert": true,
+            "handler": function() {
+               document.body.innerHTML = '<br/><br/>Preview screen submitted.';
+            },
+            "onfail": function() {
+               document.body.innerHTML = '<br/><br/>Preview screen submitted.';
+            }
+          });
+        };
+      }
+      else {
+        pui.handler = null;
+      }
       pui.render(preview);
     }
   }
@@ -3483,6 +3453,7 @@ pui["run"] = function(config) {
 }
 
 pui["signon"] = function(config) {
+  var mobile = (config["mobile"] === true);
   var container = config["container"];
   var debug = config["debug"];
   var workstnid = config["workstnid"];
@@ -3531,6 +3502,9 @@ pui["signon"] = function(config) {
   if (config["duplicateid"] == "1") {
     ajaxParams["duplicateid"] = "1";
   }
+  if (mobile) {
+    ajaxParams["mobile"] = "1";
+  }  
   var params = config["params"];
   if (params != null) {
     for (var param in params) {
@@ -3597,7 +3571,7 @@ pui.runMVC = function(response) {
       pui.hideWaitAnimation();
       if (parms == null) {
         document.body.style.backgroundColor = "#DFE8F6";
-        document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui["session ended text"] + '<br/><br/>' + pui["close browser text"] + '</div>';
+        document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui.getLanguageText("runtimeMsg", "session ended text") + '<br/><br/>' + pui.getLanguageText("runtimeMsg", "close browser text") + '</div>';
         return;
       }        
       parms.container = pui.runtimeContainer;
@@ -3646,6 +3620,7 @@ pui.runMVC = function(response) {
 
 pui.start = function() {  
   var parms = getQueryStringParms();
+  pui.canvasSize = parms["canvasSize"];
   var program = parms["pgm"];
   if (program == null) program = parms["program"];
   var debug = parms["debug"]
@@ -3659,8 +3634,9 @@ pui.start = function() {
   var jsonURL = parms["jsonURL"];
   var mode = parms["mode"];
   var controller = parms["controller"];
+  var mobile = (parms["mobile"] === "1");
   var params = {};
-  pui.detectIPadEmulation(container);
+  if (pui.detectMobileEmulation != null && typeof pui.detectMobileEmulation == "function") pui.detectMobileEmulation(container);
   for (var i = 1; i <= 255; i++) {
     var parmValue = parms["p" + i];
     var parmLen = parms["l" + i];
@@ -3686,6 +3662,7 @@ pui.start = function() {
     "workstnid": workstnid,
     "suffixid": suffixid,
     "duplicateid": duplicateid,    
+    "mobile": mobile,
     "params": params
   };
   if (program == null && jsonURL == null && mode == null) {
@@ -3708,74 +3685,6 @@ pui.start = function() {
 }
 
 
-pui.detectIPadEmulation = function(container) {
-  if (container == null) container = "pui";
-  if (typeof container == "string") container = document.getElementById(container);
-  if (container == null) return;
-  var useFinger;
-  if (container.parentNode.className == "ipad-emulator") {
-    pui.iPadEmulation = true;
-    useFinger = false;
-  }
-  if (container.parentNode.className == "iphone-emulator") {
-    pui.iPadEmulation = true;
-    pui.iPhoneEmulation = true;
-    useFinger = false;
-  }
-  if (!pui.iPadEmulation) return;  
-  if (useFinger) {
-    var finger = document.createElement("img");
-    finger.src = "/profoundui/proddata/images/ipad/finger.png";
-    finger.style.position = "absolute";
-    finger.style.cursor = "crosshair";  
-    finger.style.zIndex = 99;  
-    addEvent(document, "mousemove", function(event) {
-      var x = getMouseX(event);
-      x = x + 3;    
-      finger.style.left = x + "px";
-      var y = getMouseY(event);
-      y = y + 3;
-      finger.style.top = y + "px";
-    });
-    addEvent(document, "mousedown", function(event) {
-      var x = getMouseX(event);
-      x = x + 1;    
-      finger.style.left = x + "px";
-      var y = getMouseY(event);
-      y = y + 1;
-      finger.style.top = y + "px";
-    });
-  }
-  var addressbar = document.createElement("input");
-  addressbar.style.position = "absolute";
-  if (pui.iPhoneEmulation) {
-    addressbar.style.left = "90px";
-    addressbar.style.top = "164px";
-    addressbar.style.width = "223px";
-    addressbar.style.backgroundColor = "#d3dae4";
-  }
-  else {
-    addressbar.style.left = "285px";
-    addressbar.style.top = "89px";
-    addressbar.style.width = "455px";
-  }
-  addressbar.style.color = "#999999";
-  addressbar.style.borderStyle = "none";
-  addressbar.style.fontFamily = "Trebuchet MS, Sans-Serif";
-  addressbar.style.fontSize = "14px";
-  addressbar.value = location.href;
-  if (!pui.iPhoneEmulation) {
-    addressbar.onclick = function() {
-      getObj("ipadKeyboard").style.display = "";
-    }
-    addressbar.onblur = function() {
-      getObj("ipadKeyboard").style.display = "none";
-    }
-  }
-  document.body.appendChild(addressbar);
-  if (useFinger) document.body.appendChild(finger);
-}
-
 pui.newSession = function() {
   window.location.reload();
 }
@@ -3788,7 +3697,7 @@ pui.closeSession = function() {
   }
 
   document.body.style.backgroundColor = "#DFE8F6";
-  document.body.innerHTML = '<div style="width: 95%; text-align: center; font-size: 200%;"><br/>' + pui["close browser text"] + '</div>';
+  document.body.innerHTML = '<div style="width: 95%; text-align: center; font-size: 200%;"><br/>' + pui.getLanguageText("runtimeMsg", "close browser text") + '</div>';
   
   // This can throw an exception in some older releases of FireFox 3 when attempting to 
   // close a window that was not opened through scripting.

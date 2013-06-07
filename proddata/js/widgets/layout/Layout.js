@@ -35,6 +35,21 @@ pui.layout.Layout = function() {
   
   var me = this;
   
+  function sizeContainer(container) {
+    for (var j = 0; j < container.childNodes.length; j++) {
+      var child = container.childNodes[j];
+      if (child.layout != null) {
+        child.layout.stretch();
+        if (child.layout.iScroll != null) child.layout.iScroll.refresh();
+      }
+      if (child.sizeMe != null && typeof child.sizeMe == "function") {
+        if (pui.isPercent(child.style.width) || pui.isPercent(child.style.height) || child.grid != null) {
+          child.sizeMe();
+        }
+      }
+    }
+  }
+  
   this.enableDesign = function() {
     me.designMode = true;
     me.layoutDiv.destroy = me.destroy;
@@ -97,6 +112,7 @@ pui.layout.Layout = function() {
     var rv = pui.layout.template.applyTemplate(parms);
     if (rv.success) {
       me.stretchList = rv.stretchList;
+      me.containers = rv.containers;
       me.stretch();
     }
     else {
@@ -154,19 +170,20 @@ pui.layout.Layout = function() {
       container.style.width = dim.width + "px";
       container.style.height = dim.height + "px";
       container.style.display = "";
-      for (j = 0; j < container.childNodes.length; j++) {
-        var child = container.childNodes[j];
-        if (child.sizeMe != null && typeof child.sizeMe == "function") {
-          if (pui.isPercent(child.style.width) || pui.isPercent(child.style.height) || child.grid != null) {
-            child.sizeMe();
-          }
-        }
-      }
+    }
+    me.sizeContainers();
+  }
+  
+  this.sizeContainers = function() {
+    for (var i = 0; i < me.containers.length; i++) {
+      sizeContainer(me.containers[i]);
     }
   }
 
   this.setProperty = function(property, value) {
     if (value == null) value = "";
+    var panel = me.layoutDiv.panel;
+    var accordion = me.layoutDiv.accordion;
     
     switch (property) {
       case "id":
@@ -205,6 +222,8 @@ pui.layout.Layout = function() {
           styleName = words[0] + words[1].substr(0, 1).toUpperCase() + words[1].substr(1);
         }
         me.layoutDiv.style[styleName] = value;
+        if (panel != null) panel.resize();
+        if (accordion != null) accordion.resize();
         me.stretch();
         break;
 
@@ -262,12 +281,89 @@ pui.layout.Layout = function() {
           me.layoutDiv[property] = func;
         }
         break;
+
+      case "has header":
+        if (panel != null) panel.setHasHeader(value != "false" && value != false);
+        me.templateProps[property] = value;
+        break;
+
+      case "small sections":
+        if (accordion != null) accordion.setMini(value == "true" || value == true);
+        me.templateProps[property] = value;
+        break;
+
+      case "allow collapse":
+        if (accordion != null) accordion.setAllowCollapse(value);
+        me.templateProps[property] = value;
+        break;
+
+      case "header height":
+        if (panel != null) panel.setHeaderHeight(value);
+        me.templateProps[property] = value;
+        break;
+
+      case "header text":
+        if (panel != null) panel.setText(value);
+        me.templateProps[property] = value;
+        break;
+
+      case "header theme":
+        if (panel != null) panel.setHeaderSwatch(value);
+        if (accordion != null) accordion.setHeaderSwatch(value);
+        me.templateProps[property] = value;
+        break;
+
+      case "body theme":
+        if (panel != null) panel.setBodySwatch(value);
+        if (accordion != null) accordion.setBodySwatch(value);
+        me.templateProps[property] = value;
+        break;
+
+      case "straight edge":
+        if (panel != null) panel.setStraightEdge(value);
+        if (accordion != null) accordion.setStraightEdge(value);
+        me.templateProps[property] = value;
+        break;
+
+      case "color":
+      case "font family":
+      case "font size":
+      case "font style":
+      case "font weight":
+      case "text align":
+      case "text decoration":
+      case "text transform":
+        if (panel != null) panel.setStyle(property, value);
+        if (accordion != null) {
+          accordion.setStyle(property, value);
+          if (property == "font family" || property == "font size") {
+            accordion.resize();
+          }
+        }
+        me.templateProps[property] = value;
+        break;
+      
+      case "onsectionclick":
+        if (!me.designMode) {
+           me.layoutDiv[property + "event"] = function() {
+            eval("var section = arguments[0];");
+            try {
+              return eval(value);
+            }
+            catch(err) {
+              pui.alert("Onexpand Error:\n" + err.message);        
+            }
+          }
+        }
+        break;
+
       
       default: 
         var savedValue = me.templateProps[property];
         me.templateProps[property] = value;
         if (me.designMode && !toolbar.loadingDisplay && !toolbar.pastingFormat) {
           var rv = me.applyTemplate();
+          if (me.layoutDiv.accordion != null) me.layoutDiv.accordion.resize();
           if (rv.success == false) {
             me.templateProps[property] = savedValue;
             setTimeout(function() {
@@ -275,8 +371,7 @@ pui.layout.Layout = function() {
             }, 0);
           }
         }
-        break;
-      
+        break;  
     }
   }
   
@@ -284,23 +379,49 @@ pui.layout.Layout = function() {
     function setupiScroll() {
       var parent = me.layoutDiv.parentNode;
       if (parent != null && parent.tagName == "DIV") {
-        me.iScroll = new iScroll(parent);
+        me.iScroll = new iScroll(parent, {
+          "onBeforeScrollStart": function (e) {
+            var target = getTarget(e);
+            while (target.nodeType != 1) target = target.parentNode;
+            while (target.tagName == "SPAN") target = target.parentNode;
+            if (target.tagName != "SELECT" && target.tagName != "INPUT" && target.tagName != "TEXTAREA" && target.tagName != "A") {
+              e.preventDefault();
+            }
+          }
+        });
       }
+    }
+    
+    var counter = 0;
+    
+    function keepTryingToSetupiScroll() {
+      counter++;
+      if (counter > 100) {  // give up
+        return;
+      }
+      setTimeout(function() {
+        if (typeof iScroll == "function") {    
+          setupiScroll();
+        }
+        else {
+          keepTryingToSetupiScroll();
+        }        
+      }, 200);
     }
   
     if (typeof iScroll == "function") {    
       setupiScroll();
     }
     else {
-      pui["loadJS"]({
-        "path": "/iscroll/iscroll.js",
-        "test": function() {
-          return (typeof iScroll == "function");
-        },
+      var returnValue = pui["loadJS"]({
+        "path": pui.normalizeURL("/iscroll/iscroll.js"),
         "callback": function() {
           setupiScroll();
         }
       });
+      if (returnValue == false) {
+        keepTryingToSetupiScroll();
+      }
     }      
   }
   

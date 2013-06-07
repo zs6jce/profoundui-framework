@@ -53,7 +53,7 @@ pui.Grid = function() {
   this.tableDiv = null;
   this.cells = [];
   this.container = null;
-  this.borderColor = "#ccccff";
+  this.borderColor = "";
   this.borderWidth = 1;
   
   this.cellCursor = "default";
@@ -326,6 +326,7 @@ pui.Grid = function() {
     
     var height = container.offsetHeight;
     if (me.hasHeader) height -= me.headerHeight;
+    if (me.pagingBar) height -= me.pagingBar.getHeight();
     var numRows = height / me.rowHeight;
     if (me.hasHeader) numRows += 1;
     numRows = parseInt(numRows);
@@ -776,7 +777,21 @@ pui.Grid = function() {
     else return true;
   }
   
-  this.pageUp = function() {    
+  this.pageUp = function() { 
+  
+    if (executeEvent("onpageup") == false) {
+    
+      return;
+    
+    }  
+    
+    if (context == "genie") {
+    
+      pressKey("pageup");
+      return;
+    
+    }
+     
     me.mask();
     var numRows = me.cells.length;
     if (me.hasHeader) numRows = numRows - 1;
@@ -809,7 +824,21 @@ pui.Grid = function() {
     else return true;
   }
 
-  this.pageDown = function() {    
+  this.pageDown = function() {   
+  
+    if (executeEvent("onpagedown") == false) {
+    
+      return;
+    
+    }
+    
+    if (context == "genie") {
+    
+      pressKey("pagedown");
+      return;
+    
+    }    
+   
     me.mask();
     var numRows = me.cells.length;
     if (me.hasHeader) numRows = numRows - 1;
@@ -923,7 +952,7 @@ pui.Grid = function() {
           
           }
           
-          if (orderBy != "") {
+          if (orderBy && orderBy != "") {
           
             addField("order", orderBy);
           
@@ -1560,10 +1589,12 @@ pui.Grid = function() {
         if (me.scrollbarObj != null && me.scrollbarObj.type == "sliding") {
           me.scrollbarObj.setScrollTopToRow(1);
         }        
+      
+        me.recNum = 1;
+        me.getData();
+      
       }
       
-      me.recNum = 1;
-      me.getData();
       desc = !desc;
       cell.sortDescending = desc;
       me.sortIcon.src = pui.normalizeURL("/profoundui/proddata/images/grids/") + (desc ? "descending.gif" : "ascending.gif");
@@ -2346,8 +2377,8 @@ pui.Grid = function() {
         if (expandToLayout != me.expandToLayout) {
           me.expandToLayout = expandToLayout;
           if (me.expandToLayout) {
-            me.doExpandToLayout();
             if (me.designMode) {
+              me.doExpandToLayout();
               me.tableDiv.designItem.properties["expand to layout"] = "true";
               me.tableDiv.designItem.propertiesChanged["expand to layout"] = true;
               me.tableDiv.designItem.designer.propWindow.refreshProperty("expand to layout");
@@ -2740,7 +2771,8 @@ pui.Grid = function() {
 
   this.setRowBackground = function(row, hover) {
     var even = ((row % 2) == 1);
-    if (me.hasHeader) even = !even;    
+    if (me.hasHeader) even = !even;
+    if (me.cells == null) return;
     var cols = me.cells[row];
     
     var selected = false;
@@ -3561,12 +3593,17 @@ pui.Grid = function() {
           x -= offset.x;
           y -= offset.y;
           
-        }        
-        contextMenu.style.left = x + "px";
-        contextMenu.style.top = y + "px";
+        }  
         contextMenu.style.zIndex = me.contextMenuZIndex;
         contextMenu.style.visibility = "";
         contextMenu.style.display = "";
+        // Position after show, as some browsers (FF) report menu width 0 when hidden.
+        var maxX = document.documentElement.clientWidth - contextMenu.clientWidth - 10;  // width of menu plus scrollbar
+        var maxY = document.documentElement.clientHeight - contextMenu.clientHeight - 10; // height of menu plus scrollbar
+        if (x > maxX) x = maxX; 
+        if (y > maxY) y = maxY;     
+        contextMenu.style.left = x + "px";
+        contextMenu.style.top = y + "px";        
         
         addEvent(document, "click", function() {
           contextMenu.style.visibility = "hidden";
@@ -3581,7 +3618,7 @@ pui.Grid = function() {
     
     cell.onclick = function(e) {      
       var target = getTarget(e);
-      if (target.tagName != "INPUT" && target.tagName != "SELECT") {
+      if (target.tagName != "INPUT" && target.tagName != "SELECT" && target.tagName != "OPTION") {
         if (!me.hasHeader) executeEvent("onrowclick", row + 1);
         if (me.hasHeader && row != 0) executeEvent("onrowclick", row);
       }
@@ -3711,12 +3748,22 @@ pui.Grid = function() {
         }
 
         // return cursor based on widgets within the cell
-        if (target.row != null && target.col != null && target.tagName == "DIV" && target.parentNode.grid == me) {
-          var column = String(target.col);
+        // this code needs to work on the cell, but the target could be the 
+        // widget in the cell...
+        var cell = target;
+        var prt = target.parentNode;
+        if (prt && prt.row && prt.col) {
+        
+          cell = prt;
+        
+        }
+        
+        if (cell.row != null && cell.col != null && cell.tagName == "DIV" && cell.parentNode.grid == me) {
+          var column = String(cell.col);
           for (var i = 0; i < me.runtimeChildren.length; i++) {
             var itm = me.runtimeChildren[i];
             if (itm["column"] == column && itm["cursor row"] != null && itm["cursor column"] != null) {
-              var recNum = me.recNum + target.row;
+              var recNum = me.recNum + cell.row;
               if (me.hasHeader) recNum = recNum - 1;
               var dom = getObj(itm["id"] + "." + recNum);
               if (dom != null) {
@@ -3972,6 +4019,7 @@ pui.Grid = function() {
       if (pui.sqlcache == null) pui.sqlcache = {};
       if (pui.sqlcache[start] == null) pui.sqlcache[start] = {};
       if (pui.sqlcache[start].sql === sql &&
+          pui.sqlcache[start].pstring === pstring &&
           pui.sqlcache[start].limit === limit &&
           pui.sqlcache[start].customURL === customURL) {
     		if (callback != null) {
@@ -4030,6 +4078,7 @@ pui.Grid = function() {
           pui.sqlcache[start].customURL = customURL;
           pui.sqlcache[start].results = response.results;
           pui.sqlcache[start].totalRecs = response.totalRecs;
+          pui.sqlcache[start].pstring = pstring;
         }  
         if (callback != null) callback(response.results, response.totalRecs);
         else returnVal = response.results;
@@ -4132,6 +4181,7 @@ pui.Grid = function() {
   this.addColumn = function() {
     var n = me.vLines.length;
     var vLine = document.createElement("div");
+    vLine.className = "grid-vline";
     if (!me.designMode) {
       vLine.relatedGrid = me;
     }
@@ -4149,7 +4199,9 @@ pui.Grid = function() {
     vLine.style.height = height + "px";
     var bwidth = me.borderWidth;
     if (bwidth < minBWidth && me.designMode) bwidth = minBWidth;
-    vLine.style.borderRight = bwidth + "px solid " + me.borderColor;
+    vLine.style.borderRightStyle = "solid";
+    vLine.style.borderRightWidth = bwidth + "px";
+    vLine.style.borderRightColor = me.borderColor;
     vLine.style.fontSize = "0px";
     vLine.style.padding = "0px";
     vLine.style.zIndex = me.vBorderZIndex;
@@ -4312,6 +4364,7 @@ pui.Grid = function() {
   this.addRow = function() {
     var n = me.hLines.length;
     var hLine = document.createElement("div");
+    hLine.className = "grid-hline";
     if (!me.designMode) {
       hLine.relatedGrid = me;
     }
@@ -4333,7 +4386,9 @@ pui.Grid = function() {
     hLine.style.width = width + "px";
     var bwidth = me.borderWidth;
     if (bwidth < minBWidth && me.designMode) bwidth = minBWidth;
-    hLine.style.borderTop = bwidth + "px solid " + me.borderColor;
+    hLine.style.borderTopStyle = "solid";
+    hLine.style.borderTopWidth = bwidth + "px";
+    hLine.style.borderTopColor = me.borderColor;
     hLine.style.fontSize = "0px";
     hLine.style.padding = "0px";
     hLine.style.zIndex = me.hBorderZIndex;
@@ -4410,10 +4465,20 @@ pui.Grid = function() {
     me.sizeAllCells();
     me.setAllCellStyles();
     me.setHeadings();
+    if (me.subfileHidden) {
+    
+      me.hideSubfile();
+    
+    }
   }
   
   this["refresh"] = function() {
-    me.getData();
+    me.recNum = 1;
+    me.totalRecs = null;
+    if (me.slidingScrollBar) {
+      me.scrollbarObj.totalRows = me.totalRecs;
+    }  
+    me.getData();    
   }
   
   this.getPropertiesModel = function() {
@@ -4510,7 +4575,7 @@ pui.Grid = function() {
       { name: "context menu id", help: "Specifies the id of a Menu widget used to display a context menu when the user right-clicks a grid row.", hideFormatting: true, validDataTypes: ["char"], context: "dspf" },
   
       { name: "Paging Bar", category: true, context: "dspf" },
-      { name: "show paging controls", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "Displays links for navigating to the previous page and the next page of records.", context: "dspf" },
+      { name: "show paging controls", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "Displays links for navigating to the previous page and the next page of records." },
       { name: "show page number", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "This property determines whether the page number should display within the paging bar.", context: "dspf" },
       { name: "initial page number", format: "number", hideFormatting: true, validDataTypes: ["zoned"], help: "Specifies the initial page number to use when the page number is displayed within the paging bar.  If not specified, page number 1 is used.", context: "dspf" },
       { name: "show bar", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "Displays a bar at the bottom of the grid even if no paging bar elements are selected to be displayed.  This can be used to show miscellaneous information such as column totals.", context: "dspf" },

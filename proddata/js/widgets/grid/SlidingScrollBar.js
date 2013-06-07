@@ -97,13 +97,13 @@ pui.SlidingScrollBar = function() {
       touchBar = document.createElement("div");
       touchBar.style.position = "absolute";
       //touchBar.style.width = "25px";
-      touchBar.style.width = "2px";
+      touchBar.style.width = "3px";
       //touchBar.style.backgroundColor = "#DDDDEE";
       touchBar.style.backgroundColor = "transparent";
       touchHandle = document.createElement("div");
       touchHandle.style.position = "absolute";
       //touchHandle.style.width = "25px";
-      touchHandle.style.width = "2px";
+      touchHandle.style.width = "3px";
       touchHandle.style.height = "25px";
       touchHandle.style.top = "0px";
       //touchHandle.style.backgroundColor = "#BBBBDD";
@@ -126,7 +126,10 @@ pui.SlidingScrollBar = function() {
               return;
             }
           }
-          touchHandle.style.opacity = 1;
+          if (target != null && target.tagName == "INPUT" || target.tagName == "SELECT" || target.tagName == "TEXTAREA") {
+            return;
+          }
+          //touchHandle.style.opacity = 1;
           touchHandle.touch = {};
           touchHandle.touch.reverse = (target != touchHandle);
           touchHandle.touch.startY = getMouseY(e);
@@ -138,6 +141,7 @@ pui.SlidingScrollBar = function() {
           if (touchHandle.lastTop != null) touchHandle.touch.startTop = touchHandle.lastTop;
           else touchHandle.touch.startTop = parseInt(touchHandle.style.top);
           function mousemove(e) {
+            touchHandle.style.opacity = 1;
             var y = getMouseY(e);
             var now = new Date().getTime();
             touchHandle.touch.duration = now - touchHandle.touch.lastTime;
@@ -189,7 +193,10 @@ pui.SlidingScrollBar = function() {
               return;
             }
           }
-          touchHandle.style.opacity = 1;
+          if (target != null && target.tagName == "INPUT" || target.tagName == "SELECT" || target.tagName == "TEXTAREA") {
+            return;
+          }
+          //touchHandle.style.opacity = 1;
           var touch = e.touches[0]
           touchHandle.touch = {};
           touchHandle.touch.reverse = (target != touchHandle);
@@ -209,6 +216,7 @@ pui.SlidingScrollBar = function() {
         function touchmove(e) {
           if (e.touches.length != 1) return;  // Only deal with one finger
           if (touchHandle.touch == null) return;
+          touchHandle.style.opacity = 1;          
           var touch = e.touches[0];
           var y = touch.pageY;
           var now = new Date().getTime();
@@ -436,10 +444,10 @@ pui.SlidingScrollBar = function() {
     }
     
     if (touchHandle != null && touchBar != null) {
-      touchBar.style.left = (me.x - 4) + "px";
+      touchBar.style.left = (me.x - 5) + "px";
       touchBar.style.top = (me.y) + "px";
       touchBar.style.zIndex = me.zIndex;
-      touchHandle.style.left = (me.x - 4) + "px";
+      touchHandle.style.left = (me.x - 5) + "px";
       if (prevStartRow == -1) {
         touchHandle.style.top = (me.y) + "px";
       }

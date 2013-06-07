@@ -19,12 +19,6 @@
 
 
 
-pui["next link text"] = "Next";
-pui["previous link text"] = "Previous";
-pui["csv export text"] = "Export to Excel";
-
-
-
 /**
  * Paging Bar Class
  * @constructor
@@ -63,17 +57,21 @@ pui.PagingBar = function() {
   
   function autoPageUp() {
     if (me.prevLink.disabled) return;
-    if (me.pageUpResponseDefined) return;
-    if (me.grid.designMode) return;
-    if (me.grid.atTop()) return;
+    if (context != "genie") {
+      if (me.pageUpResponseDefined) return;
+      if (me.grid.designMode) return;
+      if (me.grid.atTop()) return;
+    }
     me.grid.pageUp();  
   }
   
   function autoPageDown() {
     if (me.nextLink.disabled) return;
-    if (me.pageDownResponseDefined) return;
-    if (me.grid.designMode) return;
-    if (me.grid.atBottom()) return;
+    if (context != "genie") {
+      if (me.pageDownResponseDefined) return;
+      if (me.grid.designMode) return;
+      if (me.grid.atBottom()) return;
+    }
     me.grid.pageDown();
   }
   
@@ -105,7 +103,7 @@ pui.PagingBar = function() {
     div.appendChild(exportImg);
 
     exportLink = document.createElement("span");
-    exportLink.innerHTML = pui["csv export text"];
+    exportLink.innerHTML = pui.getLanguageText("runtimeText", "csv export text");
     exportLink.style.position = "absolute";
     exportLink.style.top = "5px";
     exportLink.style.left = "24px";
@@ -142,7 +140,7 @@ pui.PagingBar = function() {
     div.appendChild(me.prevImg);
       
     me.prevLink = document.createElement("span");
-    me.prevLink.innerHTML = pui["previous link text"];
+    me.prevLink.innerHTML = pui.getLanguageText("runtimeText", "previous link text");
     me.prevLink.href = "javascript:void(0)";
     me.prevLink.style.verticalAlign = "top";
     me.prevLink.shortcutKey = "PageUp";
@@ -181,7 +179,7 @@ pui.PagingBar = function() {
     div.appendChild(spacesSpan2);
 
     me.nextLink = document.createElement("span");
-    me.nextLink.innerHTML = pui["next link text"];
+    me.nextLink.innerHTML = pui.getLanguageText("runtimeText", "next link text");
     me.nextLink.href = "javascript:void(0)";
     me.nextLink.style.verticalAlign = "top";
     me.nextLink.shortcutKey = "PageDown";
@@ -414,27 +412,29 @@ pui.PagingBar = function() {
         me.nextImg.disabled = false;
         me.nextLink.disabled = false;
         
-        if (!me.grid.designMode && me.grid.atTop() && (me.pageUpCondition == "false" || !me.pageUpResponseDefined)) {
-          me.prevImg.disabled = true;
-          me.prevLink.disabled = true;
-          pui.addCssClass(me.prevLink, "paging-link-disabled");
-          pui.addCssClass(me.prevImg, "prev-image-icon-disabled");        
-        }
-        else {
-          pui.removeCssClass(me.prevLink, "paging-link-disabled");
-          pui.removeCssClass(me.prevImg, "prev-image-icon-disabled");
-        }
-        
-        if ( !me.grid.designMode && me.grid.atBottom() && 
-             ((me.grid.subfileEnd && pui["page down on subfile end"] != true) || me.pageDownCondition == "false" || !me.pageDownResponseDefined) ) {
-          me.nextImg.disabled = true;
-          me.nextLink.disabled = true;
-          pui.addCssClass(me.nextLink, "paging-link-disabled");
-          pui.addCssClass(me.nextImg, "next-image-icon-disabled"); 
-        }
-        else {
-          pui.removeCssClass(me.nextLink, "paging-link-disabled");
-          pui.removeCssClass(me.nextImg, "next-image-icon-disabled");
+        if (context != "genie") {
+          if (!me.grid.designMode && me.grid.atTop() && (me.pageUpCondition == "false" || !me.pageUpResponseDefined)) {
+            me.prevImg.disabled = true;
+            me.prevLink.disabled = true;
+            pui.addCssClass(me.prevLink, "paging-link-disabled");
+            pui.addCssClass(me.prevImg, "prev-image-icon-disabled");        
+          }
+          else {
+            pui.removeCssClass(me.prevLink, "paging-link-disabled");
+            pui.removeCssClass(me.prevImg, "prev-image-icon-disabled");
+          }
+          
+          if ( !me.grid.designMode && me.grid.atBottom() && 
+               ((me.grid.subfileEnd && pui["page down on subfile end"] != true) || me.pageDownCondition == "false" || !me.pageDownResponseDefined) ) {
+            me.nextImg.disabled = true;
+            me.nextLink.disabled = true;
+            pui.addCssClass(me.nextLink, "paging-link-disabled");
+            pui.addCssClass(me.nextImg, "next-image-icon-disabled"); 
+          }
+          else {
+            pui.removeCssClass(me.nextLink, "paging-link-disabled");
+            pui.removeCssClass(me.nextImg, "next-image-icon-disabled");
+          }
         }
       }
       else {
@@ -467,6 +467,12 @@ pui.PagingBar = function() {
     me.container = newContainer;
     div.parentNode.removeChild(div);
     me.container.appendChild(div); 
+  }
+  
+  this.getHeight = function() {
+  
+    return div.offsetHeight;
+  
   }
 
 }

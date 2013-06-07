@@ -84,6 +84,9 @@ pui.layout.templates["mobile device"] += "<tr condition=\"{ property: 'bottom ba
 pui.layout.templates["mobile device"] += "</table>";
 pui.layout.templates["mobile device"] += pui.layout.maximizeIcon;
 
+pui.layout.templates["css panel"] = pui.layout.template.cssPanelTemplate;
+
+pui.layout.templates["accordion"] = pui.layout.template.accordionTemplate;
 
 
 
@@ -97,3 +100,19 @@ pui.layout.getTemplateList = function() {
   return list;
 }
 
+
+pui.layout.mergeProps = function(templateProps) {
+  var props = [];
+  var layoutProps = pui.layout.getPropertiesModel();
+  for (var i = 0; i < layoutProps.length; i++) {
+    if (layoutProps[i].templateProperties == true) {
+      for (var j = 0; j < templateProps.length; j++) {
+        props.push(templateProps[j]);
+      }      
+    }
+    else {
+      props.push(layoutProps[i]);
+    }
+  }
+  return props;
+}

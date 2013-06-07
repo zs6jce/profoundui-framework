@@ -108,7 +108,7 @@ function getObj(id) {
 // params: url, parm1, value1, parm2, value2, parm3, value3, etc.
 function postToNewWindow(url) {
   if (!url) {
-    alert("postToNewWindow Error: URL not specified.");
+    pui.alert("postToNewWindow Error: URL not specified.");
   }
   var form = document.forms["postToForm"];
   if (form == null) {
@@ -137,7 +137,7 @@ function postToNewWindow(url) {
 // params: url, parm1, value1, parm2, value2, parm3, value3, etc.
 function postTo(url) {
   if (!url) {
-    alert("postTo Error: URL not specified.");
+    pui.alert("postTo Error: URL not specified.");
   }
   var form = document.forms["postToForm"];
   if (form == null) {
@@ -834,7 +834,7 @@ pui.Base64 = {
 
 pui["downloadJSON"] = function() {
   if (pui["savedJSON"] == null) {
-    alert("JSON is not available.");
+    pui.alert("JSON is not available.");
     return;
   }
   pui.downloadAsAttachment("text/plain", "json.txt", pui["savedJSON"]);  
@@ -946,6 +946,9 @@ pui.normalizeURL = function(url) {
 
   if (pui["serverURL"] != null) {
     return pui["serverURL"] + url;
+  }
+  else if (window["cordova"] && url.substr(0, 1) == "/") {
+    return url.substr(1);
   }
   else {
     return url;
@@ -1319,8 +1322,7 @@ pui["refresh"] = function(parms) {
   else window.location.reload();
 }
 
-
-pui["download"] = function (params) {
+pui["downloadURL"] = function (params) {
 
   var inline = (params["inline"] === true);
   if (params["id"] == null) return;  
@@ -1340,6 +1342,14 @@ pui["download"] = function (params) {
   url += "&AUTH=" + encodeURIComponent(pui["appJob"]["auth"]);
   url += "&r=" + Math.floor(Math.random() * 1000000000);
 
+  return url;
+}
+
+pui["download"] = function (params) {
+
+  var url = pui.downloadURL(params);
+  var inline = (params["inline"] === true);
+  
   if (inline) {
      pui["openURL"](url);
   }
@@ -1473,4 +1483,45 @@ pui["loadJS"] = function(parms) {
 
 
 
+pui["endOfSession"] = function(message) {
+  pui.confirmOnClose = false;
+  pui.shutdownOnClose = false;
+  if (window["puiMobileClient"] != null && window["puiMobileClient"]["showConnections"] != null) {
+    window["puiMobileClient"]["showConnections"]();
+    if (message != null) pui.alert(message);
+    return;
+  }
+  var parms = getQueryStringParms();
+  var gobackto = parms["gobackto"];
+  if (gobackto != null) {
+    document.body.innerHTML = "";
+    if (message != null) pui.alert(message);
+    location.href = gobackto;
+  }
+  if (navigator["app"] != null && navigator["app"]["exitApp"] != null) {
+    document.body.innerHTML = "";
+    if (message != null) {
+      pui.alert(message, function() { navigator["app"]["exitApp"]() });
+    }      
+    return;
+  }
+}
 
+
+
+pui.alert = function(msg, alertCallback, title, buttonName) {
+  if (window["navigator"] != null && window["navigator"]["notification"] != null && window["navigator"]["notification"].alert != null) {
+    if (alertCallback == null && title == null && buttonName == null && window["puiMobileClient"] != null && window["puiMobileClient"].alert != null) {
+      window["puiMobileClient"].alert(msg);
+    }
+    else {
+      if (alertCallback == null) alertCallback = function() {};
+      if (title == null) title = "Profound UI";
+      if (buttonName == null) buttonName = "OK";
+      window["navigator"]["notification"].alert(msg, alertCallback, title, buttonName);
+    }
+  }
+  else {
+    alert(msg);
+  }
+}

@@ -185,7 +185,7 @@ function getCursorPosition(obj) {
   var cur;
   if (typeof obj == "string") obj = getObj(obj);
   if (obj == null) return -1;
-  if (obj.tagName != "INPUT" || (obj.type != null && obj.type != "" && obj.type != "text" && obj.type != "number" && obj.type != "password")) return -1;
+  if (obj.tagName != "INPUT" || !pui.isTextbox(obj)) return -1;
   if (document.selection!=null) {
     if (obj==null) obj = document.activeElement; 
     cur = document.selection.createRange(); 
@@ -381,14 +381,6 @@ pui.arrayForEach = function(array, func) {
   
 }
 
-pui.alert = function(msg) {
-  //if (Ext != null && Ext.MessageBox != null && Ext.MessageBox.alert != null) {
-  //  Ext.MessageBox.alert("?", msg);
-  //}
-  //else {
-    alert(msg);
-  //}
-}
 
 pui.safeParseInt = function(stringValue, nanValue) {
   if (nanValue == null) nanValue = 0;
@@ -712,11 +704,12 @@ pui.beforeUnload = function(event) {
     if (context == "genie" && pui.isSignOnScreen()) return;
     if (window.parent != window && typeof(window.parent["Atrium"]) != "undefined") return;
     if (context == "genie" || !inDesignMode() || recordFormats.isDirty()) {
+      var theCloseMessage = pui.getLanguageText("runtimeMsg", "closeMessage");
       if (context == "genie" && pui.genie.config.closeMessage != null && pui.genie.config.closeMessage != "") {
-        pui.closeMessage = pui.genie.config.closeMessage;
+        theCloseMessage = pui.genie.config.closeMessage;
       }
-      event.returnValue = pui.closeMessage;
-      return pui.closeMessage;
+      event.returnValue = theCloseMessage;
+      return theCloseMessage;
     }
   }
 }
@@ -1095,16 +1088,32 @@ pui.getSQLVarName = function(dom) {
 
   var varName = context + ".";
 
+  var id = dom.id;
+  
+  if (context == "genie" && dom.parentNode != pui.runtimeContainer) {
+  
+    // Strip window index, as the server 
+    // processing is not aware of the resulting id at 
+    // .scn file processing time.
+    var pos = id.lastIndexOf("_W");
+    if (pos != -1) {
+    
+      id = id.substr(0, id.lastIndexOf("_W") + 2);
+    
+    }
+  
+  }
+
   var inGrid = (typeof(dom.parentNode.parentNode.grid) != "undefined");
   if (!inGrid || dom.hasBoundSQLProps) {
   
-    varName += dom.id;
+    varName += id;
   
   }
   else {
   
-    var len = dom.id.lastIndexOf(".") + 1;
-    varName += dom.id.substr(0, len) + "*";
+    var len = id.lastIndexOf(".") + 1;
+    varName += id.substr(0, len) + "*";
   
   }
   
@@ -1242,7 +1251,7 @@ pui.getWindowScrollTop = function() {  // gets window scroll top position
 
 pui.getNoConnectionMessage = function(req) {
 
-  var msg = pui["no connection message"];
+  var msg = pui.getLanguageText("runtimeMsg", "no connection message");
   
   if (pui["no connection status"] == true) {
   
@@ -1379,7 +1388,7 @@ pui.getScript = function(path) {
 //   - javascript array
 pui.parseCommaSeparatedList = function(list) {
   if (typeof list != "string") {
-    if (lsit instanceof Array) return list;
+    if (list instanceof Array) return list;
     else return [];
   }
   if (list == "") return [];
@@ -1395,10 +1404,36 @@ pui.parseCommaSeparatedList = function(list) {
   return listArray;
 }
 
+
+pui.isHTML5InputType = function(type) {
+  switch(type) {
+    // provided as a choice in the "input type" property
+    case "number":
+    case "date":
+    case "datetime":
+    case "time":
+    case "email":
+    case "url":
+    case "month":
+    case "tel":
+    case "url":
+    // not provided as a choice in the "input type" property, but could be valid HTML5 input types
+    case "color":
+    case "datetime-local":
+    //case "range":
+    case "search":
+    case "week":
+      return true;
+    default:
+      return false;
+  }
+}
+
+
 pui.isTextbox = function(obj) {
 
   if (obj.tagName == "INPUT") {
-    if (obj.type == null || obj.type == "" || obj.type == "text" || obj.type == "number" || obj.type == "password") {
+    if (obj.type == null || obj.type == "" || obj.type == "text" || pui.isHTML5InputType(obj.type) || obj.type == "password") {
       return true;
     }
   }
@@ -1427,3 +1462,5 @@ pui.isFieldExit = function(e) {
   }        
   
 }
+
+
