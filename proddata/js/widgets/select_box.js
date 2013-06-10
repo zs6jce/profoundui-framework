@@ -47,6 +47,7 @@ pui.setSelectBoxValue = function(value, dom) {
      || dom.fieldInfo.shift == '5'
      || dom.fieldInfo.shift == '7') {
        value = trim(value);
+       dom.pui.properties["value"] = value;
     }
   }
   
@@ -57,11 +58,15 @@ pui.setSelectBoxValue = function(value, dom) {
     else {
       dom.value = value;
     }
+    dom.pui.properties["value"] = value;
     return;
   }
   var multiple = false;
   if (dom.getAttribute("multiple") != null) multiple = true;
-  if (!multiple) dom.value = value;
+  if (!multiple) {
+    dom.value = value;
+    dom.pui.properties["value"] = value;
+  }
   if (multiple) {
     var values = value.split(",");
     for (var i = 0; i < dom.options.length; i++) {
@@ -238,6 +243,19 @@ pui.widgets.add({
     },
     
     "choices": function(parms) {
+    
+      // Can't have this happening at the same time as other population options.
+      // Causes timing/order of events issues if you call 'get()' while Ajax calls
+      // are in progress.
+      var db = parms.evalProperty("choices database file");
+      var url = parms.evalProperty("choices url");
+      
+      if (db != "" || url != "") {
+      
+        return;
+        
+      } 
+    
       if (parms.dom.tagName == "SELECT") parms.dom.options.length = 0;
       var choicesString = parms.value; 
       var choiceValuesString = parms.evalProperty("choice values");
@@ -246,6 +264,19 @@ pui.widgets.add({
     },
 
     "choice values": function(parms) {
+    
+      // Can't have this happening at the same time as other population options.
+      // Causes timing/order of events issues if you call 'get()' while Ajax calls
+      // are in progress.
+      var db = parms.evalProperty("choices database file");
+      var url = parms.evalProperty("choices url");
+      
+      if (db != "" || url != "") {
+      
+        return;
+        
+      }    
+    
       if (parms.dom.tagName == "SELECT") parms.dom.options.length = 0;
       var choicesString = parms.evalProperty("choices");
       var choiceValuesString = parms.value; 
