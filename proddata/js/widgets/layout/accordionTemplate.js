@@ -29,7 +29,7 @@ pui.layout.template.accordionTemplate = function(parms) {
 
   if (returnProps) {
     return pui.layout.mergeProps([
-      { name: "section names", type: "list", help: "Specifies a comma separate list of section names for the accordion." },
+      { name: "section names", type: "list", help: "Specifies a comma separate list of section names for the accordion.", translate: true },
       { name: "active section", format: "number", help: "This property specifies the initial active section on an Accordion Layout. Each section within an Accordion is identified by a sequential index, starting with 0 for the first section, 1 for the second section, and so on.  The default value is 0." },
       { name: "header theme", choices: ["A - Black", "B - Blue", "C - Gray", "D - Light Gray", "E - Yellow", "F - Green", "G - Red", "Other..."], help: "Specifies the jQuery Mobile theme to use for the accordion headers.  The theme is associated with a set of cascading style sheet rules." },
       { name: "body theme", choices: ["A - Black", "B - Blue", "C - Gray", "D - Light Gray", "E - Yellow", "F - Green", "G - Red", "Other..."], help: "Specifies the jQuery Mobile theme to use for the content body of the accordion.  The theme is associated with a set of cascading style sheet rules." },
