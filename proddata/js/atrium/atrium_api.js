@@ -82,3 +82,68 @@ Atrium["getUser"] = function() {
 	return par["Atrium"]["api"]["getUser"]();  
 
 }
+
+
+
+
+
+
+
+
+function loadPCCommandApplet(callback) {
+
+  if (document.getElementById("PCCommandApplet") == null) {
+  	var applet = document.createElement("applet");
+  	applet.id = "PCCommandApplet";
+  	applet.archive = "/profoundui/proddata/applet/PCIntegration.jar";
+  	applet.code = "com.profoundlogic.genie.PCIntegration";
+  	applet.style.height = "0px";
+  	applet.style.width = "0px";
+  	var temp = eval(callback);
+  	if (typeof(temp) == "function") { // Test if it's a good function...
+  	  var param = document.createElement("param");
+  	  param.setAttribute("name", "callback");
+  	  param.setAttribute("value", callback);
+  	  applet.appendChild(param);
+  	}
+  	document.body.appendChild(applet); 
+  }
+
+}
+
+Atrium["runPCCommand"] = function(command) {
+
+	var applet = document.getElementById("PCCommandApplet");
+	if (!applet) {
+	
+	  // Could replace this at some time with a load <param>
+	  // for the applet to process.
+	
+	  Atrium.appletCommandData = command;
+	  loadPCCommandApplet("runCommandCb");
+	  return;  
+	
+	}
+	
+	try {
+		applet["runCommand"](command);
+	}
+	catch(e) {
+		var msg = "Unable to execute \"" + command + "\".\n\n"
+		if (e != null) {
+		  msg += e.name + ":\n\n" + e.message + ".";
+		}
+		alert(msg);
+	}  
+
+}
+
+window["runCommandCb"] = function() {
+
+  Atrium["runPCCommand"](Atrium.appletCommandData);
+  Atrium.appletCommandData = null;  
+
+}
+
+
+
