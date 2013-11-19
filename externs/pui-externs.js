@@ -240,5 +240,15 @@ var pui = {
   setUseWrapMode: {},
   setWrapLimitRange: {},
   setShowGutter: {},
-  sizeMe: {}
+  sizeMe: {},
+  iScroll: {},
+  viewdesigner: {},
+  borderTopLeftRadius: {},
+  borderTopRightRadius: {},
+  borderBottomLeftRadius: {},
+  borderBottomRightRadius: {},
+  DATFMT: {},
+  keyword: {},
+  line: {},
+  cond: {}
 }
