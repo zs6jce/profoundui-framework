@@ -3307,3 +3307,14 @@ a.ui-link-inherit {
   text-shadow: none;
 }
 
+
+
+
+::-ms-clear {
+  width: 0;
+  height: 0;
+}
+::-ms-reveal { 
+  width: 0;
+  height: 0;
+}
