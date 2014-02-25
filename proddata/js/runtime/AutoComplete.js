@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * Auto-Complete Class
@@ -28,7 +31,15 @@
 function AutoComplete(config) {
 
 	/* PRIVATE MEMBERS */
+<<<<<<< HEAD
 	var cancelQuery = false;
+=======
+	var agt = navigator.userAgent.toLowerCase();
+	var is_major = parseInt(navigator.appVersion);
+	var is_ie = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1));
+	var is_ie6    = (is_ie && (is_major == 4) && (agt.indexOf("msie 6.")!=-1) );
+	var quirksMode = (document.compatMode == "BackCompat");
+>>>>>>> Initial import into GIT
 	
 	// Internal fields.
 	var me = this;
@@ -79,24 +90,38 @@ function AutoComplete(config) {
 	url = config.url;
 	valueField = config.valueField;
 	
+<<<<<<< HEAD
+=======
+	// Container can be either an id or dom object. Defaults to document.body
+	if (typeof(config.container) == "string") container = document.getElementById(config.container);
+	else if (typeof(config.container) == "object") container = config.container;
+	else container = document.body;
+	
+>>>>>>> Initial import into GIT
 	// Text box can be either id or dom object.
 	if (typeof(config.textBox) == "object") textBox = config.textBox;
 	else textBox = document.getElementById(config.textBox);
 	textBox.setAttribute("autocomplete", "off");
+<<<<<<< HEAD
 	if (config.container) {
 	  container = config.container;
 	}
 	else {
 	  container = textBox.parentNode;
 	}
+=======
+>>>>>>> Initial import into GIT
 	// Set maxLength to a large number.
 	// Removing the attribute using removeAttribute() causes -1
 	// to be assigned in FF, causing problems.
   if (context == "genie") textBox.setAttribute("maxLength", "133");
 	// Set hard-coded choices and values, if provided.
 	if (config.choices && config.values) {
+<<<<<<< HEAD
 	  var translated = false;
 	  var compare = trim(textBox.value);
+=======
+>>>>>>> Initial import into GIT
 		recordSet = new Array();
 		choices = config.choices;
 		values  = config.values;
@@ -105,6 +130,7 @@ function AutoComplete(config) {
   			recordSet[recordSet.length] = new Array();			
   			recordSet[recordSet.length - 1][0] = trim(choices[i]);
   			recordSet[recordSet.length - 1][1] = trim(values[i]);
+<<<<<<< HEAD
   			if (!translated && compare != "") {
   			
   			  if (compare == trim(values[i])) {
@@ -116,6 +142,8 @@ function AutoComplete(config) {
   			  }
   			
   			}
+=======
+>>>>>>> Initial import into GIT
   	  }
 		}
 		recordSet.sort(function(a, b) {
@@ -189,7 +217,11 @@ function AutoComplete(config) {
 	else shadow = true;
 
 	// Use shim only in IE6.
+<<<<<<< HEAD
 	if (pui["is_old_ie"] && pui["ie_mode"] <= 6) useShim = true;
+=======
+	if (is_ie6) useShim = true;
+>>>>>>> Initial import into GIT
 	else useShim = false;
 	
 	// Assign events.
@@ -206,7 +238,10 @@ function AutoComplete(config) {
 	else typeAheadDelay = 200;
 		
 	// Create result pane, shim, and shadowing divs. These will be sized/positioned when data is shown or when the window is resized.
+<<<<<<< HEAD
 	
+=======
+>>>>>>> Initial import into GIT
 	resultPane = document.createElement("div");
 	resultPane.style.display = "none";
 	resultPane.style.margin = "0px";
@@ -322,8 +357,13 @@ function AutoComplete(config) {
 	  removeEvent(textBox, "keyup", doKeyUp);
 	  removeEvent(textBox, "keydown", doKeyDown);
 	  removeEvent(textBox, "blur", doBlur);
+<<<<<<< HEAD
 	  removeEvent(textBox, "resize", doResize);
 	  removeEvent(window, "resize", doResize);
+=======
+	  removeEvent(textBox, "reize", doResize);
+	  removeEvent(window, "reize", doResize);
+>>>>>>> Initial import into GIT
     resultPane = null;               
     shadowDiv = null;                
     leftShadow = null;               
@@ -354,8 +394,13 @@ function AutoComplete(config) {
 	
 	/* PRIVATE METHODS */
 	function doBlur(event) {
+<<<<<<< HEAD
 		event = event || window.event;
 		cancelQuery = true;
+=======
+		
+		event = event || window.event;
+>>>>>>> Initial import into GIT
 		setTimeout(hideResults, 200);
 	}
 	
@@ -434,6 +479,7 @@ function AutoComplete(config) {
 			if (textBox.value.replace(/ /g, "") != "") {
 				
 				if (choices && values) {
+<<<<<<< HEAD
 					doLookup(rtrim(textBox.value.toUpperCase()));
 				}
 				else {
@@ -441,6 +487,14 @@ function AutoComplete(config) {
 					cancelQuery = false;
 					typeAheadTimer = setTimeout(function() {
 						doQuery(rtrim(textBox.value));
+=======
+					doLookup(trim(textBox.value).toUpperCase());
+				}
+				else {
+					clearTimeout(typeAheadTimer);
+					typeAheadTimer = setTimeout(function() {
+						doQuery(trim(textBox.value));
+>>>>>>> Initial import into GIT
 					}, typeAheadDelay);
 				}
 				return;
@@ -516,7 +570,11 @@ function AutoComplete(config) {
 		if (query == "") return;
 		
 		// Send dummy record in onload event so that template can be created.
+<<<<<<< HEAD
 		onload({results:[{"field1": ""}]});
+=======
+		onload({results:[{field1: ""}]});
+>>>>>>> Initial import into GIT
 
 		var startIndex;
 		for (var i = 0; i < recordSet.length; i++) {
@@ -568,7 +626,11 @@ function AutoComplete(config) {
 		
 		if (hiddenField) autoCompQueries += 1;
 		
+<<<<<<< HEAD
 		var req = new pui.Ajax(pui.appendAuth(url));
+=======
+		var req = new pui.Ajax(url);
+>>>>>>> Initial import into GIT
 		req["method"] = "post";
 		req["async"] = true;
 		req["suppressAlert"] = true;
@@ -583,11 +645,14 @@ function AutoComplete(config) {
 				hideResults();
 				return;
 			}
+<<<<<<< HEAD
   		if (cancelQuery) {
   			hideResults();
   			return;
   		}
 			
+=======
+>>>>>>> Initial import into GIT
 			var data;			
 			data = eval(response);
 			records = data.results;
@@ -618,15 +683,26 @@ function AutoComplete(config) {
 	}
 	
 	function showResults() {
+<<<<<<< HEAD
 		drawResults();
 		resultPane.style.display = "block";
 		position();
 		if (shadow) applyShadow();		
 		if (useShim) applyShim();
+=======
+		
+		position();
+		drawResults();
+		resultPane.style.display = "block";
+		if (shadow) applyShadow();		
+		if (useShim) applyShim();
+		
+>>>>>>> Initial import into GIT
 	}
 	
 	function position() {
 	
+<<<<<<< HEAD
     top = textBox.offsetTop;
     left = textBox.offsetLeft;
     
@@ -680,6 +756,20 @@ function AutoComplete(config) {
       if (newTop - scrollTop >= 0) top = newTop;
     }
 
+=======
+		top = textBox.offsetTop;
+		left = textBox.offsetLeft;
+		top += textBox.offsetHeight;
+		top += topAdjust;
+		left += leftAdjust;
+		var cellDiv = textBox.parentNode;
+		var gridDiv = null;
+		if (cellDiv != null) gridDiv = cellDiv.parentNode;
+		if (gridDiv != null && gridDiv.grid != null) {
+		  top += cellDiv.offsetTop + gridDiv.offsetTop;
+		  left += cellDiv.offsetLeft + gridDiv.offsetLeft;
+		}
+>>>>>>> Initial import into GIT
 		resultPane.style.top = top + "px";
 		resultPane.style.left = left + "px";
 		
@@ -763,7 +853,11 @@ function AutoComplete(config) {
 		// Width is set to either used defined value or calculated width. 
 		// The text box and result pane borders are taken into consideration.
 		var calcWidth = textBox.offsetWidth;
+<<<<<<< HEAD
 		if (!pui["is_old_ie"] || !pui["is_quirksmode"]) calcWidth -= 2;
+=======
+		if (!is_ie || !quirksMode) calcWidth -= 2;
+>>>>>>> Initial import into GIT
 		if (width == null || width < calcWidth) width = calcWidth;
 		resultPane.style.width = width + "px";		
 		
@@ -886,8 +980,12 @@ function applyAutoComp(properties, originalValue, domObj) {
     var valueField = evalPropertyValue(properties["choice values field"], originalValue, domObj);
     var limit = evalPropertyValue(properties["max choices"], originalValue, domObj);
     var choices = evalPropertyValue(properties["choices"], originalValue, domObj);
+<<<<<<< HEAD
     choices = pui.parseCommaSeparatedList(choices);
     if (choices.length == 0) choices = [""];
+=======
+    choices = choices.split(",");
+>>>>>>> Initial import into GIT
     var values = evalPropertyValue(properties["choice values"], originalValue, domObj);
     if (values == "") {
       values = [];
@@ -896,12 +994,20 @@ function applyAutoComp(properties, originalValue, domObj) {
       }
     }
     else {
+<<<<<<< HEAD
       values = pui.parseCommaSeparatedList(values);
     }
     if (values.length == 0) values = [""];
 
     // Apply auto complete if any of the settings are given.
     if ((file != "" && fields[0] != "") || url != "" || (choices.length > 0 && choices[0] != "" && values[0] != "")) {
+=======
+      values = values.split(",");
+    }
+
+    // Apply auto complete if any of the settings are given.
+    if ((file != "" && fields[0] != "") || url != "" || (choices[0] != "" && values[0] != "")) {
+>>>>>>> Initial import into GIT
  	
  	    // Check for onselect event handler.
       var onSelectProp = evalPropertyValue(properties["onselect"], originalValue, domObj);
@@ -937,12 +1043,30 @@ function applyAutoComp(properties, originalValue, domObj) {
         	if (where != "") sql += " AND (" + where + ")"; 
         	sql += " ORDER BY " + fields[0];  	
     	}
+<<<<<<< HEAD
+=======
+    	var container = document.getElementById(appContainerId);
+    	if (context == "dspf") {
+    	  container = pui.runtimeContainer;
+    	  if (domObj.parentNode.isPUIWindow == true) {
+    	    container = domObj.parentNode;
+    	  }
+    	  else {
+    	    var gridDiv = domObj.parentNode.parentNode;
+    	    if (gridDiv != null && gridDiv.grid != null && gridDiv.parentNode.isPUIWindow == true) {
+    	      container = gridDiv.parentNode;
+    	    }
+    	  }
+    	}
+
+>>>>>>> Initial import into GIT
 
         if (domObj.autoComp != null && domObj.autoComp.destroy != null) {
           domObj.autoComp.destroy();
           domObj.autoComp = null; 
         }
 
+<<<<<<< HEAD
       	var container;
       	if (context == "dspf" && inDesignMode()) {
       	
@@ -973,6 +1097,8 @@ function applyAutoComp(properties, originalValue, domObj) {
       	
       	}
 
+=======
+>>>>>>> Initial import into GIT
         var autoComp = new AutoComplete({
         	textBox: domObj,
         	url: (url != "") ? url : getProgramURL("PUI0009102.PGM"),
@@ -984,17 +1110,29 @@ function applyAutoComp(properties, originalValue, domObj) {
         	onselect: onselect,
         	valueField: (url == "" && choices[0] == "" && values[0] == "" && valueField != "" && valueField != fields[0]) ? valueField : null,
         	beforequery: (url == "" && choices[0] == "" && values[0] == "") ? function(baseParams, query) {
+<<<<<<< HEAD
         		query = rtrim(query.toUpperCase());
+=======
+        		query = trim(query.toUpperCase());
+>>>>>>> Initial import into GIT
         		if (query == "") return false;
         		query = query.replace(/'/g, "''");  // '
         		if (pui["secLevel"] > 0) {
         		  if (evalPropertyValue(properties["contains match"], originalValue, domObj) == "true") {
+<<<<<<< HEAD
         		    query = "%" + trim(query) + "%";
+=======
+        		    query = "%" + query + "%";
+>>>>>>> Initial import into GIT
         		  }
         		  else {
         		    query += "%";
         		  }
+<<<<<<< HEAD
         		  baseParams["q"] = pui.getSQLVarName(domObj);
+=======
+        		  baseParams["q"] = encodeURIComponent(pui.getSQLVarName(domObj));
+>>>>>>> Initial import into GIT
         		  baseParams["p1"] = query;
         		  pui.getSQLParams(properties, baseParams);
         		  
@@ -1033,7 +1171,11 @@ function applyAutoComp(properties, originalValue, domObj) {
         		  // The "value" field (if used) is tacked onto the 
         		  // end of the query, so appears in the data record 
         		  // but not in the field display array...
+<<<<<<< HEAD
         		  if (url == "" && index == fields.length) break;        
+=======
+        		  if (index == fields.length) break;        
+>>>>>>> Initial import into GIT
         			
         			measureDiv.innerHTML = "";
         			template += "<div class=\"autocomplete-col\" style=\"float: left; width: ";
@@ -1069,7 +1211,11 @@ function applyAutoComp(properties, originalValue, domObj) {
         		document.body.removeChild(measureDiv);
 
         	},
+<<<<<<< HEAD
         	shadow: (pui["is_old_ie"] && pui["ie_mode"] <= 6) ? false : true
+=======
+        	shadow: (is_ie6 == true) ? false : true
+>>>>>>> Initial import into GIT
         });
     	domObj.autoComp = autoComp;
     	

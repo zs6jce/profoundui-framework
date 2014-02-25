@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 if (!window["Atrium"]) window["Atrium"] = new Object();
 
 Atrium["launchURL"] = function(url, title, closable) {
@@ -72,6 +75,7 @@ Atrium["getToken"] = function() {
 	
 	return par["Atrium"]["api"]["getToken"]();
 
+<<<<<<< HEAD
 }
 
 Atrium["getUser"] = function() {
@@ -91,3 +95,6 @@ Atrium["runPCCommand"] = function(command) {
   par["Atrium"]["api"]["runPCCommand"](command);
   
 }
+=======
+}
+>>>>>>> Initial import into GIT

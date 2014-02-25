@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 pui.widgets.add({
@@ -36,17 +39,24 @@ pui.widgets.add({
       }
     }
 
+<<<<<<< HEAD
     if (!parms.design && parms.propertyName == "field type") {
       parms.dom.layout.setProperty("center vertically", parms.properties["center vertically"]);
       parms.dom.layout.setProperty("center horizontally", parms.properties["center horizontally"]);
     }
 
+=======
+>>>>>>> Initial import into GIT
     var setProperty = true;
     if (parms.propertyName == "field type" || parms.propertyName == "template") {
       parms.dom.style.padding = "0px";
       parms.dom.style.borderWidth = "0px";
       
+<<<<<<< HEAD
       // we assume we want 100% height for browser viewport (should we remove these properties once this screen has finished?)
+=======
+      // this is temporary and hacky ... we assume we want 100% height for browser viewport (should at least remove this once this screen has finished?)
+>>>>>>> Initial import into GIT
       if (!parms.design && parms.properties["height"] == "100%" && parms.dom.parentNode.id == "pui") {
       
         // If height is unset, IE returns "auto", and all others return "0px"
@@ -60,6 +70,7 @@ pui.widgets.add({
           document.body.style.overflow = "hidden";
           parms.dom.parentNode.style.padding = "0";
           parms.dom.parentNode.style.height = "100%";
+<<<<<<< HEAD
         }
 
         // Phonegap/Mobile Client is buggy on iOS when using 100% height, so we assign the height in pixels
@@ -80,6 +91,10 @@ pui.widgets.add({
           parms.dom.style.height = height;
         }
 
+=======
+        } 
+        
+>>>>>>> Initial import into GIT
       }
       
       if (parms.design) {
@@ -100,8 +115,12 @@ pui.widgets.add({
         parms.dom.layout.template = parms.value;
       }
       else if (!parms.design) {
+<<<<<<< HEAD
         addEvent(window, "resize", parms.dom.layout.onresize);
         addEvent(document, "orientationchange", parms.dom.layout.onresize);
+=======
+        addEvent(window, "resize", parms.dom.layout.stretch);
+>>>>>>> Initial import into GIT
       }
       nmodel = makeNamedModel(pui.layout.getPropertiesModel());
       for (var prop in parms.properties) {
@@ -121,6 +140,7 @@ pui.widgets.add({
   },
   
   initialize: function(parms) {
+<<<<<<< HEAD
     if (parms.design) return;   
     var dom = parms.dom;
     var id = dom.id;
@@ -134,5 +154,9 @@ pui.widgets.add({
     }
   }
 
+=======
+  }
+    
+>>>>>>> Initial import into GIT
 });
 

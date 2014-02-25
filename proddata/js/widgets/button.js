@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.add({
   name: "button",
@@ -26,7 +29,11 @@ pui.widgets.add({
   newValue: "Click Here",
   inlineEdit: true,
   defaults: {
+<<<<<<< HEAD
     "width": !pui["is_quirksmode"] ? "100px" : null,
+=======
+    "width": !quirksMode ? "100px" : null,
+>>>>>>> Initial import into GIT
     "css class": "button"    
   },
   
@@ -37,7 +44,11 @@ pui.widgets.add({
       if (parms.design && parms.properties["field type"] != "button") {
         var cssClass = parms.designItem.properties["css class"];
         if (cssClass == null) cssClass = "";
+<<<<<<< HEAD
         if (!pui.isBound(cssClass)) {
+=======
+        if (typeof cssClass != "object") {
+>>>>>>> Initial import into GIT
           if (cssClass.indexOf("button") < 0) {
             if (cssClass != "") cssClass += " ";
             cssClass += "button";
@@ -62,7 +73,11 @@ pui.widgets.add({
     
     "value": function(parms) {
       parms.dom.value = parms.value;
+<<<<<<< HEAD
     }
+=======
+    }    
+>>>>>>> Initial import into GIT
 
   }
   

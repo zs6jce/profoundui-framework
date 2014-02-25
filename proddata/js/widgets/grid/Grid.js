@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 /**
@@ -51,10 +54,16 @@ pui.Grid = function() {
   this.vLines = [];
   this.hLines = [];
   this.tableDiv = null;
+<<<<<<< HEAD
   this.mainClass = "";
   this.cells = [];
   this.container = null;
   this.borderColor = "";
+=======
+  this.cells = [];
+  this.container = null;
+  this.borderColor = "#ccccff";
+>>>>>>> Initial import into GIT
   this.borderWidth = 1;
   
   this.cellCursor = "default";
@@ -180,8 +189,11 @@ pui.Grid = function() {
   
   this.dataConsumed = false;
   
+<<<<<<< HEAD
   this.initialPageNumber = 1;
   
+=======
+>>>>>>> Initial import into GIT
   var me = this;
   
   var addRowIcon;
@@ -194,11 +206,14 @@ pui.Grid = function() {
   var seHandle;
   var minBWidth = 1;
   var designBorderStyle = "solid";
+<<<<<<< HEAD
   var persistState = false;
   var movableColumns = false;
   var resizableColumns = false;
   var columnSignature;
   var clientSortColumnId;
+=======
+>>>>>>> Initial import into GIT
   
   var headerCellProxy;
   var headerCellProxyContainer;
@@ -262,7 +277,11 @@ pui.Grid = function() {
     }
     if (removeColumnIcon == null) {
       removeColumnIcon = createIcon("minus", "Remove Column");
+<<<<<<< HEAD
       removeColumnIcon.onclick = function() {
+=======
+      removeColumnIcon.onclick = function() {        
+>>>>>>> Initial import into GIT
         var lastCol = me.vLines.length - 2;
         if (lastCol < 1) return;
         if (me.hasChildren(lastCol)) {
@@ -273,7 +292,10 @@ pui.Grid = function() {
         itm.designer.undo.start("Remove Grid Column");
         itm.designer.undo.add(itm, "column widths");
         itm.designer.undo.add(itm, "number of columns");
+<<<<<<< HEAD
         itm.designer.undo.add(itm, "column headings");
+=======
+>>>>>>> Initial import into GIT
         me.removeLastColumn();
         me.doExpandToLayout();
         me.selectMe();
@@ -333,7 +355,10 @@ pui.Grid = function() {
     
     var height = container.offsetHeight;
     if (me.hasHeader) height -= me.headerHeight;
+<<<<<<< HEAD
     if (me.pagingBar) height -= me.pagingBar.getHeight();
+=======
+>>>>>>> Initial import into GIT
     var numRows = height / me.rowHeight;
     if (me.hasHeader) numRows += 1;
     numRows = parseInt(numRows);
@@ -350,7 +375,10 @@ pui.Grid = function() {
       domObj.style.top = (parseInt(domObj.style.top) - diffTop) + "px";
     });
     me.setScrollBar();
+<<<<<<< HEAD
     me.setHeadings();
+=======
+>>>>>>> Initial import into GIT
   }
   
   this.isInitCollapsed = function() {
@@ -401,7 +429,11 @@ pui.Grid = function() {
     }
     if (button != null && button.tagName == "IMG") {
       button.src = pui.normalizeURL("/profoundui/proddata/images/icons/expandall.gif");
+<<<<<<< HEAD
       button.title = pui.getLanguageText("runtimeText", "expandAll");
+=======
+      button.title = "Expand All";
+>>>>>>> Initial import into GIT
     }
   }
 
@@ -423,6 +455,7 @@ pui.Grid = function() {
       me.setAllCellStyles();
       me.getData();
       // reenable any elements that were below the visible portion of the cell when collapsed
+<<<<<<< HEAD
       for (var i = 0; i < me.runtimeChildren.length; i++) {
       
         var domEls = me.runtimeChildren[i].domEls;
@@ -469,6 +502,26 @@ pui.Grid = function() {
     if (button != null && button.tagName == "IMG") {
       button.src = pui.normalizeURL("/profoundui/proddata/images/icons/collapseall.gif");
       button.title = pui.getLanguageText("runtimeText", "collapseAll");
+=======
+      for (var row = 0; row < me.cells.length; row++) {
+        for (var col = 0; col < me.cells[row].length; col++) {
+          var cell = me.cells[row][col];
+          var child = cell.firstChild;
+          while (child != null) {
+            var top = parseInt(child.style.top);
+            if (child.reenableOnExpand) {
+              child.reenableOnExpand = false;
+              child.disabled = false;
+            }
+            child = child.nextSibling;
+          }
+        }
+      }
+    }
+    if (button != null && button.tagName == "IMG") {
+      button.src = pui.normalizeURL("/profoundui/proddata/images/icons/collapseall.gif");
+      button.title = "Collapse All";
+>>>>>>> Initial import into GIT
     }
   }
   
@@ -485,6 +538,7 @@ pui.Grid = function() {
     
   }
   
+<<<<<<< HEAD
   this["rowZoom"] = function(rowCells) {
     if (context != "dspf") return;
     if (typeof rowCells == "number") {
@@ -493,6 +547,9 @@ pui.Grid = function() {
       rowCells = me.cells[rowNum];
       if (rowCells == null) return;
     }
+=======
+  this.rowZoom = function(rowCells) {
+>>>>>>> Initial import into GIT
     if (me.zoomDiv == null) {
       me.zoomDiv = document.createElement("div");
       var width = parseInt(me.tableDiv.style.width);
@@ -554,6 +611,7 @@ pui.Grid = function() {
   }
   
   this.exportCSV = function(file) {
+<<<<<<< HEAD
     var delimiter;
     if (typeof(pui["csv separator"]) == "string") {
       // This flag not defined by default.
@@ -565,6 +623,12 @@ pui.Grid = function() {
         delimiter = ";";
       }
     }
+=======
+    var delimiter = ",";
+    if (pui.appJob != null && (pui.appJob["decimalFormat"] == "I" || pui.appJob["decimalFormat"] == "J")) {
+      delimiter = ";";
+    }  
+>>>>>>> Initial import into GIT
     if (me.designMode) return;    
     var fileName = file;
     if (fileName == null) fileName = me.csvFileName;
@@ -578,6 +642,7 @@ pui.Grid = function() {
 
     // initialize column array, each array element will hold the index to the dataArray
     var columnArray = [];
+<<<<<<< HEAD
     var numericData = [];
     var graphicData = [];
     var boundVisibility  = [];
@@ -586,6 +651,10 @@ pui.Grid = function() {
       numericData.push(false);
       graphicData.push(false);
       boundVisibility.push(false);
+=======
+    for (var i = 0; i < me.vLines.length - 1; i++) {
+      columnArray.push(-1);
+>>>>>>> Initial import into GIT
     }
     
     // go through all grid elements, retrieve field names, and identify data index by field name
@@ -594,22 +663,31 @@ pui.Grid = function() {
       if (itm["visibility"] != "hidden") {
         var col = Number(itm["column"]);
         if (!isNaN(col) && col >= 0 && col < columnArray.length && columnArray[col] == -1) {
+<<<<<<< HEAD
           if (pui.isBound(itm["visibility"])) {
             boundVisibility[col] = itm["visibility"];
           }
           var val = itm["value"];
           if (itm["field type"] == "html container") val = itm["html"];
           if (pui.isBound(val) && val["dataType"] != "indicator" && val["dataType"] != "expression") {
+=======
+          var val = itm["value"];
+          if (itm["field type"] == "html container") val = itm["html"];
+          if (typeof val == "object" && val["dataType"] != "indicator" && val["dataType"] != "expression") {
+>>>>>>> Initial import into GIT
             var fieldName = pui.fieldUpper(val["fieldName"]);
             for (var j = 0; j < me.fieldNames.length; j++ ) {
               if (fieldName == me.fieldNames[j]) {
                 columnArray[col] = j;
+<<<<<<< HEAD
                 if (val["formatting"] == "Number") {
                    numericData[col] = true;
                 }
                 if (val["dataType"] == "graphic") {
                    graphicData[col] = true;
                 }
+=======
+>>>>>>> Initial import into GIT
                 break;
               }
             }
@@ -617,7 +695,11 @@ pui.Grid = function() {
         }
       }
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> Initial import into GIT
     var data = "";
     
     // build csv headings
@@ -635,12 +717,16 @@ pui.Grid = function() {
       }
     }
 
+<<<<<<< HEAD
     data = "\uFEFF" + data;
 
+=======
+>>>>>>> Initial import into GIT
     // build csv data    
     for (var i = 0; i < me.dataArray.length; i++) {
       var line = "";      
       var record = me.dataArray[i];
+<<<<<<< HEAD
       
       // build fieldData for use with pui.evalBoundProperties
       //  Note that fieldData is not necessarily in the same sequence as columnArray
@@ -659,10 +745,13 @@ pui.Grid = function() {
       
       // build CSV data for this row.
       
+=======
+>>>>>>> Initial import into GIT
       for (var j = 0; j < columnArray.length; j++) {
         var idx = columnArray[j];
         if (idx > -1) {
           var value = record[idx];
+<<<<<<< HEAD
           if (graphicData[j]) {
              value = pui.formatting.decodeGraphic(value);
           } 
@@ -677,6 +766,11 @@ pui.Grid = function() {
           }
           if (line != "") line += delimiter;
           line += '"' + rtrim(value) + '"';
+=======
+          value = value.replace(/"/g, '""');  // "
+          if (line != "") line += delimiter;
+          line += '"' + value + '"';
+>>>>>>> Initial import into GIT
         }
       }
       if (data != "") data += "\n";
@@ -795,9 +889,13 @@ pui.Grid = function() {
     if (elems != null && elems.length == 1) {
       var elem = elems[0];
       if (elem != null) {
+<<<<<<< HEAD
         // This is not always a dom element, such as with 'selection field', etc.
         if (!elem.tagName) return elem.value;
         else return getElementValue(elem);
+=======
+        return getElementValue(elem);
+>>>>>>> Initial import into GIT
       }      
     }
 
@@ -812,6 +910,7 @@ pui.Grid = function() {
     return record[columnIndex];
   }
   
+<<<<<<< HEAD
   this["setDataValue"] = function(rowNum, fieldName, value) {
     var field = null;
     for (var i = 0; i < me.runtimeChildren.length; i++) {
@@ -827,11 +926,14 @@ pui.Grid = function() {
     return true;
   }
 
+=======
+>>>>>>> Initial import into GIT
   this.atTop = function() {
     if (me.recNum > 1) return false;
     else return true;
   }
   
+<<<<<<< HEAD
   this.pageUp = function() { 
   
     if (executeEvent("onpageup") == false) {
@@ -847,6 +949,9 @@ pui.Grid = function() {
     
     }
      
+=======
+  this.pageUp = function() {    
+>>>>>>> Initial import into GIT
     me.mask();
     var numRows = me.cells.length;
     if (me.hasHeader) numRows = numRows - 1;
@@ -879,6 +984,7 @@ pui.Grid = function() {
     else return true;
   }
 
+<<<<<<< HEAD
   this.pageDown = function() {   
   
     if (executeEvent("onpagedown") == false) {
@@ -894,6 +1000,9 @@ pui.Grid = function() {
     
     }    
    
+=======
+  this.pageDown = function() {    
+>>>>>>> Initial import into GIT
     me.mask();
     var numRows = me.cells.length;
     if (me.hasHeader) numRows = numRows - 1;
@@ -946,11 +1055,18 @@ pui.Grid = function() {
     maskCover.style.top = top + "px";
     maskCover.style.width = width + "px";
     maskCover.style.height = height + "px";
+<<<<<<< HEAD
     maskCover.className = "grid-mask";
     //maskCover.style.zIndex = 250;
     //maskCover.style.backgroundColor = "#CCCCCC";
     //maskCover.style.opacity = 0.35;
     //maskCover.style.filter = "alpha(opacity=35)";
+=======
+    maskCover.style.zIndex = 250;
+    maskCover.style.backgroundColor = "#CCCCCC";
+    maskCover.style.opacity = 0.35;
+    maskCover.style.filter = "alpha(opacity=35)";
+>>>>>>> Initial import into GIT
     me.tableDiv.parentNode.appendChild(maskCover);
   }
   
@@ -981,6 +1097,7 @@ pui.Grid = function() {
     var dataURL = me.dataProps["data url"];
     if (dataURL == "") dataURL = null;
     if (sql == null) sql = "";
+<<<<<<< HEAD
     if (sql != "" || dataURL != null) {
       if (csvFile != null) {
         if (sql == null || sql == "") return;
@@ -993,6 +1110,15 @@ pui.Grid = function() {
         if (typeof(pui["csv separator"]) == "string") {
           delimiter = pui["csv separator"];  
         }
+=======
+    if (sql != "" && dataURL == null) {
+      var sqlStart = sql.substr(0, 7).toUpperCase();
+      if (sqlStart != "SELECT ") return;  // Invalid - not an SQL SELECT statement
+    }
+    if (sql != "" || dataURL != null) {
+      if (csvFile != null) {
+        if (sql == null || sql == "") return;
+>>>>>>> Initial import into GIT
         var form = document.createElement("form");
         form.action = getProgramURL("PUI0009107.pgm");
         form.method = "post";
@@ -1002,9 +1128,12 @@ pui.Grid = function() {
           field.value = fieldValue;
           form.appendChild(field);
         }
+<<<<<<< HEAD
         addField("delimiter", delimiter);
         addField("UTF8", "Y");
         addField("decType", decType);
+=======
+>>>>>>> Initial import into GIT
         addField("fileName", csvFile + ".csv");
         if (pui["secLevel"] > 0) {
         
@@ -1019,7 +1148,11 @@ pui.Grid = function() {
           
           }
           
+<<<<<<< HEAD
           if (orderBy && orderBy != "") {
+=======
+          if (orderBy != "") {
+>>>>>>> Initial import into GIT
           
             addField("order", orderBy);
           
@@ -1037,7 +1170,11 @@ pui.Grid = function() {
           for (var i = 0; i < me.cells[0].length; i++) {
             var heading = getInnerText(me.cells[0][i]);
             heading = heading.replace(/"/g, '""');  // "
+<<<<<<< HEAD
             if (headings != "") headings += delimiter;
+=======
+            if (headings != "") headings += ",";
+>>>>>>> Initial import into GIT
             headings += '"' + heading + '"';
           }          
           addField("headings", headings);
@@ -1103,8 +1240,12 @@ pui.Grid = function() {
             ref: me.ref,
             errors: me.errors,
             rowNum: rowNum,
+<<<<<<< HEAD
             subfileRow: subfileRow,
             dataArrayIndex: i - 1
+=======
+            subfileRow: subfileRow
+>>>>>>> Initial import into GIT
           });
           if (me.selectionEnabled && me.selectionField != null) {
             var qualField = pui.formatUpper(me.recordFormatName) + "." + pui.fieldUpper(me.selectionField.fieldName) +  "." + subfileRow;
@@ -1128,7 +1269,12 @@ pui.Grid = function() {
       }
       if (me.tableDiv.style.visibility != "hidden" && me.scrollbarObj != null) me.scrollbarObj.draw();
       if (me.pagingBar != null) {
+<<<<<<< HEAD
         me.pagingBar.pageNumber = parseInt((me.recNum + numRows * 2 - 2) / numRows) + me.initialPageNumber - 1;
+=======
+        //me.pagingBar.pageNumber = parseInt((me.recNum + numRows - 1) / numRows);
+        me.pagingBar.pageNumber = parseInt((me.recNum + numRows * 2 - 2) / numRows);
+>>>>>>> Initial import into GIT
         me.pagingBar.draw();
       }
       me.cleared = false;      
@@ -1136,6 +1282,7 @@ pui.Grid = function() {
     
     
     function receiveData(data, totalRecs) {
+<<<<<<< HEAD
       if (me == null || me.cells == null) return;  // since this is asynchronous, the user may have moved to the next screen by and the grid may no longer exist
       if (totalRecs != null) me.totalRecs = totalRecs;
       var paddingCSS = getPaddingCSS();
@@ -1145,6 +1292,10 @@ pui.Grid = function() {
       for (var i = 0; i < me.cells[0].length; i++) {
         cellMap[me.cells[0][i].columnId] = i;
       }
+=======
+      if (totalRecs != null) me.totalRecs = totalRecs;
+      var paddingCSS = getPaddingCSS();
+>>>>>>> Initial import into GIT
       for (var i = 0; i < data.length; i++) {
         var record = data[i];
         var colNum = 0;
@@ -1154,6 +1305,7 @@ pui.Grid = function() {
           if (colNum < row.length) {            
             var dataValue = record[j];
             var alignCSS = "";
+<<<<<<< HEAD
             var idx;
             if (pui["secLevel"] > 0) {
               idx = cellMap[colNum];
@@ -1165,6 +1317,12 @@ pui.Grid = function() {
               alignCSS = " text-align:" + row[idx].style.textAlign;
             }
             row[idx].innerHTML = '<div style="' + paddingCSS + alignCSS + '">' + dataValue + '</div>';
+=======
+            if (row[colNum].style.textAlign != null && row[colNum].style.textAlign != "") {
+              alignCSS = " text-align:" + row[colNum].style.textAlign;
+            }
+            row[colNum].innerHTML = '<div style="' + paddingCSS + alignCSS + '">' + dataValue + '</div>';
+>>>>>>> Initial import into GIT
           }
           colNum++;
         }
@@ -1226,12 +1384,20 @@ pui.Grid = function() {
   }
 
   this.destroy = function() {
+<<<<<<< HEAD
     if (me.contextMenuId) removeEvent(document, "click", me.hideContextMenu); 
     for (var i = me.vLines.length - 1; i >= 0; i = i - 1) {
       if (me.vLines[i].parentNode != null) me.vLines[i].parentNode.removeChild(me.vLines[i]);
     }  
     for (var i = me.hLines.length - 1; i >= 0; i = i - 1) {
       if (me.hLines[i].parentNode != null) me.hLines[i].parentNode.removeChild(me.hLines[i]);
+=======
+    for (var i = me.vLines.length - 1; i >= 0; i = i - 1) {
+      me.vLines[i].parentNode.removeChild(me.vLines[i]);
+    }  
+    for (var i = me.hLines.length - 1; i >= 0; i = i - 1) {
+      me.hLines[i].parentNode.removeChild(me.hLines[i]);
+>>>>>>> Initial import into GIT
     }
     if (me.scrollbarObj != null) me.scrollbarObj.destroy();
     if (me.pagingBar != null) me.pagingBar.destroy();
@@ -1258,7 +1424,11 @@ pui.Grid = function() {
     delete me.cellProps;
     delete me;
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Initial import into GIT
   this.getColumnWidths = function() {
     var widths = "";
     for (var i = 1; i < me.vLines.length; i++) {
@@ -1338,7 +1508,11 @@ pui.Grid = function() {
   function sendPropertyToDesigner(itm, propertyName, value) {
     stringValue = String(value);
     if (itm.properties[propertyName] != stringValue) {
+<<<<<<< HEAD
       if (pui.isBound(itm.properties[propertyName])) {
+=======
+      if (typeof itm.properties[propertyName] == "object") {
+>>>>>>> Initial import into GIT
         if (propertyName == "top" || propertyName == "left") itm.properties[propertyName].designValue = stringValue;
       }
       else {
@@ -1356,7 +1530,11 @@ pui.Grid = function() {
     var handle = document.createElement("div");
     handle.style.position = "absolute";
     handle.style.border = "1px solid #0000ff";
+<<<<<<< HEAD
     if (pui["is_old_ie"] && pui["is_quirksmode"]) {
+=======
+    if (is_ie && quirksMode) {
+>>>>>>> Initial import into GIT
       handle.style.height = "6px";
       handle.style.width = "6px";
       handle.style.padding = "0px";
@@ -1494,6 +1672,7 @@ pui.Grid = function() {
         me.cells[0][i].innerHTML = '<div style="' + paddingCSS + alignCSS + '">' + me.columnHeadings[i] + '</div>';
         centerHeadingVertically(me.cells[0][i]);
       }      
+<<<<<<< HEAD
       // This method runs when the user resizes columns, and the sort icon becomes orphaned.
       var placeIcon = false;
       if (me.designMode == false && me.sortable == true && me.sortIcon != null) {      
@@ -1514,6 +1693,8 @@ pui.Grid = function() {
           destination.appendChild(me.sortIcon);
         }
       }
+=======
+>>>>>>> Initial import into GIT
     }
   }
   
@@ -1535,7 +1716,11 @@ pui.Grid = function() {
          (me.dataProps["custom sql"] == null || me.dataProps["custom sql"] == "" ) &&
          (me.dataProps["data url"] == null || me.dataProps["data url"] == "" ) &&
          (me.dataProps["database fields"] != null && me.dataProps["database fields"] != "") ) {
+<<<<<<< HEAD
       var fields = pui.getFieldList(me.dataProps["database fields"]);
+=======
+      var fields = me.dataProps["database fields"].split(",");
+>>>>>>> Initial import into GIT
       for (var i = 0; i < fields.length; i++) {
         headerRow[i].fieldName = fields[i];
         if (!pui.iPadEmulation) {
@@ -1554,7 +1739,11 @@ pui.Grid = function() {
         var col = Number(itm["column"]);
         var val = itm["value"];
         if (itm["field type"] == "html container") val = itm["html"];
+<<<<<<< HEAD
         if (pui.isBound(val) && !isNaN(col) && col < headerRow.length && headerRow[col].sortIndex == null) {
+=======
+        if (typeof val == "object" && !isNaN(col) && col < headerRow.length && headerRow[col].sortIndex == null) {
+>>>>>>> Initial import into GIT
           var fieldName = pui.fieldUpper(val["fieldName"]);
           for (var j = 0; j < me.fieldNames.length; j++ ) {
             if (fieldName == me.fieldNames[j]) {
@@ -1575,7 +1764,67 @@ pui.Grid = function() {
         sortColumn(headerRow[me.initialSortColumn]);
       }
     }
+<<<<<<< HEAD
         
+=======
+    
+    function isDefaultSortDescending(col) {
+      var sortOrder = null;
+      if (me.defaultSortOrderArray.length == 0) return false;    
+      if (me.defaultSortOrderArray.length == 1) {
+        sortOrder = me.defaultSortOrderArray[0];
+      }
+      else {
+        sortOrder = me.defaultSortOrderArray[col];
+      } 
+      if (sortOrder == null) return false;
+      if (sortOrder.length < 1) return false;
+      sortOrder = sortOrder.substr(0, 1).toUpperCase();
+      if (sortOrder == "D") return true;
+      else return false;   
+    }
+    
+    function resetDefaultSort() {
+      var headerRow = me.cells[0];
+      for (var col = 0; col < headerRow.length; col++) {
+        headerRow[col].sortDescending = !isDefaultSortDescending(col);
+      }
+    }
+    
+    function sortColumnUsingSQL(cell) {
+      if (me.gridMenu != null) me.gridMenu.hide();
+      if (cell == null) return;
+      var desc = cell.sortDescending;
+      resetDefaultSort();
+      if (desc == null) desc = true;
+      if (me.sortIcon == null) {
+        me.sortIcon = document.createElement("img");
+        me.sortIcon.style.paddingLeft = "3px";
+      }
+      else {
+        me.sortIcon.parentNode.removeChild(me.sortIcon);
+      }
+      me.sortBy = cell.fieldName;
+      desc = !desc;
+      if (desc) me.sortBy += " DESC";
+
+      me.sorted = true;
+
+      if (me.scrollbarObj != null && me.scrollbarObj.type == "sliding") {
+        me.scrollbarObj.setScrollTopToRow(1);
+      }
+      me.recNum = 1;
+      me.getData();
+      cell.sortDescending = desc;
+      me.sortIcon.src = pui.normalizeURL("/profoundui/proddata/images/grids/") + (desc ? "descending.gif" : "ascending.gif");
+      var destination = cell;
+      if (destination.firstChild != null && destination.firstChild.tagName == "DIV") {
+        destination = destination.firstChild;
+      }
+      destination.appendChild(me.sortIcon);
+    }
+
+>>>>>>> Initial import into GIT
     function attachClickEventForSQL(cell) {
       function doSort() {
         sortColumnUsingSQL(cell);
@@ -1584,6 +1833,75 @@ pui.Grid = function() {
       cell.sortColumn = doSort;
     }
 
+<<<<<<< HEAD
+=======
+    function sortColumn(cell) {
+      if (me.gridMenu != null) me.gridMenu.hide();
+      if (cell == null) return;
+      var sortIndex = cell.sortIndex;
+      var desc = cell.sortDescending;
+      resetDefaultSort();
+      if (desc == null) desc = true;
+      if (me.sortIcon == null) {
+        me.sortIcon = document.createElement("img");
+        me.sortIcon.style.paddingLeft = "3px";
+      }
+      else {
+        me.sortIcon.parentNode.removeChild(me.sortIcon);
+      }
+
+      if (me.tableDiv.columnSortResponseField == null) {
+        if (!me.sorted) {
+          for (var i = 0; i < me.dataArray.length; i++) {
+           me.dataArray[i].subfileRow = i + 1;
+          }
+        }
+        me.dataArray.sort(function(row1, row2) {
+          var value1 = row1[sortIndex];
+          var value2 = row2[sortIndex];
+          if (cell.dataType == "zoned" || cell.dataType == "floating") {
+            value1 = Number(value1);
+            value2 = Number(value2);
+          }
+          if (cell.dataType == "reference") {
+            var refObj = me.ref[cell.fieldName];
+            if (refObj != null) {
+              if (refObj.dataType == 7 || refObj.dataType == 9 ||  refObj.dataType == 10) {  // zoned, packed, floating
+                value1 = Number(value1);
+                value2 = Number(value2);
+              }
+            }
+          }
+          if ((desc && value1 < value2) || (!desc && value1 > value2)) return -1;
+          else return 1;
+        });
+        me.sorted = true;
+  
+        for (var i = 0; i < me.runtimeChildren.length; i++) {
+          me.runtimeChildren[i].domEls = [];
+        }
+        pui.rrnTracker = {};   // to do -- problem ... rrn tracker doesn't handle multiple grids?
+
+        removeAllResponseElements();
+  
+        if (me.scrollbarObj != null && me.scrollbarObj.type == "sliding") {
+          me.scrollbarObj.setScrollTopToRow(1);
+        }        
+      }
+      
+      me.recNum = 1;
+      me.getData();
+      desc = !desc;
+      cell.sortDescending = desc;
+      me.sortIcon.src = pui.normalizeURL("/profoundui/proddata/images/grids/") + (desc ? "descending.gif" : "ascending.gif");
+      var destination = cell;
+      if (destination.firstChild != null && destination.firstChild.tagName == "DIV") {
+        destination = destination.firstChild;
+      }
+      destination.appendChild(me.sortIcon);
+    }
+
+>>>>>>> Initial import into GIT
     function attachClickEvent(cell) {
       function doSort() {
         if (me.tableDiv.columnSortResponseField != null) {
@@ -1601,6 +1919,7 @@ pui.Grid = function() {
     }
   }
   
+<<<<<<< HEAD
   this.restoreState = function() {
        
     if (persistState == false) {
@@ -1874,11 +2193,20 @@ pui.Grid = function() {
       if (fldName.substr(0, startsWith.length) == startsWith) {
         toRemove.push(fldName);
       }
+=======
+  
+  function removeAllResponseElements() {
+    var toRemove = [];
+    var startsWith = me.recordFormatName + ".";
+    for (var fldName in pui.responseElements) {
+      if (fldName.substr(0, startsWith.length) == startsWith) toRemove.push(fldName);
+>>>>>>> Initial import into GIT
     }
     for (var i = 0; i < toRemove.length; i++) {
       delete pui.responseElements[toRemove[i]];
     }
   }
+<<<<<<< HEAD
 
   function saveResponsesToDataArray() {
     var fieldXRef = {};
@@ -1988,6 +2316,9 @@ pui.Grid = function() {
     localStorage[me.storageKey] = JSON.stringify(stg);
     
   }
+=======
+  
+>>>>>>> Initial import into GIT
   
   function executeEvent(eventName) {
     if (me.designMode) return;
@@ -2000,6 +2331,7 @@ pui.Grid = function() {
         eval("var dom = pui.temporary_property;");
         
         eval("var row = arguments[1];");
+<<<<<<< HEAD
         eval("var rowNumber = arguments[1];");
         
         if (eventName == "onrowclick") {
@@ -2013,6 +2345,8 @@ pui.Grid = function() {
           eval("var event = arguments[3]");
         
         }
+=======
+>>>>>>> Initial import into GIT
 
         var rowNum = arguments[1];
         if (rowNum != null) {
@@ -2025,12 +2359,19 @@ pui.Grid = function() {
         if (me.recNum != null && !isNaN(me.recNum) && me.recNum > 0) {
           var adjustedRow = eval("row");
           adjustedRow += (me.recNum - 1);
+<<<<<<< HEAD
           eval("rowNumber = " + adjustedRow);
           if (me.dataArray[adjustedRow - 1] != null && me.dataArray[adjustedRow - 1].subfileRow != null) {
             adjustedRow = me.dataArray[adjustedRow - 1].subfileRow;
           }
           eval("row = " + adjustedRow); 
           eval ("var rrn = " + adjustedRow);       
+=======
+          if (me.dataArray[adjustedRow - 1] != null && me.dataArray[adjustedRow - 1].subfileRow != null) {
+            adjustedRow = me.dataArray[adjustedRow - 1].subfileRow;
+          }
+          eval("row = " + adjustedRow);          
+>>>>>>> Initial import into GIT
         }
         var returnVal = eval(eventCode);
         if (returnVal == false) return false;
@@ -2080,6 +2421,7 @@ pui.Grid = function() {
           var pos;
           var fieldInfo;
           if (obj == null) {
+<<<<<<< HEAD
 			//try an input field
             id = "I_" + (row + x) + "_" + col;
             obj = getObj(id);
@@ -2094,6 +2436,13 @@ pui.Grid = function() {
             if (!obj.readOnly) continue;
             text = obj.value;
             text = text.replace(/ /g, "&nbsp;");
+=======
+            id = "I_" + (row + x) + "_" + col;
+            obj = getObj(id);
+            if (obj == null) continue;
+            if (!obj.readOnly) continue;
+            text = obj.value;
+>>>>>>> Initial import into GIT
             obj.style.display = "none";
             objClass = obj.className;
             left = parseInt(obj.style.left);
@@ -2250,6 +2599,7 @@ pui.Grid = function() {
       if (me.designMode && bwidth < minBWidth) bwidth = minBWidth;
       var scrollBarWidth = 23;
       if (pui.touchDevice || pui.iPadEmulation) scrollBarWidth = 0;
+<<<<<<< HEAD
 
       me.scrollbarObj.x = parseInt(me.vLines[me.vLines.length - 1].style.left) - scrollBarWidth;
 
@@ -2276,6 +2626,10 @@ pui.Grid = function() {
 
       me.scrollbarObj.y = parseInt(me.tableDiv.style.top) + bwidth;
       
+=======
+      me.scrollbarObj.x = parseInt(me.vLines[me.vLines.length - 1].style.left) - scrollBarWidth;
+      me.scrollbarObj.y = parseInt(me.tableDiv.style.top) + bwidth;
+>>>>>>> Initial import into GIT
       if (stype == "paging") {
         me.scrollbarObj.height = me.getStyleAsInt("height") - bwidth;
         if (me.scrollbarObj.height < 0) me.scrollbarObj.height = 0;
@@ -2437,7 +2791,10 @@ pui.Grid = function() {
       case "cursor record number":
       case "cursor progression":
       case "subfile return rrn":
+<<<<<<< HEAD
       case "subfile changed":
+=======
+>>>>>>> Initial import into GIT
       
       case "subfile message key":
       case "subfile program message queue":
@@ -2685,8 +3042,13 @@ pui.Grid = function() {
         break;
       
       case "column headings":
+<<<<<<< HEAD
         if (!pui.isBound(value) && !pui.isTranslated(value)) {
           me.columnHeadings = pui.parseCommaSeparatedList(value);
+=======
+        if (typeof value  != "object") {
+          me.columnHeadings = value.split(",");
+>>>>>>> Initial import into GIT
         }
         me.setHeadings();
         break;
@@ -2715,7 +3077,10 @@ pui.Grid = function() {
 
       case "resizable columns":
         if (!me.designMode && (value == true || value == "true" )) {
+<<<<<<< HEAD
           resizableColumns = true;
+=======
+>>>>>>> Initial import into GIT
           for (var i = 0; i < me.vLines.length; i++) {
             lineDesign(me.vLines, i, true, true);
           }        
@@ -2724,7 +3089,10 @@ pui.Grid = function() {
 
       case "movable columns":
         if (!me.designMode && me.hasHeader && (value == true || value == "true" )) {
+<<<<<<< HEAD
           movableColumns = true;
+=======
+>>>>>>> Initial import into GIT
           var headerRow = me.cells[0];
           for (var col = 0; col < headerRow.length; col++) {
             cellDesign(headerRow[col], true);
@@ -2732,17 +3100,25 @@ pui.Grid = function() {
         }
         break;
       
+<<<<<<< HEAD
       case "persist state": 
         persistState = (me.designMode == false && typeof(window.localStorage) != "undefined" && (value == true || value == "true"));
         break;
         
+=======
+>>>>>>> Initial import into GIT
       case "expand to layout":
         var expandToLayout = (value == true || value == "true");
         if (expandToLayout != me.expandToLayout) {
           me.expandToLayout = expandToLayout;
           if (me.expandToLayout) {
+<<<<<<< HEAD
             if (me.designMode) {
               me.doExpandToLayout();
+=======
+            me.doExpandToLayout();
+            if (me.designMode) {
+>>>>>>> Initial import into GIT
               me.tableDiv.designItem.properties["expand to layout"] = "true";
               me.tableDiv.designItem.propertiesChanged["expand to layout"] = true;
               me.tableDiv.designItem.designer.propWindow.refreshProperty("expand to layout");
@@ -2773,6 +3149,7 @@ pui.Grid = function() {
       
       case "context menu id":
         if (!me.designMode) {
+<<<<<<< HEAD
           removeEvent(document, "click", me.hideContextMenu);
           var contextMenuId = trim(value);
           if (contextMenuId != "") {
@@ -2786,6 +3163,9 @@ pui.Grid = function() {
             if (typeof me.tableDiv.style.webkitUserSelect != "undefined") me.tableDiv.style.webkitUserSelect = "none";
           }                     
           addEvent(document, "click", me.hideContextMenu);
+=======
+          me.contextMenuId = value;
+>>>>>>> Initial import into GIT
         }
         break;
         
@@ -2805,6 +3185,7 @@ pui.Grid = function() {
         }
         break;
 
+<<<<<<< HEAD
       case "initial page number":
         var page = Number(value);
         if (isNaN(page)) page = 1;
@@ -2816,6 +3197,8 @@ pui.Grid = function() {
         }
         break;
 
+=======
+>>>>>>> Initial import into GIT
       case "show bar":
         me.pagingBar.showBar = (value == true || value == "true");
         if (me.designMode) {
@@ -2940,7 +3323,11 @@ pui.Grid = function() {
       
       case "top":
         var top = value;
+<<<<<<< HEAD
         if (pui.isBound(top)) top = top.designValue;
+=======
+        if (typeof top == "object") top = top.designValue;
+>>>>>>> Initial import into GIT
         var diff = parseInt(me.tableDiv.style.top) - pui.safeParseInt(top);
         me.doThisToTableDivs(function(domObj) {
           domObj.style.top = (parseInt(domObj.style.top) - diff) + "px";
@@ -2950,7 +3337,11 @@ pui.Grid = function() {
         
       case "left":
         var left = value;
+<<<<<<< HEAD
         if (pui.isBound(left)) left = left.designValue;
+=======
+        if (typeof left == "object") left = left.designValue;
+>>>>>>> Initial import into GIT
         var diff = parseInt(me.tableDiv.style.left) - pui.safeParseInt(left);
         me.doThisToTableDivs(function(domObj) {
           domObj.style.left = (parseInt(domObj.style.left) - diff) + "px";
@@ -3083,7 +3474,10 @@ pui.Grid = function() {
       case "onrowmouseout":
       case "onpagedown":
       case "onpageup":
+<<<<<<< HEAD
       case "onscroll":
+=======
+>>>>>>> Initial import into GIT
         me.events[property] = value;
         break;
       
@@ -3127,6 +3521,7 @@ pui.Grid = function() {
     }
   }
   
+<<<<<<< HEAD
   this["setCursorRecordNumber"] = function(rrn) {
   
     if (typeof rrn == "number" && rrn > 0 && rrn < 9999) {
@@ -3137,6 +3532,8 @@ pui.Grid = function() {
   
   }
   
+=======
+>>>>>>> Initial import into GIT
   this.placeCursor = function(onTimeout) {
     var rrn = me.placeCursorRRN;
     me.placeCursorRRN = null;
@@ -3158,8 +3555,12 @@ pui.Grid = function() {
 
   this.setRowBackground = function(row, hover) {
     var even = ((row % 2) == 1);
+<<<<<<< HEAD
     if (me.hasHeader) even = !even;
     if (me.cells == null) return;
+=======
+    if (me.hasHeader) even = !even;    
+>>>>>>> Initial import into GIT
     var cols = me.cells[row];
     
     var selected = false;
@@ -3226,7 +3627,11 @@ pui.Grid = function() {
           cols[i].style.backgroundImage = "";
         }
         else {
+<<<<<<< HEAD
           cols[i].style.backgroundImage = "url('" + pui.normalizeURL(selectionImage, true) + "')";
+=======
+          cols[i].style.backgroundImage = "url('" + selectionImage + "')";
+>>>>>>> Initial import into GIT
         }
         pui.addCssClass(cols[i], "selected");
       }
@@ -3234,7 +3639,11 @@ pui.Grid = function() {
         setColor(cols[i], me.cellProps["hover font color"], i);
         cols[i].style.backgroundColor = me.cellProps["hover background"];
         if (me.cellProps["hover image"] != null && me.cellProps["hover image"] != "") {
+<<<<<<< HEAD
           cols[i].style.backgroundImage = "url('" + pui.normalizeURL(me.cellProps["hover image"], true) + "')";
+=======
+          cols[i].style.backgroundImage = "url('" + me.cellProps["hover image"] + "')";
+>>>>>>> Initial import into GIT
           cols[i].style.backgroundRepeat = "repeat-x";        
         }
         pui.addCssClass(cols[i], "hover");
@@ -3445,6 +3854,7 @@ pui.Grid = function() {
           if (columnPointer.matchedCol != null) {
             me.moveColumn(cell.col, columnPointer.matchedCol);
             columnPointer.matchedCol = null;            
+<<<<<<< HEAD
             if (persistState) { 
               var colSequence = [];
               for (var i = 0; i < me.cells[0].length; i++) {
@@ -3452,6 +3862,8 @@ pui.Grid = function() {
               }  
               saveState(colSequence, "colSequence");
             }
+=======
+>>>>>>> Initial import into GIT
           }
         }
         if (me.designMode) {
@@ -3689,6 +4101,7 @@ pui.Grid = function() {
         }
         else {
           me.alignColumnTotals();
+<<<<<<< HEAD
           if (isVertical && persistState) {
             var colWidths = new Array(me.cells[0].length);
             for (var j = 0; j < me.cells[0].length; j++) {
@@ -3697,6 +4110,8 @@ pui.Grid = function() {
             }
             saveState(colWidths, "colWidths");
           }
+=======
+>>>>>>> Initial import into GIT
         }
         removeEvent(document, "mousemove", mousemove);
         removeEvent(document, "mouseup", mouseup);
@@ -3886,11 +4301,18 @@ pui.Grid = function() {
     
     if (me.designMode) setCellStyles(cell, header, even, col);
     
+<<<<<<< HEAD
     cell.onmouseover = function(e) {
       e = e || window.event;
       if (me.dragging) return;
       if (!me.hasHeader) executeEvent("onrowmouseover", row + 1, null, e);
       if (me.hasHeader && row != 0) executeEvent("onrowmouseover", row, null, e);
+=======
+    cell.onmouseover = function() {
+      if (me.dragging) return;
+      if (!me.hasHeader) executeEvent("onrowmouseover", row + 1);
+      if (me.hasHeader && row != 0) executeEvent("onrowmouseover", row);
+>>>>>>> Initial import into GIT
       if (!me.hoverEffect) return;
       if (pui.touchDevice || pui.iPadEmulation) return;
       var header = (row == 0 && me.hasHeader);
@@ -3918,17 +4340,27 @@ pui.Grid = function() {
         }
         me.zoomIcon.style.display = "";
         me.zoomIcon.onclick = function(e) {
+<<<<<<< HEAD
           me["rowZoom"](me.cells[row]);
+=======
+          me.rowZoom(me.cells[row]);
+>>>>>>> Initial import into GIT
           preventEvent(e);
         }
 
       }
     }
 
+<<<<<<< HEAD
     cell.onmouseout = function(e) {
       e = e || window.event;
       if (!me.hasHeader) executeEvent("onrowmouseout", row + 1, null, e);
       if (me.hasHeader && row != 0) executeEvent("onrowmouseout", row, null, e);
+=======
+    cell.onmouseout = function() {
+      if (!me.hasHeader) executeEvent("onrowmouseout", row + 1);
+      if (me.hasHeader && row != 0) executeEvent("onrowmouseout", row);
+>>>>>>> Initial import into GIT
       var header = (row == 0 && me.hasHeader);
       if (header) return;      
       me.setRowBackground(row);
@@ -3959,6 +4391,7 @@ pui.Grid = function() {
           document.body.oncontextmenu = stopContextMenu;
           return;
         }
+<<<<<<< HEAD
         var contextMenu;
         if (me.contextMenuId) {
         
@@ -3975,6 +4408,15 @@ pui.Grid = function() {
         // See usage below and in 'hideContextMenu'...
         contextMenu.showing = true;
         
+=======
+        var contextMenuId = me.contextMenuId;
+        if (contextMenuId == null) contextMenuId = "";
+        contextMenuId = trim(contextMenuId);
+        if (contextMenuId == "") return;
+        var contextMenu = getObj(contextMenuId);
+        if (contextMenu == null) return;
+        
+>>>>>>> Initial import into GIT
         // disable browser's context menu
         document.body.oncontextmenu = stopContextMenu;
         
@@ -3982,6 +4424,7 @@ pui.Grid = function() {
         cell.onclick(event);
         
         // show custom context menu
+<<<<<<< HEAD
         var x = pui.getMouseX(event);
         var y = pui.getMouseY(event);
         var parent = contextMenu.parentNode;
@@ -4036,10 +4479,34 @@ pui.Grid = function() {
         
         }, 250);
           
+=======
+        var x = getMouseX(event);
+        var y = getMouseY(event);
+        var parent = contextMenu.parentNode;
+        if (parent != null && parent.tagName == "FORM") parent = parent.parentNode;  // this will handle Genie (although the the context menu option is not available in Genie yet)
+        if (parent != null) {
+          x = x - parent.offsetLeft;
+          y = y - parent.offsetTop;
+        }        
+        contextMenu.style.left = x + "px";
+        contextMenu.style.top = y + "px";
+        contextMenu.style.zIndex = me.contextMenuZIndex;
+        contextMenu.style.visibility = "";
+        contextMenu.style.display = "";
+        
+        addEvent(document, "click", function() {
+          contextMenu.style.visibility = "hidden";
+          contextMenu.style.display = "none";
+        });
+        
+        preventEvent(event);
+        if (event != null && event.stopPropagation != null) event.stopPropagation();      
+>>>>>>> Initial import into GIT
         return false;
       }
     }
     
+<<<<<<< HEAD
     // Map a 'tap/hold' gesture on touch devices to the cell mousedown event.
     
     // Interestingly, Chrome on Android seems to fire a 'onmousedown' event with the mouse button 
@@ -4072,14 +4539,25 @@ pui.Grid = function() {
       if (target.tagName != "INPUT" && target.tagName != "SELECT" && target.tagName != "OPTION") {
         if (!me.hasHeader) executeEvent("onrowclick", row + 1, isRight, e);
         if (me.hasHeader && row != 0) executeEvent("onrowclick", row, isRight, e);
+=======
+    cell.onclick = function(e) {      
+      var target = getTarget(e);
+      if (target.tagName != "INPUT" && target.tagName != "SELECT") {
+        if (!me.hasHeader) executeEvent("onrowclick", row + 1);
+        if (me.hasHeader && row != 0) executeEvent("onrowclick", row);
+>>>>>>> Initial import into GIT
       }
       if (context == "dspf" && !me.designMode) {
       
         me.setCursorRRN(row);
         
+<<<<<<< HEAD
         var prevent = ((target.tagName == "INPUT" || target.tagName == "SELECT") && !target.disabled && !target.readOnly);
         
         if (me.selectionEnabled && !prevent && (row > 0 || !me.hasHeader)) {
+=======
+        if (me.selectionEnabled && target.tagName != "INPUT" && target.tagName != "SELECT" && (row > 0 || !me.hasHeader)) {
+>>>>>>> Initial import into GIT
           if (me.recNum != null && !isNaN(me.recNum) && me.recNum > 0) {
           
             if (!e) e = window.event;
@@ -4201,6 +4679,7 @@ pui.Grid = function() {
         }
 
         // return cursor based on widgets within the cell
+<<<<<<< HEAD
         // this code needs to work on the cell, but the target could be the 
         // widget in the cell...
         var cell = target;
@@ -4217,6 +4696,14 @@ pui.Grid = function() {
             var itm = me.runtimeChildren[i];
             if (itm["column"] == column && itm["cursor row"] != null && itm["cursor column"] != null) {
               var recNum = me.recNum + cell.row;
+=======
+        if (target.row != null && target.col != null && target.tagName == "DIV" && target.parentNode.grid == me) {
+          var column = String(target.col);
+          for (var i = 0; i < me.runtimeChildren.length; i++) {
+            var itm = me.runtimeChildren[i];
+            if (itm["column"] == column && itm["cursor row"] != null && itm["cursor column"] != null) {
+              var recNum = me.recNum + target.row;
+>>>>>>> Initial import into GIT
               if (me.hasHeader) recNum = recNum - 1;
               var dom = getObj(itm["id"] + "." + recNum);
               if (dom != null) {
@@ -4228,6 +4715,7 @@ pui.Grid = function() {
         }
         
         // position cursor to an input element in the first column, if it's there
+<<<<<<< HEAD
         // Don't do this when text selection flag is set, as the browser removes text selection
         // when a box receives focus.
         if (typeof(pui["grid text selection"]) == "undefined" || pui["grid text selection"] == false) {
@@ -4236,16 +4724,30 @@ pui.Grid = function() {
             var cell = me.cells[row][0];
             placeCursorOnCell(cell);
           }
+=======
+        if (target.tagName != "INPUT" && target.tagName != "SELECT" && target.tagName != "TEXTAREA") {
+          // position to input box in first column, if it is present
+          var cell = me.cells[row][0];
+          placeCursorOnCell(cell);
+>>>>>>> Initial import into GIT
         }
       }
     }
     
+<<<<<<< HEAD
     cell.ondblclick = function(e) {
       e = e || window.event;
       if (me.designMode) {
         if (me.hasHeader && row == 0) {
           var itm = me.tableDiv.designItem;
           if (!pui.isBound(itm.properties["column headings"]) && !pui.isTranslated(itm.properties["column headings"])) {
+=======
+    cell.ondblclick = function() {
+      if (me.designMode) {
+        if (me.hasHeader && row == 0) {
+          var itm = me.tableDiv.designItem;
+          if (typeof itm.properties["column headings"] != "object") {
+>>>>>>> Initial import into GIT
             itm.designer.inlineEditBox.onUpdate = function(newHeading) {
               while (newHeading.indexOf("\n") != -1) {
                 newHeading = newHeading.replace("\n", "<br/>");
@@ -4297,8 +4799,13 @@ pui.Grid = function() {
         }
       }
       else {      
+<<<<<<< HEAD
         if (!me.hasHeader) executeEvent("onrowdblclick", row + 1, null, e);
         if (me.hasHeader && row != 0) executeEvent("onrowdblclick", row, null, e);
+=======
+        if (!me.hasHeader) executeEvent("onrowdblclick", row + 1);
+        if (me.hasHeader && row != 0) executeEvent("onrowdblclick", row);
+>>>>>>> Initial import into GIT
       }
     }
     
@@ -4322,6 +4829,7 @@ pui.Grid = function() {
   function placeCursorOnCell(cell) {
     if (cell == null) return false;
     var inputBox = cell.firstChild;
+<<<<<<< HEAD
     var found = false;
     while (inputBox != null) {
     
@@ -4340,13 +4848,23 @@ pui.Grid = function() {
     }
     if (!found) return false;
     if (inputBox.comboBoxWidget != null) inputBox = inputBox.comboBoxWidget.getBox();
+=======
+    while (inputBox != null && inputBox.tagName != "INPUT" && inputBox.tagName != "TEXTAREA" && inputBox.tagName != "SELECT" && inputBox.style.visibility != "hidden" && inputBox.style.display != "none") {
+      inputBox = inputBox.nextSibling;
+    }
+    if (inputBox == null) return false;
+>>>>>>> Initial import into GIT
     var tag = inputBox.tagName;
     if (tag != "INPUT" && tag != "TEXTAREA" && tag != "SELECT") return false;
     try {
       inputBox.focus();
       if (inputBox.createTextRange != null) {
         // for IE, this makes the cursor appear - workaround for IE8 bug where the cursor just doesn't show
+<<<<<<< HEAD
         if (inputBox.select != null) inputBox.select();
+=======
+        if (inputBox.select != null && typeof inputBox.select == "function") inputBox.select();
+>>>>>>> Initial import into GIT
         var tr = inputBox.createTextRange();
         if (tr != null && tr.collapse !=  null && tr.select != null) {
           tr.collapse();
@@ -4369,7 +4887,11 @@ pui.Grid = function() {
       propValue = me.cellProps[propName];
       if (propValue == null) propValue = "";      
     }
+<<<<<<< HEAD
     if (pui.isBound(propValue) || pui.isTranslated(propValue)) return;
+=======
+    if (typeof propValue == "object") return;
+>>>>>>> Initial import into GIT
     var propValues = propValue.split(",");
     if (propValues.length > 1) {
       if (col < propValues.length) {
@@ -4408,7 +4930,11 @@ pui.Grid = function() {
     if (header) {
       var headerImage = me.cellProps["header image"];
       if (headerImage != null && headerImage != "") {
+<<<<<<< HEAD
         cell.style.backgroundImage = "url('" + pui.normalizeURL(headerImage, true) + "')";
+=======
+        cell.style.backgroundImage = "url('" + headerImage + "')";
+>>>>>>> Initial import into GIT
         cell.style.backgroundRepeat = "repeat-x";
       }
       else {
@@ -4473,7 +4999,10 @@ pui.Grid = function() {
       if (pui.sqlcache == null) pui.sqlcache = {};
       if (pui.sqlcache[start] == null) pui.sqlcache[start] = {};
       if (pui.sqlcache[start].sql === sql &&
+<<<<<<< HEAD
           pui.sqlcache[start].pstring === pstring &&
+=======
+>>>>>>> Initial import into GIT
           pui.sqlcache[start].limit === limit &&
           pui.sqlcache[start].customURL === customURL) {
     		if (callback != null) {
@@ -4487,7 +5016,11 @@ pui.Grid = function() {
     }
     var returnVal = null;
     var url = getProgramURL("PUI0009102.PGM");
+<<<<<<< HEAD
     if (customURL) url = pui.appendAuth(customURL);
+=======
+    if (customURL) url = customURL;
+>>>>>>> Initial import into GIT
     var req = new pui.Ajax(url);
     req["method"] = "post";
     req["async"] = true;
@@ -4532,7 +5065,10 @@ pui.Grid = function() {
           pui.sqlcache[start].customURL = customURL;
           pui.sqlcache[start].results = response.results;
           pui.sqlcache[start].totalRecs = response.totalRecs;
+<<<<<<< HEAD
           pui.sqlcache[start].pstring = pstring;
+=======
+>>>>>>> Initial import into GIT
         }  
         if (callback != null) callback(response.results, response.totalRecs);
         else returnVal = response.results;
@@ -4548,9 +5084,12 @@ pui.Grid = function() {
         sizeCell(row, col);
       }
     }
+<<<<<<< HEAD
     if (columnSignature == null) {
       columnSignature = me.getColumnWidths();
     }
+=======
+>>>>>>> Initial import into GIT
   }
 
   this.isDataGrid = function() {
@@ -4580,10 +5119,17 @@ pui.Grid = function() {
     borderWidth = parseInt(borderWidth);
     if (borderWidth < minBWidth && me.designMode) borderWidth = minBWidth;
     for (var i = 0; i < me.vLines.length; i++) {
+<<<<<<< HEAD
       me.vLines[i].style.borderRightWidth = borderWidth + "px";
     }
     for (var i = 0; i < me.hLines.length; i++) {
       me.hLines[i].style.borderTopWidth = borderWidth + "px";
+=======
+      me.vLines[i].style.borderRightWidth = borderWidth;
+    }
+    for (var i = 0; i < me.hLines.length; i++) {
+      me.hLines[i].style.borderTopWidth = borderWidth;
+>>>>>>> Initial import into GIT
     }
     me.borderWidth = borderWidth;
     setLineWidths();
@@ -4638,12 +5184,15 @@ pui.Grid = function() {
   this.addColumn = function() {
     var n = me.vLines.length;
     var vLine = document.createElement("div");
+<<<<<<< HEAD
     vLine.className = "grid-vline";
     if (me.mainClass != "") {
     
       vLine.className += " " + me.mainClass + "-vline";
     
     }    
+=======
+>>>>>>> Initial import into GIT
     if (!me.designMode) {
       vLine.relatedGrid = me;
     }
@@ -4661,9 +5210,13 @@ pui.Grid = function() {
     vLine.style.height = height + "px";
     var bwidth = me.borderWidth;
     if (bwidth < minBWidth && me.designMode) bwidth = minBWidth;
+<<<<<<< HEAD
     vLine.style.borderRightStyle = "solid";
     vLine.style.borderRightWidth = bwidth + "px";
     vLine.style.borderRightColor = me.borderColor;
+=======
+    vLine.style.borderRight = bwidth + "px solid " + me.borderColor;
+>>>>>>> Initial import into GIT
     vLine.style.fontSize = "0px";
     vLine.style.padding = "0px";
     vLine.style.zIndex = me.vBorderZIndex;
@@ -4672,10 +5225,15 @@ pui.Grid = function() {
     setLineWidths();
     lineDesign(me.vLines, n, true);
     if (n > 0) {
+<<<<<<< HEAD
       var columnId = n - 1;
       for (var row = 1; row < me.hLines.length; row++) {
         var cell = makeCell(row-1, columnId);
         cell.columnId = columnId;
+=======
+      for (var row = 1; row < me.hLines.length; row++) {
+        var cell = makeCell(row-1, n-1);
+>>>>>>> Initial import into GIT
         cellDesign(cell);
       }
     }
@@ -4684,6 +5242,7 @@ pui.Grid = function() {
   }
   
   this["removeColumn"] = function(colIndex) {
+<<<<<<< HEAD
     var lastCol = me.vLines.length - 2;
     if (lastCol < 1) {
       pui.alert("You cannot remove the last column.");
@@ -4693,6 +5252,10 @@ pui.Grid = function() {
     me.removeLastColumn();
     me.doExpandToLayout();
     me.selectMe();
+=======
+    me.moveColumn(colIndex, me.cells[0].length);  // move column to end
+    me.removeLastColumn();
+>>>>>>> Initial import into GIT
   }
   
   this.removeLastColumn = function() {
@@ -4735,10 +5298,16 @@ pui.Grid = function() {
       // adjust grid properties
       var changed = false; 
       var itm = me.tableDiv.designItem;
+<<<<<<< HEAD
       itm.designer.undo.clear();
       function movePropertyParts(propName) {
         var value = itm.properties[propName];
         if (value == null || value == "" || pui.isBound(value) || pui.isTranslated(value)) return;
+=======
+      function movePropertyParts(propName) {
+        var value = itm.properties[propName];
+        if (value == null || value == "" || typeof value == "object") return;
+>>>>>>> Initial import into GIT
         arr = value.split(",");
         if (arr.length == 1 && propName != "column headings" && propName != "column widths") {
           // One value is applicable to all columns
@@ -4836,12 +5405,15 @@ pui.Grid = function() {
   this.addRow = function() {
     var n = me.hLines.length;
     var hLine = document.createElement("div");
+<<<<<<< HEAD
     hLine.className = "grid-hline";
     if (me.mainClass != "") {
     
       hLine.className += " " + me.mainClass + "-hline";
     
     }
+=======
+>>>>>>> Initial import into GIT
     if (!me.designMode) {
       hLine.relatedGrid = me;
     }
@@ -4863,9 +5435,13 @@ pui.Grid = function() {
     hLine.style.width = width + "px";
     var bwidth = me.borderWidth;
     if (bwidth < minBWidth && me.designMode) bwidth = minBWidth;
+<<<<<<< HEAD
     hLine.style.borderTopStyle = "solid";
     hLine.style.borderTopWidth = bwidth + "px";
     hLine.style.borderTopColor = me.borderColor;
+=======
+    hLine.style.borderTop = bwidth + "px solid " + me.borderColor;
+>>>>>>> Initial import into GIT
     hLine.style.fontSize = "0px";
     hLine.style.padding = "0px";
     hLine.style.zIndex = me.hBorderZIndex;
@@ -4876,9 +5452,13 @@ pui.Grid = function() {
     lineDesign(me.hLines, n, false);
     if (n > 0) {
       for (var col = 1; col < me.vLines.length; col++) {
+<<<<<<< HEAD
         var columnId = col - 1;
         var cell = makeCell(n-1, columnId); 
         cell.columnId = columnId;
+=======
+        var cell = makeCell(n-1, col-1);        
+>>>>>>> Initial import into GIT
         cellDesign(cell);
       }
     }
@@ -4928,6 +5508,7 @@ pui.Grid = function() {
       }
     }
   }
+<<<<<<< HEAD
 
   this["scrollToRow"] = function(row) {
     if (me.slidingScrollBar) {
@@ -4939,10 +5520,14 @@ pui.Grid = function() {
     }
   }
 
+=======
+  
+>>>>>>> Initial import into GIT
   this["setNumberOfRows"] = function(numRows) {
     me.setProperty("number of rows", String(numRows)); 
     me.sizeAllCells();
     me.setAllCellStyles(); 
+<<<<<<< HEAD
     
     // Found this code to be losing changes to components after grid resize for 
     // 'expand to layout'. This causes auto-complete box to clear (due to lost hidden value)
@@ -4955,11 +5540,18 @@ pui.Grid = function() {
     //}
     //removeAllResponseElements();
     
+=======
+    for (var i = 0; i < me.runtimeChildren.length; i++) {
+      me.runtimeChildren[i].domEls = [];
+    }
+    removeAllResponseElements();
+>>>>>>> Initial import into GIT
     me.getData();
   }
   
   this["render"] = function() {
     me.sizeAllCells();
+<<<<<<< HEAD
     me.setAllCellStyles();
     me.setHeadings();
     if (me.subfileHidden) {
@@ -5001,6 +5593,13 @@ pui.Grid = function() {
     menu.style.display = "none";    
           
   
+=======
+    me.setAllCellStyles(); 
+  }
+  
+  this["refresh"] = function() {
+    me.getData();
+>>>>>>> Initial import into GIT
   }
   
   this.getPropertiesModel = function() {
@@ -5030,7 +5629,10 @@ pui.Grid = function() {
       { name: "cursor record number", readOnly: true, format: "number", hideFormatting: true, validDataTypes: ["zoned"], help: "This property can be bound to a numeric field, which will return the relative record number of the record on which the cursor is located." + (pui.viewdesigner ? "" : "  It represents the SFLCSRRRN keyword."), context: "dspf" },
       { name: "cursor progression", choices: ["left to right", "top to bottom"], help: "This property determines the tab order for input elements within the subfile." + (pui.viewdesigner ? "" : "  It represents the SFLCSRPRG keyword."), context: "dspf" },
       { name: "subfile return rrn", readOnly: true, format: "number", hideFormatting: true, validDataTypes: ["zoned", "reference"], help: "This property can be bound to a numeric field, which will return the relative record number of the top visible record within a grid." + (pui.viewdesigner ? "" : "  It represents the SFLSCROLL keyword."), context: "dspf" },
+<<<<<<< HEAD
       { name: "subfile changed", format: "1 / 0", readOnly: true, hideFormatting: true, validDataTypes: ["indicator"], help: "Specifies a response indicator that is set on if the input data within the subfile is modified.", context: "dspf" },
+=======
+>>>>>>> Initial import into GIT
       
       { name: "Message Subfile Settings", category: true, context: "dspf", viewdesigner: false },
       { name: "subfile message key", readOnly: true, hideFormatting: true, validDataTypes: ["char"], defaultDataLength: 4, help: "This property specifies a field that is used to select messages from a program message queue for display.  Your program places a message reference key in this field. The property represents the SFLMSGKEY keyword on a subfile record format.", context: "dspf", viewdesigner: false },
@@ -5060,7 +5662,11 @@ pui.Grid = function() {
       { name: "header font color", type: "color", help: "Defines the color of the text inside the header row.  To define a different color for each grid cell in the header row, specify a comma separated list of color values." },
       { name: "header background", type: "color", help: "Defines the background color of the header row.  To define a different color for each grid cell in the header row, specify a comma separated list of color values." },
       { name: "header image", type: "image", help: "Defines a repeating background image for the header row." },
+<<<<<<< HEAD
       { name: "column headings", type: "list", help: "Specifies a comma separated list of heading text for each column of the grid.", translate: true },
+=======
+      { name: "column headings", type: "list", help: "Specifies a comma separated list of heading text for each column of the grid." },
+>>>>>>> Initial import into GIT
   
       { name: "Colors", category: true },    
       { name: "odd row font color", type: "color", help: "Defines the color of text inside the odd rows of the grid.  To define a different color for each grid column, specify a comma separated list of color values." },
@@ -5091,23 +5697,36 @@ pui.Grid = function() {
       { name: "column sort response", format: "number", readOnly: true, validDataTypes: ["zoned"], help: "Specifies a response variable for server-side sorting.  If omitted, client-side sorting is used.  The response is a numeric value that represents a column in the grid.  Each grid column is identified by a sequential index, starting with 0 for the first column, 1 for the second column, and so on.  It is the responsibility of the program to keep track of the sort direction, and to display an up or down arrow in the appropriate column using the \"initial sort column\" and \"default sort order\" properties.", context: "dspf" },
       { name: "resizable columns", choices: ["true", "false"], help: "Allows the user to resize grid columns at run time.", context: "dspf" },
       { name: "movable columns", choices: ["true", "false"], help: "Allows the user to rearrange grid columns at run time.", context: "dspf" },
+<<<<<<< HEAD
       { name: "persist state", choices: ["true", "false"], help: "Specifies whether the grid state should be saved when the user sorts, moves, or resizes columns.  When set to true, the state is saved to browser local storage with each user action, and automatically restored the next time the grid is dislpayed.", context: "dspf" },
+=======
+      //{ name: "persist grid state", choices: ["true", "false"], help: "Specifies whether the grid state should be saved when the user sorts, moves, or resizes columns.  When set to true, the state is saved to browser cookies with each user action, and automatically restored the next time the grid is dislpayed.", context: "dspf" },
+>>>>>>> Initial import into GIT
       //{ name: "find option", choices: ["true", "false"], help: "Presents an option to search grid data when the grid heading is right-clicked.", context: "dspf" },
       //{ name: "filter option", choices: ["true", "false"], help: "Presents an option to filter grid data when the grid heading is right-clicked.", context: "dspf" },
       { name: "export option", choices: ["true", "false"], help: "Presents an option to export grid data to Excel using the CSV format when the grid heading is right-clicked.", context: "dspf" },
       { name: "context menu id", help: "Specifies the id of a Menu widget used to display a context menu when the user right-clicks a grid row.", hideFormatting: true, validDataTypes: ["char"], context: "dspf" },
   
       { name: "Paging Bar", category: true, context: "dspf" },
+<<<<<<< HEAD
       { name: "show paging controls", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "Displays links for navigating to the previous page and the next page of records." },
       { name: "show page number", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "This property determines whether the page number should display within the paging bar.", context: "dspf" },
       { name: "initial page number", format: "number", hideFormatting: true, validDataTypes: ["zoned"], help: "Specifies the initial page number to use when the page number is displayed within the paging bar.  If not specified, page number 1 is used.", context: "dspf" },
+=======
+      { name: "show paging controls", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "Displays links for navigating to the previous page and the next page of records.", context: "dspf" },
+      { name: "show page number", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "This property determines whether the page number should display within the paging bar.", context: "dspf" },
+>>>>>>> Initial import into GIT
       { name: "show bar", choices: ["true", "false"], hideFormatting: true, validDataTypes: ["indicator", "expression"], help: "Displays a bar at the bottom of the grid even if no paging bar elements are selected to be displayed.  This can be used to show miscellaneous information such as column totals.", context: "dspf" },
       { name: "page down condition", validDataTypes: ["indicator", "expression"], hideFormatting: true, readOnly: true, format: "true / false", type: "boolean", help: "Determines if the next page link is enabled.", context: "dspf" },
       { name: "page down response", format: "1 / 0", readOnly: true, hideFormatting: true, validDataTypes: ["indicator"], help: "Specifies a response indicator that is returned to your program when the next page link is clicked.", context: "dspf" },
       { name: "page up condition", validDataTypes: ["indicator", "expression"], hideFormatting: true, readOnly: true, format: "true / false", type: "boolean", help: "Determines if the previous page link is enabled.", context: "dspf" },
       { name: "page up response", format: "1 / 0", readOnly: true, hideFormatting: true, validDataTypes: ["indicator"], help: "Specifies a response indicator that is returned to your program when the previous page link is clicked.", context: "dspf" },
       { name: "csv export", choices: ["true", "false"], help: "Displays a link allowing the user to export grid data to Excel using the CSV format.", context: "dspf" },
+<<<<<<< HEAD
       { name: "csv file name", help: "Defines the name of the download file used to export grid data to CSV format.  The .csv extension is automatically appended to the name.  If omitted, the record format name is used.", context: "dspf", translate: true },
+=======
+      { name: "csv file name", help: "Defines the name of the download file used to export grid data to CSV format.  The .csv extension is automatically appended to the name.  If omitted, the record format name is used.", context: "dspf" },
+>>>>>>> Initial import into GIT
       { name: "export with headings", choices: ["true", "false"], help: "Specifies whether subfile headings should be exported as the first row of the CSV file.", context: "dspf" },
       
       { name: "Row Folding", category: true, context: "dspf" },      
@@ -5171,7 +5790,11 @@ pui.Grid = function() {
 
       { name: "Misc", category: true },    
       { name: "css class", multOccur: (context == "dspf" ? true : false), attribute: "class", help: "Defines a custom cascading style sheet class to assign to the element." + (context == "dspf" ? "  To specify multiple classes, right-click the property and select Add Another CSS Class." : "") },
+<<<<<<< HEAD
       { name: "tool tip", type: "long", help: "Defines the text to appear in a tool tip when the user hovers the mouse over this element.", translate: true },
+=======
+      { name: "tool tip", type: "long", help: "Defines the text to appear in a tool tip when the user hovers the mouse over this element." },
+>>>>>>> Initial import into GIT
       { name: "visibility", format: "visible / hidden", choices: ["hidden", "visible"], help: "Determines whether the element is visible or hidden." },
       
       { name: "Events", category: true },
@@ -5179,9 +5802,14 @@ pui.Grid = function() {
       { name: "onrowdblclick", type: "js", help: "Initiates a client-side script when a row within the grid is double-clicked.  The script can determine the row number using the <b>row</b> variable.", bind: false },
       { name: "onrowmouseover", type: "js", help: "Initiates a client-side script when the mouse is moved over a row within the grid.  The script can determine the row number using the <b>row</b> variable.", bind: false },
       { name: "onrowmouseout", type: "js", help: "Initiates a client-side script when the mouse is moved off of a row within the grid.  The script can determine the row number using the <b>row</b> variable.", bind: false },
+<<<<<<< HEAD
       { name: "onpagedown", type: "js", help: "Initiates a client-side script when the user pages down using the grid's scrollbar or the grid's paging bar.  To prevent the grid's default paging action, the script must evaluate to <i>false</i>.", bind: false },
       { name: "onpageup", type: "js", help: "Initiates a client-side script when the user pages up using the grid's scrollbar or the grid's paging bar.  To prevent the grid's default paging action, the script must evaluate to <i>false</i>.", bind: false },
       { name: "onscroll", type: "js", help: "Initiates a client-side script when the user scrolls using the grid's scrollbar.  The <b>row</b> variable in the script provides the top row of the grid.", bind: false }
+=======
+      { name: "onpagedown", type: "js", help: "Initiates a client-side script when the user pages down using the grid's scrollbar.  To prevent the grid's default paging action, the script must evaluate to <i>false</i>.", bind: false },
+      { name: "onpageup", type: "js", help: "Initiates a client-side script when the user pages up using the grid's scrollbar.  To prevent the grid's default paging action, the script must evaluate to <i>false</i>.", bind: false }
+>>>>>>> Initial import into GIT
     ];
     
     return model;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.add({
   name: "textbox",
@@ -33,7 +36,11 @@ pui.widgets.add({
       parms.dom.value = parms.evalProperty("value");
       if (!parms.design) {
         applyAutoComp(parms.properties, parms.originalValue, parms.dom);
+<<<<<<< HEAD
         if (pui.iPadEmulation && !pui.iPhoneEmulation && parms.dom.id.indexOf(".") == -1) {
+=======
+        if (pui.iPadEmulation && !pui.iPhoneEmulation) {
+>>>>>>> Initial import into GIT
           addEvent(parms.dom, "focus", function(event) {
             getObj("ipadKeyboard").style.display = "";
           });
@@ -46,6 +53,7 @@ pui.widgets.add({
     },
     
     "value": function(parms) {
+<<<<<<< HEAD
       if (parms.dom.autoCompTranslated) {
       
         parms.dom.autoCompTranslated = false;
@@ -64,6 +72,9 @@ pui.widgets.add({
           parms.dom.setAttribute("type", parms.value);
         } catch(e) { }
       }
+=======
+      parms.dom.value = parms.value;
+>>>>>>> Initial import into GIT
     }
   
   }

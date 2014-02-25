@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.panelStyles = {
   "Simple": {
@@ -294,12 +297,18 @@ pui.widgets.getPanelProxy = function(defaults) {
 pui.widgets.resizePanel = function(panel, settings, width, height, parms) {
 
   if (typeof width == "string") {
+<<<<<<< HEAD
     if (width != "" && !isNaN(width)) width += "px";
+=======
+>>>>>>> Initial import into GIT
     if (width.length >= 3 && width.substr(width.length - 2) == "px") width = parseInt(width);
     else width = panel.topLeftDiv.parentNode.offsetWidth;
   }
   if (typeof height == "string") {
+<<<<<<< HEAD
     if (height != "" && !isNaN(height)) height += "px";
+=======
+>>>>>>> Initial import into GIT
     if (height.length >= 3 && height.substr(height.length - 2) == "px") height = parseInt(height);
     else height = panel.topLeftDiv.parentNode.offsetHeight;
   }  
@@ -392,7 +401,11 @@ pui.widgets.add({
     "field type": function(parms) {
 
       parms.dom.sizeMe = function() {
+<<<<<<< HEAD
         var pstyle = parms.properties["panel style"];
+=======
+        var pstyle = parms.value;      
+>>>>>>> Initial import into GIT
         var settings = pui.widgets.panelStyles[pstyle];
         if (settings == null) {
           var pstyle = pui.widgets.getPanelStyles()[0];
@@ -620,8 +633,12 @@ pui.widgets.add({
     },
 
     "width": function(parms) {
+<<<<<<< HEAD
       if (pui.isNumericString(parms.value)) parms.dom.style.width = parms.value + "px";
       else parms.dom.style.width = parms.value;
+=======
+      parms.dom.style.width = parms.value;
+>>>>>>> Initial import into GIT
       var pstyle = parms.properties["panel style"];
       var settings = pui.widgets.panelStyles[pstyle];
       if (settings == null) {
@@ -634,8 +651,12 @@ pui.widgets.add({
     },
     
     "height": function(parms) {
+<<<<<<< HEAD
       if (pui.isNumericString(parms.value)) parms.dom.style.height = parms.value + "px";
       else parms.dom.style.height = parms.value;
+=======
+      parms.dom.style.height = parms.value;
+>>>>>>> Initial import into GIT
       var pstyle = parms.properties["panel style"];
       var settings = pui.widgets.panelStyles[pstyle];
       if (settings == null) {

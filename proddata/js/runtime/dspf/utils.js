@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 function allowKeysSimple(allowedUnicodes, e){
@@ -48,7 +51,10 @@ pui.isSubfileProperty = function(propertyName) {
     case "subfile message key": return true;
     case "subfile program message queue": return true;
     case "selection field": return true;
+<<<<<<< HEAD
     case "subfile changed": return true;
+=======
+>>>>>>> Initial import into GIT
     default: return false;
   }
 }
@@ -242,6 +248,7 @@ pui.parseLibraryFileMember = function(path) {
 }
 
 
+<<<<<<< HEAD
 
 pui.assignShortcutKey = function(shortcutKey, dom) {
   var formatName = pui.lastFormatName;
@@ -292,3 +299,5 @@ pui.getParentWindow = function(el) {
   return win;
 
 }
+=======
+>>>>>>> Initial import into GIT

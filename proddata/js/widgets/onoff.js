@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * On Off Switch Class
@@ -44,11 +47,14 @@ pui.OnOffSwitch = function() {
   
   function getOnPoint() {
     var totalWidth = me.container.offsetWidth;
+<<<<<<< HEAD
     if (totalWidth == 0) {
       totalWidth = parseInt(me.container.style.width);
       if (isNaN(totalWidth)) totalWidth = 0;
       totalWidth += 2;
     }
+=======
+>>>>>>> Initial import into GIT
     if (me.wideHandle) onPoint = parseInt((totalWidth + 3) / 2);
     else onPoint = totalWidth - 6;
     return onPoint;
@@ -56,6 +62,7 @@ pui.OnOffSwitch = function() {
   
   this.init = function() {
     offLabel.className = "off-label";
+<<<<<<< HEAD
     offLabel.style.background = "url('" + pui.normalizeURL("/profoundui/proddata/images/onoff/off.png") + "') no-repeat right 0";
     offSpan.innerHTML = "OFF";
     offLabel.appendChild(offSpan);
@@ -69,6 +76,16 @@ pui.OnOffSwitch = function() {
     handleRightDiv.style.background = "url('" + pui.normalizeURL("/profoundui/proddata/images/onoff/handle_right.png") + "') no-repeat right 0";
     handleCenterDiv.className = "onoff-handle-center";
     handleCenterDiv.style.background = "url('" + pui.normalizeURL("/profoundui/proddata/images/onoff/handle_center.png") + "')";
+=======
+    offSpan.innerHTML = "OFF";
+    offLabel.appendChild(offSpan);
+    onLabel.className = "on-label";
+    onSpan.innerHTML = "ON";
+    onLabel.appendChild(onSpan);
+    handleLeftDiv.className = "onoff-handle-left";
+    handleRightDiv.className = "onoff-handle-right";
+    handleCenterDiv.className = "onoff-handle-center";
+>>>>>>> Initial import into GIT
     handleRightDiv.appendChild(handleCenterDiv);
     handleLeftDiv.appendChild(handleRightDiv);
     pui.addCssClass(me.container, "onoff-switch");
@@ -116,11 +133,14 @@ pui.OnOffSwitch = function() {
         var handleEndX = parseInt(handleLeftDiv.style.left);
         var diff = Math.abs(handleStartX - handleEndX);
         var totalWidth = me.container.offsetWidth;
+<<<<<<< HEAD
         if (totalWidth == 0) {
           totalWidth = parseInt(me.container.style.width);
           if (isNaN(totalWidth)) totalWidth = 0;
           totalWidth += 2;
         }
+=======
+>>>>>>> Initial import into GIT
         var halfPoint = totalWidth / 2;
         if (me.wideHandle) halfPoint = halfPoint / 2 - 4;
         if (draggingHandle) {
@@ -153,6 +173,7 @@ pui.OnOffSwitch = function() {
  
   this.size = function() {
     var totalWidth = me.container.offsetWidth;
+<<<<<<< HEAD
     if (totalWidth == 0) {
       totalWidth = parseInt(me.container.style.width);
       if (isNaN(totalWidth)) totalWidth = 0;
@@ -161,12 +182,16 @@ pui.OnOffSwitch = function() {
     offLabelWidth = totalWidth - 5;
     if (offLabelWidth < 0) offLabelWidth = 0;
     offLabel.style.width = offLabelWidth + "px";
+=======
+    offLabel.style.width = (totalWidth - 5) + "px";
+>>>>>>> Initial import into GIT
     me.setWideHandle(me.wideHandle);
   }
   
   this.setWideHandle = function(isWide) {
     if (isWide) {
       var totalWidth = me.container.offsetWidth;
+<<<<<<< HEAD
       if (totalWidth == 0) {
         totalWidth = parseInt(me.container.style.width);
         if (isNaN(totalWidth)) totalWidth = 0;
@@ -174,6 +199,9 @@ pui.OnOffSwitch = function() {
       }
       var handleWidth = parseInt((totalWidth - 14) / 2);
       if (handleWidth < 0) handleWidth = 0;
+=======
+      var handleWidth = parseInt((totalWidth - 14) / 2);
+>>>>>>> Initial import into GIT
       handleLeftDiv.style.width = handleWidth + "px";
     }
     else {

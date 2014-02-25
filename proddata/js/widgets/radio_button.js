@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.add({
   name: "radio button",
@@ -32,8 +35,13 @@ pui.widgets.add({
   propertySetters: {
   
     "field type": function(parms) {
+<<<<<<< HEAD
       if (parms.design && !pui["is_quirksmode"]) {
         if (!pui["is_old_ie"]) {
+=======
+      if (parms.design && !quirksMode) {
+        if (!is_ie) {
+>>>>>>> Initial import into GIT
           parms.dom.style.margin = "2px";
         }
       }
@@ -49,7 +57,11 @@ pui.widgets.add({
           var groupValue = parms.evalProperty("radio button group");
           if (value != null && groupValue != null) {
             if ((value == groupValue) || (!isNaN(Number(value)) && !isNaN(Number(groupValue)) && Number(value) == Number(groupValue))) {
+<<<<<<< HEAD
               if (pui["is_old_ie"]) parms.dom.name = "radio";  // temporary name -- fixes problem of checkboxes being checked off in IE8 standards mode when radio button's checked dom property is set to true
+=======
+              if (is_ie) parms.dom.name = "radio";  // temporary name -- fixes problem of checkboxes being checked off in IE8 standards mode when radio button's checked dom property is set to true
+>>>>>>> Initial import into GIT
               parms.dom.checked = true;
             }
           }        
@@ -60,6 +72,7 @@ pui.widgets.add({
             }
           });
         }
+<<<<<<< HEAD
         else if (context == "genie") {
         
           var relatedId = parms.evalProperty("related field"); 
@@ -117,6 +130,8 @@ pui.widgets.add({
           }  
        
         }
+=======
+>>>>>>> Initial import into GIT
       }
     }      
   }

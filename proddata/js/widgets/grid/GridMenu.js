@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -16,6 +17,15 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  In the COPYING and COPYING.LESSER files included with the Profound UI Runtime.
 //  If not, see <http://www.gnu.org/licenses/>.
+=======
+
+pui["filter text"] = "Filter";
+pui["remove filters text"] = "Remove All Filters";
+pui["find text"] = "Find";
+pui["sort ascending text"] = "Sort Ascending";
+pui["sort descending text"] = "Sort Descending";
+
+>>>>>>> Initial import into GIT
 
 
 
@@ -83,6 +93,7 @@ pui.GridMenu = function() {
       }
     }
     if (me.clickEvent != null) {
+<<<<<<< HEAD
       left = pui.getMouseX(me.clickEvent);
       top = pui.getMouseY(me.clickEvent);
       var maxLeft = document.body.offsetWidth - 185;  // width of menu plus scrollbar
@@ -98,6 +109,18 @@ pui.GridMenu = function() {
       }
       top = top - offset.y;
       left = left - offset.x;      
+=======
+      if (me.clickEvent.pageX) left = me.clickEvent.pageX;
+      else if (me.clickEvent.clientX) left = me.clickEvent.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+      if (me.clickEvent.pageY) top = me.clickEvent.pageY;
+      else if (me.clickEvent.clientY) top = me.clickEvent.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+      var maxLeft = document.body.offsetWidth - 185;  // width of menu plus scrollbar
+      if (context == "dspf" && me.grid.tableDiv.parentNode.getAttribute("container") == "true") {
+        var offset = pui.layout.getContainerOffset(me.grid.tableDiv.parentNode)
+        top = top - offset.y;
+        left = left - offset.x;
+      }
+>>>>>>> Initial import into GIT
       if (left > maxLeft) left = maxLeft;
     }
     menuDiv.style.left = left + "px";
@@ -129,13 +152,21 @@ pui.GridMenu = function() {
     var menuIcons = [];
     var optionHandlers = [];
     if (me.grid.sortable && me.cell.sortColumn != null) {
+<<<<<<< HEAD
       menuOptions.push(pui.getLanguageText("runtimeText", "sort ascending text"));
+=======
+      menuOptions.push(pui["sort ascending text"]);
+>>>>>>> Initial import into GIT
       menuIcons.push("icons/sort_ascending.png");
       optionHandlers.push(function() {
         me.cell.sortDescending = true;
         me.cell.sortColumn();
       });
+<<<<<<< HEAD
       menuOptions.push(pui.getLanguageText("runtimeText", "sort descending text"));
+=======
+      menuOptions.push(pui["sort descending text"]);
+>>>>>>> Initial import into GIT
       menuIcons.push("icons/sort_descending.png");
       optionHandlers.push(function() {
         me.cell.sortDescending = false;
@@ -151,7 +182,11 @@ pui.GridMenu = function() {
         optionHandlers.push(null);
       }
       if (me.grid.findOption) {
+<<<<<<< HEAD
         menuOptions.push(pui.getLanguageText("runtimeText", "find text") + "...");
+=======
+        menuOptions.push(pui["find text"] + "...");
+>>>>>>> Initial import into GIT
         menuIcons.push("icons/search.png");
         optionHandlers.push(function() {
           alert("find - to do");
@@ -159,7 +194,11 @@ pui.GridMenu = function() {
       }
   
       if (me.grid.filterOption) {
+<<<<<<< HEAD
         menuOptions.push(pui.getLanguageText("runtimeText", "filter text") + "...");
+=======
+        menuOptions.push(pui["filter text"] + "...");
+>>>>>>> Initial import into GIT
         menuIcons.push("icons/filter.png");
         optionHandlers.push(function() {
           alert("filter - to do");
@@ -167,7 +206,11 @@ pui.GridMenu = function() {
       }
   
       if (me.grid.filterOption && true) {
+<<<<<<< HEAD
         menuOptions.push(pui.getLanguageText("runtimeText", "remove filters text"));
+=======
+        menuOptions.push(pui["remove filters text"]);
+>>>>>>> Initial import into GIT
         menuIcons.push("icons/remove_filter.png");
         optionHandlers.push(function() {
           alert("remove all filters - to do");
@@ -182,7 +225,11 @@ pui.GridMenu = function() {
         menuIcons.push(null);
         optionHandlers.push(null);
       }
+<<<<<<< HEAD
       menuOptions.push(pui.getLanguageText("runtimeText", "csv export text") + "...");
+=======
+      menuOptions.push(pui["csv export text"] + "...");
+>>>>>>> Initial import into GIT
       menuIcons.push("grids/excel.gif");
       optionHandlers.push(function() {
         me.grid.exportCSV();

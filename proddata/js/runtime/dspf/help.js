@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.help = {};
 
@@ -54,7 +57,11 @@ pui.help.show = function() {
     else {
       // check help panel condition first
       var condition = props["help panel condition" + suffix];
+<<<<<<< HEAD
       if (condition != null && pui.isBound(condition)) {
+=======
+      if (condition != null && typeof condition == "object") {
+>>>>>>> Initial import into GIT
         var dataValue;
         if (condition.dataType == "expression") {
           dataValue = pui.evalIndicatorExpression(condition.fieldName, data);
@@ -330,7 +337,11 @@ pui.help.extendedHelp = function(props, container) {
     else {
       // check help panel condition first
       var condition = props["help panel condition" + suffix];
+<<<<<<< HEAD
       if (condition != null && pui.isBound(condition)) {
+=======
+      if (condition != null && typeof condition == "object") {
+>>>>>>> Initial import into GIT
         var dataValue;
         if (condition.dataType == "expression") {
           dataValue = pui.evalIndicatorExpression(condition.fieldName, data);

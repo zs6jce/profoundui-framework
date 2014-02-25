@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -25,6 +26,13 @@ pui.loadSelectBoxChoices = function(choicesString, choiceValuesString, dom) {
   var choices = pui.parseCommaSeparatedList(choicesString);
   var choiceValues = pui.parseCommaSeparatedList(choiceValuesString);
 
+=======
+
+
+pui.loadSelectBoxChoices = function(choicesString, choiceValuesString, dom) {
+  var choices = choicesString.split(",");
+  var choiceValues = choiceValuesString.split(",");
+>>>>>>> Initial import into GIT
   dom.choices = {};
   for (var i = 0; i < choices.length; i++) {
     var optionText = choices[i];
@@ -39,6 +47,7 @@ pui.loadSelectBoxChoices = function(choicesString, choiceValuesString, dom) {
 }
 
 pui.setSelectBoxValue = function(value, dom) {
+<<<<<<< HEAD
   
   // If this is a numeric field in Genie, trim blanks...
   if (dom.fieldInfo != null && dom.fieldInfo.shift != null) {
@@ -51,6 +60,8 @@ pui.setSelectBoxValue = function(value, dom) {
     }
   }
   
+=======
+>>>>>>> Initial import into GIT
   if (dom.tagName == "INPUT") {  // read-only select box widgets do not get converted into dropdowns
     if (dom.choices != null && dom.choices[value] != null) {
       dom.value = dom.choices[value];
@@ -58,15 +69,22 @@ pui.setSelectBoxValue = function(value, dom) {
     else {
       dom.value = value;
     }
+<<<<<<< HEAD
     dom.pui.properties["value"] = value;
+=======
+>>>>>>> Initial import into GIT
     return;
   }
   var multiple = false;
   if (dom.getAttribute("multiple") != null) multiple = true;
+<<<<<<< HEAD
   if (!multiple) {
     dom.value = value;
     dom.pui.properties["value"] = value;
   }
+=======
+  if (!multiple) dom.value = value;
+>>>>>>> Initial import into GIT
   if (multiple) {
     var values = value.split(",");
     for (var i = 0; i < dom.options.length; i++) {
@@ -98,7 +116,11 @@ pui.widgets.add({
       var url = parms.evalProperty("choices url");
       if (url != "" && !parms.design) {
       	
+<<<<<<< HEAD
       	var req = new pui.Ajax(pui.appendAuth(url));
+=======
+      	var req = new pui.Ajax(url);
+>>>>>>> Initial import into GIT
       	req["async"] = true;
       	req["suppressAlert"] = true;
       	req["onready"] = function() {
@@ -243,6 +265,7 @@ pui.widgets.add({
     },
     
     "choices": function(parms) {
+<<<<<<< HEAD
     
       // Can't have this happening at the same time as other population options.
       // Causes timing/order of events issues if you call 'get()' while Ajax calls
@@ -256,6 +279,8 @@ pui.widgets.add({
         
       } 
     
+=======
+>>>>>>> Initial import into GIT
       if (parms.dom.tagName == "SELECT") parms.dom.options.length = 0;
       var choicesString = parms.value; 
       var choiceValuesString = parms.evalProperty("choice values");
@@ -264,6 +289,7 @@ pui.widgets.add({
     },
 
     "choice values": function(parms) {
+<<<<<<< HEAD
     
       // Can't have this happening at the same time as other population options.
       // Causes timing/order of events issues if you call 'get()' while Ajax calls
@@ -277,6 +303,8 @@ pui.widgets.add({
         
       }    
     
+=======
+>>>>>>> Initial import into GIT
       if (parms.dom.tagName == "SELECT") parms.dom.options.length = 0;
       var choicesString = parms.evalProperty("choices");
       var choiceValuesString = parms.value; 
@@ -286,7 +314,11 @@ pui.widgets.add({
     
     "select box height": function(parms) {
       // Process change in select box height for IE6 -- list boxes show normally, but dropdowns show as textboxes in design mode  
+<<<<<<< HEAD
       if (parms.design && pui["is_old_ie"] && pui["ie_mode"] == 6) {
+=======
+      if (parms.design && is_ie6) {
+>>>>>>> Initial import into GIT
         var nmodel = getPropertiesNamedModel();
         applyPropertyToField(nmodel["field type"], parms.properties, parms.dom, "select box", parms.design, parms.designItem, parms.resizer);
       }

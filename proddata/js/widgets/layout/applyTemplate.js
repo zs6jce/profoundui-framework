@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.layout.template.applyTemplate = function(parms) {
   var dom = parms.dom;
@@ -72,6 +75,7 @@ pui.layout.template.applyTemplate = function(parms) {
     dom.appendChild(newDom.removeChild(child));
     child = newDom.firstChild;
   }
+<<<<<<< HEAD
   if (newDom.panel != null) {
     dom.panel = newDom.panel;
     dom.sizeMe = function() {
@@ -86,6 +90,8 @@ pui.layout.template.applyTemplate = function(parms) {
     }
     dom.accordion.container = dom;
   }
+=======
+>>>>>>> Initial import into GIT
   
   return { 
     success: true,
@@ -103,6 +109,10 @@ pui.layout.template.getProxy = function(defaults) {
     proxyMode: true
   });
   pui.layout.template.processDOM(proxy);
+<<<<<<< HEAD
+=======
+  proxy.style.border = "1px dotted #15428B";
+>>>>>>> Initial import into GIT
   if (defaults["width"] != null) proxy.style.width = defaults["width"];
   if (defaults["height"] != null) proxy.style.height = defaults["height"];
   if (defaults["css class"] != null) proxy.className = defaults["css class"];

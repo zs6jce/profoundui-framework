@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * Paging Scrollbar Class
@@ -73,7 +76,11 @@ pui.PagingScrollBar = function() {
         outerDiv.scrollTop = midPoint;
         return;
       }        
+<<<<<<< HEAD
    
+=======
+    
+>>>>>>> Initial import into GIT
       var returnVal;
       if (ignoreOnScroll) {
         ignoreOnScroll = false;
@@ -188,8 +195,13 @@ pui.PagingScrollBar = function() {
   }
   
   this.destroy = function() {
+<<<<<<< HEAD
     if (outerDiv.parentNode != null) outerDiv.parentNode.removeChild(outerDiv);
     if (innerDiv.parentNode != null) innerDiv.parentNode.removeChild(innerDiv);
+=======
+    outerDiv.parentNode.removeChild(outerDiv);
+    innerDiv.parentNode.removeChild(innerDiv);
+>>>>>>> Initial import into GIT
   }
 
   this.changeContainer = function(newContainer) {

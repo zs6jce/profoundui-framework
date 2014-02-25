@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -16,6 +17,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  In the COPYING and COPYING.LESSER files included with the Profound UI Runtime.
 //  If not, see <http://www.gnu.org/licenses/>.
+=======
+>>>>>>> Initial import into GIT
 
 
 pui.runtimeContainer = null;
@@ -40,6 +43,10 @@ pui.modified = false;
 pui.ctlRecModified = {};
 pui.ignoreBlurs = false;
 pui.ignoreFocus = false;
+<<<<<<< HEAD
+=======
+pui.closeMessage = "This will end your session.";
+>>>>>>> Initial import into GIT
 pui.confirmOnClose = true;
 pui.shutdownOnClose = true;
 pui.skipConfirm = false;
@@ -51,15 +58,21 @@ pui.cursorRRNs = {};
 pui.returnRRNs = {};
 pui.topRRNs = {};
 pui.sflModes = {};
+<<<<<<< HEAD
 pui.subfileChangedFields = {};
+=======
+>>>>>>> Initial import into GIT
 pui.dragDropFields = {};
 pui.changedFields ={};
 pui.windowTopField = null;
 pui.windowLeftField = null;
 pui.populateWindowTopLeft = true;
 pui.validCommandKeyField = null;
+<<<<<<< HEAD
 pui.backButtonField = null;
 pui.sendBackButtonResponse = false;
+=======
+>>>>>>> Initial import into GIT
 pui.setOffFields = [];
 pui.autoArrange = {};
 pui.autoArrange.keys = {};
@@ -74,8 +87,11 @@ pui.iPhoneEmulation = false;
 pui.columnSortResponseGrid = null;
 pui.fileUploadElements = [];
 pui.activeElement = null;
+<<<<<<< HEAD
 pui.autoPageGrid = false;
 
+=======
+>>>>>>> Initial import into GIT
 
 // this is normally stored in a theme, but themes are not available at runtime
 // so for now, this is just hardcoded
@@ -87,6 +103,17 @@ pui.pagingBarHeight = 27;
 pui["vertical button spacing"] = 33;     // this accounts for the height of the button as well, used in non-window formats
 pui["horizontal button spacing"] = 90;   // this accounts for the width of the button as well, used in window formats
 
+<<<<<<< HEAD
+=======
+pui["runtimeMessages"]= {};
+pui["runtimeMessages"]["ME"] = "Mandatory entry field. You must enter data.";
+pui["runtimeMessages"]["MF"] = "Mandatory fill field. You must fill the input box completely.";
+pui["runtimeMessages"]["required"] = "The value cannot be blank. This field is required.";
+pui["runtimeMessages"]["file required"] = "You must select at least one file.";
+pui["runtimeMessages"]["signature overflow"] = "The signature drawing size exceeds the maximum number of bytes available for storing the signature.  Please clear the signature pad and try again.";
+pui["runtimeMessages"]["validValues"] = "Value entered is not valid. Valid values are: ";
+
+>>>>>>> Initial import into GIT
 pui["dup"] = {};
 pui["dup"]["char"] = "\u25CF";  // this is a character that looks like a round circle
 pui["dup"]["keyCode"] = 45;     // Insert (the default dup key is Shift-Insert)
@@ -108,8 +135,14 @@ pui["loading animation"]["height"] = 16;
 
 pui["auto tab"] = false;  // when the user reaches the end of the field, the cursor is automatically advanced to the next field
 pui["enable arrow keys"] = false;
+<<<<<<< HEAD
 pui["horizontal auto arrange"] = false;
 pui["buttons per row"] = 1;  //required when pui["horizontal auto arrange"] set to true
+=======
+
+pui["session ended text"] = "Your session has ended.";
+pui["close browser text"] = "To complete the log off process, please close your browser window.";
+>>>>>>> Initial import into GIT
 
 pui.fkeyValues = {
   "F1": 1,
@@ -245,6 +278,7 @@ pui.doClearLine = function(clearLine, format, oRange, startingLine) {
     if (row != null && row != "") {
       row = parseInt(row);
       if (!isNaN(row) && row > 0) {
+<<<<<<< HEAD
         if (row >= clearFrom && row <= clearTo) {
           itm["visibility"] = "hidden";
           if (itm["grid"] != null) {
@@ -252,6 +286,10 @@ pui.doClearLine = function(clearLine, format, oRange, startingLine) {
           }
         }
         if (row >= rangeFrom && row <= rangeTo && pui["clear overlapped lines"] != false) {
+=======
+        if ( (row >= clearFrom && row <= clearTo) ||
+             (row >= rangeFrom && row <= rangeTo) ) {
+>>>>>>> Initial import into GIT
           itm["visibility"] = "hidden";
           if (itm["grid"] != null) {
             gridToHide = itm["grid"];
@@ -399,7 +437,11 @@ pui.overlayAdjust = function(formats) {
               var itm = items[j];
               if (itm["grid"] != null) continue;
               var itmType = itm["field type"];
+<<<<<<< HEAD
               if (itmType != "panel" && itmType != "css panel" && !pui.isBound(itm["top"]) && itm["css class"] != "stationary" && itm["css class 2"] != "stationary") {
+=======
+              if (itmType != "panel" && typeof itm["top"] != "object" && itm["css class"] != "stationary" && itm["css class 2"] != "stationary") {
+>>>>>>> Initial import into GIT
                 itm["top"] = (parseInt(itm["top"]) + pushDown) + "px";
               }
             }
@@ -450,6 +492,7 @@ pui.cleanup = function() {
 }
 
 
+<<<<<<< HEAD
 pui.resize = function(inEmulator) {
   var container = pui.runtimeContainer;
   if (container == null) return;
@@ -463,10 +506,23 @@ pui.resize = function(inEmulator) {
     if (inEmulator && child.layout != null) {
       child.layout.stretch();
     }
+=======
+pui.resize = function() {
+  var container = pui.runtimeContainer;
+  if (container == null) return;
+  for (j = 0; j < container.childNodes.length; j++) {
+    var child = container.childNodes[j];
+    if (child.sizeMe != null && typeof child.sizeMe == "function") {
+      if (pui.isPercent(child.style.width) || pui.isPercent(child.style.height)) {
+        child.sizeMe();
+      }
+    }
+>>>>>>> Initial import into GIT
   } 
 }
 
 
+<<<<<<< HEAD
 pui.popstate = function(e) {
   if (e == null) return;
   var state = e.state;
@@ -509,11 +565,16 @@ pui.render = function(parms) {
   
   }
 
+=======
+pui.render = function(parms) {
+
+>>>>>>> Initial import into GIT
   if (!pui.resizeEventAssigned) {
     addEvent(window, "resize", pui.resize);
     pui.resizeEventAssigned = true;
   }
 
+<<<<<<< HEAD
   if (!pui.backButtonSetup && history.pushState != null && history.replaceState != null) {
     history.replaceState({ puipage: "previous" }, document.title);
     history.pushState({ puipage: "current" }, document.title);
@@ -521,12 +582,17 @@ pui.render = function(parms) {
     pui.backButtonSetup = true;
   }
 
+=======
+>>>>>>> Initial import into GIT
   pui.cleanup();
 
   pui.oldRenderParms = parms;
 
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> Initial import into GIT
   // handle errors
   var success = parms.success;
   if (success == null) success = true;
@@ -570,6 +636,7 @@ pui.render = function(parms) {
   }
 
   pui.attachOnUserActivity();
+<<<<<<< HEAD
   if (pui.handler == null) {
     if (pui["client side timeout"] == true) {
       pui.timeout = parms["timeout"];
@@ -579,6 +646,9 @@ pui.render = function(parms) {
       pui.autoKeepAlive.setup();
     }
   }
+=======
+  pui.autoKeepAlive.setup();
+>>>>>>> Initial import into GIT
 
   pui.rrnTracker = {};
   pui.modified = false;
@@ -591,11 +661,15 @@ pui.render = function(parms) {
   pui.returnRRNs = {};
   pui.topRRNs = {};
   pui.sflModes = {};
+<<<<<<< HEAD
   pui.subfileChangedFields = {};
+=======
+>>>>>>> Initial import into GIT
   pui.sqlcache = {};
   pui.bypassValidation = "false";
   pui.placeCursorOnSubfile = false;
   pui.activeElement = null;
+<<<<<<< HEAD
   pui.sendBackButtonResponse = false;
   pui.autoPageGrid = false;
     
@@ -605,6 +679,8 @@ pui.render = function(parms) {
     pui.alert(translateError);
     
   }
+=======
+>>>>>>> Initial import into GIT
   
   var layers = parms["layers"];
     
@@ -643,7 +719,10 @@ pui.render = function(parms) {
     pui.windowLeftField = null;
     pui.populateWindowTopLeft = true;
     pui.validCommandKeyField = null;
+<<<<<<< HEAD
     pui.backButtonField = null;
+=======
+>>>>>>> Initial import into GIT
     pui.setOffFields = [];
     pui.cursorFields.record = null;
     pui.cursorFields.field = null;
@@ -658,7 +737,10 @@ pui.render = function(parms) {
     pui.cursorValues.column = null;
     pui.cursorValues.setRow = null;
     pui.cursorValues.setColumn = null;
+<<<<<<< HEAD
     pui.cursorValues.noFocus = null;
+=======
+>>>>>>> Initial import into GIT
     pui.gridsDisplayed = [];
     pui.layoutsDisplayed = [];
     pui.fileUploadElements = [];
@@ -681,7 +763,11 @@ pui.render = function(parms) {
           var refItems = layers[i]["metaData"]["items"];
           for (var j = 0; j < refItems.length; j++) {
             var panel = refItems[j];
+<<<<<<< HEAD
             if (panel["id"] == winRef && (panel["field type"] == "panel" || panel["field type"] == "css panel")) {
+=======
+            if (panel["id"] == winRef && panel["field type"] == "panel") {
+>>>>>>> Initial import into GIT
               formats[0]["metaData"]["items"].push(panel);
               break;
             }
@@ -702,7 +788,11 @@ pui.render = function(parms) {
       }
       if (format["active"] == true) {
         format.lastFormat = true;
+<<<<<<< HEAD
         pui.lastFormatName = format.name;
+=======
+        pui.lastFormatName = formats.name;
+>>>>>>> Initial import into GIT
       }
       pui.renderFormat(format);
     }
@@ -735,6 +825,7 @@ pui.render = function(parms) {
           if (pui.focusField.dom.tagName == "DIV" || pui.focusField.dom.style.visibility == "hidden") {
             pui["focusOnContainer"]();
           }
+<<<<<<< HEAD
           else if (pui.cursorValues.noFocus == true) {
             pui["focusOnContainer"]();
           }
@@ -742,6 +833,12 @@ pui.render = function(parms) {
             try {
               pui.focusField.dom.focus();
               if (pui["is_old_ie"] && pui.focusField.dom.tagName != "SELECT" && pui.focusField.dom.type != "checkbox" && pui.focusField.dom.type != "radio") {
+=======
+          else {
+            try {
+              pui.focusField.dom.focus();
+              if (is_ie && pui.focusField.dom.tagName != "SELECT" && pui.focusField.dom.type != "checkbox" && pui.focusField.dom.type != "radio") {
+>>>>>>> Initial import into GIT
                 if (pui.focusField.dom.createTextRange != null) {
                   // for IE, this makes the cursor appear - workaround for IE8 bug where the cursor just doesn't show
                   pui.focusField.dom.select();
@@ -765,6 +862,7 @@ pui.render = function(parms) {
       }, 1);
     }
   }
+<<<<<<< HEAD
   else if (!pui.placeCursorOnSubfile && (pui.cursorValues.setRow == null || pui.cursorValues.setColumn == null)) {
     pui["focusOnContainer"]();
   }
@@ -780,6 +878,18 @@ pui.render = function(parms) {
       grid.scrollbarObj.ready = true;
     }
   }
+=======
+  else {
+    pui["focusOnContainer"]();
+  }
+
+  //var errors =  ;
+  //if (errors != null) {
+  //  pui.showErrors(errors);
+  //}
+
+  pui.screenIsReady = true;
+>>>>>>> Initial import into GIT
 
 }
 
@@ -802,6 +912,7 @@ pui.renderFormat = function(parms) {
   if (!isDesignMode && parms.rowNum == null) {
     pui.keyMap[formatName] = {};
     var obj = parms.metaData.screen["return cursor record"];
+<<<<<<< HEAD
     if (pui.isBound(obj)) pui.cursorFields.record = (pui.handler == null ? formatName + "." : "") + pui.fieldUpper(obj["fieldName"]);
     obj = parms.metaData.screen["return cursor field"];
     if (pui.isBound(obj)) pui.cursorFields.field = (pui.handler == null ? formatName + "." : "") + pui.fieldUpper(obj["fieldName"]);
@@ -833,6 +944,37 @@ pui.renderFormat = function(parms) {
     var idx = 1;
     obj = parms.metaData.screen["set off"];
     while (pui.isBound(obj)) {
+=======
+    if (typeof obj == "object") pui.cursorFields.record = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["return cursor field"];
+    if (typeof obj == "object") pui.cursorFields.field = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["return cursor position"];
+    if (typeof obj == "object") pui.cursorFields.position = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["return cursor row"];
+    if (typeof obj == "object") pui.cursorFields.row = formatName + "." + obj["fieldName"].toUpperCase();
+    obj = parms.metaData.screen["return cursor column"];    
+    if (typeof obj == "object") pui.cursorFields.column = formatName + "." + obj["fieldName"].toUpperCase();
+    obj = parms.metaData.screen["changed"];
+    if (typeof obj == "object") pui.changedFields[formatName] = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["window left"];
+    if (typeof obj == "object") pui.windowLeftField = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["window top"];
+    if (typeof obj == "object") pui.windowTopField = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["valid command key"];
+    if (typeof obj == "object") pui.validCommandKeyField = formatName + "." + obj["fieldName"].toUpperCase();
+    obj = parms.metaData.screen["dd element id"];
+    if (typeof obj == "object") pui.dragDropFields.ddElementId = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["dd record number"];
+    if (typeof obj == "object") pui.dragDropFields.ddRecordNumber = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["target element id"];
+    if (typeof obj == "object") pui.dragDropFields.targetElementId = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    obj = parms.metaData.screen["target record number"];
+    if (typeof obj == "object") pui.dragDropFields.targetRecordNumber = formatName + "." + pui.fieldUpper(obj["fieldName"]);
+    
+    var idx = 1;
+    obj = parms.metaData.screen["set off"];
+    while (typeof obj == "object") {
+>>>>>>> Initial import into GIT
       pui.setOffFields.push(formatName + "." + obj["fieldName"].toUpperCase());
       idx++;
       obj = parms.metaData.screen["set off " + idx];
@@ -842,9 +984,13 @@ pui.renderFormat = function(parms) {
     
     pui.cursorValues.setRow = pui.evalBoundProperty(screenProperties["set cursor row"], data, parms.ref);
     pui.cursorValues.setColumn = pui.evalBoundProperty(screenProperties["set cursor column"], data, parms.ref);
+<<<<<<< HEAD
     pui.cursorValues.noFocus = pui.evalBoundProperty(screenProperties["no focus"], data, parms.ref);
     if (pui.cursorValues.noFocus == "true") pui.cursorValues.noFocus = true;
     if (pui.isBound(screenProperties["set cursor condition"])) {
+=======
+    if (typeof screenProperties["set cursor condition"] == "object") {
+>>>>>>> Initial import into GIT
       var setCursor = pui.evalBoundProperty(screenProperties["set cursor condition"], data, parms.ref);
       if (setCursor != true && setCursor != "true") {
         pui.cursorValues.setRow = null;
@@ -863,7 +1009,11 @@ pui.renderFormat = function(parms) {
       var propValue = screenProperties[propname];
       designer.screenProperties[designer.currentScreen.screenId][propname] = propValue;
       designer.screenPropertiesChanged[designer.currentScreen.screenId][propname] = true;
+<<<<<<< HEAD
       if (pui.isBound(propValue)) {
+=======
+      if (typeof propValue == "object") {
+>>>>>>> Initial import into GIT
         designer.dataFields.addUsage({
           fieldName: propValue.fieldName,
           dataType: propValue.dataType,  
@@ -873,8 +1023,12 @@ pui.renderFormat = function(parms) {
           keywords: propValue.keywords,
           designItem: "Screen",
           property: propname,
+<<<<<<< HEAD
           force: true,
           "longName": propValue["longName"]
+=======
+          force: true
+>>>>>>> Initial import into GIT
         }, designer);
       }
     }    
@@ -893,6 +1047,11 @@ pui.renderFormat = function(parms) {
   var gridsToRender = [];
   for (var i = 0; i < items.length; i++) {
 
+<<<<<<< HEAD
+=======
+    var hasBoundSQLProps = false;
+
+>>>>>>> Initial import into GIT
     if (parms["hideControlRecord"] == true && !isDesignMode && items[i]["field type"] != "grid" && items[i]["grid"] == null && items[i]["cursor row"] != null) {
       continue;
     }
@@ -910,26 +1069,41 @@ pui.renderFormat = function(parms) {
     // this is accomplished by removing the "shortcut key" property
     if (!isDesignMode && items[i]["auto arrange"] == "true") {
       var vis = items[i]["visibility"];
+<<<<<<< HEAD
       if (vis == "hidden" || (pui.isBound(vis) && pui.evalBoundProperty(vis, data, parms.ref) == "hidden")) {
+=======
+      if (vis == "hidden" || (typeof vis == "object" && pui.evalBoundProperty(vis, data, parms.ref) == "hidden")) {
+>>>>>>> Initial import into GIT
         if (items[i]["shortcut key"] != null) delete items[i]["shortcut key"];
       }      
     }
     if (!isDesignMode && items[i]["shortcut key"] != null) {
       var dis = items[i]["disabled"];
+<<<<<<< HEAD
       if (dis == "true" || (pui.isBound(dis) && pui.evalBoundProperty(dis, data, parms.ref) == "true")) {
+=======
+      if (dis == "true" || (typeof dis == "object" && pui.evalBoundProperty(dis, data, parms.ref) == "true")) {
+>>>>>>> Initial import into GIT
         delete items[i]["shortcut key"];
       }      
     }
   
     // create dom element for item
+<<<<<<< HEAD
     var gridObj = null;
+=======
+>>>>>>> Initial import into GIT
     var container = null;
     var gridId = items[i].grid;
     var layoutId = items[i]["layout"];
     if (gridId != null) {  // item belongs to a grid
       var gridDom = getObj(gridId);
       if (gridDom != null) {
+<<<<<<< HEAD
         gridObj = gridDom.grid;
+=======
+        var gridObj = gridDom.grid;
+>>>>>>> Initial import into GIT
         var colNum = Number(items[i].column);
         if (isDesignMode) {        
           var rowNum = (gridObj.hasHeader ? 1 : 0);
@@ -940,7 +1114,10 @@ pui.renderFormat = function(parms) {
             container = gridObj.cells[parms.rowNum][colNum];
           }
           else {
+<<<<<<< HEAD
             if (items[i].domEls != null) delete items[i].domEls;  // must not be present, may be there from cached mvc response object
+=======
+>>>>>>> Initial import into GIT
             gridObj.runtimeChildren.push(items[i]);
             continue;
           }
@@ -996,8 +1173,13 @@ pui.renderFormat = function(parms) {
       var toppx = items[i].top;
       //if (leftpx == null) leftpx = "0px";
       //if (toppx == null) toppx = "0px";
+<<<<<<< HEAD
       if (pui.isBound(leftpx)) leftpx = "0px";
       if (pui.isBound(toppx)) toppx = "0px";
+=======
+      if (typeof leftpx == "object") leftpx = "0px";
+      if (typeof toppx == "object") toppx = "0px";
+>>>>>>> Initial import into GIT
       if (leftpx == "NaNpx") leftpx = "0px";
       if (toppx == "NaNpx") toppx = "0px";
       if (items[i].left != null) dom.style.left = leftpx;
@@ -1019,7 +1201,11 @@ pui.renderFormat = function(parms) {
         designItem.properties.newitem = "true";
         designItem.propertiesChanged.newitem = true;
         var fieldType = items[i]["field type"];
+<<<<<<< HEAD
         if (fieldType == "styled button" || fieldType == "panel" || fieldType == "css panel" || fieldType == "css button" || fieldType == "Layout") {
+=======
+        if (fieldType == "styled button" || fieldType == "panel") {
+>>>>>>> Initial import into GIT
           designItem.dom.style.borderStyle = "none";
         }
       }
@@ -1029,7 +1215,11 @@ pui.renderFormat = function(parms) {
         if (prop == "domEls") continue;
         var propValue = items[i][prop];
         var newValue;
+<<<<<<< HEAD
         if (pui.isBound(propValue)) {
+=======
+        if (typeof propValue == "object") {
+>>>>>>> Initial import into GIT
           if (isDesignMode) {
             designer.dataFields.addUsage({
               fieldName: propValue.fieldName,
@@ -1040,14 +1230,22 @@ pui.renderFormat = function(parms) {
               keywords: propValue.keywords,
               designItem: designItem,
               property: prop,
+<<<<<<< HEAD
               force: true,
               "longName": propValue["longName"]
+=======
+              force: true
+>>>>>>> Initial import into GIT
             }, designer);
             newValue = propValue;
           }
           else {
           
+<<<<<<< HEAD
             if (pui.isSQLProp(prop)) dom.hasBoundSQLProps = true;
+=======
+            hasBoundSQLProps = pui.isSQLProp(prop);
+>>>>>>> Initial import into GIT
           
             newValue = pui.evalBoundProperty(propValue, data, parms.ref);
             
@@ -1061,7 +1259,11 @@ pui.renderFormat = function(parms) {
                 if (dbFile != null && dbFile != "") {
                   var optionFields = pui.evalBoundProperty(items[i]["choice options field"], data, parms.ref);
                   var optionField;
+<<<<<<< HEAD
                   if (optionFields != null) optionField = pui.parseCommaSeparatedList(optionFields)[0];
+=======
+                  if (optionFields != null) optionField = optionFields.split(",")[0];
+>>>>>>> Initial import into GIT
                   var valueField = pui.evalBoundProperty(items[i]["choice values field"], data, parms.ref);
                   if (optionField != null && optionField != "" && valueField != null && valueField != "" && optionField != valueField) {
                     propValue["formatting"] = "Text";
@@ -1072,6 +1274,7 @@ pui.renderFormat = function(parms) {
               }
             }
             if (prop == "cursor record number") {
+<<<<<<< HEAD
               pui.cursorRRNs[(pui.handler == null ? formatName + "." : "") + pui.fieldUpper(propValue.fieldName)] = dom;
             }
             if (prop == "subfile return rrn") {
@@ -1085,6 +1288,18 @@ pui.renderFormat = function(parms) {
             }
             if (prop == "subfile changed") {
               pui.subfileChangedFields[properties["record format name"]] = propValue.fieldName;
+=======
+              pui.cursorRRNs[formatName + "." + pui.fieldUpper(propValue.fieldName)] = dom;
+            }
+            if (prop == "subfile return rrn") {
+              pui.returnRRNs[formatName + "." + pui.fieldUpper(propValue.fieldName)] = dom;
+            }
+            if (prop == "return mode") {
+              pui.sflModes[formatName + "." + pui.fieldUpper(propValue.fieldName)] = dom;
+            }
+            if (prop == "column sort response") {
+              dom.columnSortResponseField = formatName + "." + pui.fieldUpper(propValue.fieldName);
+>>>>>>> Initial import into GIT
             }
           }
         }
@@ -1123,6 +1338,7 @@ pui.renderFormat = function(parms) {
           
           if (!isDesignMode) {
             var formattingObj = items[i][propname];
+<<<<<<< HEAD
             if (pui.isBound(formattingObj)) {
             
               formattingObj["revert"] = false;
@@ -1149,6 +1365,14 @@ pui.renderFormat = function(parms) {
                   
                 }
                 
+=======
+            if (typeof formattingObj == "object") {
+            
+              formattingObj.revert = false;
+
+              if (pui.touchDevice && propname == "value" && properties["field type"] == "textbox" && formattingObj["formatting"] == "Number") {
+                dom.type = "number";
+>>>>>>> Initial import into GIT
               }
             
               if (propname == "changed") {
@@ -1177,7 +1401,11 @@ pui.renderFormat = function(parms) {
                 var fieldName = formattingObj.fieldName.toUpperCase();
                 var qualField = formatName + "." + fieldName;
                 if (pui.handler != null) qualField = fieldName;
+<<<<<<< HEAD
                 if (parms.subfileRow != null) {
+=======
+                                if (parms.subfileRow != null) {
+>>>>>>> Initial import into GIT
                   qualField += "." + (parms.subfileRow);
                 }
                 if (pui.dupElements[qualField] == null) pui.dupElements[qualField] = [];
@@ -1206,7 +1434,11 @@ pui.renderFormat = function(parms) {
                     radioName += "." + parms.subfileRow;
                   }
                   dom.name = radioName;
+<<<<<<< HEAD
                   if (pui["is_old_ie"]) {
+=======
+                  if (is_ie) {
+>>>>>>> Initial import into GIT
                     // IE has a bug: radio button names cannot be assigned dynamically (they stop working)
                     // So, the element has to be recreated
                     var newDom;
@@ -1314,12 +1546,20 @@ pui.renderFormat = function(parms) {
             }
             
             if (propname == "selection field" && properties["field type"] == "grid") {
+<<<<<<< HEAD
               if (pui.isBound(items[i]["selection field"])) {
+=======
+              if (typeof items[i]["selection field"] == "object" && typeof items[i]["selection field"].fieldName == "string") {
+>>>>>>> Initial import into GIT
                 dom.grid.selectionField = items[i]["selection field"];
               }
             }
             
+<<<<<<< HEAD
             if (propname == "shortcut key" && propValue != null && propValue != "" && !pui.isBound(items[i]["response"])) {
+=======
+            if (propname == "shortcut key" && propValue != null && propValue != "" && typeof items[i]["response"] != "object") {
+>>>>>>> Initial import into GIT
               if (pui.keyMap[formatName][propValue] == null) pui.keyMap[formatName][propValue] = [];
               pui.keyMap[formatName][propValue].push(dom);
               dom.shortcutKey = propValue;
@@ -1344,7 +1584,11 @@ pui.renderFormat = function(parms) {
                 }              
               }              
             }            
+<<<<<<< HEAD
             if (propname == "focus class" && !pui.isBound(propValue) && trim(propValue) != "") {
+=======
+            if (propname == "focus class" && typeof propValue == "string" && trim(propValue) != "") {
+>>>>>>> Initial import into GIT
               dom.focusClass = trim(propValue);
               addEvent(dom, "focus", pui.applyFocusClass);
               addEvent(dom, "blur", pui.removeFocusClass);
@@ -1408,8 +1652,11 @@ pui.renderFormat = function(parms) {
                     value += pui["dup"]["char"];
                   }
                   target.value = value;
+<<<<<<< HEAD
                   setModified(event);
                   pui.goToNextElement(target);
+=======
+>>>>>>> Initial import into GIT
                   preventEvent(event);
                   return false;
                 }                
@@ -1418,7 +1665,11 @@ pui.renderFormat = function(parms) {
             if (propname == "allow field exit" && propValue == "true") {
               var boxDom = dom;
               if (dom.comboBoxWidget != null) boxDom = dom.comboBoxWidget.getBox();            
+<<<<<<< HEAD
               if (pui.isBound(items[i]["value"]) && items[i]["value"]["rjZeroFill"] == "true") {
+=======
+              if (typeof items[i]["value"] == "object" && items[i]["value"]["rjZeroFill"] == "true") {
+>>>>>>> Initial import into GIT
                 dom.rjZeroFill = true;
                 boxDom.rjZeroFill = true;
               }             
@@ -1439,9 +1690,12 @@ pui.renderFormat = function(parms) {
             if (propname == "validate name" && propValue == "true") {
               dom.validateName = true;
             }
+<<<<<<< HEAD
             if (propname == "validate email" && propValue == "true") {
               dom.validateEmail = true;
             }
+=======
+>>>>>>> Initial import into GIT
             if (propname == "set as modified" && propValue == "true") {
               dom.modified = true;
               pui.modified = true;
@@ -1494,7 +1748,10 @@ pui.renderFormat = function(parms) {
               if (parms.lastFormat != true) {
                 dom.style.display = "none";
                 dom.style.visibility = "hidden";
+<<<<<<< HEAD
                 dom.removeAttribute("id");
+=======
+>>>>>>> Initial import into GIT
               }
               else {
                 if (properties["visibility"] != "hidden") {
@@ -1506,13 +1763,18 @@ pui.renderFormat = function(parms) {
                   }
                   else {
                     pui.autoArrange.keys[shortcutKey] = true;
+<<<<<<< HEAD
                     if (isWin|| pui["horizontal auto arrange"]) {
 					  if (pui.autoArrange.top  == null) pui.autoArrange.top = parseInt(dom.style.top);
+=======
+                    if (isWin) {
+>>>>>>> Initial import into GIT
                       if (pui.autoArrange.left == null) {
                         pui.autoArrange.left = parseInt(dom.style.left);
                         pui.autoArrange.startLeft = parseInt(dom.style.left);
                       }
                       else {
+<<<<<<< HEAD
 						if (pui["horizontal auto arrange"]){
 							// This will re-arrange the buttons to fill the first line before wrapping to the second line
 							if(pui.autoArrange.buttonCount==null)
@@ -1543,6 +1805,17 @@ pui.renderFormat = function(parms) {
                       dom.style.left = pui.autoArrange.left + "px";
                       pui.autoArrange.prevTop = parseInt(dom.style.top);
 					  if (pui["horizontal auto arrange"]) dom.style.top = pui.autoArrange.top + "px";
+=======
+                        if (pui.autoArrange.prevTop != null && Math.abs(parseInt(dom.style.top) - pui.autoArrange.prevTop) > 5) {
+                          pui.autoArrange.left = pui.autoArrange.startLeft;
+                        }
+                        else {
+                          pui.autoArrange.left += pui["horizontal button spacing"];
+                        }
+                      }
+                      dom.style.left = pui.autoArrange.left + "px";
+                      pui.autoArrange.prevTop = parseInt(dom.style.top);
+>>>>>>> Initial import into GIT
                     }
                     else {                
                       if (pui.autoArrange.top == null) pui.autoArrange.top = parseInt(dom.style.top);
@@ -1566,7 +1839,11 @@ pui.renderFormat = function(parms) {
           if (propValue != null && propValue != "") {
             var propParm = properties;
             if (isDesignMode) propParm = designItem.properties;
+<<<<<<< HEAD
             dom = applyPropertyToField(propConfig, propParm, dom, propValue, isDesignMode, designItem, null, parms.subfileRow);
+=======
+            dom = applyPropertyToField(propConfig, propParm, dom, propValue, isDesignMode, designItem);
+>>>>>>> Initial import into GIT
           }
 
           if (!isDesignMode && propname == "visibility" && propValue == "visible" && parms.rowNum != null) {
@@ -1641,6 +1918,7 @@ pui.renderFormat = function(parms) {
       }
 
       // check set cursor row / column
+<<<<<<< HEAD
       if ( !isDesignMode && properties["visibility"] != "hidden" &&
            pui.cursorValues.setRow != null && pui.cursorValues.setRow != "" &&
            pui.cursorValues.setColumn != null && pui.cursorValues.setColumn != "" ) {
@@ -1677,6 +1955,37 @@ pui.renderFormat = function(parms) {
             //}              
           }
         } 
+=======
+      if ( !isDesignMode && 
+           pui.cursorValues.setRow != null && pui.cursorValues.setRow != "" &&
+           pui.cursorValues.setColumn != null && pui.cursorValues.setColumn != "" &&
+           pui.cursorValues.setRow == properties["cursor row"] ) {
+        var cursorMatch = false;
+        if (pui.cursorValues.setColumn == properties["cursor column"]) cursorMatch = true;
+        if (!cursorMatch) {
+          if (properties["field type"] == "textbox" || properties["field type"] == "date field" || properties["field type"] == "password field" || properties["field type"] == "combox box" || properties["field type"] == "spinner") {
+            var fieldInfo = items[i]["value"];
+            if (fieldInfo != null && typeof fieldInfo == "object" && fieldInfo["dataLength"] != null) {
+              var dataLength = Number(fieldInfo["dataLength"]);
+              var cursorColumn = Number(properties["cursor column"]);
+              var setColumn = Number(pui.cursorValues.setColumn);
+              if (!isNaN(dataLength) && !isNaN(cursorColumn) && !isNaN(setColumn)) {
+                if (setColumn > cursorColumn && setColumn < cursorColumn + dataLength) {
+                  cursorMatch = true;
+                }                
+              }
+            }
+          }
+        }
+        if (cursorMatch) {
+          //if (pui.focusField.dom == null || pui.focusField.setFocusFlag != true) {
+            // "set cursor row" and "set cursor column" take precedence over other propertiess like "set focus"
+            pui.focusField.dom = dom;
+            if (dom.comboBoxWidget != null) pui.focusField.dom = dom.comboBoxWidget.getBox();
+            pui.focusField.setFocusFlag = true;
+          //}              
+        }              
+>>>>>>> Initial import into GIT
       }
       
       // attach events that keep track of modified state / cursor, apply a key filter, set max length
@@ -1693,7 +2002,11 @@ pui.renderFormat = function(parms) {
           }
         }
         // textboxes and text areas    
+<<<<<<< HEAD
         if ((dom.comboBoxWidget != null) || (dom.tagName == "TEXTAREA") || (dom.tagName == "INPUT" && (pui.isTextbox(dom) || dom.type == "file"))) {
+=======
+        if ((dom.comboBoxWidget != null) || (dom.tagName == "TEXTAREA") || (dom.tagName == "INPUT" && (dom.type == "" || dom.type == "text" || dom.type == "number" || dom.type == "password" || dom.type == "file"))) {
+>>>>>>> Initial import into GIT
           var boxDom = dom;
           if (dom.comboBoxWidget != null) boxDom = dom.comboBoxWidget.getBox();
           if (dom.formattingInfo != null && dom.formattingInfo.maxLength != null) {
@@ -1735,7 +2048,11 @@ pui.renderFormat = function(parms) {
               });
             }
           }
+<<<<<<< HEAD
           if (dom.cursorRecord != null || dom.cursorField != null || dom.cursorRow != null || dom.cursorColumn != null) {
+=======
+          if (boxDom.cursorRecord != null || boxDom.cursorField != null || boxDom.cursorRow != null || boxDom.cursorColumn != null) {
+>>>>>>> Initial import into GIT
             addEvent(boxDom, "focus", pui.returnCursor);
             addEvent(boxDom, "keyup", pui.returnCursor);
           }          
@@ -1751,7 +2068,11 @@ pui.renderFormat = function(parms) {
           
           addEvent(boxDom, "keydown", function(event) {
             event = event || window.event;
+<<<<<<< HEAD
             var key = event.keyCode;
+=======
+            var key = event.keyCode;            
+>>>>>>> Initial import into GIT
             if (key >= 9 && key <= 45 && key != 32) return;   // includes keys like arrow keys, ctrl, shift, etc.
             if (key >= 112 && key <= 145) return;             // includes f1-f12, num lock, scroll lock, etc.
             setModified(event);
@@ -1773,6 +2094,7 @@ pui.renderFormat = function(parms) {
             addEvent(boxDom, "keydown", function(event) {
               event = event || window.event;
               var key = event.keyCode;
+<<<<<<< HEAD
               var target = getTarget(event); 
               var digit = null;
               
@@ -1801,12 +2123,19 @@ pui.renderFormat = function(parms) {
               
               }
               
+=======
+              var digit = null;
+>>>>>>> Initial import into GIT
               if (key >= 48 && key <= 57) digit = key - 48;
               if (key >= 96 && key <= 105) digit = key - 96;
               if (key == 46) digit = 0;
               if (key == 8) digit = 0;
               if (digit != null) {
+<<<<<<< HEAD
                 target = getTarget(event);
+=======
+                var target = getTarget(event);
+>>>>>>> Initial import into GIT
                 var value = target.value;
                 if (value == null) return;                
                 var pos = getCursorPosition(target);                
@@ -1815,7 +2144,11 @@ pui.renderFormat = function(parms) {
                 if (key != 46 && key != 8) pos++;
                 preventEvent(event);
                 pui.applyEditMask(target, event, pos);
+<<<<<<< HEAD
                 if (pui["is_old_ie"]) {
+=======
+                if (is_ie) {
+>>>>>>> Initial import into GIT
                   try {
                     event.keyCode = 0;
                   }
@@ -1828,6 +2161,7 @@ pui.renderFormat = function(parms) {
           }
         }
         // checkboxes / radio buttons / dropdowns
+<<<<<<< HEAD
         if (dom.tagName == "SELECT") {
           addEvent(dom, "keydown", function(event) {
             event = event || window.event;
@@ -1837,6 +2171,8 @@ pui.renderFormat = function(parms) {
             }
           });
         }
+=======
+>>>>>>> Initial import into GIT
         if ((dom.tagName == "SELECT") || (dom.tagName == "INPUT" && (dom.type == "checkbox" || dom.type == "radio"))) {
           if (dom.cursorRecord != null || dom.cursorField != null || dom.cursorRow != null || dom.cursorColumn != null) {
             addEvent(dom, "focus", pui.returnCursor);
@@ -1845,6 +2181,7 @@ pui.renderFormat = function(parms) {
           addEvent(dom, "focus", pui.setActiveElement);
           addEvent(dom, "keydown", pui.setActiveElement);
           addEvent(dom, "change", setModified);
+<<<<<<< HEAD
           if (dom.tagName != "SELECT") {addEvent(dom, "click", setModified);}
 			else{
 			// prevent pagedown key from selecting last option in select box (not operational for Firefox)
@@ -1859,6 +2196,9 @@ pui.renderFormat = function(parms) {
 			});
 		  
 		  }
+=======
+          if (dom.tagName != "SELECT") addEvent(dom, "click", setModified);
+>>>>>>> Initial import into GIT
         }
         
         if (dom.tagName == "INPUT" && dom.type == "radio") {
@@ -1878,7 +2218,11 @@ pui.renderFormat = function(parms) {
       // determine first field to set focus on
       if (!isDesignMode && !pui.iPadEmulation && pui.focusField.dom == null && !dom.disabled && !dom.readOnly && properties["visibility"] != "hidden") {
         if (dom.tagName == "INPUT") {
+<<<<<<< HEAD
           if (pui.isTextbox(dom) || dom.type == "checkbox" || dom.type == "radio" || dom.type == "file") {
+=======
+          if (dom.type == "" || dom.type == "text" || dom.type == "number" || dom.type == "checkbox" || dom.type == "radio" || dom.type == "password" || dom.type == "file") {
+>>>>>>> Initial import into GIT
             pui.focusField.dom = dom;
           }
         }
@@ -1924,14 +2268,19 @@ pui.renderFormat = function(parms) {
         var fieldNames;
         var ref;
         var errors;
+<<<<<<< HEAD
         var recName = pui.formatUpper(properties["record format name"]);
         if (subfiles != null) subfile = subfiles[recName];
+=======
+        if (subfiles != null) subfile = subfiles[pui.formatUpper(properties["record format name"])];
+>>>>>>> Initial import into GIT
         if (subfile != null) subfileData = subfile.data;
         if (subfile != null) fieldNames = subfile["field names"];
         if (subfile != null) ref = subfile.ref;
         if (subfile != null) errors = subfile.errors;
 
         dom.grid.fileId = parms["fileId"];
+<<<<<<< HEAD
         if (typeof(pui["view"]) != "undefined") {
           
           dom.grid.storageKey = "pui-grid-" + pui["view"];
@@ -1942,6 +2291,8 @@ pui.renderFormat = function(parms) {
           dom.grid.storageKey = "pui-grid-" + parms["library"] + "-" + parms["file"] + "-" + recName;
           
         }
+=======
+>>>>>>> Initial import into GIT
 
         if (subfileData != null) dom.grid.dataArray = subfileData;
         else dom.grid.dataArray = [];
@@ -2083,8 +2434,13 @@ pui.renderFormat = function(parms) {
         }
         
         if (dom.grid.dataArray.length == 0) {
+<<<<<<< HEAD
           if (pui.isBound(items[i]["subfile message key"]) || 
               pui.isBound(items[i]["subfile program message queue"])) {
+=======
+          if (typeof items[i]["subfile message key"] == "object" || 
+              typeof items[i]["subfile program message queue"] == "object") {
+>>>>>>> Initial import into GIT
             dom.grid.hideSubfile();
           }
         }
@@ -2128,6 +2484,7 @@ pui.renderFormat = function(parms) {
   	    	        
     }  // end if already rendered condition
 
+<<<<<<< HEAD
     if ((pui["controller"] != null || typeof pui.handler == "function") && properties != null && properties["set as modified"] != "false") {
       dom.modified = true;
     }
@@ -2157,6 +2514,9 @@ pui.renderFormat = function(parms) {
       }         
       
     }    
+=======
+    dom.hasBoundSQLProps = hasBoundSQLProps;
+>>>>>>> Initial import into GIT
 
   }  // end for loop to process all items
 
@@ -2187,9 +2547,12 @@ pui.renderFormat = function(parms) {
   // render grid data
   for (var i = 0; i < gridsToRender.length; i++) {
     var grid = gridsToRender[i];
+<<<<<<< HEAD
     if (pui.focusField != null && pui.focusField.setFocusFlag == true) {
       grid.placeCursorRRN = null;  // "set focus" takes precedence over "place cursor" 
     }
+=======
+>>>>>>> Initial import into GIT
     if (grid.isInitCollapsed()) {
       grid.collapse(getObj(grid.tableDiv.id + "_expander"));
     }
@@ -2199,7 +2562,11 @@ pui.renderFormat = function(parms) {
     }
     if (grid.subfileHidden) continue;
     if (grid.recNum > 1 && grid.scrollbarObj != null && grid.scrollbarObj.type == "sliding") {
+<<<<<<< HEAD
       grid.scrollbarObj.setScrollTopToRow(grid.recNum, true);
+=======
+      grid.scrollbarObj.setScrollTopToRow(grid.recNum);
+>>>>>>> Initial import into GIT
     }
     else {
       if (pui.placeCursorOnSubfile && pui.cursorValues.setColumn == null && pui.cursorValues.setRow == null) {
@@ -2211,22 +2578,34 @@ pui.renderFormat = function(parms) {
       }
     }
     if (grid.scrollbarObj != null) {
+<<<<<<< HEAD
       //grid.scrollbarObj.ready = true; ... this now happens at the end of pui.render() instead of here, since we don't want to cause the onscroll event to fire prematurely
+=======
+      grid.scrollbarObj.ready = true;
+>>>>>>> Initial import into GIT
       if (!isDesignMode && grid.scrollbarObj.type == "sliding" && grid.scrollbarObj.rowsPerPage == 1) {
         grid.scrollbarObj.draw();
       }
     }
     grid.makeSortable();
+<<<<<<< HEAD
     grid.restoreState();
   }
 
   // execute global onload event
   if (!isDesignMode && pui["onload"] != null && typeof pui["onload"] == "function" && parms.rowNum == null && parms.runOnload !== false) {
+=======
+  }
+
+  // execute global onload event
+  if (!isDesignMode && pui["onload"] != null && typeof pui["onload"] == "function" && parms.rowNum == null) {
+>>>>>>> Initial import into GIT
     pui["onload"](parms);
   }
 
   // execute format's onload event / save onsubmit event
 	if (screenProperties != null && !isDesignMode) {
+<<<<<<< HEAD
   	if (parms.runOnload !== false) {
     	var onloadProp = screenProperties["onload"];
     	if (onloadProp != null && onloadProp != "") {
@@ -2239,6 +2618,18 @@ pui.renderFormat = function(parms) {
     	    pui.alert("Onload Error:\n" + err.message);
     	  }
     	}
+=======
+  	var onloadProp = screenProperties["onload"];
+  	if (onloadProp != null && onloadProp != "") {
+  	  try {
+  	    eval('var format = "' + screenProperties["record format name"] + '";');
+  	    eval('var file = "' + parms.file + '";');
+  	    eval(onloadProp);
+  	  }
+  	  catch(err) {
+  	    pui.alert("Onload Error:\n" + err.message);
+  	  }
+>>>>>>> Initial import into GIT
   	}
   	pui.onsubmitProp = screenProperties["onsubmit"];
 	}	
@@ -2262,6 +2653,7 @@ pui.attachResponse = function(dom) {
       }
     }
     
+<<<<<<< HEAD
     if (dom.shortcutKey != null) {
     
       pui.keyName = dom.shortcutKey;
@@ -2275,6 +2667,11 @@ pui.attachResponse = function(dom) {
     // function independently of one another.
     var doms = [];
     if (dom.shortcutKey != null && !dom.parentPagingBar) {
+=======
+    var doms = [];
+    if (dom.shortcutKey != null) {
+      pui.keyName = dom.shortcutKey;
+>>>>>>> Initial import into GIT
       for (formatName in pui.keyMap) {
         var keyMapDomArray = pui.keyMap[formatName][pui.keyName];
         if (keyMapDomArray != null) {
@@ -2340,6 +2737,7 @@ pui.showErrors = function(errors, rrn) {
       if (msg != null && msg != "") globalMessages.push(msg);
       continue;
     }
+<<<<<<< HEAD
     // 'dom' is the widget element. 
     // 'tipBox' is the element the tool tip is attached to
     // this is the interior textbox for a combobox widget.
@@ -2364,6 +2762,47 @@ pui.showErrors = function(errors, rrn) {
       pui.addCssClass(tipBox, "invalid");
       tip.setMessage(msg); 
       tip.show(3000, true);     
+=======
+    if (dom.comboBoxWidget != null) dom = dom.comboBoxWidget.getBox();
+    var newClass = dom.className;
+    if (newClass == null) newClass = "";
+    var temp = " " + newClass + " ";
+    if (temp.indexOf(" invalid ") < 0) {  //  not found
+      if (newClass != "") newClass += " ";
+      newClass += "invalid";
+    }
+    dom.className = newClass;
+    if (dom.validationTip == null) {
+      dom.validationTip = new pui.ValidationTip();
+      dom.validationTip.container = pui.runtimeContainer;
+  	  if (dom.parentNode.isPUIWindow == true) {
+  	    dom.validationTip.container = dom.parentNode;
+  	  }
+  	  else {
+  	    var gridDiv = dom.parentNode.parentNode;
+  	    if (gridDiv != null && gridDiv.grid != null && gridDiv.parentNode.isPUIWindow == true) {
+  	      dom.validationTip.container = gridDiv.parentNode;
+  	    }
+  	  }
+      dom.validationTip.init(dom);
+    }
+
+    var tip = dom.validationTip;
+    tip.doneShowing = false;
+    tip.setMessage(msg);      
+    function showTipOnTimer(tip, dom) {  // allows blur events to complete
+      setTimeout(function() {
+        var posDom = dom;
+        if (dom.parentNode != null && dom.parentNode.comboBoxWidget != null) posDom = dom.parentNode;
+        if (posDom.parentNode == null || posDom.parentNode.tagName == null) return;
+        tip.show(3000);
+        tip.positionByElement(posDom);
+      }, 0);
+    }
+    showTipOnTimer(tip, dom);
+
+    if (rrn != null) {
+>>>>>>> Initial import into GIT
       var cell = dom.parentNode;
       if (cell != null) {
         var gridDiv = cell.parentNode;
@@ -2374,6 +2813,60 @@ pui.showErrors = function(errors, rrn) {
       }
     }
 
+<<<<<<< HEAD
+=======
+    function showTipOnFocus(e) {
+      if (pui.ignoreFocus) return;
+      var target = getTarget(e);
+      if (target == null) return;
+      var tip = target.validationTip;
+      if (tip == null) return;
+      if (tip.doneShowing == true) return;
+      tip.show();
+    }
+    
+    function hideTipOnBlur(e) {
+      if (pui.ignoreBlurs) return;
+      var target = getTarget(e);
+      if (target == null) return;
+      var tip = target.validationTip;
+      if (tip == null) return;
+      tip.hide();
+    }
+    
+    function hideTipOnKeyDown(event) {
+      event = event || window.event;
+      var key = event.keyCode;        
+      if (key >= 9 && key <= 45) return;     // includes keys like arrow keys, ctrl, shift, etc.
+      if (key >= 112 && key <= 145) return;  // includes f1-f12, num lock, scroll lock, etc.
+      var target = getTarget(event);
+      if (target == null) return;
+      var tip = target.validationTip;
+      if (tip == null) return;
+      tip.hide();
+      tip.doneShowing = true;
+      pui.removeCssClass(target, "invalid");
+    }
+
+    function hideTipOnChange(event) {
+      event = event || window.event;
+      var target = getTarget(event);
+      if (target == null) return;
+      var tip = target.validationTip;
+      if (tip == null) return;
+      tip.hide();
+      tip.doneShowing = true;
+      pui.removeCssClass(target, "invalid");
+    }
+    
+    addEvent(dom, "focus", showTipOnFocus);
+    if (!(dom.tagName == "INPUT" && (dom.type == "text" || dom.type == "number"))) {
+      addEvent(dom, "click", showTipOnFocus);
+    }
+    addEvent(dom, "blur", hideTipOnBlur)
+    if (dom.tagName == "SELECT") addEvent(dom, "change", hideTipOnChange);
+    else addEvent(dom, "keydown", hideTipOnKeyDown);
+>>>>>>> Initial import into GIT
   }    
   
   if (globalMessages.length > 0) {
@@ -2447,9 +2940,12 @@ pui.respond = function() {
     try {
       pui.referenceToResponse = response;  // create temporary reference to response object, so it can be updated by certain API's
       var onsubmitReturnVal = eval(pui.onsubmitProp);
+<<<<<<< HEAD
       if (typeof onsubmitReturnVal == "function") {
         onsubmitReturnVal = onsubmitReturnVal(response);
       }
+=======
+>>>>>>> Initial import into GIT
       delete pui.referenceToResponse;
       if (onsubmitReturnVal == false) {
         pui.rrnTracker = {};
@@ -2532,8 +3028,14 @@ pui.buildResponse = function() {
     if (dom.comboBoxWidget != null) boxDom = dom.comboBoxWidget.getBox();
     var value = null;
     if (dom.responseValue != null) {
+<<<<<<< HEAD
       value = dom.responseValue;      
       if (value == "0") {  // handle same indicator variables bound to multiple buttons
+=======
+      value = dom.responseValue;
+      // handle same indicator variables bound to multiple buttons
+      if (value == "0") {
+>>>>>>> Initial import into GIT
         for (var i = 1; i < doms.length; i++) {
           if (doms[i].responseValue == "1") {
             value = "1";
@@ -2541,6 +3043,7 @@ pui.buildResponse = function() {
           }
         }
       }
+<<<<<<< HEAD
       else if (dom.responseValue == "" && dom.pui.properties["field type"] == "menu" && doms.length > 1) {  // handle same response variable bound to multiple menus
         for (var i = 1; i < doms.length; i++) {
           if (doms[i].responseValue != "") {
@@ -2549,6 +3052,8 @@ pui.buildResponse = function() {
           }
         }
       }
+=======
+>>>>>>> Initial import into GIT
       response[fieldName] = value;
     }
     else {
@@ -2556,13 +3061,21 @@ pui.buildResponse = function() {
         if (dom.ME == true && dom.modified != true) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
+<<<<<<< HEAD
           response.errors.push({ dom: boxDom, msg: pui.getLanguageText("runtimeMsg", "ME") });
+=======
+          response.errors.push({ dom: boxDom, msg: pui["runtimeMessages"]["ME"] });
+>>>>>>> Initial import into GIT
           continue;
         }
         if (dom.MF == true && dom.modified == true && boxDom.maxLength != null && boxDom.value != null && (boxDom.maxLength != boxDom.value.length || boxDom.value === boxDom.emptyText)) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
+<<<<<<< HEAD
           response.errors.push({ dom: boxDom, msg: pui.getLanguageText("runtimeMsg", "MF") });
+=======
+          response.errors.push({ dom: boxDom, msg: pui["runtimeMessages"]["MF"] });
+>>>>>>> Initial import into GIT
           continue;
         }
       }
@@ -2571,8 +3084,13 @@ pui.buildResponse = function() {
              (dom.fileUpload != null && dom.fileUpload.getCount() < 1) ) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
+<<<<<<< HEAD
           var msg = pui.getLanguageText("runtimeMsg", "required");
           if (dom.fileUpload != null) msg = pui.getLanguageText("runtimeMsg", "file required");
+=======
+          var msg = pui["runtimeMessages"]["required"];
+          if (dom.fileUpload != null) msg = pui["runtimeMessages"]["file required"];
+>>>>>>> Initial import into GIT
           response.errors.push({ dom: boxDom, msg: msg });
           continue;
         }
@@ -2598,6 +3116,7 @@ pui.buildResponse = function() {
             case "file":
             case "hidden":
             case "":
+<<<<<<< HEAD
             // following are new HTML5 input types
             case "number":
             case "date":
@@ -2612,6 +3131,8 @@ pui.buildResponse = function() {
             case "datetime-local":
             case "search":
             case "week":
+=======
+>>>>>>> Initial import into GIT
               value = dom.value;
               if (value === dom.emptyText) value = "";
               if (dom.autoCompValueField != null) {
@@ -2745,7 +3266,11 @@ pui.buildResponse = function() {
         if (value.length > dom.formattingInfo.maxLength) {
           response.valid = false;
           if (response.errors == null) response.errors = [];
+<<<<<<< HEAD
           response.errors.push({ dom: dom, msg: pui.getLanguageText("runtimeMsg", "signature overflow") });
+=======
+          response.errors.push({ dom: dom, msg: pui["runtimeMessages"]["signature overflow"] });
+>>>>>>> Initial import into GIT
           continue;          
         }
       }
@@ -2753,7 +3278,11 @@ pui.buildResponse = function() {
       var formattingObj = dom.formattingInfo;
       if (formattingObj != null && formattingObj.dataType != "expression") {
         formattingObj.value = value;
+<<<<<<< HEAD
         formattingObj["revert"] = true;
+=======
+        formattingObj.revert = true;
+>>>>>>> Initial import into GIT
         if (dom.responseValue != null) formattingObj.formatting = "Text";
         value = pui.FieldFormat.format(formattingObj);
         if (typeof value == "object") {
@@ -2780,6 +3309,7 @@ pui.buildResponse = function() {
               continue;
             }
           }
+<<<<<<< HEAD
 
           if (dom.validateEmail == true) {
             if (!pui.validateEmail(value)) {
@@ -2796,6 +3326,14 @@ pui.buildResponse = function() {
             var invalid = true;
             for (var i = 0; i < validValues.length; i++) {
               if (rtrim(String(validValues[i])) == value) {
+=======
+        
+          if (typeof dom.validValues == "string") {
+            var validValues = dom.validValues.split(",");
+            var invalid = true;
+            for (var i = 0; i < validValues.length; i++) {
+              if (rtrim(validValues[i]) == value) {
+>>>>>>> Initial import into GIT
                 invalid = false;
                 break;
               }
@@ -2803,7 +3341,11 @@ pui.buildResponse = function() {
             if (invalid) {
               response.valid = false;
               if (response.errors == null) response.errors = [];
+<<<<<<< HEAD
               response.errors.push({ dom: boxDom, msg: pui.getLanguageText("runtimeMsg", "validValues") + validValues.join(", ") + "." });
+=======
+              response.errors.push({ dom: boxDom, msg: pui["runtimeMessages"]["validValues"] + validValues.join(", ") + "." });
+>>>>>>> Initial import into GIT
               continue;
             }
           }
@@ -2904,18 +3446,25 @@ pui.buildResponse = function() {
                 
         response[fieldName] = value;
         if (dom.subfileRow != null) {
+<<<<<<< HEAD
           var sflName = fieldName.split(".")[0];
           var rrnName = sflName + ".rrn";
+=======
+          var rrnName = fieldName.split(".")[0] + ".rrn";
+>>>>>>> Initial import into GIT
           var trackerName = rrnName + "=" + dom.subfileRow;
           if (pui.rrnTracker[trackerName] != true) {            
             if (response[rrnName] == null) response[rrnName] = [];
             response[rrnName].push(dom.subfileRow);
             pui.rrnTracker[trackerName] = true;
           }
+<<<<<<< HEAD
           var subfileChangedField = pui.subfileChangedFields[sflName];
           if (subfileChangedField != null) {
             response[sflName + "." + subfileChangedField + "." + dom.subfileRow] = "1";
           }
+=======
+>>>>>>> Initial import into GIT
         }
       }
     }
@@ -3052,6 +3601,7 @@ pui.buildResponse = function() {
     }
   }
 
+<<<<<<< HEAD
   if (pui.backButtonField != null) {
     if (pui.sendBackButtonResponse) {
       response[pui.backButtonField] = "1";
@@ -3060,6 +3610,8 @@ pui.buildResponse = function() {
       response[pui.backButtonField] = "0";
     }
   }
+=======
+>>>>>>> Initial import into GIT
   
   return response;
 }
@@ -3076,7 +3628,10 @@ pui.submitResponse = function(response) {
     pui.handler(response);
   }  
   else {
+<<<<<<< HEAD
     pui.timeoutMonitor.end();
+=======
+>>>>>>> Initial import into GIT
     ajaxJSON({
       "url": url,
       "method": "post",
@@ -3087,8 +3642,13 @@ pui.submitResponse = function(response) {
       "handler": function(parms) {
         pui.hideWaitAnimation();
         if (parms == null) {
+<<<<<<< HEAD
           //document.body.style.backgroundColor = "#DFE8F6";
           document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui.getLanguageText("runtimeMsg", "session ended text") + '<br/><br/>' + pui.getLanguageText("runtimeMsg", "close browser text") + '</div>';
+=======
+          document.body.style.backgroundColor = "#DFE8F6";
+          document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui["session ended text"] + '<br/><br/>' + pui["close browser text"] + '</div>';
+>>>>>>> Initial import into GIT
           var returnVal = shutDown();
           if (returnVal == false) return;
           pui.shutdownOnClose = false;
@@ -3100,8 +3660,13 @@ pui.submitResponse = function(response) {
         if (pui.genie == null) pui.render(parms);
         else pui.render5250(parms);
       },
+<<<<<<< HEAD
       "onfail": function(req) {
         if (pui["onoffline"] == null) pui.alert(pui.getNoConnectionMessage(req));
+=======
+      "onfail": function() {
+        if (pui["onoffline"] == null) pui.alert(pui["no connection message"]);
+>>>>>>> Initial import into GIT
         pui.hideWaitAnimation(true);
         pui.resetResponseValues();
         if (pui["onoffline"] != null) pui["onoffline"]();
@@ -3130,11 +3695,24 @@ pui.cancelResponse = function(messages) {
     var msg = messages[id];
     var dom = getObj(id);
     if (dom != null) {
+<<<<<<< HEAD
       var tip = dom.validationTip;
       if (tip != null) tip.hide();
       tip = new pui.ValidationTip(dom);
       tip.setMessage(msg);
       tip.show();
+=======
+      if (dom.validationTip != null) dom.validationTip.hide();
+      dom.validationTip = new pui.ValidationTip();
+      dom.validationTip.container = pui.runtimeContainer;
+  	  if (dom.parentNode.isPUIWindow == true) {
+  	    dom.validationTip.container = dom.parentNode;
+  	  }
+      dom.validationTip.init(dom);
+      dom.validationTip.setMessage(msg);
+      dom.validationTip.show();
+      dom.validationTip.positionByElement(dom);
+>>>>>>> Initial import into GIT
     }    
   }
   pui.hideWaitAnimation(true);
@@ -3142,13 +3720,20 @@ pui.cancelResponse = function(messages) {
     var grid = pui.gridsDisplayed[i];
     grid.unMask();
   }
+<<<<<<< HEAD
   pui["unmaskScreen"]();
+=======
+>>>>>>> Initial import into GIT
   pui.resetResponseValues();
 }
 
 
 pui.evalBoundProperty = function(propValue, data, ref) {
+<<<<<<< HEAD
   if (!pui.isBound(propValue) && !pui.isTranslated(propValue)) return propValue;
+=======
+  if (typeof propValue != "object") return propValue;
+>>>>>>> Initial import into GIT
   
   var formattingObj = propValue;
 
@@ -3156,7 +3741,11 @@ pui.evalBoundProperty = function(propValue, data, ref) {
     if (formattingObj["designValue"] != null) return formattingObj["designValue"];
     return "";
   }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> Initial import into GIT
   var fieldName = formattingObj.fieldName;
   if (formattingObj["lowerCaseField"] != true && pui.handler == null) {
     fieldName = fieldName.toUpperCase();
@@ -3293,7 +3882,11 @@ pui.handleHotKey = function(e, keyName) {
 
   if (context != "dspf") return;
   
+<<<<<<< HEAD
   if (!e) e = window.event;
+=======
+	if (!e) e = window.event;
+>>>>>>> Initial import into GIT
   var key = e.keyCode;
   var fkey;
   
@@ -3301,7 +3894,11 @@ pui.handleHotKey = function(e, keyName) {
 
   if (keyName == null) {
     if (fkey >= 1 && fkey <= 12) {
+<<<<<<< HEAD
       if(!pui["is_old_ie"] || (fkey > 1 || e.shiftKey)){
+=======
+      if(!is_ie || (fkey > 1 || e.shiftKey)){
+>>>>>>> Initial import into GIT
         if(e.shiftKey){
           fkey = fkey + 12;
         }
@@ -3348,6 +3945,7 @@ pui.handleHotKey = function(e, keyName) {
   
   var processKey = (keyName != null && pui.lastFormatName != null);
   if (processKey && keyName != "Enter") {
+<<<<<<< HEAD
     if (pui.keyMap[pui.lastFormatName][keyName] == null) {
       processKey = false;
     }
@@ -3385,6 +3983,16 @@ pui.handleHotKey = function(e, keyName) {
     var doms = [];
     var mustRespond = false;
     for (var formatName in pui.keyMap) {
+=======
+     if (pui.keyMap[pui.lastFormatName][keyName] == null) {
+      processKey = false;
+    }
+  }
+  if  (processKey) {
+    var doms = [];
+    var mustRespond = false;
+    for (formatName in pui.keyMap) {
+>>>>>>> Initial import into GIT
       var domArray = pui.keyMap[formatName][keyName];
       if (domArray != null) {
         var allDisabled = true;
@@ -3395,7 +4003,11 @@ pui.handleHotKey = function(e, keyName) {
             if (dom.nextPage == true && !dom.parentPagingBar.grid.atBottom()) {
               dom.parentPagingBar.grid.pageDown();
               preventEvent(e);
+<<<<<<< HEAD
               if (pui["is_old_ie"]) {
+=======
+              if (is_ie) {
+>>>>>>> Initial import into GIT
                   try {
                     e.keyCode = 0;
                   }
@@ -3406,7 +4018,11 @@ pui.handleHotKey = function(e, keyName) {
             if (dom.prevPage == true && !dom.parentPagingBar.grid.atTop()) {
               dom.parentPagingBar.grid.pageUp();
               preventEvent(e);
+<<<<<<< HEAD
               if (pui["is_old_ie"]) {
+=======
+              if (is_ie) {
+>>>>>>> Initial import into GIT
                 try {
                   e.keyCode = 0;
                 }
@@ -3416,7 +4032,11 @@ pui.handleHotKey = function(e, keyName) {
             }
             if (dom.disabled) {
               preventEvent(e);
+<<<<<<< HEAD
               if (pui["is_old_ie"]) {
+=======
+              if (is_ie) {
+>>>>>>> Initial import into GIT
                 try {
                   e.keyCode = 0;
                 }
@@ -3431,7 +4051,11 @@ pui.handleHotKey = function(e, keyName) {
           doms[0].onclick();
           pui.runtimeContainer.focus();
           preventEvent(e);
+<<<<<<< HEAD
           if (pui["is_old_ie"]) {
+=======
+          if (is_ie) {
+>>>>>>> Initial import into GIT
             try {
               e.keyCode = 0;
             }
@@ -3441,7 +4065,11 @@ pui.handleHotKey = function(e, keyName) {
         }
         if (allDisabled) {
           preventEvent(e);
+<<<<<<< HEAD
           if (pui["is_old_ie"]) {
+=======
+          if (is_ie) {
+>>>>>>> Initial import into GIT
             try {
               e.keyCode = 0;
             }
@@ -3475,7 +4103,11 @@ pui.handleHotKey = function(e, keyName) {
       }    
 
       preventEvent(e);
+<<<<<<< HEAD
       if (pui["is_old_ie"]) {
+=======
+      if (is_ie) {
+>>>>>>> Initial import into GIT
         try {
           e.keyCode = 0;
         }
@@ -3485,9 +4117,15 @@ pui.handleHotKey = function(e, keyName) {
     }
   }
 
+<<<<<<< HEAD
   if (keyName != null && ((keyName != "PageUp" && keyName != "PageDown") || pui.autoPageGrid)) {
     preventEvent(e);
     if (pui["is_old_ie"]) {
+=======
+  if (keyName != null && keyName != "PageUp" && keyName != "PageDown") {
+    preventEvent(e);
+    if (is_ie) {
+>>>>>>> Initial import into GIT
       try {
         e.keyCode = 0;
       }
@@ -3505,8 +4143,11 @@ pui.handleF1 = function(e) {
 
 
 pui["run"] = function(config) {
+<<<<<<< HEAD
   var mobile = (config["mobile"] === true);
   var parameter = config["parameter"];
+=======
+>>>>>>> Initial import into GIT
   var program = config["program"];
   if (program == null) program = "";
   var container = config["container"];
@@ -3534,6 +4175,7 @@ pui["run"] = function(config) {
   container.setAttribute("tabindex", "0");
   pui.runtimeContainer = container;
   pui.showWaitAnimation();
+<<<<<<< HEAD
   var method = "post";
   var url = getProgramURL("PUI0001200.pgm");  
   if (config["jsonURL"] != null) {
@@ -3543,6 +4185,10 @@ pui["run"] = function(config) {
     method = "get";  
     
   }
+=======
+  var url = getProgramURL("PUI0001200.pgm");
+  if (config["jsonURL"] != null) url = config["jsonURL"];
+>>>>>>> Initial import into GIT
   var ajaxParams = {
     "program": program.toUpperCase(),
     "library": library.toUpperCase(),
@@ -3556,6 +4202,7 @@ pui["run"] = function(config) {
   }  
   if (config["duplicateid"] == "1") {
     ajaxParams["duplicateid"] = "1";
+<<<<<<< HEAD
   }
   if (mobile) {
     ajaxParams["mobile"] = "1";
@@ -3563,6 +4210,9 @@ pui["run"] = function(config) {
     ajaxParams["p1"] = parameter;
     ajaxParams["l1"] = "250";
   }
+=======
+  }  
+>>>>>>> Initial import into GIT
   var params = config["params"];
   if (params != null) {
     for (var param in params) {
@@ -3578,6 +4228,7 @@ pui["run"] = function(config) {
       var preview = window.opener.pui["generatePreview"]();
       preview.container = container;
       pui.isPreview = true;
+<<<<<<< HEAD
       if (window.opener.pui.viewdesigner) {
         pui.handler = function(response) {
           ajaxJSON({
@@ -3598,6 +4249,8 @@ pui["run"] = function(config) {
       else {
         pui.handler = null;
       }
+=======
+>>>>>>> Initial import into GIT
       pui.render(preview);
     }
   }
@@ -3617,7 +4270,11 @@ pui["run"] = function(config) {
 
     ajaxJSON({
       "url": url,
+<<<<<<< HEAD
       "method": method,
+=======
+      "method": "post",
+>>>>>>> Initial import into GIT
       "sendAsBinary": false,
       "params": ajaxParams,
       "saveResponse": true,
@@ -3627,11 +4284,19 @@ pui["run"] = function(config) {
         parms.container = container;
         pui.render(parms);
       },
+<<<<<<< HEAD
       "onfail": function(req) {
         pui.hideWaitAnimation(true);
         setTimeout(function() {
           if (pui["onoffline"] == null) {
             pui.alert(pui.getNoConnectionMessage(req));
+=======
+      "onfail": function() {
+        pui.hideWaitAnimation(true);
+        setTimeout(function() {
+          if (pui["onoffline"] == null) {
+            pui.alert(pui["no connection message"]);
+>>>>>>> Initial import into GIT
             if (pui.touchDevice) {
               setTimeout(function() {
                 if (navigator["app"] != null && navigator["app"]["exitApp"] != null) { // Check for exitApp api in PhoneGap
@@ -3650,7 +4315,10 @@ pui["run"] = function(config) {
 }
 
 pui["signon"] = function(config) {
+<<<<<<< HEAD
   var mobile = (config["mobile"] === true);
+=======
+>>>>>>> Initial import into GIT
   var container = config["container"];
   var debug = config["debug"];
   var workstnid = config["workstnid"];
@@ -3699,9 +4367,12 @@ pui["signon"] = function(config) {
   if (config["duplicateid"] == "1") {
     ajaxParams["duplicateid"] = "1";
   }
+<<<<<<< HEAD
   if (mobile) {
     ajaxParams["mobile"] = "1";
   }  
+=======
+>>>>>>> Initial import into GIT
   var params = config["params"];
   if (params != null) {
     for (var param in params) {
@@ -3733,11 +4404,19 @@ pui["signon"] = function(config) {
       parms.container = container;
       pui.render(parms);
     },
+<<<<<<< HEAD
     "onfail": function(req) {
       pui.hideWaitAnimation(true);
       setTimeout(function() {
         if (pui["onoffline"] == null) {
           pui.alert(pui.getNoConnectionMessage(req));
+=======
+    "onfail": function() {
+      pui.hideWaitAnimation(true);
+      setTimeout(function() {
+        if (pui["onoffline"] == null) {
+          pui.alert(pui["no connection message"]);
+>>>>>>> Initial import into GIT
           if (pui.touchDevice) {
             setTimeout(function() {
               if (navigator["app"] != null && navigator["app"]["exitApp"] != null) { // Check for exitApp api in PhoneGap
@@ -3758,8 +4437,13 @@ pui["signon"] = function(config) {
 pui.runMVC = function(response) {
 
   ajaxJSON({
+<<<<<<< HEAD
     "url": pui.normalizeURL(pui["controller"]) + "?r=" + Math.floor((Math.random()*1000000000)+1),
     "method": "get",
+=======
+    "url": pui.normalizeURL(pui["controller"]),
+    "method": "post",
+>>>>>>> Initial import into GIT
     "params": response,
     "sendAsBinary": false,
     "saveResponse": true,
@@ -3767,8 +4451,13 @@ pui.runMVC = function(response) {
     "handler": function(parms) {
       pui.hideWaitAnimation();
       if (parms == null) {
+<<<<<<< HEAD
         //document.body.style.backgroundColor = "#DFE8F6";
         document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui.getLanguageText("runtimeMsg", "session ended text") + '<br/><br/>' + pui.getLanguageText("runtimeMsg", "close browser text") + '</div>';
+=======
+        document.body.style.backgroundColor = "#DFE8F6";
+        document.body.innerHTML = '<div style="font-family: Trebuchet MS; width: 95%; text-align: center; font-size: 200%;"><br/>' + pui["session ended text"] + '<br/><br/>' + pui["close browser text"] + '</div>';
+>>>>>>> Initial import into GIT
         return;
       }        
       parms.container = pui.runtimeContainer;
@@ -3805,8 +4494,13 @@ pui.runMVC = function(response) {
         }
       });
     },
+<<<<<<< HEAD
     "onfail": function(req) {
       if (pui["onoffline"] == null) pui.alert(pui.getNoConnectionMessage(req));
+=======
+    "onfail": function() {
+      if (pui["onoffline"] == null) pui.alert(pui["no connection message"]);
+>>>>>>> Initial import into GIT
       pui.hideWaitAnimation(true);
       pui.resetResponseValues();
       if (pui["onoffline"] != null) pui["onoffline"]();
@@ -3817,7 +4511,10 @@ pui.runMVC = function(response) {
 
 pui.start = function() {  
   var parms = getQueryStringParms();
+<<<<<<< HEAD
   pui.canvasSize = parms["canvasSize"];
+=======
+>>>>>>> Initial import into GIT
   var program = parms["pgm"];
   if (program == null) program = parms["program"];
   var debug = parms["debug"]
@@ -3831,9 +4528,14 @@ pui.start = function() {
   var jsonURL = parms["jsonURL"];
   var mode = parms["mode"];
   var controller = parms["controller"];
+<<<<<<< HEAD
   var mobile = (parms["mobile"] === "1");
   var params = {};
   if (pui.detectMobileEmulation != null && typeof pui.detectMobileEmulation == "function") pui.detectMobileEmulation(container);
+=======
+  var params = {};
+  pui.detectIPadEmulation(container);
+>>>>>>> Initial import into GIT
   for (var i = 1; i <= 255; i++) {
     var parmValue = parms["p" + i];
     var parmLen = parms["l" + i];
@@ -3859,7 +4561,10 @@ pui.start = function() {
     "workstnid": workstnid,
     "suffixid": suffixid,
     "duplicateid": duplicateid,    
+<<<<<<< HEAD
     "mobile": mobile,
+=======
+>>>>>>> Initial import into GIT
     "params": params
   };
   if (program == null && jsonURL == null && mode == null) {
@@ -3882,6 +4587,77 @@ pui.start = function() {
 }
 
 
+<<<<<<< HEAD
+=======
+pui.detectIPadEmulation = function(container) {
+  if (container == null) container = "pui";
+  if (typeof container == "string") container = document.getElementById(container);
+  if (container == null) return;
+  var useFinger;
+  if (container.parentNode.className == "ipad-emulator") {
+    pui.iPadEmulation = true;
+    useFinger = false;
+  }
+  if (container.parentNode.className == "iphone-emulator") {
+    pui.iPadEmulation = true;
+    pui.iPhoneEmulation = true;
+    useFinger = false;
+  }
+  if (!pui.iPadEmulation) return;  
+  if (useFinger) {
+    var finger = document.createElement("img");
+    finger.src = "/profoundui/proddata/images/ipad/finger.png";
+    finger.style.position = "absolute";
+    finger.style.cursor = "crosshair";  
+    finger.style.zIndex = 99;  
+    addEvent(document, "mousemove", function(event) {
+      var x = getMouseX(event);
+      x = x + 3;    
+      finger.style.left = x + "px";
+      var y = getMouseY(event);
+      y = y + 3;
+      finger.style.top = y + "px";
+    });
+    addEvent(document, "mousedown", function(event) {
+      var x = getMouseX(event);
+      x = x + 1;    
+      finger.style.left = x + "px";
+      var y = getMouseY(event);
+      y = y + 1;
+      finger.style.top = y + "px";
+    });
+  }
+  var addressbar = document.createElement("input");
+  addressbar.style.position = "absolute";
+  if (pui.iPhoneEmulation) {
+    addressbar.style.left = "90px";
+    addressbar.style.top = "164px";
+    addressbar.style.width = "223px";
+    addressbar.style.backgroundColor = "#d3dae4";
+  }
+  else {
+    addressbar.style.left = "285px";
+    addressbar.style.top = "89px";
+    addressbar.style.width = "455px";
+  }
+  addressbar.style.color = "#999999";
+  addressbar.style.borderStyle = "none";
+  addressbar.style.fontFamily = "Trebuchet MS, Sans-Serif";
+  addressbar.style.fontSize = "14px";
+  addressbar.value = location.href;
+  if (!pui.iPhoneEmulation) {
+    addressbar.onclick = function() {
+      getObj("ipadKeyboard").style.display = "";
+    }
+    addressbar.onblur = function() {
+      getObj("ipadKeyboard").style.display = "none";
+    }
+  }
+  document.body.appendChild(addressbar);
+  if (useFinger) document.body.appendChild(finger);
+}
+
+>>>>>>> Initial import into GIT
 pui.newSession = function() {
   window.location.reload();
 }
@@ -3893,8 +4669,13 @@ pui.closeSession = function() {
     return;
   }
 
+<<<<<<< HEAD
   //document.body.style.backgroundColor = "#DFE8F6";
   document.body.innerHTML = '<div style="width: 95%; text-align: center; font-size: 200%;"><br/>' + pui.getLanguageText("runtimeMsg", "close browser text") + '</div>';
+=======
+  document.body.style.backgroundColor = "#DFE8F6";
+  document.body.innerHTML = '<div style="width: 95%; text-align: center; font-size: 200%;"><br/>' + pui["close browser text"] + '</div>';
+>>>>>>> Initial import into GIT
   
   // This can throw an exception in some older releases of FireFox 3 when attempting to 
   // close a window that was not opened through scripting.
@@ -3934,6 +4715,7 @@ pui["maskScreen"] = function(parms) {
   if (bodyWidth < 0) bodyWidth = 0;
   if (bodyHeight < 0) bodyHeight = 0;
   
+<<<<<<< HEAD
   
   var maskDiv;
   if (pui.maskDiv == null) {
@@ -3943,24 +4725,35 @@ pui["maskScreen"] = function(parms) {
   else {
     maskDiv = pui.maskDiv;
   }
+=======
+  var maskDiv = document.createElement("div"); 
+>>>>>>> Initial import into GIT
   pui.runtimeContainer.appendChild(maskDiv);
   
   maskDiv.isPUIWindowMask = true;
   maskDiv.style.position = "absolute";
+<<<<<<< HEAD
   
   
   
  
+=======
+>>>>>>> Initial import into GIT
   maskDiv.style.left = "0px";
   maskDiv.style.top = "0px";
   if (pui.genie != null || pui.runtimeContainer.offsetLeft != 0 || pui.runtimeContainer.offsetTop != 0) {
     maskDiv.style.display = "none";
     setTimeout(function() {
+<<<<<<< HEAD
       //maskDiv.style.left = (-pui.runtimeContainer.offsetLeft) + "px";
       //maskDiv.style.top = (-pui.runtimeContainer.offsetTop) + "px";
 	  var runtimePosition = getDivPosition(pui.runtimeContainer);
 	  maskDiv.style.left = (0-runtimePosition.x) + "px";
       maskDiv.style.top = (0-runtimePosition.y) + "px";
+=======
+      maskDiv.style.left = (-pui.runtimeContainer.offsetLeft) + "px";
+      maskDiv.style.top = (-pui.runtimeContainer.offsetTop) + "px";
+>>>>>>> Initial import into GIT
       maskDiv.style.display = "";
     }, 0);
   }
@@ -3978,6 +4771,7 @@ pui["maskScreen"] = function(parms) {
   addEvent(window, "resize", resize);
   addEvent(window, "scroll", scroll);
   
+<<<<<<< HEAD
   
   
  function getDivPosition(obj) {
@@ -4001,6 +4795,8 @@ pui["maskScreen"] = function(parms) {
   
   
   
+=======
+>>>>>>> Initial import into GIT
   function resize() {
     if (pui["resizeFrequency"] != null && pui.lastResizeTime != null && (new Date).getTime() - pui.lastResizeTime < pui["resizeFrequency"]) return; 
     pui.lastResizeTime = (new Date).getTime();
@@ -4022,6 +4818,7 @@ pui["maskScreen"] = function(parms) {
 
     var top = document.documentElement.scrollTop;
     var left = document.documentElement.scrollLeft;
+<<<<<<< HEAD
     if(!pui["is_old_ie"]) {
       top = window.pageYOffset;
       left = window.pageXOffset;
@@ -4030,6 +4827,15 @@ pui["maskScreen"] = function(parms) {
     if (pui.genie != null || pui.runtimeContainer.offsetLeft != 0 || pui.runtimeContainer.offsetTop != 0) {
       left -= runtimePosition.x;
       if (context == "dspf") top -= runtimePosition.y;
+=======
+    if(!is_ie) {
+      top = window.pageYOffset;
+      left = window.pageXOffset;
+    }    
+    if (pui.genie != null || pui.runtimeContainer.offsetLeft != 0 || pui.runtimeContainer.offsetTop != 0) {
+      left -= pui.runtimeContainer.offsetLeft;
+      if (context == "dspf") top -= pui.runtimeContainer.offsetTop;
+>>>>>>> Initial import into GIT
       else top = -pui.runtimeContainer.offsetTop;      
     }
       
@@ -4043,6 +4849,7 @@ pui["maskScreen"] = function(parms) {
 
 
 
+<<<<<<< HEAD
 pui["unmaskScreen"] = function() {
   if (pui.maskDiv == null) return;
   var parent = pui.maskDiv.parentNode;
@@ -4051,6 +4858,8 @@ pui["unmaskScreen"] = function() {
 }
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.setupWindowDiv = function(parms, layer) {
 
@@ -4195,9 +5004,13 @@ pui.showMessageSubfileHelp = function(textObj) {
     var month = Number(date.substr(4,2)) - 1;
     var day = Number(date.substr(6,2));
     var dateObj = new Date(year, month, day);
+<<<<<<< HEAD
     var dateFormat = pui.appJob.dateFormat;
     if (dateFormat == "") dateFormat = "*ISO";
     var keyword = pui.formatting.keywords.DATFMT[dateFormat];
+=======
+    var keyword = pui.formatting.keywords.DATFMT[pui.appJob.dateFormat];
+>>>>>>> Initial import into GIT
     var dispFormat = keyword.pattern.replace(/\B/g, pui.appJob.dateSeparator);
     date = dateObj.format(dispFormat, 'en_US');
   }
@@ -4281,8 +5094,12 @@ pui.setActiveElement = function(e) {
 
 
 pui.returnCursor = function(e, dom) {
+<<<<<<< HEAD
   var target;
   if (e != null) target = getTarget(e);
+=======
+  var target = getTarget(e);
+>>>>>>> Initial import into GIT
   if (dom != null) target = dom;
   var cell = target.parentNode;
   var parentGrid = null;
@@ -4458,9 +5275,12 @@ pui.goToNextElement = function(target) {
         try {
           nextObjBox.focus();
           if (pui["highlight on focus"]) nextObjBox.select();
+<<<<<<< HEAD
           setTimeout(function() {
             pui.returnCursor(null, nextObjBox);
           }, 0);
+=======
+>>>>>>> Initial import into GIT
         }
         catch(e) {}
         break;
@@ -4515,6 +5335,7 @@ pui.goToClosestElement = function(baseElem, direction) {
     var elem = elems[i];
     if (elem.readOnly || elem.disabled || elem.style.visibility == "hidden" || elem.parentNode.style.visibility == "hidden") continue;
     if (elem.tagName == "A") elem = elem.parentNode;
+<<<<<<< HEAD
     var mainElem = elem;
     if (elem.parentNode.comboBoxWidget != null) mainElem = elem.parentNode;
     var x = parseInt(mainElem.style.left);
@@ -4526,6 +5347,17 @@ pui.goToClosestElement = function(baseElem, direction) {
       var cellX = parseInt(mainElem.parentNode.style.left);
       if (isNaN(cellX)) return null;
       var cellY = parseInt(mainElem.parentNode.style.top);
+=======
+    var x = parseInt(elem.style.left);
+    if (isNaN(x)) continue;
+    var y = parseInt(elem.style.top);
+    if (isNaN(y)) continue;
+    gridDom = elem.parentNode.parentNode;
+    if (gridDom.grid != null) {  // the element is within a grid
+      var cellX = parseInt(elem.parentNode.style.left);
+      if (isNaN(cellX)) return null;
+      var cellY = parseInt(elem.parentNode.style.top);
+>>>>>>> Initial import into GIT
       if (isNaN(cellY)) return null;
       var gridX = parseInt(gridDom.style.left);
       if (isNaN(gridX)) continue;
@@ -4556,9 +5388,12 @@ pui.goToClosestElement = function(baseElem, direction) {
     try {
       curElem.focus();
       if (pui["highlight on focus"]) curElem.select();
+<<<<<<< HEAD
       setTimeout(function() {
         pui.returnCursor(null, curElem);
       }, 0);
+=======
+>>>>>>> Initial import into GIT
     }
     catch(e) {}
   }
@@ -4607,6 +5442,7 @@ pui.doFieldExit = function(target) {
     
   return false;
 }
+<<<<<<< HEAD
 
 pui.translate = function(parms) {
   
@@ -4734,3 +5570,5 @@ pui.doTranslate = function(obj, translationMap, isScreen) {
   return rtn;
   
 }
+=======
+>>>>>>> Initial import into GIT

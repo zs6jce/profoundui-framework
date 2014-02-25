@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -71,6 +72,8 @@ function setCursor(row, col) {
   }
  
 }
+=======
+>>>>>>> Initial import into GIT
 
 
 // hide an element by id or object reference
@@ -124,6 +127,7 @@ function getElementValue(id) {
       elemValue = elem.innerHTML;
     }
   }
+<<<<<<< HEAD
   if (elem.tagName == "INPUT" && elem.type == "checkbox") {
     if (elem.checked && elem.checkedValue != null) return elem.checkedValue;
     if (!elem.checked && elem.uncheckedValue != null) return elem.uncheckedValue;
@@ -155,6 +159,10 @@ function getElementValue(id) {
       elemValue = elem.onOffSwitch.offValue;
     }        
   }
+=======
+  if (elem.tagName.toLowerCase() == 'input' || elem.tagName.toLowerCase() == 'select' || elem.tagName.toLowerCase() == 'textarea') elemValue = elem.value;
+  if (elem.comboBoxWidget != null) elemValue = elem.comboBoxWidget.getValue();
+>>>>>>> Initial import into GIT
 
   elemValue = elemValue.replace(/&nbsp;/g,' ');
   // Safari and Opera use the non-breaking space character A0 (160) -- we'll replace this with a standard space
@@ -183,7 +191,11 @@ function getObj(id) {
 // params: url, parm1, value1, parm2, value2, parm3, value3, etc.
 function postToNewWindow(url) {
   if (!url) {
+<<<<<<< HEAD
     pui.alert("postToNewWindow Error: URL not specified.");
+=======
+    alert("postToNewWindow Error: URL not specified.");
+>>>>>>> Initial import into GIT
   }
   var form = document.forms["postToForm"];
   if (form == null) {
@@ -212,7 +224,11 @@ function postToNewWindow(url) {
 // params: url, parm1, value1, parm2, value2, parm3, value3, etc.
 function postTo(url) {
   if (!url) {
+<<<<<<< HEAD
     pui.alert("postTo Error: URL not specified.");
+=======
+    alert("postTo Error: URL not specified.");
+>>>>>>> Initial import into GIT
   }
   var form = document.forms["postToForm"];
   if (form == null) {
@@ -260,6 +276,7 @@ function changeElementValue(id, val) {
       elem.innerHTML = val;
     }
   }
+<<<<<<< HEAD
   if (elem.tagName == "INPUT" || elem.tagName == "SELECT" || elem.tagName == "TEXTAREA") {
     if (elem.tagName == "INPUT" && elem.type == "checkbox") {
       if (typeof val == "boolean") {
@@ -275,6 +292,10 @@ function changeElementValue(id, val) {
     else {
       elem.value = val;
     }
+=======
+  if (elem.tagName == "INPUT" || elem.tagName == "SELECT") {
+    elem.value = val;
+>>>>>>> Initial import into GIT
   }
   if (context == "dspf") {
     elem.modified = true;
@@ -293,9 +314,12 @@ function changeElementValue(id, val) {
     pui.response[elem.fieldInfo["idx"]] = elem;
   }
   pui.checkEmptyText(elem);
+<<<<<<< HEAD
   if (elem.pui && elem.pui.properties) {  
     elem.pui.properties["value"] = val;
   }  
+=======
+>>>>>>> Initial import into GIT
 }
 
 // assign a new css class to an element
@@ -356,7 +380,11 @@ function newElement(row, col, elemType, content, id) {
         newElem.type = "button";
         newElem.value = content;  
         newElem.className = "button";
+<<<<<<< HEAD
         if (!pui["is_quirksmode"]) {
+=======
+        if (!quirksMode) {
+>>>>>>> Initial import into GIT
           // default width needed for IE
           newElem.style.width = "55px"; 
         } 
@@ -598,8 +626,11 @@ function removeEvent(obj, eventName, func) {
 }
 
 
+<<<<<<< HEAD
 // DEPRECATED -- use pui.getMouseX() and pui.getMouseY() instead.
 
+=======
+>>>>>>> Initial import into GIT
 function getMouseX(event) {
   if (event != null && event.touches != null && event.touches.length == 1) {  // test for touch screen device like iPad
     return event.touches[0].pageX;
@@ -638,6 +669,7 @@ function getMouseY(event) {
   return y;
 }
 
+<<<<<<< HEAD
 pui.getMouseX = function(event) {
 
   return pui.getMouseXY(event).x;
@@ -675,6 +707,8 @@ pui.getMouseXY = function(event) {
   return xy;
 
 }
+=======
+>>>>>>> Initial import into GIT
 
 function showErrors() {
 
@@ -698,22 +732,32 @@ function showErrors() {
 
 
 
+<<<<<<< HEAD
 function currentDate(editCode, YYYY) {
+=======
+function currentDate(editCode) {
+>>>>>>> Initial import into GIT
 
   if (editCode == null || editCode == "Y") {
     slashes = true;
   }
 
   if (inDesignMode()) {
+<<<<<<< HEAD
     var dt;
     if (slashes) dt = "DD/DD/DD";
     else dt = "DDDDDD";
     if (YYYY) dt += "DD";
     return dt;
+=======
+    if (slashes) return "DD/DD/DD";
+    else return "DDDDDD";
+>>>>>>> Initial import into GIT
   }
   else{
     var sysTime;
     var returnValue = "";
+<<<<<<< HEAD
     if (pui && pui.appJob) {
       if (pui.appJob.sysTime == 0) return "";
       sysTime = new Date(pui.appJob.sysTime * 1000);
@@ -734,6 +778,20 @@ function currentDate(editCode, YYYY) {
       returnValue = ((parseInt(sysTime.getMonth(), 10) + 1) < 10 ? '0' : '') + (parseInt(sysTime.getMonth(), 10) + 1) + '/' +
         (parseInt(sysTime.getDate(), 10) < 10 ? '0' : '') + sysTime.getDate() + '/' +
         ((parseInt(sysTime.getFullYear(), 10) - subtractYear) < 10 ? '0' : '') + (parseInt(sysTime.getFullYear(), 10) - subtractYear);
+=======
+    if(pui && pui.appJob) {
+      if (pui.appJob.sysTime == 0) return "";
+      sysTime = new Date(pui.appJob.sysTime * 1000);
+      var keyword = pui.formatting.keywords.DATFMT[pui.appJob.dateFormat];
+      var dispFormat = keyword.pattern.replace(/\B/g, pui.appJob.dateSeparator);
+      returnValue = sysTime.format(dispFormat, 'en_US');
+    }
+    else{
+      sysTime = new Date();
+      returnValue = ((parseInt(sysTime.getMonth(), 10) + 1) < 10 ? '0' : '') + (parseInt(sysTime.getMonth(), 10) + 1) + '/' +
+        (parseInt(sysTime.getDate(), 10) < 10 ? '0' : '') + sysTime.getDate() + '/' +
+        ((parseInt(sysTime.getFullYear(), 10) - 2000) < 10 ? '0' : '') + (parseInt(sysTime.getFullYear(), 10) - 2000);
+>>>>>>> Initial import into GIT
     }
     if (editCode != null && editCode != "Y") {
       var separator = "/";
@@ -936,7 +994,11 @@ pui.Base64 = {
 
 pui["downloadJSON"] = function() {
   if (pui["savedJSON"] == null) {
+<<<<<<< HEAD
     pui.alert("JSON is not available.");
+=======
+    alert("JSON is not available.");
+>>>>>>> Initial import into GIT
     return;
   }
   pui.downloadAsAttachment("text/plain", "json.txt", pui["savedJSON"]);  
@@ -982,8 +1044,13 @@ pui["keepAlive"] = function() {
         }
       }
     },
+<<<<<<< HEAD
     "onfail": function(req) {
       if (pui["onoffline"] == null) pui.alert(pui.getNoConnectionMessage(req));
+=======
+    "onfail": function() {
+      if (pui["onoffline"] == null) pui.alert(pui["no connection message"]);
+>>>>>>> Initial import into GIT
       pui.hideWaitAnimation(true);
       if (context == "genie") pui.genie.formSubmitted = false;
       if (context == "dspf") {
@@ -1044,6 +1111,7 @@ pui["openURL"] = function(url) {
 
 
 
+<<<<<<< HEAD
 pui.normalizeURL = function(url, mobileClientOnly) {
 
   if (url == null || typeof url != "string") return "";
@@ -1055,13 +1123,19 @@ pui.normalizeURL = function(url, mobileClientOnly) {
   if (url.substr(0, 5).toLowerCase() == "http:" || url.substr(0, 6).toLowerCase() == "https:") {
     return url;
   }
+=======
+pui.normalizeURL = function(url) {
+>>>>>>> Initial import into GIT
 
   if (pui["serverURL"] != null) {
     return pui["serverURL"] + url;
   }
+<<<<<<< HEAD
   else if (window["cordova"] && url.substr(0, 1) == "/") {
     return url.substr(1);
   }
+=======
+>>>>>>> Initial import into GIT
   else {
     return url;
   }
@@ -1229,12 +1303,16 @@ pui["showCalendar"] = function(id) {
   if (typeof obj != "object") return;
   var calimg = obj.calimg;
   if (calimg == null) return;
+<<<<<<< HEAD
   if (calimg.click != null && typeof calimg.click == "function") {
     calimg.click();
   }
   else if (calimg.onclick != null && typeof calimg.onclick == "function") {
     setTimeout(function() { calimg.onclick(); }, 250 );
   }
+=======
+  if (calimg.click != null && typeof calimg.click == "function") calimg.click();
+>>>>>>> Initial import into GIT
 }
 
 
@@ -1255,6 +1333,7 @@ pui.getComputedStyle = function(obj) {
 
 pui["upload"] = function(params, callback) {
   
+<<<<<<< HEAD
   var dir = params["dir"];
   var overwrite = (params["overwrite"] === true);
 
@@ -1350,11 +1429,31 @@ pui["upload"] = function(params, callback) {
   
   }
   
+=======
+  var path = typeof(params["path"] == "string") ? params["path"] : "";
+  var overwrite = (params["overwrite"] === true);
+  var dir = "";
+  var fileName = "";
+    
+  for (var i = path.length - 1; i >= 0; i--) {
+    var thisChar = path.charAt(i);
+    if (thisChar != "/") {
+      fileName = thisChar + fileName;
+    }
+    else {
+      var len = (i == 0) ? 1 : i;        
+      dir = path.substr(0, len);
+      break;
+    }
+  }
+    
+>>>>>>> Initial import into GIT
   var url = getProgramURL("PUI0009109.PGM");
   url += "?AUTH=" + encodeURIComponent(pui["appJob"]["auth"]);
   url += "&mode=ajax";
   url += "&r=" + Math.floor(Math.random() * 1000000000);
   
+<<<<<<< HEAD
   var formData = new FormData();
   formData.append("dir", dir);
   formData.append("overwrite", (overwrite) ? "1" : "0");
@@ -1401,6 +1500,25 @@ pui["upload"] = function(params, callback) {
     formData.append("filename", obj["name"]);
     
   }
+=======
+  var blob;  
+  try {
+    blob = new Blob([params["data"]]);
+  }
+  catch(err) {
+    var blobTheBuilder = new (window["BlobBuilder"] || window["WebKitBlobBuilder"] || window["MozBlobBuilder"] || BlobBuilder)();
+    blobTheBuilder.append(params["data"]);
+    blob = blobTheBuilder["getBlob"]();
+  }
+      
+  var formData = new FormData();
+  formData.append("file", blob);
+  formData.append("dir", dir);
+  formData.append("overwrite", (overwrite) ? "1" : "0");
+  formData.append("flimit", 1);
+  formData.append("slimit", String(Math.ceil(params["data"].byteLength / 1048576))); // Size rounded up to nearest MB.
+  formData.append("filename", fileName);
+>>>>>>> Initial import into GIT
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
@@ -1408,14 +1526,19 @@ pui["upload"] = function(params, callback) {
   xhr.onreadystatechange = function() {
   
     if (xhr.readyState != 4) {
+<<<<<<< HEAD
       
       return;
       
+=======
+      return;
+>>>>>>> Initial import into GIT
     }
     
     var success = true;
     var error;
     if (xhr.status == 200) {
+<<<<<<< HEAD
       
       var rsp;
       try {
@@ -1478,6 +1601,34 @@ pui["upload"] = function(params, callback) {
   
   xhr.send(formData);  
   
+=======
+      var rsp;
+      try {
+        rsp = eval("(" + xhr.responseText + ")");
+      }
+      catch(e) {
+        success = false;
+        error = "Server response missing or invalid."
+      }
+      if (rsp) {
+        success = rsp["success"];
+        if (!success) {
+          error = rsp["error"];
+        }
+      }
+    }
+    else {
+      success = false;
+      error = xhr.status + " - " + xhr.statusText + ".";
+    }
+    
+    if (typeof(callback) == "function") {
+      callback(success, error);  
+    }    
+  }
+  
+  xhr.send(formData);   
+>>>>>>> Initial import into GIT
 }
 
 
@@ -1550,14 +1701,19 @@ pui["deleteCookie"] = function(name, path, domain) {
 
 
 
+<<<<<<< HEAD
 pui["refresh"] = function(parms) {
   if (parms == null) parms = {};
   var url = parms["url"];
   var skin = parms["skin"];
+=======
+pui["refresh"] = function() {
+>>>>>>> Initial import into GIT
   pui["setCookie"]("puiRefreshId", pui.psid, null, "/");
   pui.skipConfirm = true;
   pui.shutdownOnClose = false;
   pui.confirmOnClose = false;
+<<<<<<< HEAD
   if (skin != null) {
     var skinParm = "skin=" + encodeURIComponent(skin);
     url = window.location.href;
@@ -1585,6 +1741,13 @@ pui["refresh"] = function(parms) {
 }
 
 pui["downloadURL"] = function (params) {
+=======
+  window.location.reload();
+}
+
+
+pui["download"] = function (params) {
+>>>>>>> Initial import into GIT
 
   var inline = (params["inline"] === true);
   if (params["id"] == null) return;  
@@ -1604,6 +1767,7 @@ pui["downloadURL"] = function (params) {
   url += "&AUTH=" + encodeURIComponent(pui["appJob"]["auth"]);
   url += "&r=" + Math.floor(Math.random() * 1000000000);
 
+<<<<<<< HEAD
   return url;
 }
 
@@ -1612,6 +1776,8 @@ pui["download"] = function (params) {
   var url = pui["downloadURL"](params);
   var inline = (params["inline"] === true);
   
+=======
+>>>>>>> Initial import into GIT
   if (inline) {
      pui["openURL"](url);
   }
@@ -1619,6 +1785,7 @@ pui["download"] = function (params) {
      pui["link"](url);
   }
   
+<<<<<<< HEAD
 }
 
 pui["focusOnContainer"] = function() {
@@ -1797,3 +1964,6 @@ pui["set"] = function(id, val) {
   changeElementValue(id, val);
 }
 
+=======
+}
+>>>>>>> Initial import into GIT

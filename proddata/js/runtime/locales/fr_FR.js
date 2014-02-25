@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -22,6 +23,12 @@ pui.locales.add({
   'name': "fr_FR",
   'text': "French (France)",
   'datePatterns': [
+=======
+pui.locales.add({
+  name: "fr_FR",
+  text: "French (France)",
+  datePatterns: [
+>>>>>>> Initial import into GIT
     'Y-m-d',
     'd.m.y',
     'd.m.Y',
@@ -31,7 +38,10 @@ pui.locales.add({
     'd-m-Y',
 	  'Y/m',
 	  'Y/m/d',
+<<<<<<< HEAD
 	  'y/m/d',
+=======
+>>>>>>> Initial import into GIT
     'j F y',
     'j F Y',
     'l j F y',
@@ -43,7 +53,11 @@ pui.locales.add({
     'j M y',
     'j M Y'
   ],
+<<<<<<< HEAD
   'timePatterns': [
+=======
+  timePatterns: [
+>>>>>>> Initial import into GIT
     'g:i',
     'g:i:s',
 	  'g:i a',
@@ -58,7 +72,11 @@ pui.locales.add({
     'H:i:s a',
     'H:i:s A'
   ],
+<<<<<<< HEAD
   'timeStampPatterns': [
+=======
+  timeStampPatterns: [
+>>>>>>> Initial import into GIT
     'D d M Y H:i:s',
     'd.m.y g:i A',
     'd.m.y g:i a',
@@ -118,4 +136,8 @@ pui.locales.add({
     'sam'
   ],
   'weekStart': 1
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> Initial import into GIT

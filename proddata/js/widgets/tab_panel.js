@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.tabStyles = {
   "Simple": {
@@ -255,7 +258,10 @@ function TabPanel() {
 
     var sWidth = me.container.style.width;
     var cntWidth = 0;
+<<<<<<< HEAD
     if (typeof sWidth == "string" && sWidth != "" && !isNaN(sWidth)) sWidth += "px";
+=======
+>>>>>>> Initial import into GIT
     if (sWidth != null && sWidth != "" && sWidth.length >= 3 && sWidth.substr(sWidth.length - 2) == "px") {
       cntWidth = parseInt(sWidth);
       if (isNaN(cntWidth)) cntWidth = 0;
@@ -266,7 +272,10 @@ function TabPanel() {
     }
 
     var sHeight = me.container.style.height;
+<<<<<<< HEAD
     if (typeof sHeight == "string" && sHeight != "" && !isNaN(sHeight)) sHeight += "px";
+=======
+>>>>>>> Initial import into GIT
     var cntHeight = 0;
     if (sHeight != null && sHeight != "" && sHeight.length >= 3 && sHeight.substr(sHeight.length - 2) == "px") {
       cntHeight = parseInt(sHeight);
@@ -402,7 +411,11 @@ function TabPanel() {
           if (dom.tabId == null && dom.parentNode.tabId != null) dom = dom.parentNode;
           var itmDom = dom.parentNode.parentNode;
           var itm = toolbar.designer.getDesignItemByDomObj(itmDom);
+<<<<<<< HEAD
           if (!pui.isBound(itm.properties["tab names"]) && !pui.isTranslated(itm.properties["tab names"])) {
+=======
+          if (typeof itm.properties["tab names"] != "object") {
+>>>>>>> Initial import into GIT
             itm.designer.inlineEditBox.onUpdate = function(newName) {
               var idx = 0;
               sibling = dom.previousSibling;
@@ -416,7 +429,11 @@ function TabPanel() {
               }
               var propValue = itm.properties["tab names"];
               if (propValue == "") propValue = "Tab 1,Tab 2,Tab 3";
+<<<<<<< HEAD
               var tabNames = pui.parseCommaSeparatedList(propValue);
+=======
+              var tabNames = propValue.split(",");
+>>>>>>> Initial import into GIT
               tabNames[idx] = newName;
               //propValue = tabNames[0];
               //for (var i = 1; i < tabNames.length; i++) {
@@ -524,6 +541,7 @@ function TabPanel() {
       addIcon.onclick = function() {
         var itm = toolbar.designer.getDesignItemByDomObj(me.container);
         var propValue = itm.properties["tab names"];
+<<<<<<< HEAD
         if (pui.isTranslated(propValue)) {
           // Number of tabs is controlled by this, 
           // doesn't make sense to change.
@@ -541,6 +559,17 @@ function TabPanel() {
           propValue = pui.parseCommaSeparatedList(propValue);
           propValue.push("New Tab");
           propValue = propValue.join(",");
+=======
+        if (typeof propValue == "object") {
+          var designValue = propValue.designValue;
+          if (designValue == null || designValue == "") designValue = "Tab 1,Tab 2,Tab 3";          
+          designValue += ",Tab " + (designValue.split(",").length + 1);
+          propValue.designValue = designValue;
+        }
+        else {
+          if (propValue == "") propValue = "Tab 1,Tab 2,Tab 3";
+          propValue += ",New Tab";
+>>>>>>> Initial import into GIT
         }
         var nmodel = getPropertiesNamedModel();
         var propConfig = nmodel["tab names"];
@@ -554,8 +583,13 @@ function TabPanel() {
         itm.designer.selection.add(itm);
         itm.designer.propWindow.refresh();
         var tabNames;
+<<<<<<< HEAD
         if (!pui.isBound(propValue) && !pui.isTranslated(propValue)) tabNames = pui.parseCommaSeparatedList(propValue);
         else tabNames = pui.parseCommaSeparatedList(propValue.designValue);
+=======
+        if (typeof propValue != "object") tabNames = propValue.split(",");
+        else tabNames = propValue.designValue.split(",");
+>>>>>>> Initial import into GIT
         me.selectedTab = tabNames.length - 1;
         me.draw();
       }
@@ -563,6 +597,7 @@ function TabPanel() {
         var itm = toolbar.designer.getDesignItemByDomObj(me.container);
         var propValue = itm.properties["tab names"];
         var tabNames;
+<<<<<<< HEAD
         if (pui.isTranslated(propValue)) {
           // Number of tabs is controlled by this, 
           // doesn't make sense to change.
@@ -577,6 +612,17 @@ function TabPanel() {
         else {
           if (propValue == "") propValue = "Tab 1,Tab 2,Tab 3";
           tabNames = pui.parseCommaSeparatedList(propValue);
+=======
+        if (typeof propValue == "object") {
+          var designValue = propValue.designValue;
+          if (designValue == null || designValue == "") designValue = "Tab 1,Tab 2,Tab 3";
+          propValue.designValue = designValue;
+          tabNames = designValue.split(",");
+        }
+        else {
+          if (propValue == "") propValue = "Tab 1,Tab 2,Tab 3";
+          tabNames = propValue.split(",");
+>>>>>>> Initial import into GIT
         }
         if (tabNames.length > 1) {
           var canRemove = true;
@@ -600,7 +646,11 @@ function TabPanel() {
           else {
             tabNames.pop();
             if (me.selectedTab > tabNames.length - 1) me.selectedTab = tabNames.length - 1;
+<<<<<<< HEAD
             if (pui.isBound(propValue) || pui.isTranslated(propValue)) propValue.designValue = tabNames.join(",");
+=======
+            if (typeof propValue == "object") propValue.designValue = tabNames.join(",");
+>>>>>>> Initial import into GIT
             else propValue = tabNames.join(",");
             var nmodel = getPropertiesNamedModel();
             var propConfig = nmodel["tab names"];
@@ -637,7 +687,10 @@ function TabPanel() {
         if (elem.parentTabPanel != null && elem.parentTab != null && elem.parentTabPanel == me.container.id) {
           if (elem.parentTab == me.selectedTab) {
             elem.style.visibility = "";
+<<<<<<< HEAD
             if (elem.chart != null) elem.style.display = "";
+=======
+>>>>>>> Initial import into GIT
             if (elem.calimg) elem.calimg.style.visibility = "";
             if (!isDesign && elem.spinner) elem.spinner.show();
             if (!isDesign && elem.labelObj) elem.labelObj.style.visibility = "";
@@ -645,19 +698,34 @@ function TabPanel() {
               if (elem.grid.hasHeader || !elem.grid.subfileHidden) elem.grid.show();
               else elem.grid.hide();
             }
+<<<<<<< HEAD
           }
           else {
             elem.style.visibility = "hidden";
             if (elem.chart != null) elem.style.display = "none";
+=======
+            //if (elem.chart) elem.chart.style.visibility = "";
+          }
+          else {
+            elem.style.visibility = "hidden";
+>>>>>>> Initial import into GIT
             if (elem.calimg) elem.calimg.style.visibility = "hidden";
             if (!isDesign && elem.spinner) elem.spinner.hide();
             if (!isDesign && elem.labelObj) elem.labelObj.style.visibility = "hidden";
             if (elem.grid && elem.grid.setProperty) elem.grid.hide();
+<<<<<<< HEAD
+=======
+            //if (elem.chart) elem.chart.style.visibility = "hidden";
+>>>>>>> Initial import into GIT
             if (elem.validationTip != null) {
               elem.validationTip.hide();
             }
           }
+<<<<<<< HEAD
           if (isDesign && elem.tagName == "INPUT" && (elem.type == "text" || pui.isHTML5InputType(elem.type) || elem.type == "checkbox" || elem.type == "radio")) {
+=======
+          if (isDesign && elem.tagName == "INPUT" && (elem.type == "text" || elem.type == "number" || elem.type == "checkbox" || elem.type == "radio")) {
+>>>>>>> Initial import into GIT
             toolbar.designer.getDesignItemByDomObj(elem).drawIcon();
           }
         }
@@ -697,7 +765,11 @@ pui.widgets.add({
       parms.dom.tabPanel = new TabPanel();
       var tabNamesString = parms.evalProperty("tab names");
       if (tabNamesString != null && tabNamesString != "") {
+<<<<<<< HEAD
         parms.dom.tabPanel.tabs = pui.parseCommaSeparatedList(tabNamesString);
+=======
+        parms.dom.tabPanel.tabs = tabNamesString.split(",");
+>>>>>>> Initial import into GIT
       }
       else {
         parms.dom.tabPanel.tabs = ["Tab 1", "Tab 2", "Tab 3"];
@@ -733,7 +805,11 @@ pui.widgets.add({
       if (parms.dom.tabPanel != null) {
         var tabNamesString = parms.value;
         if (tabNamesString != null && tabNamesString != "") {
+<<<<<<< HEAD
           parms.dom.tabPanel.tabs = pui.parseCommaSeparatedList(tabNamesString);
+=======
+          parms.dom.tabPanel.tabs = tabNamesString.split(",");
+>>>>>>> Initial import into GIT
         }
         else {
           parms.dom.tabPanel.tabs = ["Tab 1", "Tab 2", "Tab 3"];

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 /**
@@ -60,11 +63,29 @@ pui.Spinner = function(dom, minValue, maxValue, increment, runtimeMode) {
   up.style.borderStyle = "none";
   up.style.backgroundColor = "transparent";
   up.src = pui.normalizeURL("/profoundui/proddata/images/up.gif");
+<<<<<<< HEAD
+=======
+  var left = parseInt(dom.style.left);
+  if (isNaN(left)) left = 0;
+  var top = parseInt(dom.style.top);
+  if (isNaN(top)) top = 0;
+  up.style.left = left +  dom.offsetWidth - 16 + "px";
+  top += 1;
+  top += parseInt((dom.offsetHeight - 22) / 2);
+  if (!quirksMode) top += 1;
+  up.style.top = top + "px";
+  up.style.zIndex = dom.style.zIndex;
+  up.style.visibility = dom.style.visibility;
+>>>>>>> Initial import into GIT
   up.style.cursor = "pointer";
   up.onclick = function() {
     me.spin(increment);
   }
+<<<<<<< HEAD
   if (pui["is_old_ie"]) {
+=======
+  if (is_ie) {
+>>>>>>> Initial import into GIT
     // in IE, a double-click does not send two onclick events
     up.ondblclick = function() {
       me.spin(increment);
@@ -76,11 +97,28 @@ pui.Spinner = function(dom, minValue, maxValue, increment, runtimeMode) {
   down.style.borderStyle = "none";
   down.style.backgroundColor = "transparent";
   down.src = pui.normalizeURL("/profoundui/proddata/images/down.gif");
+<<<<<<< HEAD
+=======
+  var left = parseInt(dom.style.left);
+  if (isNaN(left)) left = 0;
+  var top = parseInt(dom.style.top);
+  if (isNaN(top)) top = 0;
+  down.style.left = left +  dom.offsetWidth - 16 + "px";
+  top += 11;
+  top += parseInt((dom.offsetHeight - 22) / 2);
+  down.style.top = top + "px";
+  down.style.zIndex = dom.style.zIndex;
+  down.style.visibility = dom.style.visibility;
+>>>>>>> Initial import into GIT
   down.style.cursor = "pointer";
   down.onclick = function() {
     me.spin(-increment);
   }
+<<<<<<< HEAD
   if (pui["is_old_ie"]) {
+=======
+  if (is_ie) {
+>>>>>>> Initial import into GIT
     // in IE, a double-click does not send two onclick events
     down.ondblclick = function() {
       me.spin(-increment);
@@ -88,6 +126,7 @@ pui.Spinner = function(dom, minValue, maxValue, increment, runtimeMode) {
   }
   
   if (runtimeMode) {
+<<<<<<< HEAD
     dom.style.paddingRight = "16px";
     dom.style.boxSizing = "border-box";
     dom.style.MozBoxSizing = "border-box";
@@ -103,6 +142,20 @@ pui.Spinner = function(dom, minValue, maxValue, increment, runtimeMode) {
       if (width < 16) width = 16;
       dom.style.width = width + "px";
     }
+=======
+    if (is_ie) {
+      var width = dom.offsetWidth;
+      width = width - 18;
+      if (width < 16) width = 16;
+      dom.style.width = width + "px";
+    }
+    else {
+      dom.style.paddingRight = "16px";
+      dom.style.boxSizing = "border-box";
+      dom.style.MozBoxSizing = "border-box";
+      dom.style.WebkitBoxSizing = "border-box";
+    }
+>>>>>>> Initial import into GIT
   }
 
   dom.extraDomEls = [up, down];
@@ -115,6 +168,7 @@ pui.Spinner = function(dom, minValue, maxValue, increment, runtimeMode) {
   // Public Properties
   
   // Public Methods
+<<<<<<< HEAD
   this.positionSpinnButtons = function() {
     var left;
     left = dom.style.left;
@@ -155,6 +209,8 @@ pui.Spinner = function(dom, minValue, maxValue, increment, runtimeMode) {
   
   me.positionSpinnButtons();  // run this in the constructor
   
+=======
+>>>>>>> Initial import into GIT
   this.hide = function() {
     up.style.visibility = "hidden";
     down.style.visibility = "hidden";
@@ -212,6 +268,7 @@ pui.widgets.add({
       if (!parms.design) {
         setTimeout( function() { 
           parms.dom.spinner = new pui.Spinner(parms.dom, parms.evalProperty("min value"), parms.evalProperty("max value"), parms.evalProperty("increment value"), !parms.design);
+<<<<<<< HEAD
           parms.dom.sizeMe = function() {
             parms.dom.spinner.positionSpinnButtons();
           }
@@ -224,6 +281,10 @@ pui.widgets.add({
           itm.mirrorDown();
         }
       }
+=======
+        }, 1);
+      }
+>>>>>>> Initial import into GIT
       if (parms.design) parms.dom.readOnly = true;
     },
     

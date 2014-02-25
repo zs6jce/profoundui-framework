@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -21,3 +22,8 @@
 
 if (!window["pui"]) window["pui"] = {};
 window["pui"]["version"] = "4.8.2"; 
+=======
+
+if (!window["pui"]) window["pui"] = {};
+window["pui"]["version"] = "4.1.7";
+>>>>>>> Initial import into GIT

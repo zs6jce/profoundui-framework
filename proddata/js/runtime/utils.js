@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 function getTarget(e) {
 	var targ;
@@ -64,7 +67,11 @@ function getElementByName_iefix(elemName) {
 
 
 function disableAction(e){
+<<<<<<< HEAD
   if(pui["is_old_ie"] && pui["ie_mode"] >= 5){
+=======
+  if(is_ie5up){
+>>>>>>> Initial import into GIT
     e.cancelBubble = true;
     e.returnValue = false;
     if (e.preventDefault) e.preventDefault();
@@ -150,7 +157,11 @@ function numericSignOnly(e){
   if(!e) e = window.event;
   var target = e.srcElement || e.target;
   if (target.autoComp != null) return;	
+<<<<<<< HEAD
   var allowedUnicodes = new Array(8,9,13,16,17,18,19,20,27,33,34,35,36,37,38,39,40,45,46,48,49,50,51,52,53,54,55,56,57,91,93,96,97,98,99,100,101,102,103,104,105,109,112,123,144,145,112,113,114,115,116,117,118,119,120,121,122,123,189,pui["field exit key"]);
+=======
+  var allowedUnicodes = new Array(8,9,13,16,17,18,19,20,27,33,34,35,36,37,38,39,40,45,46,48,49,50,51,52,53,54,55,56,57,91,93,96,97,98,99,100,101,102,103,104,105,109,110,112,123,144,145,188,190,112,113,114,115,116,117,118,119,120,121,122,123,189,109,pui["field exit key"]);
+>>>>>>> Initial import into GIT
   allowKeys(allowedUnicodes, e);
 }
 function alphabeticOnly(e) {
@@ -185,7 +196,11 @@ function getCursorPosition(obj) {
   var cur;
   if (typeof obj == "string") obj = getObj(obj);
   if (obj == null) return -1;
+<<<<<<< HEAD
   if (obj.tagName != "INPUT" || !pui.isTextbox(obj)) return -1;
+=======
+  if (obj.tagName != "INPUT" || (obj.type != null && obj.type != "" && obj.type != "text" && obj.type != "number" && obj.type != "password")) return -1;
+>>>>>>> Initial import into GIT
   if (document.selection!=null) {
     if (obj==null) obj = document.activeElement; 
     cur = document.selection.createRange(); 
@@ -381,6 +396,17 @@ pui.arrayForEach = function(array, func) {
   
 }
 
+<<<<<<< HEAD
+=======
+pui.alert = function(msg) {
+  //if (Ext != null && Ext.MessageBox != null && Ext.MessageBox.alert != null) {
+  //  Ext.MessageBox.alert("?", msg);
+  //}
+  //else {
+    alert(msg);
+  //}
+}
+>>>>>>> Initial import into GIT
 
 pui.safeParseInt = function(stringValue, nanValue) {
   if (nanValue == null) nanValue = 0;
@@ -471,6 +497,7 @@ pui.keyFilter = (function() {
 
 function allowKeys(allowedUnicodes, e) {
 
+<<<<<<< HEAD
   // Allow user-defined key mappings in Genie.
 
   if (context == "genie" && pui.genie.getMappedKeyName(e) != "") {
@@ -479,6 +506,8 @@ function allowKeys(allowedUnicodes, e) {
   
   }
   
+=======
+>>>>>>> Initial import into GIT
   if (context == "dspf") return allowKeysSimple(allowedUnicodes, e);
 
   var obj;
@@ -488,13 +517,26 @@ function allowKeys(allowedUnicodes, e) {
   var pos;
   var success;
   var shiftKey;
+<<<<<<< HEAD
+=======
+  var isTextbox = false;
+>>>>>>> Initial import into GIT
 
   //key=(typeof event!='undefined')?window.event.keyCode:e.keyCode;
   key = e.keyCode;
   obj = e.target || e.srcElement; // IE doesn't use .target
   
+<<<<<<< HEAD
   var isTextbox = pui.isTextbox(obj);
   
+=======
+  if (obj.tagName == "INPUT") {
+    if (obj.type == null || obj.type == "" || obj.type == "text" || obj.type == "number" || obj.type == "password") {
+      isTextbox = true;
+    }
+  }
+
+>>>>>>> Initial import into GIT
   if (pui.genie.formSubmitted) {
     if (pui.genie.config.enableKeyAhead) {
       if (e.modifiers) shiftKey = e.modifiers && Event.SHIFT_MASK;
@@ -526,6 +568,7 @@ function allowKeys(allowedUnicodes, e) {
       }
     }
   }
+<<<<<<< HEAD
   //if (key == 8) {     // backspace key
   
     // Let's not do this anymore...
@@ -544,6 +587,23 @@ function allowKeys(allowedUnicodes, e) {
     //  return false;
     //}
   //} 
+=======
+  if (key == 8) {     // backspace key
+    if (isTextbox) {
+      pos = getCursorPosition(obj);
+      if (pos == 0) {
+        goPrev(obj);
+        disableAction(e);
+        return false;              
+      }
+    }
+    else {
+      if (obj.tagName != "TEXTAREA") goPrev(obj);
+      disableAction(e);
+      return false;
+    }
+  } 
+>>>>>>> Initial import into GIT
   if (key == 35 && isTextbox) {     // end key
     if (obj.value != rtrim(obj.value)) {
       obj.value = rtrim(obj.value);
@@ -610,7 +670,11 @@ function allowKeys(allowedUnicodes, e) {
   	}
     
   }
+<<<<<<< HEAD
   if (isTextbox && pui.isFieldExit(e)) {    
+=======
+  if (key == pui["field exit key"] && isTextbox && !e.shiftKey) {    // numpad plus sign
+>>>>>>> Initial import into GIT
     pui.storeCursorPosition(obj);
     fieldExit(obj);
     disableAction(e);
@@ -704,6 +768,7 @@ pui.beforeUnload = function(event) {
     if (context == "genie" && pui.isSignOnScreen()) return;
     if (window.parent != window && typeof(window.parent["Atrium"]) != "undefined") return;
     if (context == "genie" || !inDesignMode() || recordFormats.isDirty()) {
+<<<<<<< HEAD
       var theCloseMessage;
       if (pui.codeBased) theCloseMessage = pui.closeMessage;
       else theCloseMessage = pui.getLanguageText("runtimeMsg", "closeMessage");
@@ -712,6 +777,13 @@ pui.beforeUnload = function(event) {
       }
       event.returnValue = theCloseMessage;
       return theCloseMessage;
+=======
+      if (context == "genie" && pui.genie.config.closeMessage != null && pui.genie.config.closeMessage != "") {
+        pui.closeMessage = pui.genie.config.closeMessage;
+      }
+      event.returnValue = pui.closeMessage;
+      return pui.closeMessage;
+>>>>>>> Initial import into GIT
     }
   }
 }
@@ -829,16 +901,24 @@ pui.checkEmptyText = function(dom) {
 
 pui.attachOnUserActivity = function() {
   if (pui.onUserActivityAttached) return;  
+<<<<<<< HEAD
   if (pui["onuseractivity"] == null && pui["client side timeout"] != true) return;
   function onUserActivity() {
     if (pui["client side timeout"] == true) pui.timeoutMonitor.timer.reset();
+=======
+  if (pui["onuseractivity"] == null) return;
+  function onUserActivity() {
+>>>>>>> Initial import into GIT
     if (pui["onuseractivity"] != null) pui["onuseractivity"]();
   }
   addEvent(document.body, "keydown", onUserActivity);
   addEvent(document.body, "mousemove",onUserActivity);
+<<<<<<< HEAD
   addEvent(document.body, "click",onUserActivity);
   addEvent(document.body, "touchstart",onUserActivity);
   addEvent(document.body, "touchmove",onUserActivity);
+=======
+>>>>>>> Initial import into GIT
   pui.onUserActivityAttached = true;
 }
 
@@ -1094,6 +1174,7 @@ pui.getSQLVarName = function(dom) {
 
   var varName = context + ".";
 
+<<<<<<< HEAD
   var id = dom.id;
   
   if (context == "genie" && dom.parentNode != pui.runtimeContainer) {
@@ -1114,12 +1195,23 @@ pui.getSQLVarName = function(dom) {
   if (!inGrid || dom.hasBoundSQLProps) {
   
     varName += id;
+=======
+  var inGrid = (typeof(dom.parentNode.parentNode.grid) != "undefined");
+  if (!inGrid || dom.hasBoundSQLProps) {
+  
+    varName += dom.id;
+>>>>>>> Initial import into GIT
   
   }
   else {
   
+<<<<<<< HEAD
     var len = id.lastIndexOf(".") + 1;
     varName += id.substr(0, len) + "*";
+=======
+    var len = dom.id.lastIndexOf(".") + 1;
+    varName += dom.id.substr(0, len) + "*";
+>>>>>>> Initial import into GIT
   
   }
   
@@ -1183,6 +1275,7 @@ pui.getSQLParams = function(properties, obj) {
   
   } while (propVal != "");
   
+<<<<<<< HEAD
   if (paramString != "") {
   
     paramString += "&";
@@ -1197,6 +1290,8 @@ pui.getSQLParams = function(properties, obj) {
   paramString += "&timfmt=" + encodeURIComponent(timeFmt.fmt);
   paramString += "&timsep=" + encodeURIComponent(timeFmt.sep);
   
+=======
+>>>>>>> Initial import into GIT
   return paramString;
 
 }
@@ -1210,6 +1305,7 @@ pui.isPercent = function(value) {
   if (value.substr(value.length - 1, 1) == "%") return true;
   return false;
 }
+<<<<<<< HEAD
 
 
 pui.isNumericString = function(value) {
@@ -1534,3 +1630,5 @@ pui.taphold = function(target, handler, threshold) {
   target.addEventListener("touchend", stop, false);  
   
 }
+=======
+>>>>>>> Initial import into GIT

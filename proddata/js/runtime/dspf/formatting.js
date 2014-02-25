@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 pui.formatting = {
   Date: {
     formats: { locales: {} },
@@ -233,7 +236,11 @@ pui.formatting = {
   		var charCode = text.charCodeAt(i);
   		if (charCode > 0xFFFF) {
   			// Character is outside of UCS-2 (fixed 2-byte encoding) range.
+<<<<<<< HEAD
   			return { msg: pui.getLanguageText("runtimeMsg", "outside ucs2") };
+=======
+  			return { msg: "Characters are outside of UCS-2 range." };
+>>>>>>> Initial import into GIT
   		}
   		// Hex digits MUST be uppercased.
   		charCode = charCode.toString(16).toUpperCase();
@@ -309,7 +316,11 @@ Date.prototype.format = function(str, locale) {
 
 pui.FieldFormat = {
   format: function(obj) {
+<<<<<<< HEAD
     if (obj["revert"]) {
+=======
+    if (obj.revert) {
+>>>>>>> Initial import into GIT
       var value = null;
       if (typeof pui["validate"] == "function") {
         value = pui["validate"](obj);
@@ -411,7 +422,11 @@ pui.FieldFormat = {
       var strInt;      
       //scrap everything from decimal point on
       strInt = strValue.replace(/\..*/, '');
+<<<<<<< HEAD
       if ((strInt == "" || strInt == "-") && pui.appJob["decimalFormat"] == "J") {
+=======
+      if (strInt == "" && pui.appJob["decimalFormat"] == "J") {
+>>>>>>> Initial import into GIT
         strInt = "0";
       }
       
@@ -498,7 +513,11 @@ pui.FieldFormat = {
         }
         else if (obj.curSym == "$") {
           if (strValue.substr(0,1) == "-") {
+<<<<<<< HEAD
             strValue = "-" + obj.curSym + strValue.substr(1);
+=======
+            strValue = "-$" + strValue.substr(1);
+>>>>>>> Initial import into GIT
           }
           else {
             strValue = obj.curSym + strValue;
@@ -594,21 +613,38 @@ pui.FieldFormat = {
         valid = !(/[^\d.\-]/.test(value)) && value.split('-').length <= 2 && value.split('.').length <= 2;
       }
       
+<<<<<<< HEAD
       var errorMsg = pui.getLanguageText("runtimeMsg", "invalid number", [ obj.value ]);
+=======
+      var errorMsg = obj.value + ' is not a valid number.';
+>>>>>>> Initial import into GIT
       if(valid){
         parts = value.replace(/-/, '').split('.');
         if(parts[0].length > parseInt(obj.dataLength, 10) - parseInt(obj.decPos, 10)){
           valid = false;
+<<<<<<< HEAD
           errorMsg = pui.getLanguageText("runtimeMsg", "invalid length", [ obj.value ]);
+=======
+          errorMsg = obj.value + ' has an incorrect data length or decimal position.';
+>>>>>>> Initial import into GIT
         }
         if(parts.length == 2){
           if(parts[1].length > parseInt(obj.decPos, 10)){
             valid = false;
+<<<<<<< HEAD
             errorMsg = pui.getLanguageText("runtimeMsg", "invalid decimal", [ obj.value, obj.decPos ]);
           }
           else if(value.indexOf('.') == -1){
             valid = value.replace(/-/g,'').length <= obj.dataLength;
             errorMsg = pui.getLanguageText("runtimeMsg", "invalid decimal", [ obj.value, obj.decPos ]);          }
+=======
+            errorMsg = obj.value + ' has too many decimal places. (max: ' + obj.decPos + ')';
+          }
+          else if(value.indexOf('.') == -1){
+            valid = value.replace(/-/g,'').length <= obj.dataLength;
+            errorMsg = obj.value + ' has too many decimal places. (max: ' + obj.decPos + ')';
+          }
+>>>>>>> Initial import into GIT
           else if(value.indexOf('.') == value.length - 1){
             valid = false;
           }
@@ -663,7 +699,11 @@ pui.FieldFormat = {
         return (value === on ? '1' : '0');
       }
       else{
+<<<<<<< HEAD
         return { msg: pui.getLanguageText("runtimeMsg", "invalid choice", [obj.value, on, off ]) };
+=======
+        return { msg: '"' + obj.value + '" is invalid. Valid choices are: "' + on + '" or "' + off + '".' };
+>>>>>>> Initial import into GIT
       }
     }
   },
@@ -770,7 +810,11 @@ pui.FieldFormat = {
       else {
         var yr = (new Date()).getFullYear();
         d = pui.formatting.Date.parse(yr + '-03-07-14.30.15.000000', 'Y-m-d-H.i.s.u000', obj.locale);
+<<<<<<< HEAD
         return { msg: pui.getLanguageText("runtimeMsg", "invalid date", [ obj.value, d.format(dateFormat, obj.locale) ]) };
+=======
+        return { msg: '"' + obj.value + '" is not a valid date. Example format: ' + d.format(dateFormat, obj.locale) };
+>>>>>>> Initial import into GIT
       }
     },
     parseKeywords: function(keywords) {
@@ -899,7 +943,11 @@ pui.FieldFormat = {
       else{
         var yr = (new Date()).getFullYear();
         d = pui.formatting.Date.parse(yr + '-03-07-14.30.15.000000', 'Y-m-d-H.i.s.u000', obj.locale);
+<<<<<<< HEAD
         return { msg: pui.getLanguageText("runtimeMsg", "invalid time", [ obj.value, d.format(obj.timeFormat, obj.locale) ]) };
+=======
+        return { msg: '"' + obj.value + '" is not a valid time. Example format: ' + d.format(obj.timeFormat, obj.locale) };
+>>>>>>> Initial import into GIT
       }
     },
     parseKeywords: function(keywords) {
@@ -979,7 +1027,11 @@ pui.FieldFormat = {
       else{
         var yr = (new Date()).getFullYear();
         d = pui.formatting.Date.parse(yr + '-09-09-14.30.15.000000', pui.formatting.Date.stdTimeStampPattern, obj.locale);
+<<<<<<< HEAD
         return { msg: pui.getLanguageText("runtimeMsg", "invalid time stamp", [ obj.value, d.format(obj.timeStampFormat, obj.locale)]) };
+=======
+        return { msg: '"' + obj.value + '" is not a valid time stamp. Example format: ' + d.format(obj.timeStampFormat, obj.locale) };
+>>>>>>> Initial import into GIT
       }
       return value;
     }
@@ -1041,6 +1093,7 @@ pui.FieldFormat = {
           value = value.slice(0, value.length-6) + '-' + value.slice(-6, -4) + '-' + value.slice(-4);
           validKeys += '\\-';
           maxLength = 11;
+<<<<<<< HEAD
           break;
         case 'Mailto Link':
           value = "mailto:" + trim(value);
@@ -1065,6 +1118,10 @@ pui.FieldFormat = {
           break;
       }
       if (validKeys != null) obj.keyFilter = new RegExp('[' + validKeys + ']');
+=======
+      }
+      obj.keyFilter = new RegExp('[' + validKeys + ']');
+>>>>>>> Initial import into GIT
       obj.maxLength = maxLength;
       return value;
     },
@@ -1076,19 +1133,33 @@ pui.FieldFormat = {
           value = value.replace(/%/g, '');
           if(value.length > 0){
             if(!(/^-?\d*\.?\d+$/.test(value))){
+<<<<<<< HEAD
               return { msg: pui.getLanguageText("runtimeMsg", "invalid percent", [ value ]) };
             }
             if(value.length - value.split('.').length-1 > obj.dataLength + (parseInt(obj.decPos, 10) === 0 ? 0 : 1)){
               return { msg: pui.getLanguageText("runtimeMsg", "invalid digits", [ value, obj.dataLength ]) };
+=======
+              return { msg: value + ' is not a valid decimal.' };
+            }
+            if(value.length - value.split('.').length-1 > obj.dataLength + (parseInt(obj.decPos, 10) === 0 ? 0 : 1)){
+              return { msg: '"' + value + '" contains too many digits. Max: ' + obj.dataLength };
+>>>>>>> Initial import into GIT
             }
             if(pui.formatting.isNumericType(obj.dataType)){
               var wholeNums = parseInt(obj.dataLentgh, 10) - parseInt(obj.decPos, 10);
               var parts = value.split('.');
               if(parts[0].length > wholeNums){
+<<<<<<< HEAD
                 return { msg: pui.getLanguageText("runtimeMsg", "exceeds whole", [ value,  wholeNums ]) };
               }
               if(parts[1] && parts[1].length > parseInt(obj.decPos, 10)){
                 return { msg: pui.getLanguageText("runtimeMsg", "exceeds decimal", [ value, obj.decPos ]) };
+=======
+                return { msg: '"' + value + '" exceeds the maximum number of digits for the whole number portion (' + wholeNums + ' digits).' };
+              }
+              if(parts[1] && parts[1].length > parseInt(obj.decPos, 10)){
+                return { msg: '"' + value + '" exceeds the maximum number of digits for the decimal portion (' + obj.decPos + ' digits).' };
+>>>>>>> Initial import into GIT
               }
             }
           }
@@ -1101,7 +1172,11 @@ pui.FieldFormat = {
               maxLength = 5;
             }
             if(value.length > maxLength){
+<<<<<<< HEAD
               return { msg: pui.getLanguageText("runtimeMsg", "zip too long", [ maxLength ]) };
+=======
+              return { msg: 'Zip Code is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
             }
           }
           else{
@@ -1109,7 +1184,11 @@ pui.FieldFormat = {
             if(value.length > maxLength){
               value = value.replace(/[^\d]/g, '');
               if(value.length > maxLength){
+<<<<<<< HEAD
                 return { msg: pui.getLanguageText("runtimeMsg", "zip too long", [ maxLength ]) };
+=======
+                return { msg: 'Zip code is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
               }
             }
           }
@@ -1122,7 +1201,11 @@ pui.FieldFormat = {
               maxLength = 9;
             }
             if(value.length > maxLength){
+<<<<<<< HEAD
               return { msg: pui.getLanguageText("runtimeMsg", "zip too long", [ maxLength ]) };
+=======
+              return { msg: 'Zip Code is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
             }
           }
           else{
@@ -1130,7 +1213,11 @@ pui.FieldFormat = {
             if(value.length > maxLength){
               value = value.replace(/[^\d]/g, '');
               if(value.length > maxLength){
+<<<<<<< HEAD
                 return { msg: pui.getLanguageText("runtimeMsg", "zip too long", [ maxLength ]) };
+=======
+                return { msg: 'Zip code is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
               }
             }
           }
@@ -1143,7 +1230,11 @@ pui.FieldFormat = {
               maxLength = 10;
             }
             if(value.length > maxLength){
+<<<<<<< HEAD
               return { msg: pui.getLanguageText("runtimeMsg", "phone too long", [ maxLength ]) };
+=======
+              return { msg: 'Phone number is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
             }
           }
           else{
@@ -1151,7 +1242,11 @@ pui.FieldFormat = {
             if(value.length > maxLength){
               value = value.replace(/[^\d]/g, '');
               if(value.length > maxLength){
+<<<<<<< HEAD
                 return { msg: pui.getLanguageText("runtimeMsg", "phone too long", [ maxLength ]) };
+=======
+                return { msg: 'Phone number is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
               }
             }
           }
@@ -1164,7 +1259,11 @@ pui.FieldFormat = {
               maxLength = 9;
             }
             if(value.length > maxLength){
+<<<<<<< HEAD
               return { msg: pui.getLanguageText("runtimeMsg", "ssno too long", [ maxLength ]) };
+=======
+              return { msg: 'Social security number is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
             }
           }
           else{
@@ -1172,13 +1271,20 @@ pui.FieldFormat = {
             if(value.length > maxLength){
               value = value.replace(/[^\d]/g, '');
               if(value.length > maxLength){
+<<<<<<< HEAD
                 return { msg: pui.getLanguageText("runtimeMsg", "ssno too long", [ maxLength ]) };
+=======
+                return { msg: 'Social security number is too long. (Maximum ' + maxLength + ' digits)' };
+>>>>>>> Initial import into GIT
               }
             }
           }
           return value;
+<<<<<<< HEAD
         default:
           return value;
+=======
+>>>>>>> Initial import into GIT
       }
     }
   },
@@ -1190,14 +1296,22 @@ pui.FieldFormat = {
           func = eval('(' + obj.customFunction + ')');
         }
         catch(err1){
+<<<<<<< HEAD
           return { msg: pui.getLanguageText("runtimeMsg", "invalid custom val") + "\n\n" + err1.message || err1.description };
+=======
+          return { msg: 'Invalid custom validation function.\n\n' + err1.message || err1.description };
+>>>>>>> Initial import into GIT
         }
         if(typeof func === 'function'){
           try{
             value = func(obj);
           }
           catch(err2){
+<<<<<<< HEAD
             return { msg: pui.getLanguageText("runtimeMsg", "error custom val") + "\n\n" + err2.message || err2.description };
+=======
+            return { msg: 'Error in custom validation function.\n\n' + err2.message || err2.description };
+>>>>>>> Initial import into GIT
           }
           return value;
         }

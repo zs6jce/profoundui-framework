@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * Widgets Class
@@ -66,7 +69,10 @@ pui.Widgets = function() {
       if (widget.context != null && widget.context != context) continue;
       if (fullList || (!widget.customSizing && widget.name != "layout")) list.push(widget.name);
     }
+<<<<<<< HEAD
     list.sort();
+=======
+>>>>>>> Initial import into GIT
     return list;
   }
   
@@ -124,8 +130,11 @@ pui.Widgets = function() {
       // add widget
       widgetArray.push(obj);
       me[name] = obj;
+<<<<<<< HEAD
       // Update the properties model with the new field type.
       getPropertiesNamedModel()["field type"].choices = me.getWidgetList(false);
+=======
+>>>>>>> Initial import into GIT
     }
   }
   

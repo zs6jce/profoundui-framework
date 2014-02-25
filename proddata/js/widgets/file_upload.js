@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -20,6 +21,26 @@
 
 
 pui["fileupload"] = {};
+=======
+
+pui["fileupload"] = {};
+
+pui["fileupload"]["select text"] = "Select Files";
+pui["fileupload"]["clear text"] = "Clear";
+pui["fileupload"]["remove text"] = "Remove";
+
+pui["fileupload"]["file limit"] = "Limit of {FILE_LIMIT} file(s) exceeded.";
+pui["fileupload"]["size limit"] = "Limit of {SIZE_LIMIT}MB per file exceeded.";
+pui["fileupload"]["duplicate file"] = "Duplicate files selected.";
+pui["fileupload"]["invalid type"] = "One or more files are of invalid type.";
+pui["fileupload"]["file exists"] = "One or more files already exist on the file system.";
+pui["fileupload"]["prevented"] = "Operation prevented by exit program.";
+
+pui["fileupload"]["input limit"] = "Total input size limit exceeded.";
+pui["fileupload"]["no session"] = "Not connected to a valid session.";
+pui["fileupload"]["timeout"] = "Transaction timed out.";
+pui["fileupload"]["invalid response"] = "The server response is missing or invalid.";
+>>>>>>> Initial import into GIT
 
 /**
  * File Upload Class
@@ -40,7 +61,10 @@ pui["fileupload"].FileUpload = function(container) {
   var table;  
   var selectors = [];
   var clearLink;
+<<<<<<< HEAD
   var uploadLink;
+=======
+>>>>>>> Initial import into GIT
   var transactionId = 1;
   var submitHandle;
   var timeout = 86400000;
@@ -53,7 +77,10 @@ pui["fileupload"].FileUpload = function(container) {
   var altName = "";
   var overwrite = false;
   var allowedTypes = [];
+<<<<<<< HEAD
   var uploadEvent; 
+=======
+>>>>>>> Initial import into GIT
 
   // Constructor.
   createIFrame();
@@ -133,7 +160,11 @@ pui["fileupload"].FileUpload = function(container) {
   	    var a = document.createElement("a");
   	    a.href = "javascript: void(0);";
   	    a.className = "remove";
+<<<<<<< HEAD
   	    a.appendChild(document.createTextNode(pui.getLanguageText("runtimeText", "upload remove text")));
+=======
+  	    a.appendChild(document.createTextNode(pui["fileupload"]["remove text"]));
+>>>>>>> Initial import into GIT
   	    a.puiFileIndex = i;
   	    if (a.attachEvent) {
   	      a.attachEvent("onclick", removeFile);
@@ -253,12 +284,15 @@ pui["fileupload"].FileUpload = function(container) {
   
   }
   
+<<<<<<< HEAD
   this.setUploadEvent = function(value) {
 
     uploadEvent = value; 
   
   }
   
+=======
+>>>>>>> Initial import into GIT
   this.setAllowedTypes = function(types) {
   
     if (types && types.constructor && types.constructor.toString().indexOf("function Array") != -1) {
@@ -289,7 +323,11 @@ pui["fileupload"].FileUpload = function(container) {
   
     if (this.getCount() > fileLimit) {
     
+<<<<<<< HEAD
       return pui.getLanguageText("runtimeMsg", "upload file limit", [ fileLimit ]);
+=======
+      return pui["fileupload"]["file limit"].replace(/{FILE_LIMIT}/g, fileLimit);
+>>>>>>> Initial import into GIT
     
     } 
   
@@ -305,7 +343,11 @@ pui["fileupload"].FileUpload = function(container) {
       
         if (typeof(used[arr[i]]) != "undefined") {
         
+<<<<<<< HEAD
           return pui.getLanguageText("runtimeMsg", "upload duplicate file");
+=======
+          return pui["fileupload"]["duplicate file"];
+>>>>>>> Initial import into GIT
         
         }
         
@@ -319,6 +361,7 @@ pui["fileupload"].FileUpload = function(container) {
 
   this.upload = function() {
   
+<<<<<<< HEAD
     if (submitHandle != null || (context == "genie" && pui.genie.formSubmitted)) {
     
       return;
@@ -439,6 +482,73 @@ pui["fileupload"].FileUpload = function(container) {
       form.submit();
     
     }
+=======
+    if (submitHandle != null) {
+    
+      return;
+    
+    }
+    
+    // These 3 values are always passed on the form action URL.
+    // This is because they are absolutely necessary in order to 
+    // notify the browser when the form submit is complete. 
+    
+    // Form POST data may not be available if the input buffer size is 
+    // exceeded, for example.
+    form.action = formAction;
+    form.action += "?AUTH=";
+    if (pui["appJob"] && pui["appJob"]["auth"]) {
+
+      form.action += encodeURIComponent(pui["appJob"]["auth"]);
+		
+		}   
+		form.action += "&trans=" + encodeURIComponent(transactionId);
+		form.action += "&id=" + encodeURIComponent(mainBox.id);     
+    
+    form.elements["flimit"].value = fileLimit;
+    form.elements["slimit"].value = sizeLimit;
+    form.elements["dir"].value = targetDirectory;
+    form.elements["altname"].value = altName;
+    form.elements["overwrite"].value = (overwrite) ? "1" : "0";
+    while(form.elements["type"]) {
+    
+      if (form.elements["type"].length) {
+      
+        form.removeChild(form.elements["type"][0]);
+        
+      }
+      else {
+      
+        form.removeChild(form.elements["type"]);  
+      
+      }
+    
+    }
+    for (var i = 0; i < allowedTypes.length; i++) {
+    
+      var hidden = createNamedElement("input", "type");
+      hidden.type = "hidden";
+      hidden.value = allowedTypes[i];
+      form.appendChild(hidden);
+    
+    } 
+    
+    submitHandle = setTimeout(function() {
+    
+      me.completeTransaction(transactionId, {"success":false,"error":pui["fileupload"]["timeout"]});
+    
+    }, timeout);
+    
+    // This prevents unused control from being posted.
+    if (!enhanced) {
+    
+      selectors[selectors.length - 1].input.disabled = true;
+    
+    }
+    
+    error = "";  
+    form.submit();
+>>>>>>> Initial import into GIT
   
   }
   
@@ -460,11 +570,19 @@ pui["fileupload"].FileUpload = function(container) {
       try {
       
         responseObj = eval("(" + response + ")");
+<<<<<<< HEAD
+=======
+        parsed = true;
+>>>>>>> Initial import into GIT
         
       }
       catch(e) {
       
+<<<<<<< HEAD
         responseObj = {"success":false,"error": pui.getLanguageText("runtimeMsg", "upload invalid response")}; 
+=======
+        responseObj = {"success":false,"error":pui["fileupload"]["invalid response"]}; 
+>>>>>>> Initial import into GIT
       
       }
       
@@ -480,6 +598,7 @@ pui["fileupload"].FileUpload = function(container) {
     
       if (responseObj["key"]) {
       
+<<<<<<< HEAD
         responseObj["error"] = pui.getLanguageText("runtimeMsg", "upload " + responseObj["key"] );
       
       }
@@ -488,6 +607,14 @@ pui["fileupload"].FileUpload = function(container) {
          error = error.replace("&1", fileLimit);
       if (responseObj["key"] == "size limit")
          error = error.replace("&1", sizeLimit);
+=======
+        responseObj["error"] = pui["fileupload"][responseObj["key"]];
+      
+      }
+      error = responseObj["error"];
+      error = error.replace(/{FILE_LIMIT}/g, fileLimit);
+      error = error.replace(/{SIZE_LIMIT}/g, sizeLimit);
+>>>>>>> Initial import into GIT
     
     }
     
@@ -500,6 +627,7 @@ pui["fileupload"].FileUpload = function(container) {
     
     submitHandle = null;
     transactionId++;  
+<<<<<<< HEAD
     
     if (context == "genie") {
     
@@ -521,6 +649,8 @@ pui["fileupload"].FileUpload = function(container) {
       }    
     
     }
+=======
+>>>>>>> Initial import into GIT
   
   }
   
@@ -541,6 +671,7 @@ pui["fileupload"].FileUpload = function(container) {
     return mainBox.id;
   
   }
+<<<<<<< HEAD
   
   this.doUploadEvent = function() {
   
@@ -575,12 +706,18 @@ pui["fileupload"].FileUpload = function(container) {
     }  
   
   }
+=======
+>>>>>>> Initial import into GIT
 
   // Private methods.
 
 	function createForm() {
 		
 		form = document.createElement("form");
+<<<<<<< HEAD
+=======
+		form.method = "post";
+>>>>>>> Initial import into GIT
 		form.enctype = "multipart/form-data";
 		form.encoding = "multipart/form-data"; // For IE7/8.
 		form.method = "post";
@@ -659,7 +796,11 @@ pui["fileupload"].FileUpload = function(container) {
 	  selector = document.createElement("a");
 	  selector.href = "javascript: void(0);";
 	  selector.className = "control-proxy";
+<<<<<<< HEAD
 	  selector.appendChild(document.createTextNode(pui.getLanguageText("runtimeText", "upload select text")));
+=======
+	  selector.appendChild(document.createTextNode(pui["fileupload"]["select text"]));
+>>>>>>> Initial import into GIT
 	  
 	  var input = document.createElement("input");
 		input.name = "file";
@@ -695,7 +836,11 @@ pui["fileupload"].FileUpload = function(container) {
 		
 		  clearLink = document.createElement("a");
 		  clearLink.href = "javascript: void(0);";
+<<<<<<< HEAD
 		  clearLink.appendChild(document.createTextNode(pui.getLanguageText("runtimeText", "upload clear text")));
+=======
+		  clearLink.appendChild(document.createTextNode(pui["fileupload"]["clear text"]));
+>>>>>>> Initial import into GIT
 		  clearLink.className = "clear";
 		  
 		  if (clearLink.attachEvent) {
@@ -723,6 +868,7 @@ pui["fileupload"].FileUpload = function(container) {
       controlBox.insertBefore(selector, clearLink);
     
     }
+<<<<<<< HEAD
     
     if (context == "genie") {
     
@@ -749,6 +895,8 @@ pui["fileupload"].FileUpload = function(container) {
 		  controlBox.appendChild(uploadLink);	      
     
     }
+=======
+>>>>>>> Initial import into GIT
         
 	}
 	
@@ -834,6 +982,7 @@ pui["fileupload"].FileUpload = function(container) {
 	
 	}	
 	
+<<<<<<< HEAD
 	function uploadFiles(e) {
 	
 	  e = e || window.event;
@@ -883,6 +1032,8 @@ pui["fileupload"].FileUpload = function(container) {
 	
 	}
 	
+=======
+>>>>>>> Initial import into GIT
   function formatBytes(bytes, precision) {  
   
     var units = ["B", "KB", "MB", "GB", "TB"];  
@@ -956,12 +1107,19 @@ pui.checkUploads = function(param) {
       
         for (var i = 0; i < pui.fileUploadElements.length; i++) { 
       
+<<<<<<< HEAD
           var fileUpload = pui.fileUploadElements[i];
           var qualField = fileUpload.qualField;
           
           // Build response.
           needResponse = true;
           
+=======
+          // Build response.
+          var fileUpload = pui.fileUploadElements[i];
+          var qualField = fileUpload.qualField;
+          
+>>>>>>> Initial import into GIT
           // Response looks like this: 
           
           // Header: 
@@ -1052,6 +1210,10 @@ pui.checkUploads = function(param) {
 
 pui.widgets.add({
 
+<<<<<<< HEAD
+=======
+  context: "dspf",
+>>>>>>> Initial import into GIT
   name: "file upload",
   newId: "FileUpload",
   menuName: "File Upload",
@@ -1072,7 +1234,11 @@ pui.widgets.add({
         if (parms.dom.fileUpload == null) {
         
           parms.dom.fileUpload = new pui["fileupload"].FileUpload(parms.dom);
+<<<<<<< HEAD
           if (context == "dspf") pui.fileUploadElements.push(parms.dom.fileUpload);
+=======
+          pui.fileUploadElements.push(parms.dom.fileUpload);
+>>>>>>> Initial import into GIT
         
         }
         
@@ -1082,7 +1248,11 @@ pui.widgets.add({
         var types = [];
         while (typeof(parms.properties[prop]) == "string") {
        
+<<<<<<< HEAD
           types.push(parms.evalProperty(prop)); 
+=======
+          types.push(parms.properties[prop]); 
+>>>>>>> Initial import into GIT
           prop = "allowed type " + (++suffix);
         
         }
@@ -1094,7 +1264,11 @@ pui.widgets.add({
     
     "selection mode": function(parms) {
     
+<<<<<<< HEAD
       parms.dom.fileUpload.setMode(parms.value); 
+=======
+      parms.dom.fileUpload.setMode(parms.newValue); 
+>>>>>>> Initial import into GIT
     
     },
     
@@ -1102,7 +1276,11 @@ pui.widgets.add({
     
       if (parms.design) return;
     
+<<<<<<< HEAD
       parms.dom.fileUpload.setFileLimit(parseInt(parms.value, 10)); 
+=======
+      parms.dom.fileUpload.setFileLimit(parseInt(parms.newValue, 10)); 
+>>>>>>> Initial import into GIT
     
     },
     
@@ -1110,7 +1288,11 @@ pui.widgets.add({
     
       if (parms.design) return;
     
+<<<<<<< HEAD
       parms.dom.fileUpload.setSizeLimit(parseInt(parms.value, 10)); 
+=======
+      parms.dom.fileUpload.setSizeLimit(parseInt(parms.newValue, 10)); 
+>>>>>>> Initial import into GIT
     
     },
     
@@ -1118,7 +1300,11 @@ pui.widgets.add({
     
       if (parms.design) return;
     
+<<<<<<< HEAD
       parms.dom.fileUpload.setTargetDirectory(trim(parms.value));   
+=======
+      parms.dom.fileUpload.setTargetDirectory(trim(parms.newValue));   
+>>>>>>> Initial import into GIT
     
     },
     
@@ -1126,7 +1312,11 @@ pui.widgets.add({
     
       if (parms.design) return;
     
+<<<<<<< HEAD
       parms.dom.fileUpload.setAltName(trim(parms.value));   
+=======
+      parms.dom.fileUpload.setAltName(trim(parms.newValue));   
+>>>>>>> Initial import into GIT
     
     },
     
@@ -1134,6 +1324,7 @@ pui.widgets.add({
     
       if (parms.design) return;
     
+<<<<<<< HEAD
       parms.dom.fileUpload.setOverwrite(parms.value == "true" || parms.value == true);   
     
     },
@@ -1143,6 +1334,9 @@ pui.widgets.add({
       if (parms.design) return;
     
       parms.dom.fileUpload.setUploadEvent(parms.newValue);
+=======
+      parms.dom.fileUpload.setOverwrite(parms.newValue == "true" || parms.newValue == true);   
+>>>>>>> Initial import into GIT
     
     }
     

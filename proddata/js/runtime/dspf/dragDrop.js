@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui["dragDropInfo"] = {};
 
@@ -30,10 +33,18 @@ pui.attachDragDrop = function(dom, properties) {
 
   var useProxy = (properties["use proxy"] == "true");
   var isGrid = (dom.grid != null);
+<<<<<<< HEAD
   if (isGrid) {
     useProxy = true;
     setTimeout(function() {
       var lastRow = dom.grid.cells.length - 1;
+=======
+  var lastRow = 0;
+  if (isGrid) {
+    useProxy = true;
+    lastRow = dom.grid.cells.length - 1;
+    setTimeout(function() {
+>>>>>>> Initial import into GIT
       if (!dom.grid.isDataGrid()) {
         var minLastRow = dom.grid.dataArray.length - dom.grid.recNum + 1;
         if (lastRow > minLastRow) lastRow = minLastRow;
@@ -62,11 +73,14 @@ pui.attachDragDrop = function(dom, properties) {
     var requestNum = 0;
     var recordNumber;
     if (isGrid) {
+<<<<<<< HEAD
       var lastRow = dom.grid.cells.length - 1;
       if (!dom.grid.isDataGrid()) {
         var minLastRow = dom.grid.dataArray.length - dom.grid.recNum + 1;
         if (lastRow > minLastRow) lastRow = minLastRow;
       }    
+=======
+>>>>>>> Initial import into GIT
       var firstRow = 0;
       if (dom.grid.hasHeader) firstRow = 1;
       var clickedOn = getTarget(event);
@@ -144,9 +158,12 @@ pui.attachDragDrop = function(dom, properties) {
         for (var i = 0; i < cols.length; i++) {
           var cloneCell = cols[i].cloneNode(true);
           cloneCell.style.top = "0px";
+<<<<<<< HEAD
           cloneCell.onclick = null;
           cloneCell.onmousedown = null;
           cloneCell.onmouseup = null;
+=======
+>>>>>>> Initial import into GIT
           proxy.appendChild(cloneCell);          
         }
       }
@@ -160,6 +177,10 @@ pui.attachDragDrop = function(dom, properties) {
       proxy.style.opacity = 0.60;
       proxy.style.filter = "alpha(opacity=60)";
       proxy.style.border = "1px solid #333333";
+<<<<<<< HEAD
+=======
+      dom.parentNode.appendChild(proxy);
+>>>>>>> Initial import into GIT
     }
 
     var cursorStartX = getMouseX(event);
@@ -180,6 +201,7 @@ pui.attachDragDrop = function(dom, properties) {
     executeEvent("ondragstart");
 
     function mousemove(event) {
+<<<<<<< HEAD
     
       if (!pui.hasParent(proxy)) {
       
@@ -195,6 +217,8 @@ pui.attachDragDrop = function(dom, properties) {
       
       }
     
+=======
+>>>>>>> Initial import into GIT
       var y = getMouseY(event) - cursorStartY;
       var x = getMouseX(event) - cursorStartX;
       proxy.style.top = (startDomY + y) + "px";
@@ -216,10 +240,14 @@ pui.attachDragDrop = function(dom, properties) {
         var bottom2 = top2 + tgt.offsetHeight;
         if (foundTarget || (left2 > right || right2 < left || top2 > bottom || bottom2 < top)) {
           if (tgt.relatedGrid != null) {
+<<<<<<< HEAD
             //tgt.style.borderTop = tgt.relatedGrid.borderWidth + "px solid " + tgt.relatedGrid.borderColor;
             tgt.style.borderTopStyle = "solid";
             tgt.style.borderWidth = tgt.relatedGrid.borderWidth + "px";
             tgt.style.borderColor = tgt.relatedGrid.borderColor;            
+=======
+            tgt.style.borderTop = tgt.relatedGrid.borderWidth + "px solid " + tgt.relatedGrid.borderColor;
+>>>>>>> Initial import into GIT
           }
           else {
             if (tgt.tagName == "IMG") {
@@ -359,11 +387,15 @@ pui.attachDragDrop = function(dom, properties) {
     function mouseup() {
       requestNum++;
       if (useProxy) {
+<<<<<<< HEAD
         if (pui.hasParent(proxy)) {
         
           proxy.parentNode.removeChild(proxy);
           
         }
+=======
+        proxy.parentNode.removeChild(proxy);
+>>>>>>> Initial import into GIT
         proxy = null;
       }
       if (touchEvent) {
@@ -395,10 +427,14 @@ pui.attachDragDrop = function(dom, properties) {
         else pui["dragDropInfo"]["text"] += " into element " + drop.id;
         
         if (dropInto.relatedGrid != null) {
+<<<<<<< HEAD
           //dropInto.style.borderTop = dropInto.relatedGrid.borderWidth + "px solid " + dropInto.relatedGrid.borderColor;
           dropInto.style.borderTopStyle = "solid";
           dropInto.style.borderWidth = dropInto.relatedGrid.borderWidth + "px";
           dropInto.style.borderColor = dropInto.relatedGrid.borderColor;            
+=======
+          dropInto.style.borderTop = dropInto.relatedGrid.borderWidth + "px solid " + dropInto.relatedGrid.borderColor;
+>>>>>>> Initial import into GIT
         }
         else {
           if (dropInto.tagName == "IMG") {
@@ -410,6 +446,7 @@ pui.attachDragDrop = function(dom, properties) {
         }
 
         if (!(drop.dom.id == dom.id && recordNumber != null && drop.recordNumber != null && (recordNumber == drop.recordNumber || recordNumber == drop.recordNumber + 1))) {
+<<<<<<< HEAD
           pui["dragDropInfo"]["cancel"] = false;
           executeEvent("ondrop");
           if (pui["dragDropInfo"]["cancel"] != true) {
@@ -419,6 +456,14 @@ pui.attachDragDrop = function(dom, properties) {
               pui.respond();
               pui.bypassValidation = "false";
             }
+=======
+          executeEvent("ondrop");
+          if (pui.dragDropFields.ddElementId != null || pui.dragDropFields.ddRecordNumber || pui.dragDropFields.targetElementId != null || pui.dragDropFields.targetRecordNumber) {
+            pui.dragDropFields.respond = true;
+            pui.bypassValidation = pui.ddBypassValidation;
+            pui.respond();
+            pui.bypassValidation = "false";
+>>>>>>> Initial import into GIT
           }
         }
 

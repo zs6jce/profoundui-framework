@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -27,11 +28,25 @@
 // Example: var obj = getObj("Submit"); pui.click(obj);
 // Example: var obj = getObj("Submit"); pui.click(obj);
 pui.click = function(button, skipjs) {
+=======
+
+// Automate the clicking of a button/link/image that has a response property
+// Parameter: id or dom object reference to a button/link/image
+//            the parameter is option -- if not passed, a response is still sent to the server
+// Example: pui.click("Submit");
+// Example: var obj = getObj("Submit); pui.click(obj);
+// Example: var obj = getObj("Submit); pui.click(obj);
+pui.click = function(button) {
+>>>>>>> Initial import into GIT
   setTimeout(function() {
     if (typeof button != "object") button = getObj(button);
     var originalResponseValue;
     if (button != null) {
+<<<<<<< HEAD
       if (skipjs != true && button.onclick != null && typeof button.onclick == "function") {
+=======
+      if (button.onclick != null && typeof button.onclick == "function") {
+>>>>>>> Initial import into GIT
         button.onclick();
         return;
       }
@@ -222,6 +237,7 @@ pui["show"] = function(parms) {
     });    
   }
   
+<<<<<<< HEAD
 
   var container = parms["container"];
   if (container != null && typeof container == "string") container = getObj(parms["container"]);
@@ -229,10 +245,14 @@ pui["show"] = function(parms) {
   if (container == null) pui.runtimeContainer = getObj("pui");
   
   var layers = [{ "formats": formatList }];
+=======
+  pui.runtimeContainer = getObj("pui");
+>>>>>>> Initial import into GIT
   
   var obj = {
     container: pui.runtimeContainer,
     "appJob": {},
+<<<<<<< HEAD
     "layers": layers,
     success: true
   }
@@ -251,6 +271,17 @@ pui["show"] = function(parms) {
     pui.renderFormat(format);
   }
 
+=======
+    "layers": [{ "formats": formatList }],
+    success: true
+  }
+  
+  pui.handler = handler;
+  if (pui.handler == null) pui.handler = function() { };
+  
+  pui.render(obj);
+  
+>>>>>>> Initial import into GIT
 }
 
 
@@ -307,7 +338,11 @@ pui["setPSHBTNFLD"] = function(fieldId, button) {
   }
 
   // Submit Screen
+<<<<<<< HEAD
   pui.click(button, true);
+=======
+  pui.click(button);
+>>>>>>> Initial import into GIT
 }
 
 
@@ -501,6 +536,7 @@ pui["capturePhoto"] = function(parms) {
   if (handler == null) {
     handler = function(response) {
       if (response["success"] == false) {
+<<<<<<< HEAD
         pui.alert(response["error"]);
       }
       else if (response["success"] == true) {
@@ -508,6 +544,15 @@ pui["capturePhoto"] = function(parms) {
       }
       else {
         pui.alert("Invalid response.");  // this shouldn't happen
+=======
+        alert(response["error"]);
+      }
+      else if (response["success"] == true) {
+        alert("Photo captured successfully.");
+      }
+      else {
+        alert("Invalid response.");  // this shouldn't happen
+>>>>>>> Initial import into GIT
       }
     }
   }
@@ -573,7 +618,11 @@ pui["capturePhoto"] = function(parms) {
                   
                     if (jsonResponse["key"]) {
                     
+<<<<<<< HEAD
                       response["error"] = pui.getLanguageText("runtimeMsg", "upload " + jsonResponse["key"]);
+=======
+                      response["error"] = pui["fileupload"][jsonResponse["key"]];
+>>>>>>> Initial import into GIT
                     
                     }
                     else {
@@ -660,7 +709,11 @@ pui.uploadDataUrl = function(params, callback) {
         success = rsp["success"];
         if (!success) {
           if (rsp["key"]) {
+<<<<<<< HEAD
             error = pui.getLanguageText("runtimeMsg", "upload " + rsp["key"]);
+=======
+            error = pui["fileupload"][rsp["key"]];
+>>>>>>> Initial import into GIT
           }
           else {
             error = rsp["error"];
@@ -703,6 +756,7 @@ pui["uploadSignature"] = function(params) {
     
 }
 
+<<<<<<< HEAD
 pui["errorTip"] = function(el, msg, hideDelay) {
 
   if (hideDelay == null) {
@@ -745,3 +799,40 @@ pui["expandAccordionSection"] = function(id, section) {
   accordion.expandSection(section);
 }
 
+=======
+pui["focusOnContainer"] = function() {
+
+    setTimeout(function() {
+
+      // we no longer focus on container
+      // this causes the browser to position the scrollbar to the container div when a header is added to start.html
+      // we focus on a dummy box instead
+      //parms.container.focus();
+
+      if (pui.dummyBox == null) {
+
+        pui.dummyBox = document.createElement("input");
+        pui.dummyBox.type = "text";  
+        pui.dummyBox.readOnly = true;
+        pui.dummyBox.style.position = "absolute";  
+        pui.dummyBox.style.left = "-999px";
+        pui.dummyBox.style.top = "-999px";
+        pui.dummyBox.style.width = "10px";
+        pui.dummyBox.style.borderStyle = "none";
+        pui.dummyBox.style.backgroundColor = "transparent";
+        pui.runtimeContainer.appendChild(pui.dummyBox);
+
+      }
+
+      pui.ignoreBlurs = true;
+      
+      pui.dummyBox.focus();
+      
+      setTimeout(function() {
+        pui.ignoreBlurs = false;
+      }, 0);
+
+    }, 1);
+
+}
+>>>>>>> Initial import into GIT

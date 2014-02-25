@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 function buildGraphicButton(parms) {
   var dom = parms.dom;
@@ -37,7 +40,11 @@ function buildGraphicButton(parms) {
   }
   var graphic = "";
   if (imageSource != null && imageSource != "") {
+<<<<<<< HEAD
     graphic = '<img src="' + pui.normalizeURL(imageSource) + '" style="vertical-align:middle;padding-bottom:2px;" /> ';
+=======
+    graphic = '<img src="' + imageSource + '" style="vertical-align:middle;padding-bottom:2px;" /> ';
+>>>>>>> Initial import into GIT
   }
   dom.setAttribute("type", "button");
   dom.innerHTML = graphic + value;
@@ -51,7 +58,11 @@ pui.widgets.add({
   newValue: "Accept",
   inlineEdit: true,
   defaults: {
+<<<<<<< HEAD
     "width": !pui["is_quirksmode"] ? "100px" : null,
+=======
+    "width": !quirksMode ? "100px" : null,
+>>>>>>> Initial import into GIT
     "image source": "/profoundui/proddata/images/accept.png",
     color: "#009933",
     "font weight": "bold"

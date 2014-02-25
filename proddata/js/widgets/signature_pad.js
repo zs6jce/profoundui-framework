@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * SignaturePad Class
@@ -220,7 +223,11 @@ pui.SignaturePad = function() {
       }
     });
     if (me.designMode) {
+<<<<<<< HEAD
       if (pui["is_chrome"] || (pui["is_old_ie"] && pui["ie_mode"] < 10)) {
+=======
+      if (is_chrome || is_ie6 || is_ie7 || is_ie8 || is_ie9) {
+>>>>>>> Initial import into GIT
         // chrome has strange rendering issues when trying to move canvas element in the designer
         // ie6,7,8,9 do not support canvas
         canvas.style.display = "none";
@@ -229,14 +236,22 @@ pui.SignaturePad = function() {
     }
   }
   
+<<<<<<< HEAD
   this.resize = function(dontClear) {
+=======
+  this.resize = function() {
+>>>>>>> Initial import into GIT
     canvas.style.width = me.container.offsetWidth + "px";
     canvas.style.height = me.container.offsetHeight + "px";
     canvas.setAttribute("width", me.container.offsetWidth);
     canvas.setAttribute("height", me.container.offsetHeight);
     setContext();
+<<<<<<< HEAD
     if (dontClear == true) me.redraw();
     else strokes = [];
+=======
+    strokes = [];
+>>>>>>> Initial import into GIT
   }
   
   this.clear = function() {
@@ -288,7 +303,10 @@ pui.SignaturePad = function() {
   }
 
   this.redraw = function() {
+<<<<<<< HEAD
     if (canvasContext == null) return;
+=======
+>>>>>>> Initial import into GIT
     canvasContext.beginPath();
     for (var i = 0; i < strokes.length; i++) {
       var points = strokes[i];
@@ -340,9 +358,12 @@ pui.widgets.add({
         parms.dom.signaturePad.designMode = parms.design;
         if (parms.design) parms.dom.signaturePad.designItem = parms.designItem;
         parms.dom.signaturePad.init();
+<<<<<<< HEAD
         parms.dom.sizeMe = function() {
           parms.dom.signaturePad.resize(true);
         }
+=======
+>>>>>>> Initial import into GIT
       }
     },
     

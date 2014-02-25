@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * Combo Box Class
@@ -37,7 +40,12 @@ pui.ComboBoxWidget = function() {
   var box;
   var arrow;
   var choicesDiv;
+<<<<<<< HEAD
   var fixedHeight = 110;
+=======
+  var cellDiv;
+  var gridDiv;
+>>>>>>> Initial import into GIT
 
   this.init = function() {
     if (me.div == null) {
@@ -53,8 +61,13 @@ pui.ComboBoxWidget = function() {
     me.div.style.border = "1px solid #7f9db9";
     if (me.div.style.width == null) me.div.style.width = "80px";
     me.div.style.height = "20px";
+<<<<<<< HEAD
     if (pui["is_quirksmode"]) {
       if (pui["is_old_ie"]) me.div.style.height = "22px";
+=======
+    if (quirksMode) {
+      if (is_ie) me.div.style.height = "22px";
+>>>>>>> Initial import into GIT
       else me.div.style.height = "19px";
     }
     
@@ -98,6 +111,7 @@ pui.ComboBoxWidget = function() {
       if (choicesDiv.style.display == "none" && !box.disabled) showChoices();
       else hideChoices();      
       preventEvent(e);
+<<<<<<< HEAD
     }       
  
     var win;
@@ -128,13 +142,30 @@ pui.ComboBoxWidget = function() {
           pui.runtimeContainer.appendChild(choicesDiv);
         }
       }
+=======
+    }    
+
+    if (choicesDiv == null) {
+      choicesDiv = document.createElement("div");
+      var parent = me.div.parentNode;
+      if (!me.design && parent.parentNode.grid != null) {
+        cellDiv = parent;
+        gridDiv = cellDiv.parentNode;
+        parent = gridDiv.parentNode;
+      }
+      parent.appendChild(choicesDiv);      
+>>>>>>> Initial import into GIT
       addEvent(document, "click", hideChoices);
     }
     choicesDiv.style.display = "none";
     choicesDiv.style.position = "absolute";
     choicesDiv.style.overflowX = "hidden";
     choicesDiv.style.overflowY = "auto";
+<<<<<<< HEAD
     choicesDiv.style.height = fixedHeight + "px";
+=======
+    choicesDiv.style.height = "110px";
+>>>>>>> Initial import into GIT
     choicesDiv.style.backgroundColor = "#EAF2FB";
     choicesDiv.style.border = "1px solid #A4BED4";
     choicesDiv.style.zIndex = 130;    
@@ -208,6 +239,7 @@ pui.ComboBoxWidget = function() {
     choicesDiv.style.display = "none";
   }
 
+<<<<<<< HEAD
   function setChoicesPos() {
   
     var top = me.div.offsetTop;
@@ -272,6 +304,19 @@ pui.ComboBoxWidget = function() {
     setChoicesPos();
     var minWidth = parseInt(me.div.style.width);
     if (pui["is_old_ie"] && me["choices"].length > 5) minWidth = minWidth - 22;
+=======
+  function showChoices() {
+    choicesDiv.innerHTML = "";
+    choicesDiv.style.display = "";
+    choicesDiv.style.left = me.div.style.left;
+    choicesDiv.style.top = (parseInt(me.div.style.top) + parseInt(me.div.style.height) + 1) + "px";
+    if (gridDiv != null && cellDiv != null) {
+      choicesDiv.style.left = (parseInt(choicesDiv.style.left) + parseInt(gridDiv.style.left) + parseInt(cellDiv.style.left)) + "px";
+      choicesDiv.style.top = (parseInt(choicesDiv.style.top) + parseInt(gridDiv.style.top) + parseInt(cellDiv.style.top)) + "px";
+    }        
+    var minWidth = parseInt(me.div.style.width);
+    if (is_ie && me["choices"].length > 5) minWidth = minWidth - 22;
+>>>>>>> Initial import into GIT
     if (minWidth < 20) minWidth = 20;
     var spacerDiv = document.createElement("div");
     spacerDiv.style.width = minWidth + "px";
@@ -333,6 +378,7 @@ pui.ComboBoxWidget = function() {
         preventEvent(e);
       }
       choicesDiv.appendChild(optDiv);
+<<<<<<< HEAD
     }
     var top = parseInt(choicesDiv.style.top, 10);
     var scrollTop = pui.getWindowScrollTop();
@@ -342,6 +388,9 @@ pui.ComboBoxWidget = function() {
     }
     choicesDiv.style.top = top + "px";    
         
+=======
+    }    
+>>>>>>> Initial import into GIT
   }
 
 
@@ -389,7 +438,11 @@ pui.widgets.add({
       var url = parms.evalProperty("choices url");
       if (url != "" && !parms.design) {
       	
+<<<<<<< HEAD
       	var req = new pui.Ajax(pui.appendAuth(url));
+=======
+      	var req = new pui.Ajax(url);
+>>>>>>> Initial import into GIT
       	req["async"] = true;
       	req["suppressAlert"] = true;
       	req["onready"] = function() {
@@ -507,6 +560,11 @@ pui.widgets.add({
         return;
       }
       
+<<<<<<< HEAD
+=======
+      //parms.dom.comboBoxWidget["choices"] = parms.evalProperty("choices").split(",");
+      //parms.dom.comboBoxWidget["choice values"] = parms.evalProperty("choice values").split(",");
+>>>>>>> Initial import into GIT
       parms.dom.comboBoxWidget.setValue(parms.evalProperty("value"));
       return;
 
@@ -518,13 +576,33 @@ pui.widgets.add({
 
     "choices": function(parms) {
       if (parms.dom.comboBoxWidget != null) {      
+<<<<<<< HEAD
         parms.dom.comboBoxWidget["choices"] = pui.parseCommaSeparatedList(parms.value);
+=======
+        var choices = parms.value;
+        if (choices != null && choices != "") {
+          parms.dom.comboBoxWidget["choices"] = choices.split(",");
+        }
+        else {
+          parms.dom.comboBoxWidget["choices"] = [];
+        }
+>>>>>>> Initial import into GIT
       }
     },
     
     "choice values": function(parms) {
       if (parms.dom.comboBoxWidget != null) {
+<<<<<<< HEAD
         parms.dom.comboBoxWidget["choice values"] = pui.parseCommaSeparatedList(parms.value);
+=======
+        var choiceValues = parms.value;
+        if (choiceValues != null && choiceValues != "") {
+          parms.dom.comboBoxWidget["choice values"] = choiceValues.split(",");
+        }
+        else {
+          parms.dom.comboBoxWidget["choice values"] = [];
+        }
+>>>>>>> Initial import into GIT
       }
     },
     
@@ -581,6 +659,7 @@ pui.widgets.add({
           pui.alert("Onselect Error:\n" + err.message);        
         }
       }
+<<<<<<< HEAD
     },
 
     "input type": function(parms) {
@@ -589,6 +668,9 @@ pui.widgets.add({
           parms.dom.comboBoxWidget.getBox().setAttribute("type", parms.value);
       }
       catch(e) { }
+=======
+
+>>>>>>> Initial import into GIT
     }
 
   },
@@ -610,6 +692,7 @@ pui.widgets.add({
         parms.dom.comboBoxWidget.setStyleProperty(parms.propertyName, parms.value)
         break;
     }
+<<<<<<< HEAD
   },
   
   afterSetters: {
@@ -621,6 +704,8 @@ pui.widgets.add({
     
     }
   
+=======
+>>>>>>> Initial import into GIT
   }
   
 });

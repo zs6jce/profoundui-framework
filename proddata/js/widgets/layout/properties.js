@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.layout.getPropertiesModel = function() {
   var model = [
@@ -34,8 +37,11 @@ pui.layout.getPropertiesModel = function() {
     { name: "top", format: "px", help: "Represents the y-coordinate of the current layout." },
     { name: "right", format: "px", help: "Position of the layout from the right of the screen or another layout container." },
     { name: "bottom", format: "px", help: "Position of the layout from the bottom of the screen or another layout container." },
+<<<<<<< HEAD
     { name: "center horizontally", choices: ["true", "false"], type: "boolean", help: "Centers the layout horizontally within its parent container.", hideFormatting: true, validDataTypes: ["indicator", "expression"] },
     { name: "center vertically", choices: ["true", "false"], type: "boolean", help: "Centers the layout vertically within its parent container.", hideFormatting: true, validDataTypes: ["indicator", "expression"] },
+=======
+>>>>>>> Initial import into GIT
     { name: "height", fromat: "px", help: "Height of the layout.", bind: false, canBeRemoved: false },
     { name: "width", format: "px", help: "Width of the layout.", bind: false, canBeRemoved: false },
     { name: "min height", format: "px", help: "Minimum height of the layout." },
@@ -52,7 +58,11 @@ pui.layout.getPropertiesModel = function() {
 
     { name: "Misc", category: true },    
     { name: "css class", multOccur: true, attribute: "class", help: "Defines a custom cascading style sheet class to assign to the element. To specify multiple classes, right-click the property and select Add Another CSS Class." },
+<<<<<<< HEAD
     { name: "tool tip", type: "long", help: "Defines the text to appear in a tool tip when the user hovers the mouse over this element.", translate: true },
+=======
+    { name: "tool tip", type: "long", help: "Defines the text to appear in a tool tip when the user hovers the mouse over this element." },
+>>>>>>> Initial import into GIT
     { name: "visibility", format: "visible / hidden", choices: ["hidden", "visible"], help: "Determines whether the element is visible or hidden." },
 
     { name: "Events", category: true },

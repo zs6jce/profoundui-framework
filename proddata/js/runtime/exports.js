@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 /* 
  * Exports (for obfuscation)
  */
@@ -58,8 +61,11 @@ window['currentDate'] = currentDate;
 window['currentTime'] = currentTime;
 window['currentUser'] = currentUser;
 window['getQueryStringParms'] = getQueryStringParms;
+<<<<<<< HEAD
 window["setCursor"] = setCursor;
 window["getTarget"] = getTarget;
+=======
+>>>>>>> Initial import into GIT
 
 window['loadPCCommandApplet'] = loadPCCommandApplet;
 window['runPCCommand'] = runPCCommand;

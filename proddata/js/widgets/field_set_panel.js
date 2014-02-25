@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.add({
   name: "field set panel",
@@ -36,6 +39,7 @@ pui.widgets.add({
   propertySetters: {
   
     "field type": function(parms) {
+<<<<<<< HEAD
       var styleString = '';
       if (parms.evalProperty("color") != null && parms.evalProperty("color") != ' ') {
     	  styleString = ' style="color: ' + parms.evalProperty("color") + ';"' ;
@@ -69,6 +73,13 @@ pui.widgets.add({
           parms.dom.innerHTML = "";
         
         }
+=======
+      parms.dom.innerHTML = "<legend>" + parms.evalProperty("value") + "</legend>";
+    },
+    
+    "value": function(parms) {
+      parms.dom.innerHTML = "<legend>" + parms.value + "</legend>";
+>>>>>>> Initial import into GIT
     },
 
     "color": function(parms) {

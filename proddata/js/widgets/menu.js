@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * Menu Widget Class
@@ -34,10 +37,17 @@ pui.MenuWidget = function() {
   this.container = null;
   this.choices = [];
   this.choiceValues = [];  
+<<<<<<< HEAD
   this.hoverBackgroundColor = null;
   this.hoverTextColor = null;
   this.animate = true;
   this.borderColor = null;
+=======
+  this.hoverBackgroundColor = "#6699FF";
+  this.hoverTextColor = "#FFFFFF";
+  this.animate = true;
+  this.borderColor = "#EEEEEE";
+>>>>>>> Initial import into GIT
   this.padding = "5px";  
   this.paddingLeft = "5px";  
   this.optionImage = null;
@@ -112,17 +122,30 @@ pui.MenuWidget = function() {
       td.style.padding = me.padding;
       td.style.paddingLeft = me.paddingLeft;
       var bcolor = me.borderColor;
+<<<<<<< HEAD
       if (bcolor != "" && bcolor != null) {      
         if (table.rows.length <= 1) td.style.borderTop = "1px solid " + bcolor;
         td.style.borderLeft = "1px solid " + bcolor;
         td.style.borderRight = "1px solid " + bcolor;
         td.style.borderBottom = "1px solid " + bcolor;
       }
+=======
+      if (bcolor == "" || bcolor == null) bcolor = "transparent";
+      
+      if (table.rows.length <= 1) td.style.borderTop = "1px solid " + bcolor;
+      td.style.borderLeft = "1px solid " + bcolor;
+      td.style.borderRight = "1px solid " + bcolor;
+      td.style.borderBottom = "1px solid " + bcolor;
+>>>>>>> Initial import into GIT
       
       td.style.filter = "alpha(opacity=100)";
       td.style.opacity = 1;
       if (me.optionImage != null && me.optionImage != "") {
+<<<<<<< HEAD
         td.style.backgroundImage = "url('" + pui.normalizeURL(me.optionImage, true) + "')";
+=======
+        td.style.backgroundImage = "url('" + me.optionImage + "')";
+>>>>>>> Initial import into GIT
         var repeat = me.repeat;
         if (repeat == null) repeat = "repeat";
         td.style.backgroundRepeat = repeat;
@@ -156,12 +179,16 @@ pui.MenuWidget = function() {
       function assignEvents(td) {
         td.onmouseover = function() {
           td.animationDone = true;
+<<<<<<< HEAD
           if (me.hoverBackgroundColor != null && me.hoverBackgroundColor != "") {
             td.style.backgroundColor = me.hoverBackgroundColor;
           }
           else {
             td.className = "menu-hover";
           }
+=======
+		  if (me.hoverBackgroundColor != null && me.hoverBackgroundColor != "") td.style.backgroundColor = me.hoverBackgroundColor;
+>>>>>>> Initial import into GIT
           if (me.hoverTextColor != null && me.hoverTextColor != "") td.style.color = me.hoverTextColor;
           if (me.optionHoverImage != null && me.optionHoverImage != "") {
             td.style.backgroundImage = "url('" + me.optionHoverImage + "')";
@@ -184,6 +211,7 @@ pui.MenuWidget = function() {
           if (!e) e = window.event;
           var tgt = e.relatedTarget;
           if (tgt == null) tgt = e.toElement;
+<<<<<<< HEAD
           
           // Some browsers (IE8) seem to set the "toElement" to the <TABLE>
           // instead of the <TD> that this routine expects.  This finds the <TD>...
@@ -194,6 +222,8 @@ pui.MenuWidget = function() {
             tgt = tgt.firstChild;
           }
           
+=======
+>>>>>>> Initial import into GIT
           if (tgt == null || tgt.level == null || tgt.tagName != "TD" || tgt.menuId != me.container.id) {
             var keep = false;
             if (tgt != null) {
@@ -251,6 +281,7 @@ pui.MenuWidget = function() {
               td.style.backgroundColor = "";
             }
           }
+<<<<<<< HEAD
           else {
             td.className = "";
           }      
@@ -264,6 +295,16 @@ pui.MenuWidget = function() {
           }
           else if (context == "dspf") {
             if (td.subMenuFrom != null) return;
+=======
+        }
+        td.onclick = function() {
+          if (td.level > 0) me.removeAllSubMenus();
+          if (me.container["onoptionclick"] != null) {
+            if (inDesignMode()) return;            
+            me.container["onoptionclick"](td.choiceValue, getInnerText(td));            
+          }
+          if (context == "dspf") {
+>>>>>>> Initial import into GIT
             var dom = me.container;
             if (dom.responseValue == null) return;
             if (dom.disabled == true) return;
@@ -284,7 +325,11 @@ pui.MenuWidget = function() {
               itmDom = itmDom.parentNode;
             }            
             var itm = toolbar.designer.getDesignItemByDomObj(itmDom);
+<<<<<<< HEAD
             if (!pui.isBound(itm.properties["choices"]) && !pui.isTranslated(itm.properties["choices"])) {
+=======
+            if (typeof itm.properties["choices"] != "object") {
+>>>>>>> Initial import into GIT
               itm.designer.inlineEditBox.onUpdate = function(newName) {
                 var idx = 0;
                 sibling = dom.parentNode.previousSibling;
@@ -476,7 +521,11 @@ pui.widgets.add({
       parms.dom.menuWidget = new pui.MenuWidget();
       var choices = parms.evalProperty("choices");
       if (choices != null && choices != "") {
+<<<<<<< HEAD
         parms.dom.menuWidget.choices = pui.parseCommaSeparatedList(choices);
+=======
+        parms.dom.menuWidget.choices = choices.split(",");
+>>>>>>> Initial import into GIT
       }
       else {
         parms.dom.menuWidget.choices = ["Option 1", "Option 2", "Option 3"];
@@ -505,7 +554,11 @@ pui.widgets.add({
       if (parms.dom.menuWidget != null) {
         var choices = parms.value;
         if (choices != null && choices != "") {
+<<<<<<< HEAD
           parms.dom.menuWidget.choices = pui.parseCommaSeparatedList(choices);
+=======
+          parms.dom.menuWidget.choices = choices.split(",");
+>>>>>>> Initial import into GIT
         }
         else {
           parms.dom.menuWidget.choices = ["Option 1", "Option 2", "Option 3"];
@@ -518,7 +571,11 @@ pui.widgets.add({
       if (parms.dom.menuWidget != null) {
         var choiceValues = parms.value;
         if (choiceValues != null && choiceValues != "") {
+<<<<<<< HEAD
           parms.dom.menuWidget.choiceValues = pui.parseCommaSeparatedList(choiceValues);
+=======
+          parms.dom.menuWidget.choiceValues = choiceValues.split(",");
+>>>>>>> Initial import into GIT
         }
         else {
           parms.dom.menuWidget.choiceValues = [];

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 function buildOutputField(parms, value) {
   if (!parms.design) {
@@ -35,8 +38,13 @@ function buildOutputField(parms, value) {
     if (overflowX == null) overflowX = "";
     var overflowY = parms.properties["overflow y"];
     if (overflowY == null) overflowY = "";
+<<<<<<< HEAD
     if (parms.propertyName == "value" && pui.isBound(parms.newValue) ||
         parms.propertyName != "value" && pui.isBound(parms.properties.value)) {      
+=======
+    if (parms.propertyName == "value" && typeof parms.newValue == "object" ||
+        parms.propertyName != "value" && typeof parms.properties.value == "object") {      
+>>>>>>> Initial import into GIT
       if (overflowX == "") parms.dom.style.overflowX = "hidden";
       if (overflowY == "") parms.dom.style.overflowY = "hidden";
     }
@@ -66,7 +74,11 @@ pui.widgets.add({
     },
     
     "overflow x": function(parms) {
+<<<<<<< HEAD
       if (context == "dspf" && parms.design && pui.isBound(parms.properties.value) && (parms.value == "" || parms.value == null)) {
+=======
+      if (context == "dspf" && parms.design && typeof parms.properties.value == "object" && (parms.value == "" || parms.value == null)) {
+>>>>>>> Initial import into GIT
         parms.properties["overflow x"] = "";
         parms.dom.style.overflowX = "hidden";
         return false;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * External Files Class
@@ -43,11 +46,16 @@ pui.ExternalFiles = function() {
     css.setAttribute("rel", "stylesheet");
     css.setAttribute("type", "text/css");
     css.setAttribute("media", "screen");
+<<<<<<< HEAD
     css.setAttribute("href", pui.normalizeURL(path));
+=======
+    css.setAttribute("href", path);
+>>>>>>> Initial import into GIT
     cssLinks[path] = css;
     head.appendChild(css);
   }
 
+<<<<<<< HEAD
   this.addJSFile = function(path, callback, checkIfLoadedOnly) {
     if (typeof path != "string") return false;
     path = trim(path);
@@ -76,13 +84,34 @@ pui.ExternalFiles = function() {
   }
   
   this.load = function(parms) {
+=======
+  this.addJSFile = function(path) {
+    if (typeof path != "string") return;
+    path = trim(path);
+    if (path == "") return;
+    if (jsScripts[path] != null) return;  // already there
+    var js = document.createElement("script");
+    js.setAttribute("type","text/javascript");
+    js.setAttribute("src", path);
+    jsScripts[path] = js;
+    head.appendChild(js);
+  }
+  
+  this.load = function(format) {
+>>>>>>> Initial import into GIT
     me.init();
     
     var props = null;
     var isDesignMode;
+<<<<<<< HEAD
     if (parms != null) {
       isDesignMode = false;
       props = parms.metaData.screen;      
+=======
+    if (format != null) {
+      isDesignMode = false;
+      props = format.metaData.screen;      
+>>>>>>> Initial import into GIT
     }
     else {
       isDesignMode = true;
@@ -94,12 +123,20 @@ pui.ExternalFiles = function() {
     // get new css paths
     var idx = 1;
     var path = props["external css"];
+<<<<<<< HEAD
     if (!isDesignMode) path = pui.evalBoundProperty(path, parms.data, parms.ref);
+=======
+    if (!isDesignMode) path = pui.evalBoundProperty(path, format.data, format.ref);
+>>>>>>> Initial import into GIT
     while (path != null) {
       cssPaths[path] = true;
       idx++;
       path = props["external css " + idx];
+<<<<<<< HEAD
       if (!isDesignMode) path = pui.evalBoundProperty(path, parms.data, parms.ref);
+=======
+      if (!isDesignMode) path = pui.evalBoundProperty(path, format.data, format.ref);
+>>>>>>> Initial import into GIT
     }
     
     // unload old css paths if they aren't in the list of new paths
@@ -120,6 +157,7 @@ pui.ExternalFiles = function() {
     }
     
     // load javascript files (there is never any unloading of javascript files and they are never loaded in design mode)
+<<<<<<< HEAD
     var jsLoadCount = 0;
     if (isDesignMode != true) {
       // first pass (get jsLoadCount)
@@ -166,6 +204,15 @@ pui.ExternalFiles = function() {
           idx++;
           path = pui.evalBoundProperty(props["external javascript " + idx], parms.data, parms.ref);
         }
+=======
+    if (isDesignMode != true) {
+      idx = 1;
+      path = pui.evalBoundProperty(props["external javascript"], format.data, format.ref);
+      while (path != null) {
+        me.addJSFile(path);
+        idx++;
+        path = pui.evalBoundProperty(props["external javascript " + idx], format.data, format.ref);
+>>>>>>> Initial import into GIT
       }
     }
   }

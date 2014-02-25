@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.imageElementMouseOver = function(event) {
   var image = getTarget(event);
@@ -83,7 +86,10 @@ pui.widgets.add({
       var hoverImage = parms.evalProperty("hover image source")
       parms.dom.hoverImage = hoverImage;
       if (hoverImage != null && hoverImage != "") {
+<<<<<<< HEAD
         parms.dom.hoverImage = pui.normalizeURL(parms.dom.hoverImage, true);
+=======
+>>>>>>> Initial import into GIT
         addEvent(parms.dom, "mouseover", pui.imageElementMouseOver);
         addEvent(parms.dom, "mouseout", pui.imageElementMouseOut);
         var preloadImage1 = new Image();
@@ -92,28 +98,41 @@ pui.widgets.add({
       var clickImage = parms.evalProperty("click image source")
       parms.dom.clickImage = clickImage;
       if (clickImage != null && clickImage != "") {
+<<<<<<< HEAD
         parms.dom.clickImage = pui.normalizeURL(parms.dom.clickImage, true);
+=======
+>>>>>>> Initial import into GIT
         addEvent(parms.dom, "mousedown", pui.imageElementMouseDown);
         addEvent(document, "mouseup", function() {
           pui.imageElementMouseUp(parms.dom);
         });
+<<<<<<< HEAD
         addEvent(parms.dom, "touchstart", pui.imageElementMouseDown);
         addEvent(document, "touchend", function() {
           pui.imageElementMouseUp(parms.dom);
         });
+=======
+>>>>>>> Initial import into GIT
         var preloadImage2 = new Image();
         preloadImage2.src = clickImage;
       }
     },
     
     "image source": function(parms) {
+<<<<<<< HEAD
       parms.dom.originalImage = pui.normalizeURL(parms.value, true);
+=======
+      parms.dom.originalImage = parms.value;
+>>>>>>> Initial import into GIT
     },
 
     "hover image source": function(parms) {
       parms.dom.hoverImage = parms.value;
       if (parms.value != null && parms.value != "") {
+<<<<<<< HEAD
         parms.dom.hoverImage = pui.normalizeURL(parms.dom.hoverImage, true);
+=======
+>>>>>>> Initial import into GIT
         addEvent(parms.dom, "mouseover", pui.imageElementMouseOver);
         addEvent(parms.dom, "mouseout", pui.imageElementMouseOut);
         var preloadImage = new Image();
@@ -124,15 +143,21 @@ pui.widgets.add({
     "click image source": function(parms) {
       parms.dom.clickImage = parms.value;
       if (parms.value != null && parms.value != "") {
+<<<<<<< HEAD
         parms.dom.clickImage = pui.normalizeURL(parms.dom.clickImage, true);
+=======
+>>>>>>> Initial import into GIT
         addEvent(parms.dom, "mousedown", pui.imageElementMouseDown);
         addEvent(document, "mouseup", function() {
           pui.imageElementMouseUp(parms.dom);
         });
+<<<<<<< HEAD
         addEvent(parms.dom, "touchstart", pui.imageElementMouseDown);
         addEvent(document, "touchend", function() {
           pui.imageElementMouseUp(parms.dom);
         });
+=======
+>>>>>>> Initial import into GIT
         var preloadImage = new Image();
         preloadImage.src = parms.value;
       }

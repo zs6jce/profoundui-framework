@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.add({
   name: "checkbox",
@@ -35,8 +38,13 @@ pui.widgets.add({
       var objValue = parms.evalProperty("value");
       var checkedValue = parms.evalProperty("checked value");
       parms.dom.checkedValue = checkedValue;
+<<<<<<< HEAD
       if (!pui["is_quirksmode"]) {
         if (!pui["is_old_ie"]) {
+=======
+      if (!quirksMode) {
+        if (!is_ie) {
+>>>>>>> Initial import into GIT
           parms.dom.style.margin = "2px";
         }
       }

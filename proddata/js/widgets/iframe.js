@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 pui.widgets.add({
@@ -49,8 +52,13 @@ pui.widgets.add({
           var widthHeight = "";
           var width = parseInt(parms.properties["width"]);
           var height = parseInt(parms.properties["height"]);
+<<<<<<< HEAD
           if (width > 0) widthHeight += ' width="' + parms.properties["width"] + '"';
           if (height > 0) widthHeight += ' height="' + parms.properties["height"] + '"';
+=======
+          if (width > 0) widthHeight += ' width="' + width + '"';
+          if (height > 0) widthHeight += ' height="' + height + '"';
+>>>>>>> Initial import into GIT
           var html = '<iframe src="' + url;
           html += '" frameborder="';
           html += (parms.properties["frame border"] == "true") ? "1" : "0";

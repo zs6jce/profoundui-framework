@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,12 +19,42 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 // Number of outstanding auto complete queries.
 var autoCompQueries = 0;
 
 var yAdjust = -20;
 
+<<<<<<< HEAD
+=======
+var agt = navigator.userAgent.toLowerCase();
+var is_major = parseInt(navigator.appVersion);
+var is_minor = parseFloat(navigator.appVersion);
+var is_ie     = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1));
+var is_ie3    = (is_ie && (is_major < 4));
+var is_ie4    = (is_ie && (is_major == 4) && (agt.indexOf("msie 4")!=-1) );
+var is_ie4up  = (is_ie && (is_major >= 4));
+var is_ie5    = (is_ie && (is_major == 4) && (agt.indexOf("msie 5.0")!=-1) );
+var is_ie5_5  = (is_ie && (is_major == 4) && (agt.indexOf("msie 5.5") !=-1));
+var is_ie5up  = (is_ie && !is_ie3 && !is_ie4);
+var is_ie5_5up =(is_ie && !is_ie3 && !is_ie4 && !is_ie5);
+var is_ie6    = (is_ie && (is_major == 4) && (agt.indexOf("msie 6.")!=-1) );
+var is_ie6up  = (is_ie && !is_ie3 && !is_ie4 && !is_ie5 && !is_ie5_5);
+var is_ie7    = (is_ie && (is_major == 4) && (agt.indexOf("msie 7.")!=-1) );
+var is_ie8    = (is_ie && (is_major == 4) && (agt.indexOf("msie 8.")!=-1) );
+var is_ie9    = (is_ie && (is_major == 5) && (agt.indexOf("msie 9.")!=-1) );
+var is_opera  = (agt.indexOf("opera") != -1);
+var is_safari = (agt.indexOf("safari") != -1);
+var is_firefox = (agt.indexOf("firefox") != -1);
+var is_android = (agt.indexOf("android") != -1);
+var is_chrome = (navigator.userAgent.toLowerCase().indexOf('chrome') != -1);
+var quirksMode = (document.compatMode == "BackCompat");
+
+if (is_ie7 || is_ie8 || is_ie9) is_ie6 = false;
+
+>>>>>>> Initial import into GIT
 var checkboxObjects = [];
 var errors        = new Array();
 var designScreens = new Array();
@@ -34,6 +65,7 @@ if (context == "genie") window.history.forward(1);
 
 // setup pui name space
 window.pui = {};
+<<<<<<< HEAD
 {
 
   var agt = navigator.userAgent.toLowerCase();
@@ -105,6 +137,8 @@ window.pui = {};
 }
 
 
+=======
+>>>>>>> Initial import into GIT
 pui["secLevel"] = 0;
 pui.dummyBox = null;
 pui.multX = null;
@@ -113,7 +147,10 @@ pui.defaultDateFormat = "MM/DD/YY";
 pui.touchDevice = ("ontouchstart" in window);
 
 pui.designer = {};
+<<<<<<< HEAD
 pui.designer["initial keywords"] = [];   // for example, customer could change it as follows... pui.designer["initial keywords"] = ["INDARA"];
+=======
+>>>>>>> Initial import into GIT
 pui.designer.currentDisplay = {};
 pui.ide = {};
 pui.cnv = {};
@@ -125,6 +162,7 @@ pui.toolbox.add = function() {};
 
 pui["field exit key"] = 107;  // numeric pad plus sign
 
+<<<<<<< HEAD
 pui["no connection status"] = false;
 
 pui["client side timeout"] = true;
@@ -175,3 +213,6 @@ pui.SQLTimeSeps = {
   "*JOB": 7
 
 };
+=======
+pui["no connection message"] = "Unable to reach server.  Check your connection and try again.";
+>>>>>>> Initial import into GIT

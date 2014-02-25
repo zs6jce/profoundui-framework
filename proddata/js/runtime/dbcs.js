@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 // Determines whether a Unicode Javascript character is in an EBCDIC DBCS range.
@@ -67,7 +70,11 @@ function validateByteCount(event, field) {
 		event = event || window.event;
 		field = event.target || event.srcElement;		
 	}
+<<<<<<< HEAD
 	if (!pui.isTextbox(field)) return;
+=======
+	if (field.type != "text" && field.type != "password" && field.type != "number") return;
+>>>>>>> Initial import into GIT
 	if (field.choices != null) return;
 	if (getEBCDICByteCount(rtrim(field.value)) > field.maxLength) {
 		if (field == null) {

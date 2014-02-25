@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 pui.widgets.add({
@@ -41,7 +44,11 @@ pui.widgets.add({
       parms.dom.grid.tableDiv = parms.dom;
       
       // improve performance in IE (IE is very slow when setting the .scrollTop property on a div)
+<<<<<<< HEAD
       if ((pui["is_old_ie"] || pui["is_opera"]) && !parms.design && parms.properties["scrollbar"] == "paging" && context == "dspf") {
+=======
+      if (is_ie && !parms.design && parms.properties["scrollbar"] == "paging" && context == "dspf") {
+>>>>>>> Initial import into GIT
         parms.dom.grid.dontSetPagingScrollTop = true;
         setTimeout(function() {
           parms.dom.grid.dontSetPagingScrollTop = false;
@@ -50,7 +57,11 @@ pui.widgets.add({
       }
       
       if (parms.properties["css class"] != null && parms.properties["css class"] != "") {
+<<<<<<< HEAD
         parms.dom.className = parms.dom.grid.mainClass = parms.properties["css class"];
+=======
+        parms.dom.className = parms.properties["css class"];
+>>>>>>> Initial import into GIT
         parms.dom.grid.cellProps = {};
         parms.dom.grid.cellPropDefaults = {};
       }
@@ -119,8 +130,11 @@ pui.widgets.add({
       setPropIfThere("header text align");
       setPropIfThere("row height");
       setPropIfThere("border color");
+<<<<<<< HEAD
       setPropIfThere("border width");
       if (parms.design) setTimeout(function() { setPropIfThere("expand to layout") }, 0);
+=======
+>>>>>>> Initial import into GIT
     }
     parms.dom.grid.setProperty(parms.propertyName, parms.value);
   },
@@ -135,9 +149,12 @@ pui.widgets.add({
         parms.dom.grid.pagingBar.draw();
         parms.dom.grid.pagingBar.position();
       }
+<<<<<<< HEAD
       if (parms.properties["expand to layout"] == "true" || parms.properties["expand to layout"] == true) {
         parms.dom.grid.doExpandToLayout();
       }
+=======
+>>>>>>> Initial import into GIT
     }
     
     // reset top since other properties may have affected it

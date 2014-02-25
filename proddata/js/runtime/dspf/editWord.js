@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.applyEditWord = function(obj) {
 
@@ -38,6 +41,7 @@ pui.applyEditWord = function(obj) {
   keyFilter += "]";
   obj.keyFilter = new RegExp(keyFilter);
 
+<<<<<<< HEAD
   // Make sure value is a number
   //   and make sure number converted to a string.
   //
@@ -54,6 +58,14 @@ pui.applyEditWord = function(obj) {
   }
   
   // format value as a string of digits
+=======
+  // get value as a number
+  var numericValue = Number(value);
+  if (isNaN(numericValue)) numericValue = 0;
+  
+  // format value as a string of digits
+  var charValue = String(numericValue);
+>>>>>>> Initial import into GIT
   charValue = charValue.replace("-", "");  // remove negative sign
   var numParts = charValue.split(".");
   var intPortion = numParts[0];
@@ -220,6 +232,7 @@ pui.applyEditWord = function(obj) {
 }
 
 
+<<<<<<< HEAD
 // -------------------------------------------------------------------
 //  This is the original applyEditMask() function.  It does not follow
 //  IBM's specs, but we are keeping it to allow backward compatibility
@@ -227,6 +240,9 @@ pui.applyEditWord = function(obj) {
 // -------------------------------------------------------------------
 
 pui.applyEditMaskOriginal = function(dom, event, pos) {
+=======
+pui.applyEditMask = function(dom, event, pos) {
+>>>>>>> Initial import into GIT
   // get key code
   event = event || window.event;
   var key;
@@ -248,7 +264,11 @@ pui.applyEditMaskOriginal = function(dom, event, pos) {
   var value = dom.value;
   if (value == null) return;
   
+<<<<<<< HEAD
   // derive mask character array
+=======
+  // derrive mask character array
+>>>>>>> Initial import into GIT
   var mask = [];
   var n = edtMsk.length;
   if (edtWrd.length < n) n = edtWrd.length;
@@ -296,7 +316,11 @@ pui.applyEditMaskOriginal = function(dom, event, pos) {
     dom.value = value;
     
     // position cursor
+<<<<<<< HEAD
     if (dom.createTextRange != null && !pui["is_opera"]) { 
+=======
+    if (dom.createTextRange != null && !is_opera) { 
+>>>>>>> Initial import into GIT
       var tr = dom.createTextRange(); 
       if (tr) { 
         tr.moveStart("character", pos);
@@ -310,6 +334,7 @@ pui.applyEditMaskOriginal = function(dom, event, pos) {
   }
 }
 
+<<<<<<< HEAD
 
 pui.applyEditMask = function(dom, event, pos) {
 	
@@ -412,3 +437,5 @@ pui.applyEditMask = function(dom, event, pos) {
 }
 
 
+=======
+>>>>>>> Initial import into GIT

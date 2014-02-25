@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.layout.template.getContainers = function(dom) {
   var containers = [];
@@ -100,6 +103,7 @@ pui.layout.getContainerOffset = function(containerDom) {
   var x = 0;
   var y = 0;
   var elem = containerDom;
+<<<<<<< HEAD
   while (elem != null && (elem.layout == null || elem.parentNode.getAttribute("container") == "true")) {
     x += elem.offsetLeft + elem.clientLeft - elem.scrollLeft;
     y += elem.offsetTop + elem.clientTop - elem.scrollTop;
@@ -127,6 +131,15 @@ pui.layout.getContainerOffset = function(containerDom) {
       }
     }    
   }
+=======
+  while (elem.layout == null || elem.parentNode.getAttribute("container") == "true") {
+    x += elem.offsetLeft;
+    y += elem.offsetTop;
+    elem = elem.offsetParent;
+  }
+  x += elem.offsetLeft;
+  y += elem.offsetTop;
+>>>>>>> Initial import into GIT
   return {
     x: x,
     y: y

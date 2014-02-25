@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -22,6 +23,12 @@ if (typeof(window["pui"]) == "undefined") window["pui"] = {};
 function loadPCCommandApplet(callback) {
 
   if (document.getElementById("PCCommandApplet") == null) {
+=======
+
+function loadPCCommandApplet(callback) {
+
+  if (getObj("PCCommandApplet") == null) {
+>>>>>>> Initial import into GIT
   	var applet = document.createElement("applet");
   	applet.id = "PCCommandApplet";
   	applet.archive = "/profoundui/proddata/applet/PCIntegration.jar";
@@ -42,6 +49,7 @@ function loadPCCommandApplet(callback) {
 
 function runPCCommand(command) {
 
+<<<<<<< HEAD
 	var applet = document.getElementById("PCCommandApplet");
 	if (!applet) {
 	
@@ -54,6 +62,10 @@ function runPCCommand(command) {
 	
 	}
 	
+=======
+	var applet = getObj("PCCommandApplet");
+	if (!applet) return;
+>>>>>>> Initial import into GIT
 	try {
 		applet["runCommand"](command);
 	}
@@ -67,6 +79,7 @@ function runPCCommand(command) {
 
 }
 
+<<<<<<< HEAD
 window["runCommandCb"] = function() {
 
   runPCCommand(pui.appletCommandData);
@@ -95,3 +108,12 @@ window["copyToClipboardCb"] = function() {
   pui.appletClipData = null;  
 
 }
+=======
+function copyToClipboard(data) {
+
+	var applet = getObj("PCCommandApplet");
+	if (!applet) return;
+	applet["copyToClipboard"](data);
+
+}
+>>>>>>> Initial import into GIT

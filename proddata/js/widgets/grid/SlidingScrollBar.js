@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 /**
@@ -43,6 +46,7 @@ pui.SlidingScrollBar = function() {
   this.showRowNum = true;
   this.showRowRange = false;
   this.interval = 250;
+<<<<<<< HEAD
   this.type = "sliding";
   this.ready = false;
   this.gridDom = null;
@@ -50,6 +54,15 @@ pui.SlidingScrollBar = function() {
   var rowNumHideRequest = 0;
   var firstRequest = true;
   var mouseWheelEnabled = false;
+=======
+  this.rowLabel = "row";
+  this.type = "sliding";
+  this.ready = false;
+  var currentRequestNum = 0;
+  var rowNumHideRequest = 0;
+  var firstRequest = true;
+  var mouseWheelEnabled = false;  
+>>>>>>> Initial import into GIT
 
   var me = this;
 
@@ -61,13 +74,19 @@ pui.SlidingScrollBar = function() {
   var rowNumDiv;
   var multiplier = 25;
   var prevStartRow = -1;
+<<<<<<< HEAD
   var fadeOutOpacity = 0;
+=======
+>>>>>>> Initial import into GIT
   
   var upImg;
   var downImg;
   
   this.init = function(gridDom) {
+<<<<<<< HEAD
     me.gridDom = gridDom;
+=======
+>>>>>>> Initial import into GIT
     outerDiv = document.createElement("div");
     outerDiv.style.position = "absolute";
     outerDiv.style.width = "23px";
@@ -98,6 +117,7 @@ pui.SlidingScrollBar = function() {
       touchBar = document.createElement("div");
       touchBar.style.position = "absolute";
       //touchBar.style.width = "25px";
+<<<<<<< HEAD
       touchBar.style.width = "3px";
       //touchBar.style.backgroundColor = "#DDDDEE";
       touchBar.style.backgroundColor = "transparent";
@@ -105,10 +125,19 @@ pui.SlidingScrollBar = function() {
       touchHandle.style.position = "absolute";
       //touchHandle.style.width = "25px";
       touchHandle.style.width = "3px";
+=======
+      touchBar.style.width = "2px";
+      touchBar.style.backgroundColor = "#DDDDEE";
+      touchHandle = document.createElement("div");
+      touchHandle.style.position = "absolute";
+      //touchHandle.style.width = "25px";
+      touchHandle.style.width = "2px";
+>>>>>>> Initial import into GIT
       touchHandle.style.height = "25px";
       touchHandle.style.top = "0px";
       //touchHandle.style.backgroundColor = "#BBBBDD";
       touchHandle.style.backgroundColor = "#999999";
+<<<<<<< HEAD
       if (!pui["is_android"]) {  // border radius on a moving element seems to render really slow on android for some reason
         touchHandle.style.borderRadius = "2px";
       }
@@ -117,6 +146,13 @@ pui.SlidingScrollBar = function() {
       
       touchHandle.style.opacity = fadeOutOpacity;
 
+=======
+      if (!is_android) {  // border radius on a moving element seems to render really slow on android for some reason
+        touchHandle.style.borderRadius = "2px";
+      }
+      outerDiv.style.visibility = "hidden";
+      
+>>>>>>> Initial import into GIT
       if (pui.iPadEmulation) {
         function mousedown(e) {
           var target = getTarget(e);
@@ -127,10 +163,13 @@ pui.SlidingScrollBar = function() {
               return;
             }
           }
+<<<<<<< HEAD
           if (target != null && target.tagName == "INPUT" || target.tagName == "SELECT" || target.tagName == "TEXTAREA") {
             return;
           }
           //touchHandle.style.opacity = 1;
+=======
+>>>>>>> Initial import into GIT
           touchHandle.touch = {};
           touchHandle.touch.reverse = (target != touchHandle);
           touchHandle.touch.startY = getMouseY(e);
@@ -142,7 +181,10 @@ pui.SlidingScrollBar = function() {
           if (touchHandle.lastTop != null) touchHandle.touch.startTop = touchHandle.lastTop;
           else touchHandle.touch.startTop = parseInt(touchHandle.style.top);
           function mousemove(e) {
+<<<<<<< HEAD
             touchHandle.style.opacity = 1;
+=======
+>>>>>>> Initial import into GIT
             var y = getMouseY(e);
             var now = new Date().getTime();
             touchHandle.touch.duration = now - touchHandle.touch.lastTime;
@@ -168,7 +210,11 @@ pui.SlidingScrollBar = function() {
             if (isNaN(pct)) pct = 0;
             var row = (me.totalRows - me.rowsPerPage) * pct;
             row = Math.round(row) + 1;
+<<<<<<< HEAD
             me.doScroll(row);
+=======
+            outerDiv.onscroll(row);
+>>>>>>> Initial import into GIT
           }
           function mouseup(e) {
             removeEvent(document, "mousemove", mousemove);
@@ -194,10 +240,13 @@ pui.SlidingScrollBar = function() {
               return;
             }
           }
+<<<<<<< HEAD
           if (target != null && target.tagName == "INPUT" || target.tagName == "SELECT" || target.tagName == "TEXTAREA") {
             return;
           }
           //touchHandle.style.opacity = 1;
+=======
+>>>>>>> Initial import into GIT
           var touch = e.touches[0]
           touchHandle.touch = {};
           touchHandle.touch.reverse = (target != touchHandle);
@@ -217,7 +266,10 @@ pui.SlidingScrollBar = function() {
         function touchmove(e) {
           if (e.touches.length != 1) return;  // Only deal with one finger
           if (touchHandle.touch == null) return;
+<<<<<<< HEAD
           touchHandle.style.opacity = 1;          
+=======
+>>>>>>> Initial import into GIT
           var touch = e.touches[0];
           var y = touch.pageY;
           var now = new Date().getTime();
@@ -244,7 +296,11 @@ pui.SlidingScrollBar = function() {
           if (isNaN(pct)) pct = 0;
           var row = (me.totalRows - me.rowsPerPage) * pct;
           row = Math.round(row) + 1;
+<<<<<<< HEAD
           me.doScroll(row);
+=======
+          outerDiv.onscroll(row);
+>>>>>>> Initial import into GIT
           e.preventDefault();
         }
         addEvent(touchHandle, "touchmove", touchmove);
@@ -256,9 +312,41 @@ pui.SlidingScrollBar = function() {
       }
       
     }
+<<<<<<< HEAD
     
     if (context == "genie") {  // for "dspf" context, the onscroll event is now attached in the rendering code
       outerDiv.onscroll = me.doScroll;
+=======
+        
+    outerDiv.onscroll = function(startRowParm) {
+      if (!me.ready) return;
+      var startRow = Math.floor(outerDiv.scrollTop / multiplier) + 1;
+      if (upImg != null && downImg != null && startRowParm == null && prevStartRow > 0) startRowParm = prevStartRow;
+      if (startRowParm != null && typeof startRowParm == "number") startRow = startRowParm;
+      if (startRow == prevStartRow) return;  // starting row has not changed
+      var endRow = startRow + me.rowsPerPage - 1;
+      if (me.showRowRange) rowNumDiv.innerHTML = me.rowLabel + "s " + startRow + " - " + endRow;
+      if (me.showRowNum) rowNumDiv.innerHTML = me.rowLabel + " " + startRow;
+      positionRowNum();
+      if (me.onchange != null) me.onchange(startRow);      
+      if (me.onSetRow != null) {
+        currentRequestNum += 1;
+        if (currentRequestNum > 10000) currentRequestNum = 10;
+        sendRow(currentRequestNum, startRow);
+      }
+      prevStartRow = startRow;
+
+      if (me.showRowNum || me.showRowRange) {
+        rowNumDiv.style.display = "";
+        rowNumHideRequest += 1;
+        if (rowNumHideRequest > 10000) rowNumHideRequest = 0;
+        positionRowNum();
+        hideRowNum(rowNumHideRequest);
+      }
+      else {
+        rowNumDiv.style.display = "none";
+      }     
+>>>>>>> Initial import into GIT
     }
     
     outerDiv.onmousedown = function(event) {
@@ -280,6 +368,7 @@ pui.SlidingScrollBar = function() {
     me.container.appendChild(rowNumDiv);    
   }  
   
+<<<<<<< HEAD
   this.attachOnScroll = function() {
     //outerDiv.onscroll = me.doScroll;
     addEvent(outerDiv, "scroll", me.doScroll);
@@ -331,6 +420,9 @@ pui.SlidingScrollBar = function() {
   }
   
   this.setScrollTopToRow = function(rowNum, setPrevStartRow) {
+=======
+  this.setScrollTopToRow = function(rowNum) {
+>>>>>>> Initial import into GIT
     if (touchHandle != null) {
       var minTop = parseInt(touchBar.style.top);
       var maxTop = minTop + parseInt(touchBar.style.height) - parseInt(touchHandle.style.height);
@@ -341,10 +433,13 @@ pui.SlidingScrollBar = function() {
       prevStartRow = rowNum;
     }
     else {
+<<<<<<< HEAD
       if (setPrevStartRow) {
         // this prevents onscroll event from processing
         prevStartRow = rowNum;
       }
+=======
+>>>>>>> Initial import into GIT
       outerDiv.scrollTop = (rowNum - 1) * multiplier;
     }
   }
@@ -377,14 +472,19 @@ pui.SlidingScrollBar = function() {
   }
 
   function slide(touchInfo) {
+<<<<<<< HEAD
     if (touchInfo == null) {
       touchHandle.style.opacity = fadeOutOpacity;
       return;
     }
+=======
+    if (touchInfo == null) return;
+>>>>>>> Initial import into GIT
     var duration = touchInfo.duration;
     var distance = touchInfo.distance;
     var startTop = touchHandle.lastTop;
     var startTime = touchInfo.lastTime;
+<<<<<<< HEAD
     if (distance == null || duration == null) {
       touchHandle.style.opacity = fadeOutOpacity;
       return;
@@ -393,11 +493,17 @@ pui.SlidingScrollBar = function() {
       //touchHandle.style.opacity = fadeOutOpacity;
       return;
     }
+=======
+    if (distance == null) return;
+    if (duration == null) return;
+    if (duration > 500) return;  // duration too big, finger must have stopped
+>>>>>>> Initial import into GIT
     var speed = distance / duration;
     var animationStartTime = new Date().getTime();
 
     function animate() {
 
+<<<<<<< HEAD
       if (touchHandle.touch == null) {
         touchHandle.style.opacity = fadeOutOpacity;
         return;
@@ -407,6 +513,11 @@ pui.SlidingScrollBar = function() {
         //touchHandle.style.opacity = fadeOutOpacity;
         return;
       }
+=======
+      if (touchHandle.touch == null) return;
+
+      if (touchHandle.touch.startTime > animationStartTime) return;
+>>>>>>> Initial import into GIT
             
       var done = false;
       var now = new Date().getTime();
@@ -449,11 +560,18 @@ pui.SlidingScrollBar = function() {
       if (isNaN(pct)) pct = 0;
       var row = (me.totalRows - me.rowsPerPage) * pct;
       row = Math.round(row) + 1;
+<<<<<<< HEAD
       me.doScroll(row);
       
       if (done) {
         touchHandle.touch = null;
         pui["animate"]({ "element": touchHandle, "property": "opacity", "from": 1, "to": fadeOutOpacity, "duration": "1s" });
+=======
+      outerDiv.onscroll(row);
+      
+      if (done) {
+        touchHandle.touch = null;
+>>>>>>> Initial import into GIT
       }
       else {
         setTimeout(animate, 1000/60);  // 60 frames per second
@@ -464,7 +582,11 @@ pui.SlidingScrollBar = function() {
   }
 
   this.draw = function() {
+<<<<<<< HEAD
     if (pui["is_old_ie"]) {
+=======
+    if (is_ie) {
+>>>>>>> Initial import into GIT
       multiplier = 25;
       if (me.totalRows > 1000) multiplier = 50;      
     }
@@ -473,23 +595,36 @@ pui.SlidingScrollBar = function() {
     }
     
     if (touchHandle != null && touchBar != null) {
+<<<<<<< HEAD
       touchBar.style.left = (me.x - 5) + "px";
       touchBar.style.top = (me.y) + "px";
       touchBar.style.zIndex = me.zIndex;
       touchHandle.style.left = (me.x - 5) + "px";
+=======
+      touchBar.style.left = (me.x - 4) + "px";
+      touchBar.style.top = (me.y) + "px";
+      touchBar.style.zIndex = me.zIndex;
+      touchHandle.style.left = (me.x - 4) + "px";
+>>>>>>> Initial import into GIT
       if (prevStartRow == -1) {
         touchHandle.style.top = (me.y) + "px";
       }
       touchHandle.style.zIndex = me.zIndex;
       outerDiv.style.visibility = "hidden";
+<<<<<<< HEAD
       outerDiv.style.display = "none";
+=======
+>>>>>>> Initial import into GIT
       touchBar.style.display = "";
       touchHandle.style.display = "";
     }
     else {
       outerDiv.style.zIndex = me.zIndex;
       outerDiv.style.visibility = "";
+<<<<<<< HEAD
       outerDiv.style.display = "";
+=======
+>>>>>>> Initial import into GIT
       outerDiv.style.left = (me.x) + "px";
       outerDiv.style.top = (me.y) + "px";
     }
@@ -513,7 +648,11 @@ pui.SlidingScrollBar = function() {
       // Firefox div height limitation is 9,999,990 pixels
       // IE div height limitation of 1,342,177 pixels
       var limit = 9999990;
+<<<<<<< HEAD
       if (pui["is_old_ie"]) limit = 1342177;
+=======
+      if (is_ie) limit = 1342177;
+>>>>>>> Initial import into GIT
       while (innerHeight > limit && multiplier > 1) {
         multiplier -= 1;
         innerHeight = (me.totalRows - me.rowsPerPage) * multiplier + height;
@@ -526,7 +665,11 @@ pui.SlidingScrollBar = function() {
     
     positionRowNum();
     
+<<<<<<< HEAD
     if (touchBar == null) me.doScroll();
+=======
+    if (touchBar == null) outerDiv.onscroll();
+>>>>>>> Initial import into GIT
     
     // show up/down arrows instead of scrollbar if there is only 1 row
     if (!me.designMode && me.ready && me.rowsPerPage == 1) {
@@ -546,7 +689,11 @@ pui.SlidingScrollBar = function() {
           var startRow = prevStartRow - 1;
           if (startRow < 1) startRow = 1;
           if (startRow > me.totalRows) startRow = me.totalRows;
+<<<<<<< HEAD
           me.doScroll(startRow);
+=======
+          outerDiv.onscroll(startRow);
+>>>>>>> Initial import into GIT
         }
         downImg = document.createElement("img");
         downImg.style.position = "absolute";
@@ -560,7 +707,11 @@ pui.SlidingScrollBar = function() {
           var startRow = prevStartRow + 1;
           if (startRow < 1) startRow = 1;
           if (startRow > me.totalRows) startRow = me.totalRows;
+<<<<<<< HEAD
           me.doScroll(startRow);
+=======
+          outerDiv.onscroll(startRow);
+>>>>>>> Initial import into GIT
         }
         outerDiv.appendChild(upImg);
         outerDiv.appendChild(downImg);
@@ -576,7 +727,10 @@ pui.SlidingScrollBar = function() {
     
   this.hide = function() {
     outerDiv.style.visibility = "hidden";
+<<<<<<< HEAD
     outerDiv.style.display = "none";
+=======
+>>>>>>> Initial import into GIT
     rowNumDiv.style.display = "none";
     rowNumDiv.style.visibility = "hidden";
     if (touchHandle != null && touchBar != null) {
@@ -586,9 +740,15 @@ pui.SlidingScrollBar = function() {
   }
   
   this.destroy = function() {
+<<<<<<< HEAD
     if (outerDiv.parentNode != null) outerDiv.parentNode.removeChild(outerDiv);
     if (innerDiv.parentNode != null) innerDiv.parentNode.removeChild(innerDiv);
     if (rowNumDiv.parentNode != null) rowNumDiv.parentNode.removeChild(rowNumDiv);
+=======
+    outerDiv.parentNode.removeChild(outerDiv);
+    innerDiv.parentNode.removeChild(innerDiv);
+    rowNumDiv.parentNode.removeChild(rowNumDiv);
+>>>>>>> Initial import into GIT
   }
   
   this.enableMouseWheel = function(gridDom) {

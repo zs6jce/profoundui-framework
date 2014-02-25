@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 /**
  * Locales Class
@@ -35,10 +38,17 @@ pui.Locales = function() {
   };
     
   this.add = function(obj) {
+<<<<<<< HEAD
     var name = obj["name"];
     if (name !== null) {
       for(var i=0; i<localeArray.length; i++){
         if(obj["text"] < localeArray[i]["text"]){
+=======
+    var name = obj.name;
+    if (name !== null) {
+      for(var i=0; i<localeArray.length; i++){
+        if(obj.text < localeArray[i].text){
+>>>>>>> Initial import into GIT
           break;
         }
       }
@@ -50,4 +60,8 @@ pui.Locales = function() {
   
 };
 
+<<<<<<< HEAD
 pui.locales = new pui.Locales();
+=======
+pui.locales = new pui.Locales();
+>>>>>>> Initial import into GIT

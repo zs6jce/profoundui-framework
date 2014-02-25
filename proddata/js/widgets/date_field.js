@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 
 var calobj=null;
@@ -57,6 +60,7 @@ function show_calendar(dateField, str_datetime, format) {
 	var dt_datetime = (str_datetime == null || str_datetime == "" ?  new Date() : str2dt(str_datetime));
 	if(dt_datetime==null) dt_datetime = new Date();
 
+<<<<<<< HEAD
   var curMonth = dt_datetime.getMonth();
 	var dt_prev_month = new Date(dt_datetime);
 	dt_prev_month.setMonth(curMonth - 1);
@@ -72,6 +76,12 @@ function show_calendar(dateField, str_datetime, format) {
 	while (dt_next_month.getMonth() != next) {
 	  dt_next_month.setDate(dt_next_month.getDate() - 1);
 	}
+=======
+	var dt_prev_month = new Date(dt_datetime);
+	dt_prev_month.setMonth(dt_datetime.getMonth()-1);
+	var dt_next_month = new Date(dt_datetime);
+	dt_next_month.setMonth(dt_datetime.getMonth()+1);
+>>>>>>> Initial import into GIT
 	var dt_prev_year = new Date(dt_datetime);
 	dt_prev_year.setFullYear(dt_datetime.getFullYear()-1);
 	var dt_next_year = new Date(dt_datetime);
@@ -92,12 +102,20 @@ function show_calendar(dateField, str_datetime, format) {
 
     "<span arrow=\"1\" style=\"cursor:pointer\" onclick=\"show_calendar(pui.currentDateField"+
     ", '"+ dt2dtstr(dt_prev_year)+"'+document.cal.time.value, '" + format + "');\">"+
+<<<<<<< HEAD
     "<img arrow=\"1\" src=\"" + pui.normalizeURL("\/profoundui\/proddata\/images\/prev_year.png") + "\" width=\"16\" height=\"16\" border=\"0\""+
+=======
+    "<img arrow=\"1\" src=\"\/profoundui\/proddata\/images\/prev_year.png\" width=\"16\" height=\"16\" border=\"0\""+
+>>>>>>> Initial import into GIT
     " alt=\"previous month\"></span>" +
 
     "<span arrow=\"1\" style=\"cursor:pointer\" onclick=\"show_calendar(pui.currentDateField"+
     ", '"+ dt2dtstr(dt_prev_month)+"'+document.cal.time.value, '" + format + "');\">"+
+<<<<<<< HEAD
     "<img arrow=\"1\" src=\"" + pui.normalizeURL("\/profoundui\/proddata\/images\/prev_month.png") + "\" width=\"16\" height=\"16\" border=\"0\""+
+=======
+    "<img arrow=\"1\" src=\"\/profoundui\/proddata\/images\/prev_month.png\" width=\"16\" height=\"16\" border=\"0\""+
+>>>>>>> Initial import into GIT
     " alt=\"previous month\"></span>" +
 		
 		"</td>\n" +
@@ -108,12 +126,20 @@ function show_calendar(dateField, str_datetime, format) {
 		
 		"<span arrow=\"1\" style=\"cursor:pointer\" onclick=\"show_calendar(pui.currentDateField"+
 		", '"+dt2dtstr(dt_next_month)+"'+document.cal.time.value, '" + format + "');\">"+
+<<<<<<< HEAD
 		"<img arrow=\"1\" src=\"" + pui.normalizeURL("\/profoundui\/proddata\/images\/next_month.png") + "\" width=\"16\" height=\"16\" border=\"0\""+
+=======
+		"<img arrow=\"1\" src=\"\/profoundui\/proddata\/images\/next_month.png\" width=\"16\" height=\"16\" border=\"0\""+
+>>>>>>> Initial import into GIT
 		" alt=\"next month\"></span>" + 
 		
 		"<span arrow=\"1\" style=\"cursor:pointer\" onclick=\"show_calendar(pui.currentDateField"+
 		", '"+dt2dtstr(dt_next_year)+"'+document.cal.time.value, '" + format + "');\">"+
+<<<<<<< HEAD
 		"<img arrow=\"1\" src=\"" + pui.normalizeURL("\/profoundui\/proddata\/images\/next_year.png") + "\" width=\"16\" height=\"16\" border=\"0\""+
+=======
+		"<img arrow=\"1\" src=\"\/profoundui\/proddata\/images\/next_year.png\" width=\"16\" height=\"16\" border=\"0\""+
+>>>>>>> Initial import into GIT
 		" alt=\"next month\"></span>" + 
 		
 		"</td>\n</tr>\n"
@@ -176,7 +202,10 @@ function show_calendar(dateField, str_datetime, format) {
 		"<input type=\"hidden\" name=\"time\" value=\""+dt2tmstr(dt_datetime)+
 		"\">\n</form>\n";
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> Initial import into GIT
 	calobj = document.getElementById("popcal");
 	var clickobj = dateField.calimg;
 	calobj.style.width ="180px";
@@ -200,9 +229,13 @@ function show_calendar(dateField, str_datetime, format) {
 	calobj.style.left = left + "px";
 	calobj.style.top = top + "px";
 
+<<<<<<< HEAD
   // Using setTimeout() to prevent the 'click' event from "bleeding through" to the 
   //  popup calendar when using pui.showCalendar() on Android.
 	setTimeout( function() { calobj.style.visibility = "visible"; }, 0 );
+=======
+	calobj.style.visibility = "visible";
+>>>>>>> Initial import into GIT
 }
 
 function allZeros(strd) {
@@ -213,6 +246,7 @@ function allZeros(strd) {
   return true;  
 }
 
+<<<<<<< HEAD
 function allDigits(strd) {
   for (var i = 0; i < strd.length; i++) {
     var ch = strd.substr(i,1);
@@ -221,6 +255,8 @@ function allDigits(strd) {
   return true;  
 }
 
+=======
+>>>>>>> Initial import into GIT
 function str2dt(str_datetime){
 	var re_date = /^(\d+)\-(\d+)\-(\d+)\s+(\d+)\:(\d+)\:(\d+)$/;
 	var result = re_date.exec(str_datetime);
@@ -247,6 +283,7 @@ function usa_dt(dt_datetime, format, formattingInfo){
     }
   }
 
+<<<<<<< HEAD
   if (formattingInfo != null && formattingInfo["dataLength"] == "8" && formattingInfo["decPos"] == "0" && (format == "MM/DD/YY" || format == "DD/MM/YY")) {
     format += "YY";
   }
@@ -254,6 +291,8 @@ function usa_dt(dt_datetime, format, formattingInfo){
     format = format.substr(0,6);
   }
 
+=======
+>>>>>>> Initial import into GIT
   var month;
   var mon;
   var day;
@@ -294,6 +333,7 @@ function usa_dt(dt_datetime, format, formattingInfo){
 function usa_dtstr2str(str_date, format, formattingInfo) {
 	if(str_date == null || str_date=="" || allZeros(str_date)) return "";
 
+<<<<<<< HEAD
   var ch1 = str_date.substr(0,1);
   var ch2 = str_date.substr(1,1);
   if (ch1 >= "1" && ch1 <= "9" && ch2 == "/") str_date = "0" + str_date;
@@ -312,6 +352,8 @@ function usa_dtstr2str(str_date, format, formattingInfo) {
     format = format.substr(0,6);
   }
 
+=======
+>>>>>>> Initial import into GIT
   var dateFormat = null;
   if (formattingInfo != null) {
     dateFormat = formattingInfo.dateFormat;
@@ -421,7 +463,11 @@ function cal(dateField, format) {
     else format = pui.defaultDateFormat;
   }
   if (format == null || format == "") format = "MM/DD/YY";  // default
+<<<<<<< HEAD
   var calHTML = '<img src="' + pui.normalizeURL('/profoundui/proddata/images/cal.gif') + '" width="16px" height="16px" border="0" alt="">';
+=======
+  var calHTML = '<img src="/' + pui.normalizeURL('profoundui/proddata/images/cal.gif') + '" width="16px" height="16px" border="0" alt="">';
+>>>>>>> Initial import into GIT
   var newElem = document.createElement("div");
   newElem.style.position = "absolute";
   newElem.style.width = "16px";
@@ -453,7 +499,11 @@ function cal(dateField, format) {
   
   gDateField[gDateCount++] = dateField;
   
+<<<<<<< HEAD
   pui.moveCal(dateField);
+=======
+  moveCal(dateField);
+>>>>>>> Initial import into GIT
   if (document.getElementById("popcal") == null) {
     addEvent(document, "click", function(e) {
       var target = getTarget(e);
@@ -468,11 +518,15 @@ function cal(dateField, format) {
     popcalDiv.style.position = "absolute";
     popcalDiv.style.width = "180px";
     popcalDiv.style.zIndex = 100;
+<<<<<<< HEAD
     popcalDiv.style.visibility = "hidden";
+=======
+>>>>>>> Initial import into GIT
     popcalDiv.id = "popcal";
     document.body.appendChild(popcalDiv);
   }
 }
+<<<<<<< HEAD
 pui.moveCal = function(dateField){
   var gCalImage = dateField.calimg;
   if (gCalImage == null) return;
@@ -481,13 +535,28 @@ pui.moveCal = function(dateField){
   //var top = parseInt(dateField.style.top);
   gCalImage.style.left = dateField.offsetLeft + dateField.offsetWidth + 5 + "px";
   var top = dateField.offsetTop;
+=======
+function moveCal(dateField){
+  var gCalImage = dateField.calimg;
+  gCalImage.style.display = "none";
+  //gCalImage.style.left = findPosX(dateField) +  dateField.offsetWidth + 5 + "px";
+  //gCalImage.style.top = findPosY(dateField) + "px";
+  gCalImage.style.left = parseInt(dateField.style.left) +  dateField.offsetWidth + 5 + "px";
+  var top = parseInt(dateField.style.top);
+>>>>>>> Initial import into GIT
 	top += parseInt((dateField.offsetHeight - 22) / 2);
   gCalImage.style.top = top + "px";
   gCalImage.style.display = "block";
 }
+<<<<<<< HEAD
 pui.moveCals = function() {
   for (var i = 0; i < gDateCount; i++) {
     pui.moveCal(gDateField[i]);
+=======
+function moveCals() {
+  for (var i = 0; i < gDateCount; i++) {
+    moveCal(gDateField[i]);
+>>>>>>> Initial import into GIT
   }
 }
 
@@ -524,6 +593,7 @@ pui.widgets.add({
             getObj("ipadKeyboard").style.display = "none";
           });
         }
+<<<<<<< HEAD
         parms.dom.sizeMe = function() {
           pui.moveCal(parms.dom);
         }
@@ -536,10 +606,15 @@ pui.widgets.add({
           itm.mirrorDown();
         }
       }
+=======
+      }
+      if (parms.design) parms.dom.readOnly = true;
+>>>>>>> Initial import into GIT
     },
     
     "value": function(parms) {
       parms.dom.value = parms.value;
+<<<<<<< HEAD
     },
     
     "input type": function(parms) {
@@ -548,6 +623,9 @@ pui.widgets.add({
       } catch(e) { }
     }
 
+=======
+    }
+>>>>>>> Initial import into GIT
   
   }
   

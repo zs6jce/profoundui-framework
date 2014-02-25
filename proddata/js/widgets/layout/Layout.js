@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 /**
  * Layout Class
  * @constructor
@@ -32,6 +35,7 @@ pui.layout.Layout = function() {
   this.lockedInPlace = false;
   this.stretchList = [];
   this.containers = [];
+<<<<<<< HEAD
   this.centerHor = false;
   this.centerVert = false;
   
@@ -52,6 +56,11 @@ pui.layout.Layout = function() {
     }
   }
   
+=======
+  
+  var me = this;
+  
+>>>>>>> Initial import into GIT
   this.enableDesign = function() {
     me.designMode = true;
     me.layoutDiv.destroy = me.destroy;
@@ -114,7 +123,10 @@ pui.layout.Layout = function() {
     var rv = pui.layout.template.applyTemplate(parms);
     if (rv.success) {
       me.stretchList = rv.stretchList;
+<<<<<<< HEAD
       me.containers = rv.containers;
+=======
+>>>>>>> Initial import into GIT
       me.stretch();
     }
     else {
@@ -131,7 +143,11 @@ pui.layout.Layout = function() {
     if (!me.designMode) return false;
     var itm = me.designItem;
     if (itm.properties[propertyName] != value) {
+<<<<<<< HEAD
       if (pui.isBound(itm.properties[propertyName])) {
+=======
+      if (typeof itm.properties[propertyName] == "object") {
+>>>>>>> Initial import into GIT
         itm.properties[propertyName].designValue = value;
       }
       else {
@@ -172,6 +188,7 @@ pui.layout.Layout = function() {
       container.style.width = dim.width + "px";
       container.style.height = dim.height + "px";
       container.style.display = "";
+<<<<<<< HEAD
     }
     me.sizeContainers();
     me.center();
@@ -219,13 +236,26 @@ pui.layout.Layout = function() {
         layoutTop = 0;
       }    
       me.layoutDiv.style.top = layoutTop + "px";
+=======
+      for (j = 0; j < container.childNodes.length; j++) {
+        var child = container.childNodes[j];
+        if (child.sizeMe != null && typeof child.sizeMe == "function") {
+          if (pui.isPercent(child.style.width) || pui.isPercent(child.style.height) || child.grid != null) {
+            child.sizeMe();
+          }
+        }
+      }
+>>>>>>> Initial import into GIT
     }
   }
 
   this.setProperty = function(property, value) {
     if (value == null) value = "";
+<<<<<<< HEAD
     var panel = me.layoutDiv.panel;
     var accordion = me.layoutDiv.accordion;
+=======
+>>>>>>> Initial import into GIT
     
     switch (property) {
       case "id":
@@ -264,8 +294,11 @@ pui.layout.Layout = function() {
           styleName = words[0] + words[1].substr(0, 1).toUpperCase() + words[1].substr(1);
         }
         me.layoutDiv.style[styleName] = value;
+<<<<<<< HEAD
         if (panel != null) panel.resize();
         if (accordion != null) accordion.resize();
+=======
+>>>>>>> Initial import into GIT
         me.stretch();
         break;
 
@@ -273,6 +306,7 @@ pui.layout.Layout = function() {
         me.layoutDiv.style.zIndex = value;
         break;
 
+<<<<<<< HEAD
       case "center horizontally":
         if (!me.designMode) me.centerHor = (value == "true" || value == true);
         break;
@@ -281,6 +315,8 @@ pui.layout.Layout = function() {
         if (!me.designMode) me.centerVert = (value == "true" || value == true);
         break;
 
+=======
+>>>>>>> Initial import into GIT
       case "locked in place":
         me.lockedInPlace = (value == "true" || value == true);
         break;
@@ -288,10 +324,13 @@ pui.layout.Layout = function() {
       case "css class":
         break;
         
+<<<<<<< HEAD
       case "overflow x":
         me.layoutDiv.firstChild.style.overflowX = value;
         break;
 
+=======
+>>>>>>> Initial import into GIT
       case "tool tip":
         me.layoutDiv.title = value;
         break;
@@ -335,6 +374,7 @@ pui.layout.Layout = function() {
           me.layoutDiv[property] = func;
         }
         break;
+<<<<<<< HEAD
 
       case "has header":
         if (panel != null) panel.setHasHeader(value != "false" && value != false);
@@ -411,13 +451,18 @@ pui.layout.Layout = function() {
         }
         break;
 
+=======
+>>>>>>> Initial import into GIT
       
       default: 
         var savedValue = me.templateProps[property];
         me.templateProps[property] = value;
         if (me.designMode && !toolbar.loadingDisplay && !toolbar.pastingFormat) {
           var rv = me.applyTemplate();
+<<<<<<< HEAD
           if (me.layoutDiv.accordion != null) me.layoutDiv.accordion.resize();
+=======
+>>>>>>> Initial import into GIT
           if (rv.success == false) {
             me.templateProps[property] = savedValue;
             setTimeout(function() {
@@ -425,6 +470,7 @@ pui.layout.Layout = function() {
             }, 0);
           }
         }
+<<<<<<< HEAD
         break;  
     }
   }
@@ -506,6 +552,15 @@ pui.layout.Layout = function() {
       me.iScroll = null;
       delete me.iScroll;
     }
+=======
+        break;
+      
+    }
+  }
+  
+  this.destroy = function() {
+    removeEvent(window, "resize", me.stretch);
+>>>>>>> Initial import into GIT
     me.layoutDiv = null;
     me.templateProps = null;
     me.stretchList = null;

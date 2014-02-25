@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
  
 /*****************************************************************************************************/
 /*                                                                                                   */
@@ -92,7 +95,10 @@ function RPGspRequest(arg) {
   var statusMessage  = null;
   var sendOK         = null;
   var sending        = null;
+<<<<<<< HEAD
   var alertFn = (typeof(pui) != "undefined" && typeof(pui.alert) != "undefined") ? pui.alert : alert;
+=======
+>>>>>>> Initial import into GIT
   
   // Reference to object that allows privileged methods to access the public members.
   var me = this;    
@@ -120,7 +126,11 @@ function RPGspRequest(arg) {
     xmlhttpObj = new ActiveXObject("Microsoft.XMLHTTP");
   }
   else {
+<<<<<<< HEAD
     alertFn("Ajax request error: Unsupported browser.");
+=======
+    alert("Ajax request error: Unsupported browser.");
+>>>>>>> Initial import into GIT
     return;
   }
   
@@ -140,7 +150,11 @@ function RPGspRequest(arg) {
                 }
                 else {
                   if ((typeof me["method"] != "string") && (me["method"].toUpperCase() != "GET" || me["method"].toUpperCase() != "POST" || me["method"].toUpperCase() != "PUT")) {
+<<<<<<< HEAD
                     alertFn('Invalid value for property: "method".');
+=======
+                    alert('Invalid value for property: "method".');
+>>>>>>> Initial import into GIT
                     return;
                   }
                   else {
@@ -151,17 +165,24 @@ function RPGspRequest(arg) {
                 if (method == "POST") {
                   if (me["postData"] != null) {
                     if (typeof me["postData"] != "string") {
+<<<<<<< HEAD
                       alertFn('Invalid value for property: "postData".');
+=======
+                      alert('Invalid value for property: "postData".');
+>>>>>>> Initial import into GIT
                       return;
                     }
                     else {
                       postData = me["postData"];
                     }
+<<<<<<< HEAD
                   }
                   else {
                     // Never send null POST data. This confuses Chrome into changing the request type
                     // and failing, in some situations.
                     postData = "";
+=======
+>>>>>>> Initial import into GIT
                   }  
                 } 
                 
@@ -169,7 +190,11 @@ function RPGspRequest(arg) {
                   async = true;
                 }
                 else if (me["async"] != true && me["async"] != false) {
+<<<<<<< HEAD
                   alertFn('Invalid value for property: "async".');
+=======
+                  alert('Invalid value for property: "async".');
+>>>>>>> Initial import into GIT
                   return;
                 }
                 else {
@@ -178,41 +203,65 @@ function RPGspRequest(arg) {
                 
                 // TODO: Somehow validate if this is a correctly formed URL to avoid JS errors on the send().
                 if (typeof me["url"] != "string") {
+<<<<<<< HEAD
                   alertFn('Invalid value for property: "url".');
+=======
+                  alert('Invalid value for property: "url".');
+>>>>>>> Initial import into GIT
                   return;
                 }
                 
                 if (me["user"] != null) {
                   if (typeof me["user"] != "string") {
+<<<<<<< HEAD
                     alertFn('Invalid value for property: "user".');
+=======
+                    alert('Invalid value for property: "user".');
+>>>>>>> Initial import into GIT
                     return;                    
                   }
                 }
                 
                 if (me["password"] != null) {
                   if (typeof me["password"] != "string") {
+<<<<<<< HEAD
                     alertFn('Invalid value for property: "password".');
+=======
+                    alert('Invalid value for property: "password".');
+>>>>>>> Initial import into GIT
                     return;                    
                   }
                 }
 
                 if (me["onsuccess"] != null) {
                   if (typeof me["onsuccess"] != "function") {
+<<<<<<< HEAD
                     alertFn('Invalid value for event: "onsuccess".');
+=======
+                    alert('Invalid value for event: "onsuccess".');
+>>>>>>> Initial import into GIT
                     return;
                   }
                 }
                 
                 if (me["onfail"] != null) {
                   if (typeof me["onfail"] != "function") {
+<<<<<<< HEAD
                     alertFn('Invalid value for event: "onfail".');
+=======
+                    alert('Invalid value for event: "onfail".');
+>>>>>>> Initial import into GIT
                     return;
                   }
                 }
                 
                 if (me["onready"] != null) {
                   if (typeof me["onready"] != "function") {
+<<<<<<< HEAD
                     alertFn('Invalid value for event: "onready".');
+=======
+                    alert('Invalid value for event: "onready".');
+>>>>>>> Initial import into GIT
                     return;
                   }
                 }
@@ -284,7 +333,11 @@ function RPGspRequest(arg) {
                   
                 }
                 catch(e) {
+<<<<<<< HEAD
                   alertFn(e);
+=======
+                  alert(e);
+>>>>>>> Initial import into GIT
                   return;
                 }
                 
@@ -323,7 +376,11 @@ function RPGspRequest(arg) {
                   else {
                     sendOK = false;
                     if (me["suppressAlert"] != true) {
+<<<<<<< HEAD
                       alertFn(statusMessage);
+=======
+                      alert(statusMessage);
+>>>>>>> Initial import into GIT
                     }
                     if (me["onfail"] != null) me["onfail"](me);
                   }
@@ -389,7 +446,11 @@ function RPGspRequest(arg) {
       return xmlhttpObj.getAllResponseHeaders();
     }
     catch(e) {
+<<<<<<< HEAD
       alertFn(e);
+=======
+      alert(e);
+>>>>>>> Initial import into GIT
     }
     
   }
@@ -403,7 +464,11 @@ function RPGspRequest(arg) {
       return xmlhttpObj.getResponseHeader(headerName);
     }
     catch(e) {
+<<<<<<< HEAD
       alertFn(e);
+=======
+      alert(e);
+>>>>>>> Initial import into GIT
     }
     
   }
@@ -424,7 +489,11 @@ function RPGspRequest(arg) {
       xmlhttpObj.abort();
     }
     catch(e) {
+<<<<<<< HEAD
       alertFn(e);
+=======
+      alert(e);
+>>>>>>> Initial import into GIT
     }
     
   }
@@ -611,7 +680,10 @@ function ajaxJSON(url, handler) {
 function ajaxSubmit(form, handler) { 
   var formObj;
   var postData = "";
+<<<<<<< HEAD
   var alertFn = (typeof(pui) != "undefined" && typeof(pui.alert) != "undefined") ? pui.alert : alert;
+=======
+>>>>>>> Initial import into GIT
   
   if (typeof(form)=="object") {
     formObj = form;    
@@ -625,11 +697,19 @@ function ajaxSubmit(form, handler) {
   var tagName;
   if (formObj!=null) tagName = formObj.tagName;
   if (formObj==null || tagName==null || tagName.toUpperCase() != "FORM") {
+<<<<<<< HEAD
     alertFn("Ajax request error: Invalid form object.");
     return "";
   }
   if (form.action == "") {
     alertFn("Ajax request error: Invalid form action.");
+=======
+    alert("Ajax request error: Invalid form object.");
+    return "";
+  }
+  if (form.action == "") {
+    alert("Ajax request error: Invalid form action.");
+>>>>>>> Initial import into GIT
     return "";    
   }
   
@@ -643,7 +723,11 @@ function ajaxSubmit(form, handler) {
         if (elemType == "hidden") go = true;
         if (elemType == "password") go = true;
         if (elemType == "text") go = true;
+<<<<<<< HEAD
         if (pui.isHTML5InputType(elemType)) go = true;
+=======
+        if (elemType == "number") go = true;
+>>>>>>> Initial import into GIT
         if (elemType == "") go = true;
         if (elemType == "checkbox" || elemType == "radio") {
           if (elem.checked) go = true;

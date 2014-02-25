@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui["charts"] = {};
 pui["charts"]["force html5"] = false;
@@ -38,6 +41,7 @@ pui.widgets.renderChart = function(parms) {
     if (parms.forceHTML5 == true || pui["charts"]["force html5"] == true) FusionCharts.setCurrentRenderer("javascript");
     if (FusionCharts(chartId)) FusionCharts(chartId).dispose();
     var chartObj = new FusionCharts("/profoundui/proddata/charts/" + parms.type + ".swf", chartId, "100%", "100%", "0", "0");
+<<<<<<< HEAD
     chartObj.dom = parms.dom;
     if (parms.transparent == true) chartObj.setTransparent(true);
     
@@ -63,6 +67,9 @@ pui.widgets.renderChart = function(parms) {
     
     }
     
+=======
+    if (parms.transparent == true) chartObj.setTransparent(true);
+>>>>>>> Initial import into GIT
     if (parms.xmlURL != null) chartObj.setXMLUrl(parms.xmlURL);
     else if (parms.xmlData != null) chartObj.setXMLData(parms.xmlData);
     else if (parms.jsonURL != null) chartObj.setJSONUrl(parms.jsonURL);
@@ -103,6 +110,7 @@ pui.widgets.renderChart = function(parms) {
 
 }
 
+<<<<<<< HEAD
 pui.widgets.addChartLinks = function(eventObject, argumentsObject) {
 
   argumentsObject["cancelDataLoad"]();
@@ -233,6 +241,8 @@ pui.widgets["doChartLink"] = function(param) {
     
 }
 
+=======
+>>>>>>> Initial import into GIT
 pui.widgets.setChartPreview = function(dom, chartType) {
   dom.innerHTML = "";
   var valid = false;
@@ -285,9 +295,12 @@ pui.widgets.add({
         parms.dom.innerHTML = "<br/>&nbsp;&nbsp;&nbsp;&nbsp;Loading Chart...";        
         if (chartType == "") chartType = "Bar2D";  // set a default
         url = parms.evalProperty("chart url");
+<<<<<<< HEAD
         if (url!=null && url!="") {
           url = pui.appendAuth(url);
         }
+=======
+>>>>>>> Initial import into GIT
         var xml = parms.evalProperty("chart xml");
         var json = parms.evalProperty("chart json");
 
@@ -321,6 +334,7 @@ pui.widgets.add({
           var where            = parms.evalProperty("selection criteria").toUpperCase();
           var nameList         = parms.evalProperty("names");
           var valueList        = parms.evalProperty("values");
+<<<<<<< HEAD
           var chartOptions     = parms.evalProperty("chart options");
           
           if (trim(nameList) != "" && trim(valueList) != "") {
@@ -331,6 +345,13 @@ pui.widgets.add({
             chartXML += '>';
             var nameArray = pui.parseCommaSeparatedList(nameList);
             var valueArray = pui.parseCommaSeparatedList(valueList);
+=======
+          
+          if (trim(nameList) != "" && trim(valueList) != "") {
+            var chartXML = '<?xml version="1.0" encoding="utf-8"?><chart>';
+            var nameArray = nameList.split(",");
+            var valueArray = valueList.split(",");
+>>>>>>> Initial import into GIT
             var n = nameArray.length;
             if (valueArray.length > n) n = valueArray.length;
             for (var i = 0; i < n; i++) {
@@ -345,7 +366,10 @@ pui.widgets.add({
               dataName = dataName.replace(/"/g, "'");  // '
               var dataValue = valueArray[i];
               if (dataValue == null) dataValue = "0";
+<<<<<<< HEAD
               dataValue = String(dataValue);
+=======
+>>>>>>> Initial import into GIT
               dataValue = trim(dataValue);
               var char1 = dataValue.substr(0, 1);
               if ((char1 < "0" || char1 > "9") && char1 != "." && char1 != "," && char1 != "-") {
@@ -449,6 +473,7 @@ pui.widgets.add({
            if (response) {
              data = response;
            }
+<<<<<<< HEAD
            // check if the returned xml data starts with a standard response
            // if it does and the "chart options" property was specified, insert chart options into the data string
            var startsWith = '<?xml version="1.0" encoding="utf-8"?><chart>';
@@ -461,6 +486,15 @@ pui.widgets.add({
              transparent: (parms.properties["chart overlay"] != "true"),
              xmlData: data
            });
+=======
+           
+          pui.widgets.renderChart({
+            dom: parms.dom,
+            type: chartType,
+            transparent: (parms.properties["chart overlay"] != "true"),
+            xmlData: data
+          });
+>>>>>>> Initial import into GIT
          }
          ajaxRequest.send(); 
           

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //  Profound UI Runtime  -- A Javascript Framework for Rich Displays
 //  Copyright (c) 2014 Profound Logic Software, Inc.
 //
@@ -18,6 +19,8 @@
 //  If not, see <http://www.gnu.org/licenses/>.
 
 
+=======
+>>>>>>> Initial import into GIT
 
 pui.widgets.buttonStyles = {
   "Ice Blue": {
@@ -261,7 +264,11 @@ pui.widgets.getStyledButtonProxy = function(defaults) {
   
   parms.properties = {};
   parms.properties.width = "100px";
+<<<<<<< HEAD
   if (defaults.width != null) parms.properties.width = defaults.width;
+=======
+  if (defaults.width != null) parms.properties.width = defaults.width;;
+>>>>>>> Initial import into GIT
   parms.properties.height = "23px"
   parms.properties.value = "Click Here";
   parms.properties["button style"] = bstyle;
@@ -331,12 +338,18 @@ pui.widgets.setStyledButtonImages = function(bstyle, buttonObj, state) {
 pui.widgets.resizeStyledButton = function(button, settings, width, height, parms) {
 
   if (typeof width == "string") {
+<<<<<<< HEAD
     if (width != "" && !isNaN(width)) width += "px";
+=======
+>>>>>>> Initial import into GIT
     if (width.length >= 3 && width.substr(width.length - 2) == "px") width = parseInt(width);
     else width = button.topLeftDiv.parentNode.offsetWidth;
   }
   if (typeof height == "string") {
+<<<<<<< HEAD
     if (height != "" && !isNaN(height)) height += "px";
+=======
+>>>>>>> Initial import into GIT
     if (height.length >= 3 && height.substr(height.length - 2) == "px") height = parseInt(height);
     else height = button.topLeftDiv.parentNode.offsetHeight;
   }  
@@ -508,9 +521,15 @@ pui.widgets.add({
       button.textDiv.style.verticalAlign = "middle";
       //button.textDiv.style.display = "table-cell";
       button.textDiv.style.display = "";
+<<<<<<< HEAD
       //if (!pui.iPadEmulation) {
       //  button.textDiv.style.cursor = "default";
       //}
+=======
+      if (!pui.iPadEmulation) {
+        button.textDiv.style.cursor = "default";
+      }
+>>>>>>> Initial import into GIT
       button.textDiv.style.overflow = "hidden";
       button.textDiv.onselectstart = function(e) { return false };
       if (typeof button.textDiv.style.MozUserSelect!="undefined") button.textDiv.style.MozUserSelect = "none";
@@ -538,10 +557,13 @@ pui.widgets.add({
       }
 
       function mouseover(e) {
+<<<<<<< HEAD
         if ( (parms.dom.getAttribute!=null && parms.dom.getAttribute("disabled")=="true" )
           || ( parms.dom.disabled!=null && parms.dom.disabled==true ) ) {
           return;
         }
+=======
+>>>>>>> Initial import into GIT
         parms.dom.mouseIsOver = true;
         if (parms.dom.clickedDown == true) return;
         var bstyle = parms.dom.button.bstyle;
@@ -562,7 +584,11 @@ pui.widgets.add({
       function mouseout(e) {
         parms.dom.mouseIsOver = false;
         if (parms.dom.clickedDown == true) return;
+<<<<<<< HEAD
         if (pui["is_old_ie"]) {
+=======
+        if (is_ie) {
+>>>>>>> Initial import into GIT
           var rel = e.relatedTarget || e.toElement;
           if (rel && rel != parms.dom) rel = rel.parentNode;
           if (rel == parms.dom) return;        
@@ -587,10 +613,13 @@ pui.widgets.add({
       if (parms.isProxy != true) addEvent(parms.dom, "mouseout", mouseout);
       
       function mousedown(event) {
+<<<<<<< HEAD
         if ( (parms.dom.getAttribute!=null && parms.dom.getAttribute("disabled")=="true" )
           || ( parms.dom.disabled!=null && parms.dom.disabled==true ) ) {
           return;
         }
+=======
+>>>>>>> Initial import into GIT
         if (pui.isRightClick(event)) return;
         parms.dom.clickedDown = true;
         var bstyle = parms.dom.button.bstyle;
@@ -681,8 +710,12 @@ pui.widgets.add({
     },
 
     "width": function(parms) {
+<<<<<<< HEAD
       if (pui.isNumericString(parms.value)) parms.dom.style.width = parms.value + "px";
       else parms.dom.style.width = parms.value;
+=======
+      parms.dom.style.width = parms.value;
+>>>>>>> Initial import into GIT
       
       var bstyle = parms.properties["button style"];
       var settings = pui.widgets.buttonStyles[bstyle];
@@ -696,8 +729,12 @@ pui.widgets.add({
     },
     
     "height": function(parms) {
+<<<<<<< HEAD
       if (pui.isNumericString(parms.value)) parms.dom.style.height = parms.value + "px";
       else parms.dom.style.height = parms.value;
+=======
+      parms.dom.style.height = parms.value;
+>>>>>>> Initial import into GIT
       
       var bstyle = parms.properties["button style"];
       var settings = pui.widgets.buttonStyles[bstyle];
