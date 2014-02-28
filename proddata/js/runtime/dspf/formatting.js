@@ -46,6 +46,7 @@ pui.formatting = {
         case 'i': return 'pui.formatting.leftPad(date.getMinutes(), 2, "0")';
         case 's': return 'pui.formatting.leftPad(date.getSeconds(), 2, "0")';
         case 'u': return 'pui.formatting.leftPad(date.getMilliseconds(), 3, "0")';
+        case 'U': return 'String("000")';
         case 'a': return '(date.getHours() < 12 ? "am" : "pm")';
         case 'A': return '(date.getHours() < 12 ? "AM" : "PM")';
         case 'z': return 'pui.formatting.leftPad(Math.ceil((date - (new Date(date.getFullYear(), 0, 1)))/86400000)+1, 3, "0")';
@@ -80,6 +81,7 @@ pui.formatting = {
         case 'i': return { r: '(\\\\d{2})', c: 'i = parseInt(matches[' + matchIndex + '], 10);', g: 1 };
         case 's': return { r: '(\\\\d{2})', c: 's = parseInt(matches[' + matchIndex + '], 10);', g: 1 };
         case 'u': return { r: '(\\\\d{3})', c: 'u = parseInt(matches[' + matchIndex + '], 10);', g: 1 };
+        case 'U': return { r: '(\\\\d{3})', c: 'var microSeconds = parseInt(matches[' + matchIndex + '], 10);', g: 1 };
         case 'a': return { r: '(am|pm)', c: 'if(matches[' + matchIndex + '] == "am"){ if(h == 12) h = 0; }else if(h < 12) h += 12;', g: 1 };
         case 'A': return { r: '(AM|PM)', c: 'if(matches[' + matchIndex + '] == "AM"){ if(h == 12) h = 0; }else if(h < 12) h += 12;', g: 1 };
         case 'z': return { r: '(\\\\d{1,3})', c: 'd = parseInt(matches[' + matchIndex + '], 10);', g: 1 };
@@ -92,10 +94,24 @@ pui.formatting = {
       }
       return pui.formatting.Date.parsers.locales[locale][format](str);
     },
-    newFormat: function(format, locale) {
+    newFormat: function(fmt, locale) {
+      var format = fmt;
       var esc = false;
       var chr = '';
       var fn = 'return ';
+      
+      // The standard timestamp pattern (Y-m-d-H-i-s.uu) causes the millisecond
+      // portion of the underlying JS Date object (identified by 'u')
+      // to be inserted twice. So if the millisecond is 123, a timestamp
+      // with the original microseconds of .123000 would become .123123
+      // We work around this temporarily by changing it to 'uU' instead of 'uu'.
+      // A proper fix would be to update all timestamp formats to end in 'uU',
+      // but this would require changes to all customer display files, so we'll
+      // just change it in here as a workaround -SK
+       
+      if (format === "Y-m-d-H.i.s.uu") {
+        format = "Y-m-d-H.i.s.uU";
+      }
       for(var i=0; i<format.length; i++){
         chr = format.charAt(i);
         if(!esc && chr == '\\'){ // 
@@ -115,14 +131,29 @@ pui.formatting = {
         pui.formatting.Date.formats.locales[locale] = {};
       }
       
-      pui.formatting.Date.formats.locales[locale][format] = new Function('date', fn);
+      pui.formatting.Date.formats.locales[locale][fmt] = new Function('date', fn);
     },
-    newParser: function(format, locale) {
+    newParser: function(fmt, locale) {
+      var format = fmt;
       var esc = false;
       var chr = '';
       var regex = '';
       var code = '';
       var matchIndex = 1;
+      
+      // The standard timestamp pattern (Y-m-d-H-i-s.uu) causes the same code
+      // "u = parseInt(matches[the-match-index], 10);" to be output twice,
+      // breaking the millisecond portion of the pattern (it'll always take
+      // the last 3 digits, which are usually 000.)  To work around
+      // that, I'm temporarily changing the pattern so it only assigns the
+      // millsecond from the first 3 digits.  The last 3 are discarded (using
+      // the capital U character).  A proper fix would be to update all
+      // formats (saved in all customer dspfs) but since that's very
+      // difficult to do, I just change the pattern temporarily.  -SK
+       
+      if (format === "Y-m-d-H.i.s.uu") {
+        format = "Y-m-d-H.i.s.uU";
+      }
                 
       for(var i=0; i<format.length; i++){
         chr = format.charAt(i);
@@ -164,7 +195,7 @@ pui.formatting = {
         pui.formatting.Date.parsers.locales[locale] = {};
       }
       
-      pui.formatting.Date.parsers.locales[locale][format] = new Function('str', fn);
+      pui.formatting.Date.parsers.locales[locale][fmt] = new Function('str', fn);
     },
     getSuffix: function(day) {
       switch(day){
@@ -1052,7 +1083,7 @@ pui.FieldFormat = {
             validKeys += '\\.';
             maxLength++;
           }
-          validKeys += '\\-\\$';
+          validKeys += '\\-%';
           value += '%';
           break;
         case 'Zip Code':
@@ -1146,7 +1177,7 @@ pui.FieldFormat = {
 >>>>>>> Initial import into GIT
             }
             if(pui.formatting.isNumericType(obj.dataType)){
-              var wholeNums = parseInt(obj.dataLentgh, 10) - parseInt(obj.decPos, 10);
+              var wholeNums = parseInt(obj.dataLength, 10) - parseInt(obj.decPos, 10);
               var parts = value.split('.');
               if(parts[0].length > wholeNums){
 <<<<<<< HEAD

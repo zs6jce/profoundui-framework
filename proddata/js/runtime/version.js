@@ -21,9 +21,13 @@
 
 
 if (!window["pui"]) window["pui"] = {};
+<<<<<<< HEAD
 window["pui"]["version"] = "4.8.2"; 
 =======
 
 if (!window["pui"]) window["pui"] = {};
 window["pui"]["version"] = "4.1.7";
 >>>>>>> Initial import into GIT
+=======
+window["pui"]["version"] = "4.8.3"; 
+>>>>>>> b2b86313ab40e3d391a3d3175f051412e7edde44
