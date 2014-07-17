@@ -8,6 +8,7 @@ INPUT.button {
 	color: #335588;
 	font-weight: bold;
 	font-size: 12px;
+	cursor: default;
 }
 
 
@@ -177,6 +178,7 @@ INPUT {
 TEXTAREA {
   z-index: 20;
   resize: none;
+  white-space: pre-wrap; 
 }
 
 FieldSet {
@@ -1137,6 +1139,7 @@ div.pui-file-upload a.remove {
   color: #335588;
   font-size: 12px;
   font-weight: bold;
+  cursor: default;
 
 }
 
@@ -3317,4 +3320,56 @@ a.ui-link-inherit {
 ::-ms-reveal { 
   width: 0;
   height: 0;
+}
+
+
+/* CSS for PUIWRKSPLF tool */
+
+.puiwrksplf-grid {
+  z-index: 9;
+}
+.puiwrksplf-grid .cell {
+  font-family: Verdana;
+  font-size: 13px;
+  text-align: center;
+}
+.puiwrksplf-grid .cell {
+  text-align: center;
+}
+.puiwrksplf-grid .header-cell {
+  font-size: 11px;
+  color: #f0f0f0;
+  background-color: #222222;
+  text-align: center;
+  font-weight: bold;
+}
+.puiwrksplf-grid .header-cell div {
+  text-align: center;
+}
+.puiwrksplf-grid .odd {
+  color: #555555;
+  background-color: #efefef;
+}
+.puiwrksplf-grid .even {
+  color: #555555;
+  background-color: #fcfcfc;
+}
+.puiwrksplf-grid .selected {
+  color: #ffffff;
+  background-color: #6699cc;  
+}
+.puiwrksplf-grid .hover {
+  color: #555555;
+  background-color: #dfe8f6;
+}
+
+.puiwrksplf-outputField {
+  font-family: Trebuchet MS;
+}
+
+.puiwrksplf-label {
+  font-family: sans-serif;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
 }

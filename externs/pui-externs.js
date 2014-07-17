@@ -63,6 +63,7 @@ var pui = {
   column: {},
   onselectstart: {},
   MozUserSelect: {},
+  webkitUserSelect: {},
   formatErrorText: {},
   signon: {},
   run: {},
@@ -250,5 +251,7 @@ var pui = {
   DATFMT: {},
   keyword: {},
   line: {},
-  cond: {}
+  cond: {},
+  comboBoxWidget: {},
+  signaturePad: {}
 }
