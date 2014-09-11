@@ -253,5 +253,6 @@ var pui = {
   line: {},
   cond: {},
   comboBoxWidget: {},
-  signaturePad: {}
+  signaturePad: {},
+  appgen: {}
 }
