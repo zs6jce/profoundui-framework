@@ -254,5 +254,6 @@ var pui = {
   cond: {},
   comboBoxWidget: {},
   signaturePad: {},
-  appgen: {}
+  appgen: {},
+  greenScreenDisplay: {}
 }
