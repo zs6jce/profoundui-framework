@@ -1492,12 +1492,7 @@ body.hybrid-signon {
 
 .hybrid-actions {
   background: #e7f1f3; /* Old browsers */
-  background: -moz-linear-gradient(top,  #e7f1f3 38%, #ffffff 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(38%,#e7f1f3), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* IE10+ */
-  background: linear-gradient(top,  #e7f1f3 38%,#ffffff 100%); /* W3C */
+  background: linear-gradient(to bottom, #e7f1f3 38%, #FFFFFF 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7f1f3', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
@@ -3372,4 +3367,264 @@ a.ui-link-inherit {
   font-size: 16px;
   text-align: center;
   font-weight: bold;
+}
+
+.puiwrksplf-input {
+  font-family: Consolas,Courier,monospace;
+  font-size: 16px;
+  text-align: left;
+}
+
+.puiwrksplf-values {
+  font-family: Consolas,Courier,monospace;
+  font-size: 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Styling for error/validation tips */
+
+.pui-tip {
+
+  z-index: 999;
+  cursor: pointer;
+  background-repeat: no-repeat;
+
+}
+
+.pui-tip .pui-tip-content {
+
+  max-width: 250px;
+  min-width: 150px;
+  color: #666666;
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  white-space: normal;
+  padding: 5px 25px 5px 5px;
+
+}
+
+.pui-tip-top {
+
+  background-position: bottom center;
+  padding: 0px 0px 7px 0px;
+
+}
+
+.pui-tip-top .pui-tip-content {
+
+  border-style: solid solid none solid;
+  border-width: 2px 2px medium 2px;
+
+}
+
+.pui-tip-top .pui-tip-close, .pui-tip-top .pui-tip-close-click {
+
+  top: 4px;
+  right: 5px;
+
+}
+
+.pui-tip-bottom {
+
+  background-position: top center;
+  padding: 7px 0px 0px 0px;  
+  
+}
+
+.pui-tip-bottom .pui-tip-content  {
+
+  border-style: none solid solid solid;
+  border-width: 2px 2px medium 2px;
+
+}
+
+.pui-tip-bottom .pui-tip-close, .pui-tip-bottom .pui-tip-close-click {
+
+  top: 8px;
+  right: 5px;  
+
+}
+
+.pui-tip-left {
+
+  background-position: right center;
+  padding: 0px 7px 0px 0px;  
+  
+}
+
+.pui-tip-left .pui-tip-content {
+
+  border-style: solid none solid solid;
+  border-width: 2px 2px medium 2px;
+  padding: 5px 5px 5px 25px;
+
+}
+
+.pui-tip-left .pui-tip-close, .pui-tip-left .pui-tip-close-click {
+
+  top: 4px;
+  left: 5px;
+
+}
+
+.pui-tip-right {
+
+  background-position: left center;
+  padding: 0px 0px 0px 7px;
+  
+}
+
+.pui-tip-right .pui-tip-content  {
+
+  border-style: solid solid solid none;
+  border-width: 2px 2px medium 2px;
+
+}
+
+.pui-tip-right .pui-tip-close, .pui-tip-right .pui-tip-close-click {
+
+  top: 4px;
+  right: 5px;  
+
+}
+
+.pui-tip .pui-tip-close, .pui-tip-close-click {
+
+  display: inline-block;
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+
+}
+
+.pui-tip .pui-tip-icon {
+
+  display: inline-block;
+  background-repeat: no-repeat;
+  width: 16px; 
+  height: 16px; 
+  vertical-align: text-bottom;
+  margin: 0px 5px 0px 0px;
+
+}
+
+/* Error/validation tip skins */
+
+/* Error */
+
+.pui-tip-error .pui-tip-content {
+
+  background: #F3E6E6 none repeat scroll 0 0;
+  border-color: #924949;
+
+}
+
+.pui-tip-error.pui-tip-top {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow-bottom.gif");
+
+}
+
+.pui-tip-error.pui-tip-bottom {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow-top.gif");
+
+}
+
+.pui-tip-error.pui-tip-left {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow-right.gif");
+
+}
+
+.pui-tip-error.pui-tip-right {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow.gif");
+
+}
+
+.pui-tip-error .pui-tip-close {
+
+  background-image: url("/profoundui/proddata/images/buttons/close/x5.png");
+
+}
+
+.pui-tip-error .pui-tip-close-click {
+
+  background-image: url("/profoundui/proddata/images/buttons/close/x5_click.png");
+
+}
+
+.pui-tip-error .pui-tip-icon {
+
+  background-image: url("/profoundui/proddata/images/icons/exclamation.png");
+
+}
+
+.pui-tip-error-invalid {
+
+  background-image: url(/profoundui/proddata/images/invalid-underline.gif);
+  background-repeat: repeat-x;
+  background-position: bottom;
+  border-color: #924949;
+  
+}
+
+/* Info */
+
+.pui-tip-info .pui-tip-content {
+
+  background: #ffffff none repeat scroll 0 0;
+  border-color: #357ebf;
+
+}
+
+.pui-tip-info.pui-tip-top {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow-bottom_blue.gif");
+
+}
+
+.pui-tip-info.pui-tip-bottom {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow-top_blue.gif");
+
+}
+
+.pui-tip-info.pui-tip-left {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow-right_blue.gif");
+
+}
+
+.pui-tip-info.pui-tip-right {
+
+  background-image: url("/profoundui/proddata/images/validation-arrow_blue.gif");
+
+}
+
+.pui-tip-info .pui-tip-close {
+
+  background-image: url("/profoundui/proddata/images/buttons/close/x4.png");
+
+}
+
+.pui-tip-info .pui-tip-close-click {
+
+  background-image: url("/profoundui/proddata/images/buttons/close/x4.png");
+
+}
+
+.pui-tip-info .pui-tip-icon {
+
+  background-image: url("/profoundui/proddata/images/icons/information.png");
+
+}
+
+.pui-tip-info-invalid {
+  
 }
