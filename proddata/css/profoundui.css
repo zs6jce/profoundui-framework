@@ -3404,7 +3404,7 @@ a.ui-link-inherit {
 
 }
 
-.pui-tip-top {
+.pui-tip.pui-tip-top {
 
   background-position: bottom center;
   padding: 0px 0px 7px 0px;
@@ -3425,7 +3425,7 @@ a.ui-link-inherit {
 
 }
 
-.pui-tip-bottom {
+.pui-tip.pui-tip-bottom {
 
   background-position: top center;
   padding: 7px 0px 0px 0px;  
@@ -3446,7 +3446,7 @@ a.ui-link-inherit {
 
 }
 
-.pui-tip-left {
+.pui-tip.pui-tip-left {
 
   background-position: right center;
   padding: 0px 7px 0px 0px;  
@@ -3468,7 +3468,7 @@ a.ui-link-inherit {
 
 }
 
-.pui-tip-right {
+.pui-tip.pui-tip-right {
 
   background-position: left center;
   padding: 0px 0px 0px 7px;
