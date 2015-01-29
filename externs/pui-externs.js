@@ -95,6 +95,7 @@ var pui = {
   currentDate: {},
   currentTime: {},
   currentUser: {},
+  currentFormatNames: {},
   userprofile: {},
   userid: {},
   currentDateField: {},
