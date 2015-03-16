@@ -186,8 +186,11 @@ FieldSet {
   padding: 0;
 }
 
+.autocomplete-results {
 
+  border: 1px solid #98C0F4;
 
+}
 
 .autocomplete-item {
 
