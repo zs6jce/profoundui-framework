@@ -1358,14 +1358,16 @@ INPUT.hybrid-button {
 }
 
 .hybrid-subfile-heading {
-  font-family: Consolas, Monospace;
-  font-size: 14px;
-  color: #333333;
+  font-family: Verdana;
+  font-size: 11px;
+  color: #ffffff;
+  background-color: #0b72a9;
   font-weight: bold;
   z-index: 100  /* above grid lines */
 }
 DIV.hybrid-subfile-heading {
-  color: #333333;
+  color: #ffffff;
+  background-color: #0b72a9;
 }
 
 
