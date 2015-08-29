@@ -3633,3 +3633,39 @@ a.ui-link-inherit {
 .pui-tip-info-invalid {
   
 }
+
+
+/* Styling for the grid find/filter box */
+
+.pui-find-filter {
+  z-index: 999;
+	position: absolute;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  padding: 0px 0px 7px 0px;
+	background-image: url("/profoundui/proddata/images/find-filter-bottom.gif");
+}
+
+.pui-find-filter-box {
+	border: 0px solid #ffffff;
+	background-color: transparent;
+	outline: none;
+}
+
+.pui-find-filter-content {
+  color: #666666;
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  white-space: normal;
+  padding: 5px 25px 5px 3px;
+  border-style: solid solid none solid;
+  border-width: 2px 2px medium 2px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+  background: #ffffff none repeat scroll 0 0;
+  border-color: #357ebf;
+}
+
+.pui-highlight {
+  background-color: #33cccc;
+}
